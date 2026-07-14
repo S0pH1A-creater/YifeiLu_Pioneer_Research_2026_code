@@ -18,9 +18,6 @@ import pandas as pd
 from datetime import datetime
 import os
 
-# Set random seed for reproducibility
-np.random.seed(42)
-
 print("="*70)
 print("GEOMETRIC BROWNIAN MOTION (GBM) DEMO")
 print("="*70)

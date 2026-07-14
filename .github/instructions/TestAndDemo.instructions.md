@@ -32,6 +32,12 @@ whenever I provide you a file to read, you read it carefully, understand the con
     - The graphs are FOR THE USER to open and review themselves from their file system
     - Do NOT redirect the user to view graphs - just confirm they are saved
 
+13. **LINE GRAPHS: USE LINES ONLY, NO MARKERS** - When plotting line graphs:
+    - Do NOT add markers/dots (no marker='o', marker='s', markersize, etc.)
+    - Plot clean lines only using `plt.plot()` with linewidth parameter
+    - Use different line styles (-, --, :, -.) or colors to distinguish lines
+    - This keeps graphs clean and professional for data visualization
+
 
 
 

@@ -175,7 +175,7 @@ plt.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/05/02_cone_of_uncertainty.png', dpi=300)
 print("✓ Saved: 02_cone_of_uncertainty.png")
-plt.show()
+plt.close()
 
 # Print cone statistics at key points
 print("\nCone of Uncertainty Statistics:")
@@ -209,7 +209,7 @@ fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
 # Left plot: Convergence of mean
 ax1 = axes[0]
-ax1.plot(sim_counts, estimated_means, color='steelblue', linewidth=2.5, marker='o', markersize=4, label='Monte Carlo Estimate')
+ax1.plot(sim_counts, estimated_means, color='steelblue', linewidth=2.5, label='Monte Carlo Estimate')
 ax1.axhline(theoretical_mean, color='red', linestyle='--', linewidth=2.5, label=f'Theoretical Mean (${theoretical_mean:.2f})')
 ax1.fill_between(sim_counts, theoretical_mean - 5, theoretical_mean + 5, color='red', alpha=0.1)
 ax1.set_title('Law of Large Numbers: Convergence of Mean', fontsize=12, fontweight='bold')
@@ -220,7 +220,7 @@ ax1.grid(True, alpha=0.3)
 
 # Right plot: Standard deviation of estimates
 ax2 = axes[1]
-ax2.plot(sim_counts, estimated_stds, color='darkgreen', linewidth=2.5, marker='s', markersize=4, label='Estimated Std Dev')
+ax2.plot(sim_counts, estimated_stds, color='darkgreen', linewidth=2.5, label='Estimated Std Dev')
 ax2.set_title('Dispersion of Final Price Distribution', fontsize=12, fontweight='bold')
 ax2.set_xlabel('Number of Simulations (N)', fontsize=11)
 ax2.set_ylabel('Standard Deviation of S(T) ($)', fontsize=11)
@@ -230,7 +230,7 @@ ax2.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/05/03_law_of_large_numbers.png', dpi=300)
 print("✓ Saved: 03_law_of_large_numbers.png")
-plt.show()
+plt.close()
 
 # Analysis of LLN
 error_at_100 = abs(estimated_means[0] - theoretical_mean)

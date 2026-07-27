@@ -1,0 +1,7 @@
+# Bytecode
+__pycache__/
+*.pyc
+
+# Large raw options dumps (re-download via options_fetch.py)
+data/options/raw/
+data/options/raw/_parts/

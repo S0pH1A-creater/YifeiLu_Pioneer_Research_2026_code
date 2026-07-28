@@ -2,10 +2,9 @@
 
 For:
 
-- **SPY**
-- **AAPL**
-- **JPM**
-- **XOM**
+- **SPY** (primary)
+- **AAPL**, **MSFT** (secondary)
+- **JPM**, **XOM** (auxiliary — retained)
 
 Download:
 
@@ -14,18 +13,20 @@ Download:
 
 (Used to calculate log returns and estimate GBM/GARCH/Heston/Merton parameters.)
 
-**Status:** ✓ SPY, AAPL, JPM, XOM in `research/data/equity/` (prices + log returns + regime stats).
+**Status:** ✓ SPY, AAPL, MSFT, JPM, XOM in `research/data/equity/` (prices + log returns + regime stats).
 
 ---
 
 ### **2. American call option data**
 
-For the same assets:
+Focus set (complete):
 
-- **SPY**
-- **AAPL**
-- **JPM**
-- **XOM**
+- **SPY** (primary)
+- **AAPL**, **MSFT** (secondary)
+
+Auxiliary (equity kept; options not required):
+
+- **JPM**, **XOM**
 
 Download:
 
@@ -38,7 +39,7 @@ Download:
 
 (Used for American option pricing and optimal stopping.)
 
-**Status:** ✓ SPY (including dedicated call panels). AAPL / JPM / XOM pending (open options CDN offline).
+**Status:** ✓ SPY + AAPL + MSFT American option panels (all three regimes). JPM / XOM left equity-only (no free Cobweb dumps; CDN offline).
 
 ---
 
@@ -80,4 +81,3 @@ Use:
   - 2008
   - 2013–2014
   - 2017–2018
-

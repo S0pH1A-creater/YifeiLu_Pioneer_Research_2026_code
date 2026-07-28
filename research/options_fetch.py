@@ -1,7 +1,9 @@
 """
 Step 1 — American option panels (DataCollection §2 / ResearchProposal-v2).
 
-Tickers: SPY (primary), AAPL, JPM, XOM (secondary when raw files available).
+Tickers:
+  SPY (primary), AAPL + MSFT (secondary / Cobweb ToS EOD),
+  JPM + XOM (auxiliary — kept; options optional if a source appears).
 
 Research fields:
   underlying, trading_date, S_t, K, expiration, T_years, option_type,
@@ -41,7 +43,16 @@ SPY_RELEASE_URL = (
 # Secondary tickers: same CDN layout as philippdubach/options-data (when online)
 OPTIONS_CDN = "https://static.philippdubach.com/data/options"
 
-OPTION_TICKERS = ["SPY", "AAPL", "JPM", "XOM"]
+# Cobweb Scripts free ToS EOD dumps (Mega) — AAPL + MSFT cover all three regimes
+COBWEB_MEGA = {
+    "AAPL": "https://mega.nz/file/DMgQBZLA#PfNJ8y6IbIsPyjWUsLT0YkA3IWpRHVpkQP9dNlfrH4A",
+    "MSFT": "https://mega.nz/file/PAxxDIga#_bPkj12uVOZCFttxaKmXUM5Tf-xqed4gcy6k9KnAsxs",
+}
+
+# Combined research panels use the core set only (neat SPY / AAPL / MSFT focus).
+CORE_OPTION_TICKERS = ["SPY", "AAPL", "MSFT"]
+AUX_OPTION_TICKERS = ["JPM", "XOM"]
+OPTION_TICKERS = CORE_OPTION_TICKERS + AUX_OPTION_TICKERS
 
 OPTIONS_START = "2008-01-01"
 OPTIONS_END = END
@@ -187,7 +198,7 @@ def download_spy_options_raw(force: bool = False) -> Path:
 
 
 def try_download_secondary_options(ticker: str) -> Path | None:
-    """Attempt CDN download for AAPL/JPM/XOM. Returns path or None if unavailable."""
+    """Attempt CDN, Cobweb Mega, then Alpha Vantage (ALPHAVANTAGE_API_KEY)."""
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     dest = RAW_DIR / f"{ticker}_options.parquet"
     if dest.exists() and dest.stat().st_size > 1_000_000:
@@ -201,13 +212,162 @@ def try_download_secondary_options(ticker: str) -> Path | None:
         if dest.stat().st_size < 1_000_000:
             dest.unlink(missing_ok=True)
             print(f"  ⚠ CDN file too small / invalid for {ticker}")
-            return None
-        print(f"  ✓ Saved: {dest.name} ({dest.stat().st_size / 1e6:.0f} MB)")
-        return dest
+        else:
+            print(f"  ✓ Saved: {dest.name} ({dest.stat().st_size / 1e6:.0f} MB)")
+            return dest
     except Exception as exc:  # noqa: BLE001
         dest.unlink(missing_ok=True)
         print(f"  ⚠ CDN unavailable for {ticker}: {exc}")
+
+    if ticker in COBWEB_MEGA:
+        got = _download_cobweb_mega(ticker)
+        if got is not None:
+            return got
+
+    return _download_alphavantage_options(ticker)
+
+
+def _download_alphavantage_options(ticker: str) -> Path | None:
+    """Sampled EOD American option chains via Alpha Vantage HISTORICAL_OPTIONS.
+
+    Requires env ALPHAVANTAGE_API_KEY. Free tier is heavily rate-limited; premium
+    optional path for auxiliary tickers (JPM/XOM) if needed.
+    """
+    import os
+    import time
+
+    api_key = os.environ.get("ALPHAVANTAGE_API_KEY", "").strip()
+    if not api_key:
+        print(
+            f"  ⚠ No ALPHAVANTAGE_API_KEY for {ticker}. "
+            "Set it to pull historical equity option chains."
+        )
         return None
+
+    # Sample business days inside each regime (matches SAMPLE_EVERY_N_DAYS cadence)
+    dates: list[pd.Timestamp] = []
+    for _, (a, b) in REGIMES.items():
+        idx = pd.bdate_range(a, b)[::SAMPLE_EVERY_N_DAYS]
+        dates.extend(list(idx))
+
+    rows: list[dict] = []
+    print(f"  Alpha Vantage HISTORICAL_OPTIONS for {ticker} ({len(dates)} dates)...")
+    for i, dt in enumerate(dates):
+        params = {
+            "function": "HISTORICAL_OPTIONS",
+            "symbol": ticker,
+            "date": dt.strftime("%Y-%m-%d"),
+            "apikey": api_key,
+            "datatype": "json",
+        }
+        try:
+            resp = requests.get(
+                "https://www.alphavantage.co/query",
+                params=params,
+                headers={"User-Agent": USER_AGENT},
+                timeout=120,
+            )
+            resp.raise_for_status()
+            payload = resp.json()
+        except Exception as exc:  # noqa: BLE001
+            print(f"    ⚠ {dt.date()}: request failed ({exc})")
+            time.sleep(15)
+            continue
+
+        if "Note" in payload or "Information" in payload:
+            msg = payload.get("Note") or payload.get("Information")
+            print(f"    ⚠ API limit/info: {msg}")
+            time.sleep(60)
+            continue
+        if "Error Message" in payload:
+            print(f"    ⚠ {dt.date()}: {payload['Error Message']}")
+            continue
+
+        data = payload.get("data") or payload.get("options") or []
+        if isinstance(data, dict):
+            data = data.get("option_chain") or data.get("calls") or []
+        if not isinstance(data, list):
+            continue
+
+        for item in data:
+            otype = str(item.get("type") or item.get("option_type") or "").lower()
+            if otype in {"c", "call"}:
+                otype = "call"
+            elif otype in {"p", "put"}:
+                otype = "put"
+            else:
+                continue
+            bid = item.get("bid")
+            ask = item.get("ask")
+            mark = item.get("mark") or item.get("mid")
+            try:
+                if mark is None and bid is not None and ask is not None:
+                    mark = (float(bid) + float(ask)) / 2.0
+                rows.append(
+                    {
+                        "date": dt,
+                        "expiration": pd.to_datetime(item.get("expiration") or item.get("expiry")),
+                        "strike": float(item.get("strike")),
+                        "type": otype,
+                        "mark": float(mark) if mark is not None else None,
+                        "bid": float(bid) if bid not in (None, "") else None,
+                        "ask": float(ask) if ask not in (None, "") else None,
+                        "last": float(item["last"]) if item.get("last") not in (None, "") else None,
+                        "volume": int(float(item.get("volume") or 0)),
+                        "open_interest": int(float(item.get("open_interest") or 0)),
+                        "symbol": ticker,
+                    }
+                )
+            except (TypeError, ValueError):
+                continue
+
+        if (i + 1) % 10 == 0:
+            print(f"    … {i + 1}/{len(dates)} dates, {len(rows):,} rows")
+        time.sleep(12)  # free-tier friendly pacing
+
+    if not rows:
+        print(f"  ⚠ Alpha Vantage returned no rows for {ticker}")
+        return None
+
+    out = pd.DataFrame(rows).dropna(subset=["date", "expiration", "strike", "mark", "type"])
+    dest = RAW_DIR / f"{ticker}_options.parquet"
+    out.to_parquet(dest, index=False)
+    print(f"  ✓ Saved: {dest.name} ({len(out):,} rows, {dest.stat().st_size / 1e6:.1f} MB)")
+    return dest
+
+
+def _download_cobweb_mega(ticker: str) -> Path | None:
+    """Download Cobweb ToS ZIP from Mega and convert regime windows to parquet."""
+    import asyncio
+
+    if not hasattr(asyncio, "coroutine"):
+        asyncio.coroutine = lambda fn: fn  # type: ignore[attr-defined]
+
+    try:
+        from mega import Mega
+    except ImportError:
+        print("  ⚠ mega.py not installed; cannot fetch Cobweb dump for", ticker)
+        return None
+
+    from cobweb_to_parquet import convert_cobweb_zip
+
+    STAGING = RAW_DIR / "_staging"
+    STAGING.mkdir(parents=True, exist_ok=True)
+    zip_path = STAGING / f"{ticker}.zip"
+    if not (zip_path.exists() and zip_path.stat().st_size > 1_000_000):
+        print(f"  Downloading Cobweb {ticker} options ZIP via Mega...")
+        mega = Mega()
+        m = mega.login()
+        saved = m.download_url(COBWEB_MEGA[ticker], dest_path=str(STAGING))
+        saved_path = Path(saved)
+        if saved_path != zip_path:
+            saved_path.replace(zip_path)
+        print(f"  ✓ Mega ZIP: {zip_path.name} ({zip_path.stat().st_size / 1e6:.0f} MB)")
+    else:
+        print(f"  Using cached Cobweb ZIP: {zip_path.name}")
+
+    out = convert_cobweb_zip(zip_path, ticker)
+    return out
 
 
 def _normalize_option_columns(df: pd.DataFrame) -> pd.DataFrame:
@@ -286,6 +446,7 @@ def load_raw_options(ticker: str) -> pd.DataFrame | None:
                     "volume",
                     "open_interest",
                     "symbol",
+                    "underlying_last",
                 ]
                 if c in names
             ]
@@ -338,9 +499,22 @@ def build_panel(
     if {"bid", "ask"}.issubset(df.columns):
         df = df[(df["bid"].fillna(0) > 0) & (df["ask"] > df["bid"])]
 
-    px = underlying_prices.rename("S_t")
-    px.index = pd.to_datetime(px.index)
-    df = df.merge(px, left_on="trading_date", right_index=True, how="inner")
+    # Prefer broker underlying from the option file when present (handles
+    # unadjusted pre-split AAPL strikes). Fall back to equity adj-close.
+    if "underlying_last" in df.columns and df["underlying_last"].notna().any():
+        df["S_t"] = pd.to_numeric(df["underlying_last"], errors="coerce")
+        missing = df["S_t"].isna()
+        if missing.any():
+            px = underlying_prices.rename("_px")
+            px.index = pd.to_datetime(px.index)
+            df = df.merge(px, left_on="trading_date", right_index=True, how="left")
+            df.loc[missing, "S_t"] = df.loc[missing, "_px"]
+            df = df.drop(columns=["_px"])
+        df = df.dropna(subset=["S_t"])
+    else:
+        px = underlying_prices.rename("S_t")
+        px.index = pd.to_datetime(px.index)
+        df = df.merge(px, left_on="trading_date", right_index=True, how="inner")
 
     rf = risk_free.rename("r")
     df = df.merge(rf, left_on="trading_date", right_index=True, how="left")
@@ -425,11 +599,17 @@ def write_organized(panels: dict[str, pd.DataFrame]) -> None:
         calls.to_csv(call_path, index=False)
         print(f"✓ Saved: {call_path.relative_to(DATA_DIR)} ({len(calls):,} calls)")
 
-    ordered = [t for t in OPTION_TICKERS if t in panels]
-    combined = pd.concat([panels[t] for t in ordered], ignore_index=True)
+    # Combined panels: core research set only (SPY primary, AAPL/MSFT secondary)
+    core_ordered = [t for t in CORE_OPTION_TICKERS if t in panels]
+    if not core_ordered:
+        raise SystemExit("No core option panels to combine (need SPY/AAPL/MSFT).")
+    combined = pd.concat([panels[t] for t in core_ordered], ignore_index=True)
     combined_path = PROCESSED_DIR / "options_panel_all.csv"
     combined.to_csv(combined_path, index=False)
-    print(f"✓ Saved: {combined_path.relative_to(DATA_DIR)} ({len(combined):,} rows)")
+    print(
+        f"✓ Saved: {combined_path.relative_to(DATA_DIR)} "
+        f"({len(combined):,} rows; core={core_ordered})"
+    )
 
     calls_all = combined[combined["option_type"] == "call"]
     calls_all_path = PROCESSED_DIR / "calls_panel_all.csv"
@@ -448,11 +628,23 @@ def write_organized(panels: dict[str, pd.DataFrame]) -> None:
         print(f"✓ Saved: {call_path.relative_to(DATA_DIR)} ({len(call_chunk):,} calls)")
 
     summary_rows = []
-    for ticker, panel in panels.items():
+    summary_order = [t for t in OPTION_TICKERS if t in panels] + [
+        t for t in panels if t not in OPTION_TICKERS
+    ]
+    for ticker in summary_order:
+        panel = panels[ticker]
+        role = (
+            "primary"
+            if ticker == "SPY"
+            else "secondary"
+            if ticker in CORE_OPTION_TICKERS
+            else "auxiliary"
+        )
         for regime, g in panel.groupby("regime"):
             summary_rows.append(
                 {
                     "underlying": ticker,
+                    "role": role,
                     "regime": regime,
                     "n_quotes": len(g),
                     "n_dates": g["trading_date"].nunique(),
@@ -487,8 +679,8 @@ def main() -> None:
 
     download_spy_options_raw(force=False)
 
-    # Attempt secondary option downloads (best-effort; CDN may be offline)
-    for ticker in ["AAPL", "JPM", "XOM"]:
+    # Core secondaries (AAPL/MSFT via Cobweb); auxiliary JPM/XOM best-effort only
+    for ticker in CORE_OPTION_TICKERS[1:] + AUX_OPTION_TICKERS:
         print(f"\nEnsuring raw options for {ticker}...")
         try_download_secondary_options(ticker)
 
@@ -502,21 +694,30 @@ def main() -> None:
     if "SPY" not in panels:
         raise SystemExit("SPY options panel is required (primary) but was not built.")
 
+    missing_core = [t for t in CORE_OPTION_TICKERS if t not in panels]
+    if missing_core:
+        raise SystemExit(
+            f"Core option panels missing: {missing_core}. "
+            "Need SPY (GitHub release) + AAPL/MSFT (Cobweb Mega)."
+        )
+
     write_organized(panels)
 
-    missing = [t for t in OPTION_TICKERS if t not in panels]
-    if missing:
-        print("\nMissing secondary equity option panels:", ", ".join(missing))
+    missing_aux = [t for t in AUX_OPTION_TICKERS if t not in panels]
+    if missing_aux:
+        print("\nAuxiliary option panels not built (left as equity-only):", ", ".join(missing_aux))
         print(
-            "Open CDN currently unavailable. Place files named "
-            f"{{TICKER}}_options.parquet in {RAW_DIR} and re-run.\n"
-            "Expected columns: date, expiration, strike, type, mark|bid|ask, volume."
+            "JPM/XOM are retained in equity data; options are optional. "
+            f"To add later: export ALPHAVANTAGE_API_KEY or place "
+            f"{{TICKER}}_options.parquet in {RAW_DIR}."
         )
 
     print("\n✓ Options Step 1 complete")
-    print(f"  Primary panel: {PROCESSED_DIR / 'SPY_options_panel.csv'}")
-    print(f"  Calls (pricing): {PROCESSED_DIR / 'calls_panel_all.csv'}")
-    print(f"  Risk-free:       {RISK_FREE_PATH}")
+    print(f"  Primary:   {PROCESSED_DIR / 'SPY_options_panel.csv'}")
+    print(f"  Secondary: {PROCESSED_DIR / 'AAPL_options_panel.csv'}")
+    print(f"             {PROCESSED_DIR / 'MSFT_options_panel.csv'}")
+    print(f"  Combined:  {PROCESSED_DIR / 'options_panel_all.csv'} (SPY+AAPL+MSFT)")
+    print(f"  Risk-free: {RISK_FREE_PATH}")
 
 
 if __name__ == "__main__":

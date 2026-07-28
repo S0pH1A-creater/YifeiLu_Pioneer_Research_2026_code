@@ -2,10 +2,12 @@
 
 Aligned with [`../DataCollection.md`](../../DataCollection.md) and [`../ResearchProposal-v2.md`](../../ResearchProposal-v2.md).
 
+**Focus:** SPY (primary) · AAPL + MSFT (secondary) · JPM + XOM (auxiliary equity only).
+
 ```
 data/
   equity/                         # §1 Stock market data
-    prices_clean.csv              # Date + adj close: SPY, AAPL, JPM, XOM
+    prices_clean.csv              # Date + adj close: SPY, AAPL, MSFT, JPM, XOM
     log_returns_all.csv           # Daily log returns (full sample)
     log_returns_by_regime.csv     # Long format: ticker × regime × date
     summary_stats.csv             # Moments by ticker × regime
@@ -14,13 +16,16 @@ data/
   options/                        # §2 American options
     raw/                          # Large source dumps (gitignored)
       SPY_options.parquet         # Primary (~600 MB)
-      AAPL_options.parquet        # Optional drop-in when available
-      JPM_options.parquet
-      XOM_options.parquet
+      AAPL_options.parquet        # Cobweb ToS EOD → parquet
+      MSFT_options.parquet        # Cobweb ToS EOD → parquet
     processed/
       SPY_options_panel.csv       # Primary research panel (calls+puts)
       SPY_calls_panel.csv         # Calls only (optimal stopping)
-      options_panel_{all,crisis,normal,high_vol}.csv
+      AAPL_options_panel.csv      # Secondary
+      AAPL_calls_panel.csv
+      MSFT_options_panel.csv      # Secondary
+      MSFT_calls_panel.csv
+      options_panel_{all,crisis,normal,high_vol}.csv   # core = SPY+AAPL+MSFT
       calls_panel_{all,crisis,normal,high_vol}.csv
       options_summary.csv
 ```
@@ -31,8 +36,9 @@ data/
 |--------|------|--------|-------|
 | SPY | Primary | ✓ | SSGA NAV (common sample start Dec 2003) |
 | AAPL | Secondary | ✓ | GitHub YF mirror adj close |
-| JPM | Secondary | ✓ | GitHub YF mirror adj close |
-| XOM | Secondary | ✓ | GitHub YF mirror adj close |
+| MSFT | Secondary | ✓ | GitHub YF mirror adj close |
+| JPM | Auxiliary | ✓ | Retained; not in options focus |
+| XOM | Auxiliary | ✓ | Retained; not in options focus |
 
 - **Requested window:** post-2000 → end of high-vol regime (2000-01-01 → 2018-12-31)
 - **Common sample on disk:** 2003-12-01 → 2018-12-31 (SPY NAV history starts Dec 2003)
@@ -41,17 +47,19 @@ data/
 
 ## 2. American options
 
-| Ticker | Status | Notes |
-|--------|--------|-------|
-| SPY | ✓ primary | Open release; calls + puts; call-only panels also written |
-| AAPL / JPM / XOM | pending | Open CDN currently 404; drop `{TICKER}_options.parquet` in `raw/` and re-run |
+| Ticker | Role | Status | Notes |
+|--------|------|--------|-------|
+| SPY | Primary | ✓ | Open release; calls + puts; call-only panels also written |
+| AAPL | Secondary | ✓ | Cobweb Scripts ToS EOD (Mega) → `AAPL_options.parquet` |
+| MSFT | Secondary | ✓ | Cobweb Scripts ToS EOD (Mega) → `MSFT_options.parquet` |
+| JPM / XOM | Auxiliary | equity only | No Cobweb dump; CDN offline — optional later via Alpha Vantage |
 
 ### Processed panel columns
 | Column | Meaning |
 |--------|---------|
-| `underlying` | Ticker (SPY primary) |
+| `underlying` | Ticker (SPY primary; AAPL/MSFT secondary) |
 | `trading_date` | Quote date |
-| `S_t` | Underlying adj close |
+| `S_t` | Underlying price (broker last when available, else adj close) |
 | `K` | Strike |
 | `expiration` | Maturity |
 | `T_years` / `dte` | Time to maturity |
@@ -76,8 +84,9 @@ data/
 ## Sources
 
 - Equity SPY: State Street NAV history
-- Equity AAPL/JPM/XOM: [dieperdev/yfinance-stock-data](https://github.com/dieperdev/yfinance-stock-data) (Yahoo adj close mirror; Unlicense)
+- Equity AAPL/MSFT/JPM/XOM: [dieperdev/yfinance-stock-data](https://github.com/dieperdev/yfinance-stock-data) (Yahoo adj close mirror; Unlicense)
 - Options SPY: [lambdaclass data-v1](https://github.com/lambdaclass/options_portfolio_backtester/releases/tag/data-v1) (MIT; philippdubach/options-data)
+- Options AAPL / MSFT: [Cobweb Scripts ToS EOD](https://cobwebscripts.com/data/toseodoptiondata.html) (free; converted via `cobweb_to_parquet.py`)
 - Risk-free: FRED `DGS3MO`
 
 ## Run
@@ -87,4 +96,6 @@ cd research
 ../.venv/bin/python data_fetch.py
 ../.venv/bin/python data_prepare.py
 ../.venv/bin/python options_fetch.py
+# optional: convert a Cobweb ZIP already in data/options/raw/_staging/
+../.venv/bin/python cobweb_to_parquet.py MSFT
 ```

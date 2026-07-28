@@ -6,41 +6,15 @@ How do Heston and GARCH volatility models, integrated with a Merton jump-diﬀus
 
 **Hypothesis**
 
-The research hypothesizes that models incorporating both jump processes and dynamic volatility
+The research hypothesizes that models incorporating both jump processes and dynamic volatility will better represent financial market behavior than traditional GBM, leading to improved estimation of optimal exercise decisions for American options.
 
-will better represent financial market behavior than traditional GBM, leading to improved
-
-estimation of optimal exercise decisions for American options.
-
-Furthermore, GARCH-based volatility models are expected to provide more accurate optimal
-
-stopping decisions than Heston stochastic volatility models in periods where historical volatility
-
-patterns and volatility clustering are dominant, as GARCH incorporates observed market behavior
-
-through parameter estimation. However, Heston models may provide advantages during highly
-
-uncertain market conditions because they explicitly model volatility as a stochastic process.
+Furthermore, GARCH-based volatility models are expected to provide more accurate optimal stopping decisions than Heston stochastic volatility models in periods where historical volatility patterns and volatility clustering are dominant, as GARCH incorporates observed market behavior through parameter estimation. However, Heston models may provide advantages during highly uncertain market conditions because they explicitly model volatility as a stochastic process.
 
 **Background and Motivation**
 
-Financial markets are complex systems characterized by uncertainty, volatility fluctuations, and
+Financial markets are complex systems characterized by uncertainty, volatility fluctuations, and occasional extreme events. The 2008 Global Financial Crisis demonstrated that simple traditional models may fail to adequately capture sudden market shocks. Understanding how well mathematical models capture financial market behavior is therefore important for improving the representation of uncertainty and thus for better financial decision-making.
 
-occasional extreme events. The 2008 Global Financial Crisis demonstrated that simple traditional
-
-models may fail to adequately capture sudden market shocks. Understanding how well
-
-mathematical models capture financial market behavior is therefore important for improving the
-
-representation of uncertainty and thus for better financial decision-making.
-
-Geometric Brownian Motion (GBM) has been widely used as a foundational model for stock price
-
-dynamics due to its simplicity and tractability. its assumptions of constant volatility and normally
-
-distributed returns limit its ability to represent real market features such as volatility clustering and
-
-market shocks.
+Geometric Brownian Motion (GBM) has been widely used as a foundational model for stock price dynamics due to its simplicity and tractability. its assumptions of constant volatility and normally distributed returns limit its ability to represent real market features such as volatility clustering and market shocks.
 
 To address these limitations, this research investigates more advanced stochastic models by first
 
@@ -65,9 +39,9 @@ paths and optimal stopping decisions in American option pricing.
 Both option prices and stock price data for:
 
 - SPY: as the primary data, representing the whole market behavior
-- AAPL, JPM, XOM: model as well, but for the purpose of making the research comprehensive,
+- AAPL, MSFT: secondary / auxiliary equities (complete equity + options panels) for comprehensiveness,
 
-not as important as SPY
+not as important as SPY; JPM and XOM equity series are retained but are not part of the options focus
 
 Option price data (specific)
 

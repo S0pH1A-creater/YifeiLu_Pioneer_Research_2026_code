@@ -2,14 +2,14 @@
 Step 1 — Equity price acquisition (DataCollection §1 / ResearchProposal-v2).
 
 Downloads adjusted closes for:
-  SPY (primary), AAPL, JPM, XOM
+  SPY (primary), AAPL + MSFT (secondary), JPM + XOM (auxiliary / retained)
 
 Window: post-2000 through the end of the high-vol evaluation regime
 (2000-01-01 → 2018-12-31). Regime subsets are carved out in data_prepare.py.
 
 Sources (tried in order per ticker):
   SPY  — State Street NAV, then Yahoo chart API
-  Others — Yahoo chart API, then Twelve Data
+  Others — GitHub YF mirror, Yahoo chart API, then Twelve Data
 """
 
 from __future__ import annotations
@@ -33,8 +33,11 @@ PRICES_PATH = EQUITY_DIR / "prices_clean.csv"
 # Backward-compatible alias used by older scripts
 LEGACY_PRICES_PATH = DATA_DIR / "prices_clean.csv"
 
-TICKERS = ["SPY", "AAPL", "JPM", "XOM"]
+# Primary research set: SPY + AAPL/MSFT. JPM/XOM kept for completeness.
 PRIMARY_TICKER = "SPY"
+SECONDARY_TICKERS = ["AAPL", "MSFT"]
+AUXILIARY_TICKERS = ["JPM", "XOM"]
+TICKERS = [PRIMARY_TICKER, *SECONDARY_TICKERS, *AUXILIARY_TICKERS]
 
 START = "2000-01-01"
 END = "2018-12-31"

@@ -255,7 +255,7 @@ def plot_rolling_volatility_spy(returns: pd.DataFrame) -> Path:
 
 
 def plot_all_tickers_normalized(prices: pd.DataFrame) -> Path:
-    """Normalized price paths for SPY / AAPL / JPM / XOM."""
+    """Normalized price paths for SPY / AAPL / MSFT (+ auxiliary JPM / XOM)."""
     fig, ax = plt.subplots(figsize=(12, 5))
     for ticker in TICKERS:
         if ticker not in prices.columns:
@@ -339,7 +339,7 @@ def print_data_description(prices: pd.DataFrame, stats: pd.DataFrame) -> None:
         f"Tickers: {', '.join(tickers)} | Primary: {PRIMARY_TICKER}\n"
         f"Full sample: {prices.index.min().date()} → {prices.index.max().date()} "
         f"({len(prices)} trading days)\n"
-        "Sources: State Street NAV (SPY); Yahoo adj-close mirror (AAPL/JPM/XOM)\n"
+        "Sources: State Street NAV (SPY); Yahoo adj-close mirror (AAPL/MSFT/JPM/XOM)\n"
         "Transform: daily logarithmic returns r_t = ln(S_t / S_{t-1})"
     )
     print(f"\nRegime summary ({PRIMARY_TICKER}):")

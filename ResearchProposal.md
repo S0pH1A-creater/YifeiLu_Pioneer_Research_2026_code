@@ -51,7 +51,7 @@ To address these limitations, this research investigates more advanced stochasti
 What real-world data:
 
 - SPY (S&P 500 ETF): primary series for market behavior (equity prices + American options)
-- AAPL, JPM, XOM: secondary equity series for comprehensiveness (AAPL collected; JPM/XOM optional when API available)
+- AAPL, MSFT: secondary equity + options for comprehensiveness; JPM/XOM equity retained as auxiliary
 - Risk-free rate: FRED 3-Month Treasury (DGS3MO)
 - American option panels (SPY primary): underlying \(S_t\), strike \(K\), expiration, call/put, premium, trading date, \(r\)
 

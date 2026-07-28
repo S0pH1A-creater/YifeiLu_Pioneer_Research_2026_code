@@ -1,9 +1,8 @@
 """
-Step 1 — Data preparation for jump-diffusion research.
+Step 1 — Equity preparation (DataCollection §1 / ResearchProposal-v2).
 
-Loads cleaned prices, computes log returns, splits into volatility regimes,
-writes summary statistics CSVs, generates exploratory figures, and runs
-sanity checks for the paper's Data acquisition & description section.
+Loads cleaned adjusted closes, computes log returns for all tickers,
+splits into volatility regimes, writes summary statistics, and figures.
 """
 
 from __future__ import annotations
@@ -14,7 +13,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from data_fetch import DATA_DIR, PRICES_PATH, load_or_download
+from data_fetch import DATA_DIR, EQUITY_DIR, PRIMARY_TICKER, PRICES_PATH, TICKERS, load_or_download
 
 # ---------------------------------------------------------------------------
 # Paths and regime definitions
@@ -22,9 +21,9 @@ from data_fetch import DATA_DIR, PRICES_PATH, load_or_download
 RESEARCH_DIR = Path(__file__).resolve().parent
 FIGURES_DIR = RESEARCH_DIR / "figures"
 
-LOG_RETURNS_ALL = DATA_DIR / "log_returns_all.csv"
-LOG_RETURNS_BY_REGIME = DATA_DIR / "log_returns_by_regime.csv"
-SUMMARY_STATS = DATA_DIR / "summary_stats.csv"
+LOG_RETURNS_ALL = EQUITY_DIR / "log_returns_all.csv"
+LOG_RETURNS_BY_REGIME = EQUITY_DIR / "log_returns_by_regime.csv"
+SUMMARY_STATS = EQUITY_DIR / "summary_stats.csv"
 
 REGIMES: dict[str, tuple[str, str]] = {
     "crisis": ("2007-01-01", "2009-12-31"),
@@ -45,7 +44,6 @@ REGIME_COLORS = {
 }
 
 MIN_OBS_PER_REGIME = 200
-PRIMARY_TICKER = "SPY"
 
 
 # ---------------------------------------------------------------------------
@@ -110,8 +108,14 @@ def summary_statistics(regime_long: pd.DataFrame) -> pd.DataFrame:
         )
     stats = pd.DataFrame(records)
     regime_cat = pd.Categorical(stats["regime"], categories=REGIME_ORDER, ordered=True)
-    stats = stats.assign(regime=regime_cat).sort_values(["ticker", "regime"]).reset_index(drop=True)
+    ticker_cat = pd.Categorical(stats["ticker"], categories=TICKERS, ordered=True)
+    stats = (
+        stats.assign(regime=regime_cat, ticker=ticker_cat)
+        .sort_values(["ticker", "regime"])
+        .reset_index(drop=True)
+    )
     stats["regime"] = stats["regime"].astype(str)
+    stats["ticker"] = stats["ticker"].astype(str)
     return stats
 
 
@@ -181,11 +185,9 @@ def plot_return_distributions(regime_long: pd.DataFrame) -> Path:
 
 
 def plot_annualized_volatility(stats: pd.DataFrame) -> Path:
-    """Grouped bar chart: annualized vol by ticker and regime (no bar edges)."""
+    """Grouped bar chart: annualized vol by ticker and regime."""
     fig, ax = plt.subplots(figsize=(10, 5))
-    tickers = [t for t in stats["ticker"].drop_duplicates().tolist()]
-    # Prefer SPY first for readability
-    tickers = sorted(tickers, key=lambda t: (t != PRIMARY_TICKER, t))
+    tickers = [t for t in TICKERS if t in set(stats["ticker"])]
     x = np.arange(len(tickers))
     width = 0.25
 
@@ -252,6 +254,40 @@ def plot_rolling_volatility_spy(returns: pd.DataFrame) -> Path:
     return path
 
 
+def plot_all_tickers_normalized(prices: pd.DataFrame) -> Path:
+    """Normalized price paths for SPY / AAPL / JPM / XOM."""
+    fig, ax = plt.subplots(figsize=(12, 5))
+    for ticker in TICKERS:
+        if ticker not in prices.columns:
+            continue
+        s = prices[ticker].dropna()
+        norm = s / s.iloc[0] * 100.0
+        ax.plot(norm.index, norm.values, linewidth=1.1, label=ticker)
+
+    for name in REGIME_ORDER:
+        start, end = REGIMES[name]
+        ax.axvspan(
+            pd.Timestamp(start),
+            pd.Timestamp(end),
+            color=REGIME_COLORS[name],
+            alpha=0.12,
+        )
+
+    ax.set_title("Normalized Adj Close (100 = first observation)")
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Index level")
+    ax.legend(frameon=False, ncol=4)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    fig.tight_layout()
+
+    path = FIGURES_DIR / "05_all_tickers_normalized.png"
+    fig.savefig(path, dpi=120)
+    plt.close(fig)
+    print(f"✓ Saved: {path.name}")
+    return path
+
+
 # ---------------------------------------------------------------------------
 # Validation
 # ---------------------------------------------------------------------------
@@ -265,25 +301,30 @@ def run_checks(
 
     results["prices_no_nan"] = int(prices.isna().sum().sum()) == 0
     results["returns_no_nan"] = int(returns.isna().sum().sum()) == 0
-    results["has_primary_spy"] = PRIMARY_TICKER in prices.columns
+    results["has_all_tickers"] = all(t in prices.columns for t in TICKERS)
 
-    # Sufficient observations per regime (SPY)
     spy = regime_long[regime_long["ticker"] == PRIMARY_TICKER]
     spy_counts = spy.groupby("regime")["log_return"].count().reindex(REGIME_ORDER)
     results["sufficient_obs_per_regime"] = bool((spy_counts >= MIN_OBS_PER_REGIME).all())
 
-    # Crisis vol > normal vol for SPY
     spy_stats = stats[stats["ticker"] == PRIMARY_TICKER].set_index("regime")
     crisis_vol = float(spy_stats.loc["crisis", "ann_vol"])
     normal_vol = float(spy_stats.loc["normal", "ann_vol"])
     results["crisis_vol_gt_normal"] = crisis_vol > normal_vol
 
-    # Log ≈ simple for small moves
     simple = prices[PRIMARY_TICKER].pct_change().dropna()
     aligned = pd.concat([returns[PRIMARY_TICKER], simple], axis=1, join="inner").dropna()
     aligned.columns = ["log", "simple"]
     median_abs_diff = float((aligned["log"] - aligned["simple"]).abs().median())
     results["log_approx_simple"] = median_abs_diff < 1e-3
+
+    # Every ticker has all three regimes
+    for ticker in TICKERS:
+        if ticker not in stats["ticker"].values:
+            results[f"{ticker}_has_regimes"] = False
+            continue
+        n_regimes = stats.loc[stats["ticker"] == ticker, "regime"].nunique()
+        results[f"{ticker}_has_regimes"] = n_regimes == 3
 
     return results
 
@@ -298,7 +339,7 @@ def print_data_description(prices: pd.DataFrame, stats: pd.DataFrame) -> None:
         f"Tickers: {', '.join(tickers)} | Primary: {PRIMARY_TICKER}\n"
         f"Full sample: {prices.index.min().date()} → {prices.index.max().date()} "
         f"({len(prices)} trading days)\n"
-        "Sources: State Street NAV (SPY); Twelve Data / Yahoo (equities)\n"
+        "Sources: State Street NAV (SPY); Yahoo adj-close mirror (AAPL/JPM/XOM)\n"
         "Transform: daily logarithmic returns r_t = ln(S_t / S_{t-1})"
     )
     print(f"\nRegime summary ({PRIMARY_TICKER}):")
@@ -309,8 +350,7 @@ def print_data_description(prices: pd.DataFrame, stats: pd.DataFrame) -> None:
             f"n={row['n_obs']}, ann_vol={row['ann_vol']:.2%}, "
             f"skew={row['skewness']:.2f}, excess_kurt={row['kurtosis']:.2f}"
         )
-    print("\nFull summary_stats.csv written for all tickers × regimes.")
-
+    print(f"\nFull summary written to {SUMMARY_STATS.relative_to(DATA_DIR)}")
 
 
 # ---------------------------------------------------------------------------
@@ -321,7 +361,7 @@ def main() -> None:
     print("STEP 1 — DATA PREPARE (returns, regimes, figures)")
     print("=" * 70)
 
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    EQUITY_DIR.mkdir(parents=True, exist_ok=True)
     FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
     prices = load_or_download(force=False)
@@ -329,24 +369,22 @@ def main() -> None:
     regime_long = build_regime_long(returns)
     stats = summary_statistics(regime_long)
 
-    # Persist datasets
     returns.to_csv(LOG_RETURNS_ALL)
-    print(f"✓ Saved: {LOG_RETURNS_ALL.name}")
+    print(f"✓ Saved: {LOG_RETURNS_ALL.relative_to(DATA_DIR)}")
 
     regime_long.to_csv(LOG_RETURNS_BY_REGIME, index=False)
-    print(f"✓ Saved: {LOG_RETURNS_BY_REGIME.name}")
+    print(f"✓ Saved: {LOG_RETURNS_BY_REGIME.relative_to(DATA_DIR)}")
 
     stats.to_csv(SUMMARY_STATS, index=False)
-    print(f"✓ Saved: {SUMMARY_STATS.name}")
+    print(f"✓ Saved: {SUMMARY_STATS.relative_to(DATA_DIR)}")
 
-    # Figures
     print("\nGenerating figures...")
     plot_spy_price_by_regime(prices)
     plot_return_distributions(regime_long)
     plot_annualized_volatility(stats)
     plot_rolling_volatility_spy(returns)
+    plot_all_tickers_normalized(prices)
 
-    # Checks
     print("\nSanity checks:")
     checks = run_checks(prices, returns, regime_long, stats)
     for name, ok in checks.items():
@@ -357,7 +395,7 @@ def main() -> None:
         raise SystemExit("One or more sanity checks failed — inspect data before modeling.")
 
     print_data_description(prices, stats)
-    print("\n✓ Step 1 complete — datasets ready for GBM baseline (Step 2)")
+    print("\n✓ Step 1 equity prepare complete")
 
 
 if __name__ == "__main__":

@@ -1,68 +1,90 @@
 # Research data layout (Step 1)
 
-Step status: see [`../STEP1.md`](../STEP1.md).
-
-## Equity prices
-| File | Description |
-|------|-------------|
-| `prices_clean.csv` | Daily closes: SPY (primary), AAPL, (+ JPM/XOM when available) |
-| `log_returns_*.csv` | Log returns and regime splits |
-| `summary_stats.csv` | Moments by ticker × regime |
-| `risk_free_dgs3mo.csv` | FRED 3-Month Treasury yield (%) |
-
-## Options (American-style equity / ETF options)
+Aligned with [`../DataCollection.md`](../../DataCollection.md) and [`../ResearchProposal-v2.md`](../../ResearchProposal-v2.md).
 
 ```
-data/options/
-  raw/                         # full source dumps (large; gitignored ideally)
-    SPY_options.parquet        # ~600 MB open release (2008–2025)
-    AAPL_options.parquet       # optional drop-in
-    JPM_options.parquet
-    XOM_options.parquet
-  processed/                   # research panels (filtered, joined)
-    SPY_options_panel.csv      # PRIMARY
-    AAPL_options_panel.csv
-    JPM_options_panel.csv
-    XOM_options_panel.csv
-    options_panel_all.csv
-    options_panel_crisis.csv
-    options_panel_normal.csv
-    options_panel_high_vol.csv
-    options_summary.csv
+data/
+  equity/                         # §1 Stock market data
+    prices_clean.csv              # Date + adj close: SPY, AAPL, JPM, XOM
+    log_returns_all.csv           # Daily log returns (full sample)
+    log_returns_by_regime.csv     # Long format: ticker × regime × date
+    summary_stats.csv             # Moments by ticker × regime
+  rates/                          # §3 Risk-free rate
+    risk_free_dgs3mo.csv          # FRED DGS3MO (%), raw CSV
+  options/                        # §2 American options
+    raw/                          # Large source dumps (gitignored)
+      SPY_options.parquet         # Primary (~600 MB)
+      AAPL_options.parquet        # Optional drop-in when available
+      JPM_options.parquet
+      XOM_options.parquet
+    processed/
+      SPY_options_panel.csv       # Primary research panel (calls+puts)
+      SPY_calls_panel.csv         # Calls only (optimal stopping)
+      options_panel_{all,crisis,normal,high_vol}.csv
+      calls_panel_{all,crisis,normal,high_vol}.csv
+      options_summary.csv
 ```
+
+## 1. Equity (adj close → log returns)
+
+| Ticker | Role | Status | Notes |
+|--------|------|--------|-------|
+| SPY | Primary | ✓ | SSGA NAV (common sample start Dec 2003) |
+| AAPL | Secondary | ✓ | GitHub YF mirror adj close |
+| JPM | Secondary | ✓ | GitHub YF mirror adj close |
+| XOM | Secondary | ✓ | GitHub YF mirror adj close |
+
+- **Requested window:** post-2000 → end of high-vol regime (2000-01-01 → 2018-12-31)
+- **Common sample on disk:** 2003-12-01 → 2018-12-31 (SPY NAV history starts Dec 2003)
+- **Transform:** \(r_t = \ln(S_t / S_{t-1})\) for every ticker
+- **Regimes:** crisis 2007–2009 · normal 2013–2014 · high_vol 2017–2018
+
+## 2. American options
+
+| Ticker | Status | Notes |
+|--------|--------|-------|
+| SPY | ✓ primary | Open release; calls + puts; call-only panels also written |
+| AAPL / JPM / XOM | pending | Open CDN currently 404; drop `{TICKER}_options.parquet` in `raw/` and re-run |
 
 ### Processed panel columns
 | Column | Meaning |
 |--------|---------|
 | `underlying` | Ticker (SPY primary) |
-| `trading_date` | Quote / trade date |
-| `S_t` | Underlying price (from `prices_clean.csv`) |
+| `trading_date` | Quote date |
+| `S_t` | Underlying adj close |
 | `K` | Strike |
-| `expiration` | Maturity date |
-| `T_years` | Time to maturity in years |
-| `dte` | Calendar days to expiration |
+| `expiration` | Maturity |
+| `T_years` / `dte` | Time to maturity |
 | `option_type` | `call` or `put` |
 | `option_price` | Premium (mid/mark) |
-| `r` | Risk-free rate (decimal, from DGS3MO) |
+| `r` | Risk-free (decimal, DGS3MO) |
 | `moneyness` | K / S_t |
 | `regime` | crisis / normal / high_vol |
 | `style` | American |
 
-### Filters applied
+### Filters
 - Dates: 2008-01-01 → 2018-12-31 (open options history starts 2008)
 - Near ATM: \|K/S − 1\| ≤ 10%
 - DTE: 7–60 days
-- Volume ≥ 1
+- Volume ≥ 1; valid bid/ask; premium ≥ max(0.05, 0.5×intrinsic)
 - Every 5th trading date (size control)
 
-### Sources
-- **SPY options:** [lambdaclass release data-v1](https://github.com/lambdaclass/options_portfolio_backtester/releases/tag/data-v1) (MIT; philippdubach/options-data)
-- **Risk-free rate:** FRED `DGS3MO`
-- **Underlying prices:** existing Step 1 equity pipeline
-- **AAPL / JPM / XOM options:** place matching parquet/CSV in `raw/` and re-run `options_fetch.py` (Yahoo does not provide deep historical chains)
+## 3. Risk-free rate
 
-### Run
+- FRED `DGS3MO` (3-Month Treasury), percent in CSV; joined as decimal `r` in option panels
+
+## Sources
+
+- Equity SPY: State Street NAV history
+- Equity AAPL/JPM/XOM: [dieperdev/yfinance-stock-data](https://github.com/dieperdev/yfinance-stock-data) (Yahoo adj close mirror; Unlicense)
+- Options SPY: [lambdaclass data-v1](https://github.com/lambdaclass/options_portfolio_backtester/releases/tag/data-v1) (MIT; philippdubach/options-data)
+- Risk-free: FRED `DGS3MO`
+
+## Run
+
 ```bash
 cd research
+../.venv/bin/python data_fetch.py
+../.venv/bin/python data_prepare.py
 ../.venv/bin/python options_fetch.py
 ```

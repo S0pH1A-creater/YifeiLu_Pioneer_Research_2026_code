@@ -1,24 +1,20 @@
 """
-Step 1 extension — Historical American equity/ETF option data.
+Step 1 — American option panels (DataCollection §2 / ResearchProposal-v2).
 
-Collects and organizes option panels for:
-  SPY  (primary) — open GitHub release (philippdubach/options-data via lambdaclass)
-  AAPL, JPM, XOM — same schema when a local/raw parquet is available
+Tickers: SPY (primary), AAPL, JPM, XOM (secondary when raw files available).
 
-Research fields written to processed CSVs:
+Research fields:
   underlying, trading_date, S_t, K, expiration, T_years, option_type,
   option_price, r, moneyness, dte, regime, style (= American)
 
 Risk-free rate: FRED 3-Month Treasury (DGS3MO), decimal form.
 
-Coverage note: the open options panel starts 2008-01-02 (crisis window
+Coverage note: open options history starts 2008-01-02 (crisis window
 uses 2008–2009 rather than calendar 2007).
 """
 
 from __future__ import annotations
 
-import io
-import time
 from pathlib import Path
 
 import numpy as np
@@ -26,7 +22,7 @@ import pandas as pd
 import pyarrow.parquet as pq
 import requests
 
-from data_fetch import DATA_DIR, END, PRICES_PATH, START, load_or_download
+from data_fetch import DATA_DIR, END, EQUITY_DIR, START, load_or_download
 
 # ---------------------------------------------------------------------------
 # Paths
@@ -34,25 +30,26 @@ from data_fetch import DATA_DIR, END, PRICES_PATH, START, load_or_download
 OPTIONS_DIR = DATA_DIR / "options"
 RAW_DIR = OPTIONS_DIR / "raw"
 PROCESSED_DIR = OPTIONS_DIR / "processed"
-RISK_FREE_PATH = DATA_DIR / "risk_free_dgs3mo.csv"
+RATES_DIR = DATA_DIR / "rates"
+RISK_FREE_PATH = RATES_DIR / "risk_free_dgs3mo.csv"
+LEGACY_RISK_FREE_PATH = DATA_DIR / "risk_free_dgs3mo.csv"
 
 SPY_RELEASE_URL = (
     "https://github.com/lambdaclass/options_portfolio_backtester/"
     "releases/download/data-v1/SPY_options.parquet"
 )
+# Secondary tickers: same CDN layout as philippdubach/options-data (when online)
+OPTIONS_CDN = "https://static.philippdubach.com/data/options"
 
-# Primary first
 OPTION_TICKERS = ["SPY", "AAPL", "JPM", "XOM"]
 
-# Filter to keep research panels tractable while covering regimes
-OPTIONS_START = "2008-01-01"  # open dataset start
+OPTIONS_START = "2008-01-01"
 OPTIONS_END = END
-ATM_BAND = 0.10  # |K/S - 1| <= 10%
+ATM_BAND = 0.10
 MIN_DTE = 7
 MAX_DTE = 60
-# Keep liquid quotes
 MIN_VOLUME = 1
-SAMPLE_EVERY_N_DAYS = 5  # every ~week of trading dates (reduce size)
+SAMPLE_EVERY_N_DAYS = 5
 
 REGIMES = {
     "crisis": ("2008-01-01", "2009-12-31"),
@@ -77,17 +74,22 @@ def assign_regime(date: pd.Timestamp) -> str | None:
 # Risk-free rate
 # ---------------------------------------------------------------------------
 def fetch_risk_free(force: bool = False) -> pd.Series:
-    """FRED DGS3MO → decimal annual rate, forward-filled to calendar days."""
-    RAW_DIR.mkdir(parents=True, exist_ok=True)
-    if RISK_FREE_PATH.exists() and not force:
-        print(f"Loading cached risk-free rates from {RISK_FREE_PATH.name}")
+    """FRED DGS3MO → decimal annual rate, forward-filled to business days."""
+    RATES_DIR.mkdir(parents=True, exist_ok=True)
+
+    src = RISK_FREE_PATH if RISK_FREE_PATH.exists() else LEGACY_RISK_FREE_PATH
+    if src.exists() and not force:
+        print(f"Loading cached risk-free rates from {src}")
+        if src != RISK_FREE_PATH:
+            RISK_FREE_PATH.write_bytes(src.read_bytes())
+            print(f"  Migrated → {RISK_FREE_PATH}")
     else:
         print("Downloading FRED DGS3MO (3M T-bill)...")
         url = (
             "https://fred.stlouisfed.org/graph/fredgraph.csv"
             f"?id=DGS3MO&cosd={START}&coed={END}"
         )
-        resp = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=60)
+        resp = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=120)
         resp.raise_for_status()
         RISK_FREE_PATH.write_bytes(resp.content)
         print(f"✓ Saved: {RISK_FREE_PATH}")
@@ -96,9 +98,8 @@ def fetch_risk_free(force: bool = False) -> pd.Series:
     rf.columns = ["date", "dgs3mo"]
     rf["date"] = pd.to_datetime(rf["date"])
     rf["dgs3mo"] = pd.to_numeric(rf["dgs3mo"], errors="coerce")
-    rf = rf.dropna().set_index("date")["dgs3mo"] / 100.0  # percent → decimal
+    rf = rf.dropna().set_index("date")["dgs3mo"] / 100.0
     rf = rf.sort_index()
-    # Reindex to business days and ffill for merges
     full_idx = pd.date_range(rf.index.min(), rf.index.max(), freq="B")
     rf = rf.reindex(full_idx).ffill().bfill()
     rf.index.name = "trading_date"
@@ -107,10 +108,10 @@ def fetch_risk_free(force: bool = False) -> pd.Series:
 
 
 # ---------------------------------------------------------------------------
-# Download raw SPY options
+# Download helpers
 # ---------------------------------------------------------------------------
 def download_file_parallel(url: str, dest: Path, n_parts: int = 8) -> Path:
-    """Multi-range parallel download (much faster for large GitHub release assets)."""
+    """Multi-range parallel download for large GitHub release assets."""
     import concurrent.futures as cf
 
     dest.parent.mkdir(parents=True, exist_ok=True)
@@ -155,6 +156,23 @@ def download_file_parallel(url: str, dest: Path, n_parts: int = 8) -> Path:
     return dest
 
 
+def download_file_stream(url: str, dest: Path) -> Path:
+    """Single-stream download (CDN / smaller files)."""
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    with requests.get(url, stream=True, headers={"User-Agent": USER_AGENT}, timeout=180) as resp:
+        resp.raise_for_status()
+        total = int(resp.headers.get("Content-Length") or 0)
+        written = 0
+        with open(dest, "wb") as f:
+            for block in resp.iter_content(1 << 20):
+                if block:
+                    f.write(block)
+                    written += len(block)
+        if total and written < total * 0.95:
+            raise RuntimeError(f"Incomplete download: {written}/{total} bytes")
+    return dest
+
+
 def download_spy_options_raw(force: bool = False) -> Path:
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     path = RAW_DIR / "SPY_options.parquet"
@@ -166,6 +184,30 @@ def download_spy_options_raw(force: bool = False) -> Path:
     download_file_parallel(SPY_RELEASE_URL, path)
     print(f"✓ Saved: {path} ({path.stat().st_size / 1e6:.0f} MB)")
     return path
+
+
+def try_download_secondary_options(ticker: str) -> Path | None:
+    """Attempt CDN download for AAPL/JPM/XOM. Returns path or None if unavailable."""
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    dest = RAW_DIR / f"{ticker}_options.parquet"
+    if dest.exists() and dest.stat().st_size > 1_000_000:
+        print(f"Using cached raw {ticker} options: {dest.name} ({dest.stat().st_size / 1e6:.0f} MB)")
+        return dest
+
+    url = f"{OPTIONS_CDN}/{ticker.lower()}/options.parquet"
+    print(f"  Trying CDN for {ticker}: {url}")
+    try:
+        download_file_stream(url, dest)
+        if dest.stat().st_size < 1_000_000:
+            dest.unlink(missing_ok=True)
+            print(f"  ⚠ CDN file too small / invalid for {ticker}")
+            return None
+        print(f"  ✓ Saved: {dest.name} ({dest.stat().st_size / 1e6:.0f} MB)")
+        return dest
+    except Exception as exc:  # noqa: BLE001
+        dest.unlink(missing_ok=True)
+        print(f"  ⚠ CDN unavailable for {ticker}: {exc}")
+        return None
 
 
 def _normalize_option_columns(df: pd.DataFrame) -> pd.DataFrame:
@@ -209,8 +251,6 @@ def _normalize_option_columns(df: pd.DataFrame) -> pd.DataFrame:
     out["expiration"] = pd.to_datetime(out["expiration"])
     out["K"] = out["K"].astype(float)
     out["option_price"] = pd.to_numeric(out["option_price"], errors="coerce")
-
-    # Normalize call/put labels
     out["option_type"] = (
         out["option_type"].astype(str).str.lower().str.strip()
         .replace({"c": "call", "p": "put", "call": "call", "put": "put"})
@@ -249,7 +289,6 @@ def load_raw_options(ticker: str) -> pd.DataFrame | None:
                 ]
                 if c in names
             ]
-            # Filter by year partitions in memory-friendly batches if needed
             filters = [
                 ("date", ">=", pd.Timestamp(OPTIONS_START).to_datetime64()),
                 ("date", "<=", pd.Timestamp(OPTIONS_END).to_datetime64()),
@@ -258,7 +297,7 @@ def load_raw_options(ticker: str) -> pd.DataFrame | None:
                 table = pq.read_table(path, columns=wanted or None, filters=filters)
                 df = table.to_pandas()
             except Exception as exc:  # noqa: BLE001
-                print(f"  Filter read failed ({exc}); scanning with pandas chunks...")
+                print(f"  Filter read failed ({exc}); scanning with pandas...")
                 df = pd.read_parquet(path, columns=wanted or None)
                 df["date"] = pd.to_datetime(df["date"])
                 df = df[
@@ -296,16 +335,13 @@ def build_panel(
     if "volume" in df.columns:
         df = df[df["volume"].fillna(0) >= MIN_VOLUME]
 
-    # Prefer quotes with a real bid/ask market when available
     if {"bid", "ask"}.issubset(df.columns):
         df = df[(df["bid"].fillna(0) > 0) & (df["ask"] > df["bid"])]
 
-    # Merge underlying close
     px = underlying_prices.rename("S_t")
     px.index = pd.to_datetime(px.index)
     df = df.merge(px, left_on="trading_date", right_index=True, how="inner")
 
-    # Merge risk-free
     rf = risk_free.rename("r")
     df = df.merge(rf, left_on="trading_date", right_index=True, how="left")
     df["r"] = df["r"].ffill().bfill()
@@ -316,7 +352,6 @@ def build_panel(
     df["moneyness"] = df["K"] / df["S_t"]
     df = df[df["moneyness"].between(1 - ATM_BAND, 1 + ATM_BAND)]
 
-    # Drop stale/illiquid marks vs intrinsic value
     intrinsic = np.where(
         df["option_type"] == "call",
         np.maximum(df["S_t"] - df["K"], 0.0),
@@ -325,15 +360,12 @@ def build_panel(
     df = df[df["option_price"] >= 0.5 * intrinsic]
     df = df[df["option_price"] >= 0.05]
 
-    # Subsample trading dates to keep files manageable
     dates = np.sort(df["trading_date"].unique())
     keep_dates = set(dates[::SAMPLE_EVERY_N_DAYS])
     df = df[df["trading_date"].isin(keep_dates)]
 
     df["style"] = "American"
     df["regime"] = df["trading_date"].map(lambda d: assign_regime(pd.Timestamp(d)))
-    # Keep rows in research regimes primarily, but retain bridge dates tagged None
-    # for completeness? Prefer regime-only for research focus.
     df = df[df["regime"].notna()]
 
     out = df[
@@ -368,7 +400,7 @@ def process_ticker(
         print(f"  ⚠ No raw options file for {ticker} in {RAW_DIR}")
         return None
     if ticker not in prices.columns:
-        print(f"  ⚠ No underlying price series for {ticker} in prices_clean.csv")
+        print(f"  ⚠ No underlying price series for {ticker}")
         return None
     panel = build_panel(raw, prices[ticker], risk_free, ticker)
     print(
@@ -382,27 +414,39 @@ def process_ticker(
 def write_organized(panels: dict[str, pd.DataFrame]) -> None:
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Per-ticker
     for ticker, panel in panels.items():
         path = PROCESSED_DIR / f"{ticker}_options_panel.csv"
         panel.to_csv(path, index=False)
         print(f"✓ Saved: {path.relative_to(DATA_DIR)}")
 
-    # Combined (SPY first)
+        # DataCollection focuses on American calls for optimal stopping
+        calls = panel[panel["option_type"] == "call"]
+        call_path = PROCESSED_DIR / f"{ticker}_calls_panel.csv"
+        calls.to_csv(call_path, index=False)
+        print(f"✓ Saved: {call_path.relative_to(DATA_DIR)} ({len(calls):,} calls)")
+
     ordered = [t for t in OPTION_TICKERS if t in panels]
     combined = pd.concat([panels[t] for t in ordered], ignore_index=True)
     combined_path = PROCESSED_DIR / "options_panel_all.csv"
     combined.to_csv(combined_path, index=False)
     print(f"✓ Saved: {combined_path.relative_to(DATA_DIR)} ({len(combined):,} rows)")
 
-    # By regime (primary SPY emphasized)
+    calls_all = combined[combined["option_type"] == "call"]
+    calls_all_path = PROCESSED_DIR / "calls_panel_all.csv"
+    calls_all.to_csv(calls_all_path, index=False)
+    print(f"✓ Saved: {calls_all_path.relative_to(DATA_DIR)} ({len(calls_all):,} calls)")
+
     for regime in REGIMES:
         chunk = combined[combined["regime"] == regime]
         path = PROCESSED_DIR / f"options_panel_{regime}.csv"
         chunk.to_csv(path, index=False)
         print(f"✓ Saved: {path.relative_to(DATA_DIR)} ({len(chunk):,} rows)")
 
-    # Summary
+        call_chunk = chunk[chunk["option_type"] == "call"]
+        call_path = PROCESSED_DIR / f"calls_panel_{regime}.csv"
+        call_chunk.to_csv(call_path, index=False)
+        print(f"✓ Saved: {call_path.relative_to(DATA_DIR)} ({len(call_chunk):,} calls)")
+
     summary_rows = []
     for ticker, panel in panels.items():
         for regime, g in panel.groupby("regime"):
@@ -430,17 +474,23 @@ def write_organized(panels: dict[str, pd.DataFrame]) -> None:
 
 def main() -> None:
     print("=" * 70)
-    print("STEP 1 — OPTIONS DATA (American equity/ETF options)")
+    print("STEP 1 — OPTIONS + RISK-FREE DATA")
     print("=" * 70)
 
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+    RATES_DIR.mkdir(parents=True, exist_ok=True)
+    EQUITY_DIR.mkdir(parents=True, exist_ok=True)
 
     risk_free = fetch_risk_free(force=False)
     prices = load_or_download(force=False)
 
-    # Ensure SPY raw options exist
     download_spy_options_raw(force=False)
+
+    # Attempt secondary option downloads (best-effort; CDN may be offline)
+    for ticker in ["AAPL", "JPM", "XOM"]:
+        print(f"\nEnsuring raw options for {ticker}...")
+        try_download_secondary_options(ticker)
 
     panels: dict[str, pd.DataFrame] = {}
     for ticker in OPTION_TICKERS:
@@ -456,16 +506,17 @@ def main() -> None:
 
     missing = [t for t in OPTION_TICKERS if t not in panels]
     if missing:
-        print("\nMissing optional equity option panels:", ", ".join(missing))
+        print("\nMissing secondary equity option panels:", ", ".join(missing))
         print(
-            "Place raw files named {TICKER}_options.parquet in "
-            f"{RAW_DIR} and re-run this script.\n"
+            "Open CDN currently unavailable. Place files named "
+            f"{{TICKER}}_options.parquet in {RAW_DIR} and re-run.\n"
             "Expected columns: date, expiration, strike, type, mark|bid|ask, volume."
         )
 
-    print("\n✓ Options Step 1 extension complete")
+    print("\n✓ Options Step 1 complete")
     print(f"  Primary panel: {PROCESSED_DIR / 'SPY_options_panel.csv'}")
-    print(f"  Combined:      {PROCESSED_DIR / 'options_panel_all.csv'}")
+    print(f"  Calls (pricing): {PROCESSED_DIR / 'calls_panel_all.csv'}")
+    print(f"  Risk-free:       {RISK_FREE_PATH}")
 
 
 if __name__ == "__main__":

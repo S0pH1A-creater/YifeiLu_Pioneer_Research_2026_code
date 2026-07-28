@@ -1,19 +1,15 @@
 """
-Step 1 — Data acquisition for jump-diffusion research.
+Step 1 — Equity price acquisition (DataCollection §1 / ResearchProposal-v2).
 
-Downloads daily close prices covering 2007–2018, cleans missing values,
-and saves research/data/prices_clean.csv.
+Downloads adjusted closes for:
+  SPY (primary), AAPL, JPM, XOM
 
-Required tickers (always fetched):
-  SPY  — State Street official NAV history
-  AAPL — Twelve Data (demo key works)
+Window: post-2000 through the end of the high-vol evaluation regime
+(2000-01-01 → 2018-12-31). Regime subsets are carved out in data_prepare.py.
 
-Optional secondary tickers (JPM, XOM):
-  Fetched when TWELVEDATA_API_KEY is set, or when Yahoo Finance is available.
-  Get a free key in ~10s: https://twelvedata.com
-
-  export TWELVEDATA_API_KEY=your_key
-  python data_fetch.py
+Sources (tried in order per ticker):
+  SPY  — State Street NAV, then Yahoo chart API
+  Others — Yahoo chart API, then Twelve Data
 """
 
 from __future__ import annotations
@@ -32,13 +28,15 @@ import requests
 # ---------------------------------------------------------------------------
 RESEARCH_DIR = Path(__file__).resolve().parent
 DATA_DIR = RESEARCH_DIR / "data"
-PRICES_PATH = DATA_DIR / "prices_clean.csv"
+EQUITY_DIR = DATA_DIR / "equity"
+PRICES_PATH = EQUITY_DIR / "prices_clean.csv"
+# Backward-compatible alias used by older scripts
+LEGACY_PRICES_PATH = DATA_DIR / "prices_clean.csv"
 
-REQUIRED_TICKERS = ["SPY", "AAPL"]
-OPTIONAL_TICKERS = ["JPM", "XOM"]
-TICKERS = REQUIRED_TICKERS + OPTIONAL_TICKERS  # target set for research
+TICKERS = ["SPY", "AAPL", "JPM", "XOM"]
+PRIMARY_TICKER = "SPY"
 
-START = "2007-01-01"
+START = "2000-01-01"
 END = "2018-12-31"
 
 SSGA_SPY_URL = (
@@ -46,6 +44,10 @@ SSGA_SPY_URL = (
     "products/fund-data/etfs/us/navhist-us-en-spy.xlsx"
 )
 TWELVE_URL = "https://api.twelvedata.com/time_series"
+# Offline Yahoo mirror (Unlicense): daily OHLCV since ~2000 for US tickers
+GITHUB_YF_MIRROR = (
+    "https://raw.githubusercontent.com/dieperdev/yfinance-stock-data/main/data"
+)
 
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
@@ -73,14 +75,15 @@ def _filter_window(series: pd.Series, start: str = START, end: str = END) -> pd.
 
 
 def _assert_full_sample(series: pd.Series, ticker: str) -> pd.Series:
-    """Reject truncated series that miss the 2007–2009 crisis regime."""
-    if series.index.min() > pd.Timestamp("2007-06-01"):
+    """Reject truncated series that miss the crisis evaluation window."""
+    # Prefer post-2000; hard-require coverage from before the 2007–09 crisis regime.
+    if series.index.min() > pd.Timestamp("2007-01-01"):
         raise ValueError(
             f"{ticker} starts {series.index.min().date()} — missing crisis window"
         )
     if len(series) < 2500:
         raise ValueError(
-            f"{ticker} too short ({len(series)} rows); need ~3000 for 2007–2018"
+            f"{ticker} too short ({len(series)} rows); need full crisis→high-vol coverage"
         )
     return series
 
@@ -110,7 +113,7 @@ def download_twelve_data(
     start: str = START,
     end: str = END,
 ) -> pd.Series:
-    """Twelve Data daily closes. Demo key supports AAPL; env key unlocks others."""
+    """Twelve Data daily closes. Demo key is limited; env key unlocks more."""
     key = os.environ.get("TWELVEDATA_API_KEY") or "demo"
     key_label = "env" if os.environ.get("TWELVEDATA_API_KEY") else "demo"
     print(f"  Twelve Data {ticker} (key={key_label})...")
@@ -139,24 +142,47 @@ def download_twelve_data(
     return series
 
 
+def download_github_yf_mirror(
+    ticker: str,
+    start: str = START,
+    end: str = END,
+) -> pd.Series:
+    """Adj Close from dieperdev/yfinance-stock-data (covers post-2000 US equities)."""
+    url = f"{GITHUB_YF_MIRROR}/{ticker.upper()}.csv"
+    print(f"  GitHub YF mirror {ticker}...")
+    resp = SESSION.get(url, timeout=60)
+    resp.raise_for_status()
+    df = pd.read_csv(io.StringIO(resp.text))
+    if "Date" not in df.columns or "Adj Close" not in df.columns:
+        raise ValueError(f"Unexpected mirror columns: {list(df.columns)}")
+    df["Date"] = pd.to_datetime(df["Date"])
+    series = df.set_index("Date")["Adj Close"].astype(float).sort_index()
+    series.name = ticker
+    series = _assert_full_sample(_filter_window(series, start, end), ticker)
+    print(f"    ✓ {ticker}: {len(series)} rows via GitHub YF mirror")
+    return series
+
+
 def download_yahoo_chart(
     ticker: str,
     start: str = START,
     end: str = END,
-    max_retries: int = 3,
+    max_retries: int = 6,
 ) -> pd.Series:
-    """Yahoo Finance chart API v8 (often rate-limited; retries with backoff)."""
+    """Yahoo Finance chart API v8 — preferred free source for adj closes."""
     period1 = int(datetime.strptime(start, "%Y-%m-%d").replace(tzinfo=timezone.utc).timestamp())
     period2 = int(datetime.strptime(end, "%Y-%m-%d").replace(tzinfo=timezone.utc).timestamp()) + 86400
-    url = (
-        f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}"
-        f"?period1={period1}&period2={period2}&interval=1d"
-    )
+    hosts = ["query1", "query2"]
     last_error: Exception | None = None
     for attempt in range(1, max_retries + 1):
+        host = hosts[(attempt - 1) % len(hosts)]
+        url = (
+            f"https://{host}.finance.yahoo.com/v8/finance/chart/{ticker}"
+            f"?period1={period1}&period2={period2}&interval=1d"
+        )
         try:
-            print(f"  Yahoo chart {ticker} (attempt {attempt}/{max_retries})...")
-            resp = SESSION.get(url, timeout=30)
+            print(f"  Yahoo chart {ticker} (attempt {attempt}/{max_retries}, {host})...")
+            resp = SESSION.get(url, timeout=40)
             resp.raise_for_status()
             result = (resp.json().get("chart") or {}).get("result")
             if not result:
@@ -175,13 +201,19 @@ def download_yahoo_chart(
         except Exception as exc:  # noqa: BLE001
             last_error = exc
             print(f"    Yahoo failed: {exc}")
-            time.sleep(8 * attempt)
+            time.sleep(10 * attempt)
     raise RuntimeError(f"Yahoo failed for {ticker}") from last_error
 
 
-def download_one(ticker: str, required: bool) -> pd.Series | None:
-    """Try sources in priority order. Optional tickers return None on failure."""
+def download_one(ticker: str) -> pd.Series:
+    """Try sources in priority order; all four tickers are required."""
     errors: list[str] = []
+
+    # Stable GitHub mirror first (avoids live Yahoo rate limits).
+    try:
+        return download_github_yf_mirror(ticker)
+    except Exception as exc:  # noqa: BLE001
+        errors.append(f"GitHubMirror: {exc}")
 
     if ticker == "SPY":
         try:
@@ -190,84 +222,84 @@ def download_one(ticker: str, required: bool) -> pd.Series | None:
             errors.append(f"SSGA: {exc}")
 
     try:
-        return download_twelve_data(ticker)
-    except Exception as exc:  # noqa: BLE001
-        errors.append(f"TwelveData: {exc}")
-
-    try:
         return download_yahoo_chart(ticker)
     except Exception as exc:  # noqa: BLE001
         errors.append(f"Yahoo: {exc}")
 
-    message = f"Could not download {ticker}. Tried: {errors}."
-    if required:
-        raise RuntimeError(message)
-    print(f"  ⚠ Skipping optional {ticker}: {message}")
-    print("    Tip: export TWELVEDATA_API_KEY=... then re-run to add JPM/XOM.")
-    return None
+    try:
+        return download_twelve_data(ticker)
+    except Exception as exc:  # noqa: BLE001
+        errors.append(f"TwelveData: {exc}")
+
+    raise RuntimeError(f"Could not download {ticker}. Tried: {errors}.")
 
 
 def download_prices() -> pd.DataFrame:
     series_list: list[pd.Series] = []
-
-    for ticker in REQUIRED_TICKERS:
-        series_list.append(download_one(ticker, required=True))  # type: ignore[arg-type]
-        time.sleep(0.3)
-
-    for ticker in OPTIONAL_TICKERS:
-        series = download_one(ticker, required=False)
-        if series is not None:
-            series_list.append(series)
-        time.sleep(0.3)
-
-    prices = pd.concat(series_list, axis=1)
+    for ticker in TICKERS:
+        series_list.append(download_one(ticker))
+        time.sleep(0.4)
+    prices = pd.concat(series_list, axis=1, sort=True)
+    prices = prices[[t for t in TICKERS if t in prices.columns]]
     return _normalize_index(prices)
 
 
 def clean_prices(prices: pd.DataFrame) -> pd.DataFrame:
-    """Forward-fill then drop remaining NaNs."""
+    """Forward-fill then drop remaining NaNs (align common trading calendar)."""
     return _normalize_index(prices.ffill().dropna())
 
 
 def _cache_is_valid(cached: pd.DataFrame) -> bool:
-    if not all(t in cached.columns for t in REQUIRED_TICKERS):
+    if not all(t in cached.columns for t in TICKERS):
         return False
     if len(cached) < 2500:
         return False
-    if cached.index.min() > pd.Timestamp("2007-06-01"):
+    if cached.index.min() > pd.Timestamp("2007-01-01"):
+        return False
+    if cached.index.max() < pd.Timestamp("2018-06-01"):
         return False
     return True
 
 
-def load_or_download(force: bool = False) -> pd.DataFrame:
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
+def _resolve_prices_path() -> Path:
+    """Prefer organized equity/ path; fall back to legacy flat path."""
+    if PRICES_PATH.exists():
+        return PRICES_PATH
+    if LEGACY_PRICES_PATH.exists():
+        return LEGACY_PRICES_PATH
+    return PRICES_PATH
 
-    if PRICES_PATH.exists() and not force:
-        print(f"Loading cached prices from {PRICES_PATH}")
-        cached = pd.read_csv(PRICES_PATH, index_col=0, parse_dates=True)
+
+def load_or_download(force: bool = False) -> pd.DataFrame:
+    EQUITY_DIR.mkdir(parents=True, exist_ok=True)
+    path = _resolve_prices_path()
+
+    if path.exists() and not force:
+        print(f"Loading cached prices from {path}")
+        cached = pd.read_csv(path, index_col=0, parse_dates=True)
         if _cache_is_valid(cached):
             print(f"  Cache OK: {len(cached)} rows, {list(cached.columns)}")
+            # Migrate legacy location if needed
+            if path != PRICES_PATH:
+                cached.to_csv(PRICES_PATH)
+                print(f"  Migrated cache → {PRICES_PATH}")
             return cached
         print("  Cache incomplete — re-downloading")
 
     print(f"Downloading prices from {START} to {END}...")
-    print(f"  Required: {REQUIRED_TICKERS}")
-    print(f"  Optional: {OPTIONAL_TICKERS}")
+    print(f"  Tickers (all required): {TICKERS}")
     prices = clean_prices(download_prices())
     prices.to_csv(PRICES_PATH)
     print(f"✓ Saved: {PRICES_PATH}")
-    missing_optional = [t for t in OPTIONAL_TICKERS if t not in prices.columns]
-    if missing_optional:
-        print(f"  Note: optional tickers not included yet: {missing_optional}")
     return prices
 
 
 def main() -> None:
     print("=" * 70)
-    print("STEP 1 — DATA FETCH (prices)")
+    print("STEP 1 — DATA FETCH (equity prices)")
     print("=" * 70)
 
-    prices = load_or_download(force=False)
+    prices = load_or_download(force=True)
 
     print("\nPrice summary:")
     print(f"  Tickers: {list(prices.columns)}")
@@ -278,7 +310,7 @@ def main() -> None:
     print(prices.head())
     print("\n  Last 5 rows:")
     print(prices.tail())
-    print("\n✓ Data fetch complete")
+    print("\n✓ Equity data fetch complete")
 
 
 if __name__ == "__main__":

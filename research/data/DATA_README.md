@@ -1,6 +1,6 @@
 # Research data layout (Step 1)
 
-Aligned with [`../DataCollection.md`](../../DataCollection.md) and [`../ResearchProposal-v2.md`](../../ResearchProposal-v2.md).
+Aligned with [`../../docs/DataCollection.md`](../../docs/DataCollection.md) and [`../../docs/ResearchProposal-v2.md`](../../docs/ResearchProposal-v2.md).
 
 **Focus:** SPY (primary) · AAPL + MSFT (secondary) · JPM + XOM (auxiliary equity only).
 
@@ -86,16 +86,16 @@ data/
 - Equity SPY: State Street NAV history
 - Equity AAPL/MSFT/JPM/XOM: [dieperdev/yfinance-stock-data](https://github.com/dieperdev/yfinance-stock-data) (Yahoo adj close mirror; Unlicense)
 - Options SPY: [lambdaclass data-v1](https://github.com/lambdaclass/options_portfolio_backtester/releases/tag/data-v1) (MIT; philippdubach/options-data)
-- Options AAPL / MSFT: [Cobweb Scripts ToS EOD](https://cobwebscripts.com/data/toseodoptiondata.html) (free; converted via `cobweb_to_parquet.py`)
+- Options AAPL / MSFT: [Cobweb Scripts ToS EOD](https://cobwebscripts.com/data/toseodoptiondata.html) (free; converted via `scripts/cobweb_to_parquet.py`)
 - Risk-free: FRED `DGS3MO`
 
 ## Run
 
 ```bash
 cd research
-../.venv/bin/python data_fetch.py
-../.venv/bin/python data_prepare.py
-../.venv/bin/python options_fetch.py
+../.venv/bin/python scripts/data_fetch.py
+../.venv/bin/python scripts/data_prepare.py
+../.venv/bin/python scripts/options_fetch.py
 # optional: convert a Cobweb ZIP already in data/options/raw/_staging/
-../.venv/bin/python cobweb_to_parquet.py MSFT
+../.venv/bin/python scripts/cobweb_to_parquet.py MSFT
 ```

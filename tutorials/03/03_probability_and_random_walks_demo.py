@@ -19,6 +19,10 @@ This demo explores key concepts from the Probability and Random Walks lesson:
    - Understanding mean reversion, drift, and volatility effects
 """
 
+
+from pathlib import Path
+
+OUTPUT_DIR = Path(__file__).resolve().parent
 import yfinance as yf
 import numpy as np
 import pandas as pd
@@ -140,7 +144,7 @@ ax4.legend()
 ax4.grid(True, alpha=0.3, axis='y')
 
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/03_fat_tails_analysis.png', dpi=150, bbox_inches='tight')
+plt.savefig(str(OUTPUT_DIR / '03_fat_tails_analysis.png'), dpi=150, bbox_inches='tight')
 plt.close()
 
 print("\n✓ Fat tails analysis complete. Key insight:")
@@ -236,7 +240,7 @@ ax2.legend(fontsize=10)
 ax2.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/03_random_walks_comparison.png', dpi=150, bbox_inches='tight')
+plt.savefig(str(OUTPUT_DIR / '03_random_walks_comparison.png'), dpi=150, bbox_inches='tight')
 plt.close()
 
 print(f"\nGeometric Walk Results:")
@@ -299,7 +303,7 @@ for idx, t in enumerate(time_points):
     print(f"  95th percentile: ${np.percentile(final_prices, 95):.2f}")
 
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/03_monte_carlo_analysis.png', dpi=150, bbox_inches='tight')
+plt.savefig(str(OUTPUT_DIR / '03_monte_carlo_analysis.png'), dpi=150, bbox_inches='tight')
 plt.close()
 
 # ============================================================================

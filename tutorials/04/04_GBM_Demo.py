@@ -11,6 +11,10 @@ Reference: The GBM formula decomposition shows how deterministic drift
 and stochastic diffusion combine into the exponential path.
 """
 
+
+from pathlib import Path
+
+OUTPUT_DIR = Path(__file__).resolve().parent
 import numpy as np
 import matplotlib.pyplot as plt
 import yfinance as yf
@@ -110,7 +114,7 @@ axes[2].grid(alpha=0.3, linestyle='--')
 plt.tight_layout()
 
 # Save the figure
-output_dir = '/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/04'
+output_dir = OUTPUT_DIR
 decomp_path = os.path.join(output_dir, '04_GBM_Decomposition.png')
 plt.savefig(decomp_path, dpi=300, bbox_inches='tight')
 print(f"✓ Saved: 04_GBM_Decomposition.png")

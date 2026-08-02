@@ -12,6 +12,10 @@ We use real financial data from yfinance to estimate parameters (mu, sigma)
 and then run Monte Carlo simulations on a real stock.
 """
 
+
+from pathlib import Path
+
+OUTPUT_DIR = Path(__file__).resolve().parent
 import numpy as np
 import matplotlib.pyplot as plt
 import yfinance as yf
@@ -122,7 +126,7 @@ plt.xlabel('Trading Days', fontsize=12)
 plt.ylabel('Stock Price ($)', fontsize=12)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/05/01_multiple_paths.png', dpi=300)
+plt.savefig(str(OUTPUT_DIR / '01_multiple_paths.png'), dpi=300)
 print("✓ Saved: 01_multiple_paths.png")
 plt.close()
 
@@ -173,7 +177,7 @@ plt.ylabel('Stock Price ($)', fontsize=12)
 plt.legend(loc='best', fontsize=10)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/05/02_cone_of_uncertainty.png', dpi=300)
+plt.savefig(str(OUTPUT_DIR / '02_cone_of_uncertainty.png'), dpi=300)
 print("✓ Saved: 02_cone_of_uncertainty.png")
 plt.close()
 
@@ -228,7 +232,7 @@ ax2.legend(fontsize=10)
 ax2.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/05/03_law_of_large_numbers.png', dpi=300)
+plt.savefig(str(OUTPUT_DIR / '03_law_of_large_numbers.png'), dpi=300)
 print("✓ Saved: 03_law_of_large_numbers.png")
 plt.close()
 

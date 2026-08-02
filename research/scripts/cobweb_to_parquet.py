@@ -16,7 +16,7 @@ from pathlib import Path
 
 import pandas as pd
 
-RAW_DIR = Path(__file__).resolve().parent / "data" / "options" / "raw"
+RAW_DIR = Path(__file__).resolve().parent.parent / "data" / "options" / "raw"
 STAGING_DIR = RAW_DIR / "_staging"
 
 # Evaluation regimes (filename trading dates)
@@ -249,7 +249,7 @@ def main() -> None:
     if not zip_path.exists():
         raise SystemExit(
             f"Missing {zip_path}; download Cobweb {ticker}.zip first "
-            f"(or: python options_fetch.py)."
+            f"(or: python scripts/options_fetch.py)."
         )
     print(f"Converting {zip_path} (regime windows only)...")
     convert_cobweb_zip(zip_path, ticker)

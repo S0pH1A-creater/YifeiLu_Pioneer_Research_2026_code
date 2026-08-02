@@ -2,6 +2,10 @@
 Redraw Monte Carlo Distribution Graph - Without Bar Margins
 """
 
+
+from pathlib import Path
+
+OUTPUT_DIR = Path(__file__).resolve().parent
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as stats
@@ -56,7 +60,7 @@ for idx, t in enumerate(time_points):
     ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/03_monte_carlo_analysis.png', dpi=150, bbox_inches='tight')
+plt.savefig(str(OUTPUT_DIR / '03_monte_carlo_analysis.png'), dpi=150, bbox_inches='tight')
 plt.close()
 
 print("✓ Monte Carlo analysis graph redrawn and saved without bar margins")

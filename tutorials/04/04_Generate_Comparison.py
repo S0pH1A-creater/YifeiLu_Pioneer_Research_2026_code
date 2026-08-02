@@ -2,6 +2,10 @@
 Generate empirical comparison graph with synthetic realistic market data
 (since yfinance is rate-limited)
 """
+
+from pathlib import Path
+
+OUTPUT_DIR = Path(__file__).resolve().parent
 import numpy as np
 import matplotlib.pyplot as plt
 import os
@@ -58,7 +62,7 @@ ax.grid(alpha=0.3, linestyle='--')
 
 plt.tight_layout()
 
-output_dir = '/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/04'
+output_dir = OUTPUT_DIR
 comparison_path = os.path.join(output_dir, '04_GBM_vs_Reality.png')
 plt.savefig(comparison_path, dpi=300, bbox_inches='tight')
 print(f"✓ Saved: 04_GBM_vs_Reality.png")

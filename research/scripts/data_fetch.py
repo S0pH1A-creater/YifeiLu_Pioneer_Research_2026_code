@@ -26,7 +26,7 @@ import requests
 # ---------------------------------------------------------------------------
 # Paths and constants
 # ---------------------------------------------------------------------------
-RESEARCH_DIR = Path(__file__).resolve().parent
+RESEARCH_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = RESEARCH_DIR / "data"
 EQUITY_DIR = DATA_DIR / "equity"
 PRICES_PATH = EQUITY_DIR / "prices_clean.csv"

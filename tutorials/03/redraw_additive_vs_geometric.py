@@ -3,6 +3,10 @@ Redraw: Additive vs Geometric Random Walks - Analysis
 Investigating why additive walk stays positive
 """
 
+
+from pathlib import Path
+
+OUTPUT_DIR = Path(__file__).resolve().parent
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -101,7 +105,7 @@ ax2.legend(fontsize=9)
 ax2.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/03_additive_vs_geometric_analysis.png', dpi=150, bbox_inches='tight')
+plt.savefig(str(OUTPUT_DIR / '03_additive_vs_geometric_analysis.png'), dpi=150, bbox_inches='tight')
 plt.close()
 
 print("\n✓ Graph saved: 03_additive_vs_geometric_analysis.png")

@@ -69,7 +69,7 @@ Time period and market regimes:
 
 How:
 
-Equity prices and log returns are prepared in `research/` (`data_fetch.py`, `data_prepare.py`). SPY American options are downloaded and filtered in `options_fetch.py`, joined to \(S_t\) and \(r\), and stored under `research/data/options/`. See `research/STEP1.md` for Step 1 status and file layout.
+Equity prices and log returns are prepared in `research/scripts/` (`data_fetch.py`, `data_prepare.py`). SPY American options are downloaded and filtered in `options_fetch.py`, joined to \(S_t\) and \(r\), and stored under `research/data/options/`. See `research/STEP1.md` for Step 1 status and file layout.
 
 
 

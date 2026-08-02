@@ -18,7 +18,7 @@ from data_fetch import DATA_DIR, EQUITY_DIR, PRIMARY_TICKER, PRICES_PATH, TICKER
 # ---------------------------------------------------------------------------
 # Paths and regime definitions
 # ---------------------------------------------------------------------------
-RESEARCH_DIR = Path(__file__).resolve().parent
+RESEARCH_DIR = Path(__file__).resolve().parent.parent
 FIGURES_DIR = RESEARCH_DIR / "figures"
 
 LOG_RETURNS_ALL = EQUITY_DIR / "log_returns_all.csv"

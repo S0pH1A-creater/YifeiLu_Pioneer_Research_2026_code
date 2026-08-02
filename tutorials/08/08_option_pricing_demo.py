@@ -11,6 +11,10 @@ This demo shows:
 5. How parameters affect option prices
 """
 
+
+from pathlib import Path
+
+OUTPUT_DIR = Path(__file__).resolve().parent
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as stats
@@ -145,7 +149,7 @@ ax2.legend(loc='best', fontsize=10)
 ax2.grid(True, alpha=0.3, which='both')
 
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/08/01_convergence_analysis.png', dpi=300, bbox_inches='tight')
+plt.savefig(str(OUTPUT_DIR / '01_convergence_analysis.png'), dpi=300, bbox_inches='tight')
 print("✓ Saved: 01_convergence_analysis.png")
 plt.close()
 
@@ -196,7 +200,7 @@ ax.legend(loc='best', fontsize=10)
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/08/02_volatility_impact.png', dpi=300, bbox_inches='tight')
+plt.savefig(str(OUTPUT_DIR / '02_volatility_impact.png'), dpi=300, bbox_inches='tight')
 print("✓ Saved: 02_volatility_impact.png")
 plt.close()
 
@@ -226,7 +230,7 @@ ax.legend(loc='best', fontsize=10)
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/08/03_time_decay.png', dpi=300, bbox_inches='tight')
+plt.savefig(str(OUTPUT_DIR / '03_time_decay.png'), dpi=300, bbox_inches='tight')
 print("✓ Saved: 03_time_decay.png")
 plt.close()
 
@@ -272,7 +276,7 @@ ax2.legend(loc='best', fontsize=10)
 ax2.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/08/04_greeks_sensitivity.png', dpi=300, bbox_inches='tight')
+plt.savefig(str(OUTPUT_DIR / '04_greeks_sensitivity.png'), dpi=300, bbox_inches='tight')
 print("✓ Saved: 04_greeks_sensitivity.png")
 plt.close()
 

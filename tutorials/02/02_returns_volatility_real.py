@@ -4,6 +4,10 @@ Follows the exact notebook structure: simple vs log returns, volatility clusteri
 and stock vs index volatility comparison with real data and plots.
 """
 
+
+from pathlib import Path
+
+OUTPUT_DIR = Path(__file__).resolve().parent
 import yfinance as yf
 import pandas as pd
 import numpy as np
@@ -55,7 +59,7 @@ ax2.set_ylabel('Annualized Volatility', color='red')
 
 plt.title('AAPL Price and Volatility Clustering')
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/volatility_clustering.png', dpi=100)
+plt.savefig(str(OUTPUT_DIR / 'volatility_clustering.png'), dpi=100)
 print("\n✓ Saved plot: volatility_clustering.png")
 plt.close()
 
@@ -83,7 +87,7 @@ plt.xlabel('Log Returns')
 plt.ylabel('Density')
 plt.legend()
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/return_distribution.png', dpi=100)
+plt.savefig(str(OUTPUT_DIR / 'return_distribution.png'), dpi=100)
 print("\n✓ Saved plot: return_distribution.png")
 plt.close()
 

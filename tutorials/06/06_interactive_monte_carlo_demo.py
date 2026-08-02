@@ -15,6 +15,10 @@ Concepts:
 - Compare normal vs fat-tailed distributions
 """
 
+
+from pathlib import Path
+
+OUTPUT_DIR = Path(__file__).resolve().parent
 import numpy as np
 import matplotlib.pyplot as plt
 import yfinance as yf
@@ -238,7 +242,7 @@ if len(scenarios) == 1:
     ax2.grid(True, alpha=0.3, axis='y')
     
     plt.tight_layout()
-    filename = '/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/06/comparison_single_scenario.png'
+    filename = str(OUTPUT_DIR / 'comparison_single_scenario.png')
     plt.savefig(filename, dpi=300, bbox_inches='tight')
     print(f"✓ Saved: comparison_single_scenario.png")
     plt.close()
@@ -266,7 +270,7 @@ else:
         ax.axhline(S0, color='green', linestyle=':', linewidth=2, alpha=0.5)
     
     plt.tight_layout()
-    filename = '/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/06/comparison_paths.png'
+    filename = str(OUTPUT_DIR / 'comparison_paths.png')
     plt.savefig(filename, dpi=300, bbox_inches='tight')
     print(f"✓ Saved: comparison_paths.png")
     plt.close()
@@ -287,7 +291,7 @@ else:
     ax.grid(True, alpha=0.3, axis='y')
     
     plt.tight_layout()
-    filename = '/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/06/comparison_distributions.png'
+    filename = str(OUTPUT_DIR / 'comparison_distributions.png')
     plt.savefig(filename, dpi=300, bbox_inches='tight')
     print(f"✓ Saved: comparison_distributions.png")
     plt.close()
@@ -330,7 +334,7 @@ else:
     
     plt.title('Statistical Summary of Scenarios', fontsize=13, fontweight='bold', pad=20)
     plt.tight_layout()
-    filename = '/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/06/comparison_statistics.png'
+    filename = str(OUTPUT_DIR / 'comparison_statistics.png')
     plt.savefig(filename, dpi=300, bbox_inches='tight')
     print(f"✓ Saved: comparison_statistics.png")
     plt.close()

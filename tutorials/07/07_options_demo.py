@@ -10,6 +10,10 @@ This demo shows:
 4. Real financial scenarios with various stock prices
 """
 
+
+from pathlib import Path
+
+OUTPUT_DIR = Path(__file__).resolve().parent
 import numpy as np
 import matplotlib.pyplot as plt
 import yfinance as yf
@@ -139,7 +143,7 @@ ax4.grid(True, alpha=0.3)
 ax4.set_xlim(50, 200)
 
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/07/01_call_put_basics.png', dpi=300, bbox_inches='tight')
+plt.savefig(str(OUTPUT_DIR / '01_call_put_basics.png'), dpi=300, bbox_inches='tight')
 print("✓ Saved: 01_call_put_basics.png")
 plt.close()
 
@@ -202,7 +206,7 @@ ax2.grid(True, alpha=0.3)
 ax2.set_xlim(80, 160)
 
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/07/02_protective_put.png', dpi=300, bbox_inches='tight')
+plt.savefig(str(OUTPUT_DIR / '02_protective_put.png'), dpi=300, bbox_inches='tight')
 print("✓ Saved: 02_protective_put.png")
 plt.close()
 
@@ -243,7 +247,7 @@ ax.legend(loc='best', fontsize=10)
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig('/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/07/03_real_world_moneyness.png', dpi=300, bbox_inches='tight')
+plt.savefig(str(OUTPUT_DIR / '03_real_world_moneyness.png'), dpi=300, bbox_inches='tight')
 print(f"✓ Saved: 03_real_world_moneyness.png")
 plt.close()
 

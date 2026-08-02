@@ -27,6 +27,9 @@ Later steps (not this file): fit to real returns, American pricing / optimal sto
 
 ## Notebooks
 
+Each of `01`–`04` now includes a **full beginner workflow** (collect prices → estimate parameters from history → which params stay constant vs update along a Monte Carlo path) **plus** the original interactive playground.
+
+
 | Notebook | Model | Key sliders |
 |----------|-------|-------------|
 | [`notebooks/01_gbm.ipynb`](notebooks/01_gbm.ipynb) | Geometric Brownian Motion | \(\mu\), \(\sigma\), \(S_0\), \(T\), steps, paths |

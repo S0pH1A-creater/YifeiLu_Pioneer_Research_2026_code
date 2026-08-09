@@ -30,6 +30,7 @@
 - `2008-2009_gbm.ipynb`
 - `2013-2014_gbm.ipynb`
 - `2018-2019_gbm.ipynb`
+- `2019-2020_gbm.ipynb`
 
 
 ## Duplicate-graph root cause (fixed)

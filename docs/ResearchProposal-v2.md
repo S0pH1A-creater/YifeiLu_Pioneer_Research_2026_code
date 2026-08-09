@@ -152,9 +152,16 @@ possible future payoﬀs and determine optimal stopping decisions.
 **Optimal Stopping Method (at each step/each day, we…)**
 
 1. Calculate the immediate exercise payoﬀ: max (St-k, 0) for an American call option.
-2. Use Monte Carlo simulations to estimate the expected payoﬀ from waiting.
-3. Compare: immediate exercise value & Expected value of continuing to hold the option
+2. Estimate the continuation value with Longstaff–Schwartz (LSM): regress discounted future
+   option cashﬂows on basis functions of \(S_t\) (polynomials in \(S\)) using the Monte Carlo
+   path cloud under risk-neutral dynamics (drift \(\mu \rightarrow r\), with jump compensator
+   where applicable); vol/jump structure from each calibrated model.
+3. Compare: immediate exercise value & estimated continuation value.
 4. Select the decision with the higher expected value.
+
+Implemented in each model’s regime notebooks as §6 (after §5 Monte Carlo paths), for SPY
+American calls across GBM, Merton, Heston–Merton, and GARCH–Merton (not the advanced
+Heston–Merton Method B notebooks). See `research/STEP3.md`.
 
 This process is repeated across diﬀerent time periods and stochastic models to determine how
 

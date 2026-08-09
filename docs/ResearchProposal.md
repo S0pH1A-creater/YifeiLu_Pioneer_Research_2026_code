@@ -59,11 +59,11 @@ What real-world data:
 
 Time period and market regimes:
 
+- Crisis period: 2008–2009 (Global Financial Crisis; options from 2008)
+
 - Normal volatility period: 2013–2014
 
-- High-volatility period: 2017–2018
-
-- Crisis period: 2007–2009 for equities; options from 2008–2009 (historical options coverage starts 2008)
+- Late period: 2018–2019
 
 
 
@@ -113,11 +113,11 @@ Equity prices and log returns are prepared in `research/scripts/` (`data_fetch.p
 
 3. Evaluate model performance across different post-2000 market volatility regimes, including:
 
-    - Normal market conditions: 2013-2014
+    - Market crash: 2008–2009 (Global Financial Crisis)
 
-    - High-volatility periods: 2017-2018
+    - Normal market conditions: 2013–2014
 
-    - Market crash: The 2008 Global Financial Crisis
+    - Late period: 2018–2019
 
 4. Assess financial risk using quantitative measures such as Value at Risk (VaR) and Conditional Value at Risk (CVaR).
 

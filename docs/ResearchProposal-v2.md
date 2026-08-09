@@ -55,9 +55,9 @@ Option price data (specific)
 
 Time period and market regimes:
 
+- Crisis period: 2008–2009 (Global Financial Crisis)
 - Normal volatility period: 2013–2014
-- High-volatility period: 2017–2018
-- Crisis period: 2008 Global Financial Crisis
+- Late period: 2018–2019
 
 How:
 
@@ -90,9 +90,9 @@ stopping decisions.
 
 1. Evaluate model performance across diﬀerent post-2000 market volatility regimes, including:
 
-- Normal market conditions: 2013-2014
-- High-volatility periods: 2017-2018
-- Market crash: The 2008 Global Financial Crisis
+- Market crash: 2008–2009 (Global Financial Crisis)
+- Normal market conditions: 2013–2014
+- Late period: 2018–2019
 
 1. Apply simulated stock price paths to American option pricing and determine optimal stopping
 

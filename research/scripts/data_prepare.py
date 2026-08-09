@@ -26,21 +26,21 @@ LOG_RETURNS_BY_REGIME = EQUITY_DIR / "log_returns_by_regime.csv"
 SUMMARY_STATS = EQUITY_DIR / "summary_stats.csv"
 
 REGIMES: dict[str, tuple[str, str]] = {
-    "crisis": ("2007-01-01", "2009-12-31"),
+    "crisis": ("2008-01-01", "2009-12-31"),
     "normal": ("2013-01-01", "2014-12-31"),
-    "high_vol": ("2017-01-01", "2018-12-31"),
+    "late": ("2018-01-01", "2019-12-31"),
 }
 
-REGIME_ORDER = ["crisis", "normal", "high_vol"]
+REGIME_ORDER = ["crisis", "normal", "late"]
 REGIME_LABELS = {
-    "crisis": "Crisis (2007–2009)",
+    "crisis": "Crisis (2008–2009)",
     "normal": "Normal (2013–2014)",
-    "high_vol": "High vol (2017–2018)",
+    "late": "Late (2018–2019)",
 }
 REGIME_COLORS = {
     "crisis": "#c44e52",
     "normal": "#4c72b0",
-    "high_vol": "#dd8452",
+    "late": "#dd8452",
 }
 
 MIN_OBS_PER_REGIME = 200
@@ -156,7 +156,8 @@ def plot_spy_price_by_regime(prices: pd.DataFrame) -> Path:
 def plot_return_distributions(regime_long: pd.DataFrame) -> Path:
     """Histograms of SPY log returns by regime (density)."""
     spy = regime_long[regime_long["ticker"] == PRIMARY_TICKER]
-    fig, axes = plt.subplots(1, 3, figsize=(12, 4), sharey=True)
+    n = len(REGIME_ORDER)
+    fig, axes = plt.subplots(1, n, figsize=(4 * n, 4), sharey=True)
 
     for ax, name in zip(axes, REGIME_ORDER):
         data = spy.loc[spy["regime"] == name, "log_return"]
@@ -186,10 +187,11 @@ def plot_return_distributions(regime_long: pd.DataFrame) -> Path:
 
 def plot_annualized_volatility(stats: pd.DataFrame) -> Path:
     """Grouped bar chart: annualized vol by ticker and regime."""
-    fig, ax = plt.subplots(figsize=(10, 5))
+    fig, ax = plt.subplots(figsize=(11, 5))
     tickers = [t for t in TICKERS if t in set(stats["ticker"])]
     x = np.arange(len(tickers))
-    width = 0.25
+    n = len(REGIME_ORDER)
+    width = 0.8 / n
 
     for i, name in enumerate(REGIME_ORDER):
         vals = []
@@ -197,7 +199,7 @@ def plot_annualized_volatility(stats: pd.DataFrame) -> Path:
             match = stats.loc[(stats["ticker"] == t) & (stats["regime"] == name), "ann_vol"]
             vals.append(float(match.iloc[0]) if len(match) else 0.0)
         ax.bar(
-            x + (i - 1) * width,
+            x + (i - (n - 1) / 2) * width,
             vals,
             width=width,
             color=REGIME_COLORS[name],
@@ -318,13 +320,13 @@ def run_checks(
     median_abs_diff = float((aligned["log"] - aligned["simple"]).abs().median())
     results["log_approx_simple"] = median_abs_diff < 1e-3
 
-    # Every ticker has all three regimes
+    # Every ticker has all evaluation regimes
     for ticker in TICKERS:
         if ticker not in stats["ticker"].values:
             results[f"{ticker}_has_regimes"] = False
             continue
         n_regimes = stats.loc[stats["ticker"] == ticker, "regime"].nunique()
-        results[f"{ticker}_has_regimes"] = n_regimes == 3
+        results[f"{ticker}_has_regimes"] = n_regimes == len(REGIME_ORDER)
 
     return results
 

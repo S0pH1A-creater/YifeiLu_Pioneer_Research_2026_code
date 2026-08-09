@@ -43,7 +43,7 @@ SPY_RELEASE_URL = (
 # Secondary tickers: same CDN layout as philippdubach/options-data (when online)
 OPTIONS_CDN = "https://static.philippdubach.com/data/options"
 
-# Cobweb Scripts free ToS EOD dumps (Mega) — AAPL + MSFT cover all three regimes
+# Cobweb Scripts free ToS EOD dumps (Mega) — AAPL + MSFT cover all evaluation regimes
 COBWEB_MEGA = {
     "AAPL": "https://mega.nz/file/DMgQBZLA#PfNJ8y6IbIsPyjWUsLT0YkA3IWpRHVpkQP9dNlfrH4A",
     "MSFT": "https://mega.nz/file/PAxxDIga#_bPkj12uVOZCFttxaKmXUM5Tf-xqed4gcy6k9KnAsxs",
@@ -65,7 +65,7 @@ SAMPLE_EVERY_N_DAYS = 5
 REGIMES = {
     "crisis": ("2008-01-01", "2009-12-31"),
     "normal": ("2013-01-01", "2014-12-31"),
-    "high_vol": ("2017-01-01", "2018-12-31"),
+    "late": ("2018-01-01", "2019-12-31"),
 }
 
 USER_AGENT = (

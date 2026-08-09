@@ -67,17 +67,17 @@ Purpose:
 ### **Main evaluation periods:**
 
 1. **Crisis period**
-  - 2008 Global Financial Crisis
+  - 2008–2009 (Global Financial Crisis)
 2. **Normal volatility period**
   - 2013–2014
-3. **High-volatility period**
-  - 2017–2018
+3. **Late period**
+  - 2018–2019
 
 ### **Option data**
 
 Use:
 
 - The same three periods:
-  - 2008
+  - 2008–2009
   - 2013–2014
-  - 2017–2018
+  - 2018–2019

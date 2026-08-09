@@ -4,8 +4,8 @@ Step 1 — Equity price acquisition (DataCollection §1 / ResearchProposal-v2).
 Downloads adjusted closes for:
   SPY (primary), AAPL + MSFT (secondary), JPM + XOM (auxiliary / retained)
 
-Window: post-2000 through the end of the high-vol evaluation regime
-(2000-01-01 → 2018-12-31). Regime subsets are carved out in data_prepare.py.
+Window: post-2000 through the end of the evaluation sample
+(2000-01-01 → 2020-12-31). Regime subsets are carved out in data_prepare.py.
 
 Sources (tried in order per ticker):
   SPY  — State Street NAV, then Yahoo chart API
@@ -40,7 +40,7 @@ AUXILIARY_TICKERS = ["JPM", "XOM"]
 TICKERS = [PRIMARY_TICKER, *SECONDARY_TICKERS, *AUXILIARY_TICKERS]
 
 START = "2000-01-01"
-END = "2018-12-31"
+END = "2020-12-31"
 
 SSGA_SPY_URL = (
     "https://www.ssga.com/us/en/intermediaries/etfs/library-content/"
@@ -86,7 +86,7 @@ def _assert_full_sample(series: pd.Series, ticker: str) -> pd.Series:
         )
     if len(series) < 2500:
         raise ValueError(
-            f"{ticker} too short ({len(series)} rows); need full crisis→high-vol coverage"
+            f"{ticker} too short ({len(series)} rows); need full crisis→late coverage"
         )
     return series
 
@@ -97,7 +97,7 @@ def _assert_full_sample(series: pd.Series, ticker: str) -> pd.Series:
 def download_spy_ssga(start: str = START, end: str = END) -> pd.Series:
     """Official State Street SPY NAV history."""
     print("  SSGA NAV history for SPY...")
-    resp = SESSION.get(SSGA_SPY_URL, timeout=60)
+    resp = SESSION.get(SSGA_SPY_URL, timeout=30)
     resp.raise_for_status()
     raw = pd.read_excel(io.BytesIO(resp.content), header=None)
     body = raw.iloc[3:, [0, 1]].copy()
@@ -259,7 +259,7 @@ def _cache_is_valid(cached: pd.DataFrame) -> bool:
         return False
     if cached.index.min() > pd.Timestamp("2007-01-01"):
         return False
-    if cached.index.max() < pd.Timestamp("2018-06-01"):
+    if cached.index.max() < pd.Timestamp("2020-06-01"):
         return False
     return True
 

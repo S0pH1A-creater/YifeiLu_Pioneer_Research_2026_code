@@ -25,8 +25,8 @@ data/
       AAPL_calls_panel.csv
       MSFT_options_panel.csv      # Secondary
       MSFT_calls_panel.csv
-      options_panel_{all,crisis,normal,high_vol}.csv   # core = SPY+AAPL+MSFT
-      calls_panel_{all,crisis,normal,high_vol}.csv
+      options_panel_{all,crisis,normal,late}.csv   # core = SPY+AAPL+MSFT
+      calls_panel_{all,crisis,normal,late}.csv
       options_summary.csv
 ```
 
@@ -40,10 +40,10 @@ data/
 | JPM | Auxiliary | ✓ | Retained; not in options focus |
 | XOM | Auxiliary | ✓ | Retained; not in options focus |
 
-- **Requested window:** post-2000 → end of high-vol regime (2000-01-01 → 2018-12-31)
-- **Common sample on disk:** 2003-12-01 → 2018-12-31 (SPY NAV history starts Dec 2003)
+- **Requested window:** post-2000 → end of late regime sample (2000-01-01 → 2020-12-31)
+- **Common sample on disk:** 2003-12-01 → 2020-12-31 (SPY NAV history starts Dec 2003)
 - **Transform:** \(r_t = \ln(S_t / S_{t-1})\) for every ticker
-- **Regimes:** crisis 2007–2009 · normal 2013–2014 · high_vol 2017–2018
+- **Regimes:** crisis 2008–2009 · normal 2013–2014 · late 2018–2019
 
 ## 2. American options
 
@@ -67,11 +67,11 @@ data/
 | `option_price` | Premium (mid/mark) |
 | `r` | Risk-free (decimal, DGS3MO) |
 | `moneyness` | K / S_t |
-| `regime` | crisis / normal / high_vol |
+| `regime` | crisis / normal / late |
 | `style` | American |
 
 ### Filters
-- Dates: 2008-01-01 → 2018-12-31 (open options history starts 2008)
+- Dates: 2008-01-01 → 2020-12-31 (open options history starts 2008)
 - Near ATM: \|K/S − 1\| ≤ 10%
 - DTE: 7–60 days
 - Volume ≥ 1; valid bid/ask; premium ≥ max(0.05, 0.5×intrinsic)

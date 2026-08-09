@@ -18,9 +18,9 @@ Checklist from [`../docs/DataCollection.md`](../docs/DataCollection.md) / [`../d
 
 | Regime | Equity window | Options window |
 |--------|---------------|----------------|
-| Crisis | 2007-01-01 → 2009-12-31 | 2008-01-01 → 2009-12-31 |
+| Crisis | 2008-01-01 → 2009-12-31 | same |
 | Normal | 2013-01-01 → 2014-12-31 | same |
-| High vol | 2017-01-01 → 2018-12-31 | same |
+| Late | 2018-01-01 → 2019-12-31 | same |
 
 ## Tickers
 

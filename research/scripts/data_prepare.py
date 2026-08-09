@@ -13,7 +13,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from data_fetch import DATA_DIR, EQUITY_DIR, PRIMARY_TICKER, PRICES_PATH, TICKERS, load_or_download
+from data_fetch import (
+    DATA_DIR,
+    EQUITY_DIR,
+    PRIMARY_TICKER,
+    PRICES_PATH,
+    SECONDARY_TICKERS,
+    TICKERS,
+    load_or_download,
+)
 
 # ---------------------------------------------------------------------------
 # Paths and regime definitions
@@ -122,11 +130,17 @@ def summary_statistics(regime_long: pd.DataFrame) -> pd.DataFrame:
 # ---------------------------------------------------------------------------
 # Figures (save only — no plt.show)
 # ---------------------------------------------------------------------------
-def plot_spy_price_by_regime(prices: pd.DataFrame) -> Path:
-    """SPY price path with shaded regime bands."""
+def plot_price_by_regime(prices: pd.DataFrame, ticker: str) -> Path:
+    """Price path with shaded regime bands (same style as SPY figure 01)."""
     fig, ax = plt.subplots(figsize=(12, 5))
-    spy = prices[PRIMARY_TICKER]
-    ax.plot(spy.index, spy.values, color="#2f2f2f", linewidth=1.2, label="SPY Adj Close")
+    series = prices[ticker].dropna()
+    ax.plot(
+        series.index,
+        series.values,
+        color="#2f2f2f",
+        linewidth=1.2,
+        label=f"{ticker} Adj Close",
+    )
 
     for name in REGIME_ORDER:
         start, end = REGIMES[name]
@@ -138,7 +152,7 @@ def plot_spy_price_by_regime(prices: pd.DataFrame) -> Path:
             label=REGIME_LABELS[name],
         )
 
-    ax.set_title("SPY Price Path with Volatility Regimes")
+    ax.set_title(f"{ticker} Price Path with Volatility Regimes")
     ax.set_xlabel("Date")
     ax.set_ylabel("Adjusted Close (USD)")
     ax.legend(loc="upper left", frameon=False)
@@ -146,11 +160,16 @@ def plot_spy_price_by_regime(prices: pd.DataFrame) -> Path:
     ax.spines["right"].set_visible(False)
     fig.tight_layout()
 
-    path = FIGURES_DIR / "01_spy_price_by_regime.png"
+    path = FIGURES_DIR / f"01_{ticker.lower()}_price_by_regime.png"
     fig.savefig(path, dpi=120)
     plt.close(fig)
     print(f"✓ Saved: {path.name}")
     return path
+
+
+def plot_spy_price_by_regime(prices: pd.DataFrame) -> Path:
+    """Backward-compatible wrapper for the primary ticker figure."""
+    return plot_price_by_regime(prices, PRIMARY_TICKER)
 
 
 def plot_return_distributions(regime_long: pd.DataFrame) -> Path:
@@ -381,7 +400,8 @@ def main() -> None:
     print(f"✓ Saved: {SUMMARY_STATS.relative_to(DATA_DIR)}")
 
     print("\nGenerating figures...")
-    plot_spy_price_by_regime(prices)
+    for ticker in (PRIMARY_TICKER, *SECONDARY_TICKERS):
+        plot_price_by_regime(prices, ticker)
     plot_return_distributions(regime_long)
     plot_annualized_volatility(stats)
     plot_rolling_volatility_spy(returns)

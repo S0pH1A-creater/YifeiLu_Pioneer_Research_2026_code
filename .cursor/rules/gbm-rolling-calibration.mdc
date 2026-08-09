@@ -1,0 +1,15 @@
+---
+description: True rolling-window GBM calibration for research/gbm notebook period files
+globs: research/gbm notebook/**
+alwaysApply: false
+---
+
+# GBM period notebooks — rolling calibration
+
+When editing files under `research/gbm notebook/`:
+
+- Use **true rolling-window calibration**: at each update point, re-estimate \(\mu\) and \(\sigma\) from only the current lookback window, then use those params for the **next** Monte Carlo segment.
+- Do **not** keep the initial (first-day) parameters fixed for the whole prediction period when rolling is `daily` or `monthly`.
+- `none` rolling = single estimate at period start (fixed params) is allowed.
+- Lookback options: 3m / 6m / 1y / 2y / 5y; rolling modes: daily / monthly / none; keep a **Reestimate** control.
+- See `research/gbm notebook/ROLLING_CALIBRATION.md`.

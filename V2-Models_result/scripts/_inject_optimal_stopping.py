@@ -1,6 +1,7 @@
 """One-shot: inject §6 Optimal stopping into all four model regime notebooks.
 
 Skips heston merton advanced. Safe to re-run (replaces existing §6 Optimal stopping).
+§6 prices American calls for SPY, AAPL, and MSFT with the same LSM harness.
 """
 
 from __future__ import annotations
@@ -11,23 +12,31 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-MODELS = {
-    "gbm": {
-        "folder": ROOT / "gbm notebook",
-        "glob": "*_gbm.ipynb",
-        "label": "GBM",
-        "path_builder": '''
+# Shared RN path builder body: uses row.underlying (or explicit ticker) + rolling[ticker]
+_PATH_COMMON_HEAD = '''
 def _rn_paths_for_contract(row, n_paths: int, seed: int):
-    """Risk-neutral paths to expiry using §5 GBM simulator (μ → r)."""
-    p = params_asof(rolling["SPY"], row.trading_date)
+    """Risk-neutral paths to expiry using §5 simulator (μ → r)."""
+    ticker = str(getattr(row, "underlying", "SPY")).upper()
+    if ticker not in rolling or len(rolling[ticker]) == 0:
+        raise RuntimeError(f"No {ticker} calibration — run Reestimate in §4 first.")
+    p = params_asof(rolling[ticker], row.trading_date)
     if p is None:
-        raise RuntimeError("No SPY calibration — run Reestimate in §4 first.")
+        raise RuntimeError(f"No {ticker} calibration — run Reestimate in §4 first.")
     dte = int(row.dte)
     if dte < 2:
         raise ValueError("dte must be >= 2")
     r = float(row.r)
     S0 = float(row.S_t)
     mu_step = np.full(dte, r, dtype=float)
+'''
+
+MODELS = {
+    "gbm": {
+        "folder": ROOT / "gbm notebook",
+        "glob": "*_gbm.ipynb",
+        "label": "GBM",
+        "path_builder": _PATH_COMMON_HEAD
+        + '''
     sig_step = np.full(dte, float(p["sigma"]), dtype=float)
     return simulate_gbm_rolling(mu_step, sig_step, S0, n_paths, seed)
 ''',
@@ -36,18 +45,8 @@ def _rn_paths_for_contract(row, n_paths: int, seed: int):
         "folder": ROOT / "merton notebook",
         "glob": "*_merton.ipynb",
         "label": "Merton",
-        "path_builder": '''
-def _rn_paths_for_contract(row, n_paths: int, seed: int):
-    """Risk-neutral paths to expiry using §5 Merton simulator (μ → r)."""
-    p = params_asof(rolling["SPY"], row.trading_date)
-    if p is None:
-        raise RuntimeError("No SPY calibration — run Reestimate in §4 first.")
-    dte = int(row.dte)
-    if dte < 2:
-        raise ValueError("dte must be >= 2")
-    r = float(row.r)
-    S0 = float(row.S_t)
-    mu_step = np.full(dte, r, dtype=float)
+        "path_builder": _PATH_COMMON_HEAD
+        + '''
     sig_step = np.full(dte, float(p["sigma"]), dtype=float)
     lam_step = np.full(dte, float(p["lam"]), dtype=float)
     muj_step = np.full(dte, float(p["mu_j"]), dtype=float)
@@ -62,18 +61,8 @@ def _rn_paths_for_contract(row, n_paths: int, seed: int):
         "folder": ROOT / "heston merton notebook",
         "glob": "*_heston_merton.ipynb",
         "label": "Heston–Merton",
-        "path_builder": '''
-def _rn_paths_for_contract(row, n_paths: int, seed: int):
-    """Risk-neutral paths to expiry using §5 Heston–Merton simulator (μ → r)."""
-    p = params_asof(rolling["SPY"], row.trading_date)
-    if p is None:
-        raise RuntimeError("No SPY calibration — run Reestimate in §4 first.")
-    dte = int(row.dte)
-    if dte < 2:
-        raise ValueError("dte must be >= 2")
-    r = float(row.r)
-    S0 = float(row.S_t)
-    mu_step = np.full(dte, r, dtype=float)
+        "path_builder": _PATH_COMMON_HEAD
+        + '''
     kappa_step = np.full(dte, float(p["kappa"]), dtype=float)
     theta_step = np.full(dte, float(p["theta"]), dtype=float)
     xi_step = np.full(dte, float(p["xi"]), dtype=float)
@@ -93,17 +82,8 @@ def _rn_paths_for_contract(row, n_paths: int, seed: int):
         "folder": ROOT / "garch merton notebook",
         "glob": "*_garch_merton.ipynb",
         "label": "GARCH–Merton",
-        "path_builder": '''
-def _rn_paths_for_contract(row, n_paths: int, seed: int):
-    """Risk-neutral paths to expiry using §5 GARCH–Merton simulator (μ → r)."""
-    p = params_asof(rolling["SPY"], row.trading_date)
-    if p is None:
-        raise RuntimeError("No SPY calibration — run Reestimate in §4 first.")
-    dte = int(row.dte)
-    if dte < 2:
-        raise ValueError("dte must be >= 2")
-    r = float(row.r)
-    S0 = float(row.S_t)
+        "path_builder": _PATH_COMMON_HEAD
+        + '''
     steps = {
         "mu": np.full(dte, r, dtype=float),
         "omega": np.full(dte, float(p["omega"]), dtype=float),
@@ -121,48 +101,27 @@ def _rn_paths_for_contract(row, n_paths: int, seed: int):
 }
 
 
-def md_cell(text: str) -> dict:
+def fix_source_newlines(text: str) -> list:
     if not text.endswith("\n"):
         text += "\n"
-    return {
-        "cell_type": "markdown",
-        "id": uuid.uuid4().hex[:8],
-        "metadata": {},
-        "source": [line + "\n" for line in text.split("\n")[:-1]] + [text.split("\n")[-1] + ("\n" if text.endswith("\n") else "")],
-    }
-
-
-def code_cell(text: str) -> dict:
-    if not text.endswith("\n"):
-        text += "\n"
-    lines = text.split("\n")
-    # keep trailing newline style like other notebook cells
-    source = [ln + "\n" for ln in lines[:-1]]
-    if lines[-1] != "":
-        source.append(lines[-1] + "\n")
-    return {
-        "cell_type": "code",
-        "execution_count": None,
-        "id": uuid.uuid4().hex[:8],
-        "metadata": {},
-        "outputs": [],
-        "source": source,
-    }
+    return [line + "\n" for line in text.split("\n")[:-1]] + (
+        [text.split("\n")[-1] + "\n"] if text.split("\n")[-1] != "" or text.endswith("\n") else []
+    )
 
 
 def stopping_markdown(label: str) -> str:
     return f"""## 6. Optimal stopping (American calls — {label})
 
-Continuous with §5: after Monte Carlo stock paths are available, use the **same {label} simulator** and §4 calibration on **SPY** to decide exercise vs wait for American calls.
+Continuous with §5: after Monte Carlo stock paths are available, use the **same {label} simulator** and §4 calibration on **SPY / AAPL / MSFT** to decide exercise vs wait for American calls.
 
 At each day along each path:
 1. Immediate payoff: $\\max(S_t - K, 0)$
 2. Continuation value: Longstaff–Schwartz regression on the path cloud (basis $1, S, S^2$)
 3. Exercise if payoff $>$ continuation
 
-Paths for pricing are **risk-neutral** (drift $\\mu \\rightarrow r$ from the option panel; vol/jumps from §4). Not the single expected path — the full Monte Carlo cloud.
+Paths for pricing are **risk-neutral** (drift $\\mu \\rightarrow r$ from the option panel; vol/jumps from §4 for that ticker). Not the single expected path — the full Monte Carlo cloud.
 
-**Workflow:** §4 **Reestimate** → §5 **Start** (optional viz) → §6 **Compute stopping**."""
+**Workflow:** §4 **Reestimate** → §5 **Start** (optional viz) → §6 **Compute stopping** (all three underlyings)."""
 
 
 def stopping_code(path_builder: str, label: str) -> str:
@@ -172,10 +131,11 @@ if str(_SCRIPTS.resolve()) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS.resolve()))
 
 from american_lsm import (
+    STOP_TICKERS,
     lsm_american_call,
-    load_spy_calls,
+    load_calls,
     params_asof,
-    sample_spy_calls,
+    sample_calls,
 )
 
 def _show_fig(fig):
@@ -190,23 +150,29 @@ def _show_fig(fig):
 
 {path_builder}
 
-_spy_calls_all = load_spy_calls(DATA)
-_contracts = sample_spy_calls(
-    _spy_calls_all, PERIOD_START, PERIOD_END, n_total=24, seed=42
-)
-stopping_results = None
-
-display(Markdown(
-    f"Sampled **{{len(_contracts)}}** SPY American calls in "
-    f"{{PERIOD_START.date()}} → {{PERIOD_END.date()}} "
-    f"(ATM band / DTE 7–60 as in the panel)."
-))
-if len(_contracts):
-    display(
-        _contracts[
-            ["trading_date", "S_t", "K", "dte", "r", "moneyness", "option_price"]
-        ].head(12)
+_STOP_TICKERS = list(STOP_TICKERS)
+_contracts_by_ticker = {{}}
+for _t in _STOP_TICKERS:
+    _panel = load_calls(DATA, _t)
+    _contracts_by_ticker[_t] = sample_calls(
+        _panel, PERIOD_START, PERIOD_END, n_total=24, seed=42
     )
+
+stopping_results = {{}}  # ticker -> DataFrame
+
+for _t in _STOP_TICKERS:
+    _n = len(_contracts_by_ticker[_t])
+    display(Markdown(
+        f"Sampled **{{_n}}** {{_t}} American calls in "
+        f"{{PERIOD_START.date()}} → {{PERIOD_END.date()}} "
+        f"(ATM band / DTE 7–60 as in the panel)."
+    ))
+    if _n:
+        display(
+            _contracts_by_ticker[_t][
+                ["trading_date", "S_t", "K", "dte", "r", "moneyness", "option_price"]
+            ].head(8)
+        )
 
 _stop_n_paths = widgets.IntSlider(
     value=2000, min=500, max=8000, step=500, description="n_paths",
@@ -229,117 +195,127 @@ def _run_optimal_stopping(_=None):
     with _stop_out:
         clear_output(wait=True)
         try:
-            if "SPY" not in rolling or len(rolling["SPY"]) == 0:
-                display(Markdown("Run **Reestimate** in §4 first (need SPY calibration)."))
-                return
-            if _contracts is None or len(_contracts) == 0:
-                display(Markdown("No SPY call contracts in this period panel slice."))
+            missing = [t for t in _STOP_TICKERS if t not in rolling or len(rolling[t]) == 0]
+            if missing:
+                display(Markdown(
+                    "Run **Reestimate** in §4 first "
+                    f"(need calibration for: {{', '.join(missing)}})."
+                ))
                 return
 
             n_paths = int(_stop_n_paths.value)
             seed0 = int(_stop_seed.value)
-            rows = []
-            example = None
             dt = 1.0 / N_DAYS
+            stopping_results = {{}}
 
-            for i, row in enumerate(_contracts.itertuples(index=False)):
-                paths = _rn_paths_for_contract(row, n_paths, seed0 + i)
-                res = lsm_american_call(paths, K=float(row.K), r=float(row.r), dt=dt)
-                err = res.price - float(row.option_price)
-                rows.append({{
-                    "trading_date": row.trading_date,
-                    "S_t": float(row.S_t),
-                    "K": float(row.K),
-                    "dte": int(row.dte),
-                    "r": float(row.r),
-                    "market": float(row.option_price),
-                    "model_price": res.price,
-                    "error": err,
-                    "early_ex_frac": res.early_exercise_frac,
-                    "mean_ex_day": res.mean_exercise_step,
-                }})
-                if example is None:
-                    example = (row, paths, res)
+            for ticker in _STOP_TICKERS:
+                contracts = _contracts_by_ticker[ticker]
+                if contracts is None or len(contracts) == 0:
+                    display(Markdown(f"No {{ticker}} call contracts in this period panel slice."))
+                    continue
 
-            stopping_results = pd.DataFrame(rows)
-            rmse = float(np.sqrt(np.mean(stopping_results["error"] ** 2)))
-            mae = float(np.mean(np.abs(stopping_results["error"])))
+                rows = []
+                example = None
+                for i, row in enumerate(contracts.itertuples(index=False)):
+                    paths = _rn_paths_for_contract(row, n_paths, seed0 + i)
+                    res = lsm_american_call(paths, K=float(row.K), r=float(row.r), dt=dt)
+                    err = res.price - float(row.option_price)
+                    rows.append({{
+                        "ticker": ticker,
+                        "trading_date": row.trading_date,
+                        "S_t": float(row.S_t),
+                        "K": float(row.K),
+                        "dte": int(row.dte),
+                        "r": float(row.r),
+                        "market": float(row.option_price),
+                        "model_price": res.price,
+                        "error": err,
+                        "early_ex_frac": res.early_exercise_frac,
+                        "mean_ex_day": res.mean_exercise_step,
+                    }})
+                    if example is None:
+                        example = (row, paths, res)
 
-            display(Markdown(
-                f"### {label} — LSM results (SPY)\\n"
-                f"n_paths={{n_paths}} | contracts={{len(stopping_results)}} | "
-                f"RMSE={{rmse:.4f}} | MAE={{mae:.4f}} | "
-                f"mean early-exercise fraction="
-                f"{{stopping_results['early_ex_frac'].mean():.3f}}"
-            ))
-            display(
-                stopping_results[
-                    ["trading_date", "S_t", "K", "dte", "market", "model_price",
-                     "error", "early_ex_frac", "mean_ex_day"]
-                ].round(4)
-            )
+                df = pd.DataFrame(rows)
+                stopping_results[ticker] = df
+                rmse = float(np.sqrt(np.mean(df["error"] ** 2)))
+                mae = float(np.mean(np.abs(df["error"])))
+                color = COLORS.get(ticker, "#2ca02c")
 
-            with plt.ioff():
-                fig, axes = plt.subplots(1, 3, figsize=(13.5, 4.0))
-                ax = axes[0]
-                ax.scatter(
-                    stopping_results["market"], stopping_results["model_price"],
-                    alpha=0.75, color=COLORS.get("SPY", "#2ca02c"),
+                display(Markdown(
+                    f"### {label} — LSM results ({{ticker}})\\n"
+                    f"n_paths={{n_paths}} | contracts={{len(df)}} | "
+                    f"RMSE={{rmse:.4f}} | MAE={{mae:.4f}} | "
+                    f"mean early-exercise fraction="
+                    f"{{df['early_ex_frac'].mean():.3f}}"
+                ))
+                display(
+                    df[
+                        ["trading_date", "S_t", "K", "dte", "market", "model_price",
+                         "error", "early_ex_frac", "mean_ex_day"]
+                    ].round(4)
                 )
-                lo = min(stopping_results["market"].min(), stopping_results["model_price"].min())
-                hi = max(stopping_results["market"].max(), stopping_results["model_price"].max())
-                ax.plot([lo, hi], [lo, hi], "k--", lw=1)
-                ax.set_xlabel("market option_price")
-                ax.set_ylabel("model LSM price")
-                ax.set_title("Price: model vs market")
 
-                axes[1].bar(
-                    ["model", "market"],
-                    [stopping_results["model_price"].mean(), stopping_results["market"].mean()],
-                    color=[COLORS.get("SPY", "#2ca02c"), "#7f7f7f"],
-                )
-                axes[1].set_title("Mean option value")
-                axes[1].set_ylabel("price")
-
-                axes[2].hist(
-                    stopping_results["mean_ex_day"], bins=12,
-                    color=COLORS.get("SPY", "#2ca02c"), alpha=0.85, edgecolor="white",
-                )
-                axes[2].set_xlabel("mean exercise day (by contract)")
-                axes[2].set_title("Optimal exercise timing")
-                fig.suptitle(
-                    f"{label} optimal stopping | {{cal_meta.get('rolling_mode')}} / "
-                    f"{{cal_meta.get('window_label')}}",
-                    fontsize=11, y=1.02,
-                )
-                fig.tight_layout()
-            _show_fig(fig)
-
-            if example is not None:
-                row, paths, res = example
-                j = int(np.argmin(np.abs(res.exercise_steps - res.mean_exercise_step)))
-                t_ex = int(res.exercise_steps[j])
                 with plt.ioff():
-                    fig2, ax = plt.subplots(figsize=(10, 3.8))
-                    ax.plot(paths[j], color=COLORS.get("SPY", "#2ca02c"), lw=1.5, label="one RN path")
-                    ax.axhline(float(row.K), color="gray", ls="--", lw=1, label=f"K={{row.K:g}}")
-                    ax.scatter(
-                        [t_ex], [paths[j, t_ex]], color="crimson", zorder=5, s=50,
-                        label=f"exercise day {{t_ex}}",
+                    fig, axes = plt.subplots(1, 3, figsize=(13.5, 4.0))
+                    ax = axes[0]
+                    ax.scatter(df["market"], df["model_price"], alpha=0.75, color=color)
+                    lo = min(df["market"].min(), df["model_price"].min())
+                    hi = max(df["market"].max(), df["model_price"].max())
+                    ax.plot([lo, hi], [lo, hi], "k--", lw=1)
+                    ax.set_xlabel("market option_price")
+                    ax.set_ylabel("model LSM price")
+                    ax.set_title("Price: model vs market")
+
+                    axes[1].bar(
+                        ["model", "market"],
+                        [df["model_price"].mean(), df["market"].mean()],
+                        color=[color, "#7f7f7f"],
                     )
-                    ax.set_xlabel("day")
-                    ax.set_ylabel("S")
-                    ax.set_title(
-                        f"Example path | trade {{pd.Timestamp(row.trading_date).date()}} | "
-                        f"dte={{int(row.dte)}} | model={{res.price:.3f}} vs mkt={{float(row.option_price):.3f}}"
+                    axes[1].set_title("Mean option value")
+                    axes[1].set_ylabel("price")
+
+                    axes[2].hist(
+                        df["mean_ex_day"], bins=12,
+                        color=color, alpha=0.85, edgecolor="white",
                     )
-                    ax.legend(frameon=False, loc="best")
-                    fig2.tight_layout()
-                _show_fig(fig2)
+                    axes[2].set_xlabel("mean exercise day (by contract)")
+                    axes[2].set_title("Optimal exercise timing")
+                    fig.suptitle(
+                        f"{label} optimal stopping | {{ticker}} | "
+                        f"{{cal_meta.get('rolling_mode')}} / {{cal_meta.get('window_label')}}",
+                        fontsize=11, y=1.02,
+                    )
+                    fig.tight_layout()
+                _show_fig(fig)
+
+                if example is not None:
+                    row, paths, res = example
+                    j = int(np.argmin(np.abs(res.exercise_steps - res.mean_exercise_step)))
+                    t_ex = int(res.exercise_steps[j])
+                    with plt.ioff():
+                        fig2, ax = plt.subplots(figsize=(10, 3.8))
+                        ax.plot(paths[j], color=color, lw=1.5, label="one RN path")
+                        ax.axhline(float(row.K), color="gray", ls="--", lw=1, label=f"K={{row.K:g}}")
+                        ax.scatter(
+                            [t_ex], [paths[j, t_ex]], color="crimson", zorder=5, s=50,
+                            label=f"exercise day {{t_ex}}",
+                        )
+                        ax.set_xlabel("day")
+                        ax.set_ylabel("S")
+                        ax.set_title(
+                            f"{{ticker}} example path | "
+                            f"trade {{pd.Timestamp(row.trading_date).date()}} | "
+                            f"dte={{int(row.dte)}} | model={{res.price:.3f}} vs "
+                            f"mkt={{float(row.option_price):.3f}}"
+                        )
+                        ax.legend(frameon=False, loc="best")
+                        fig2.tight_layout()
+                    _show_fig(fig2)
 
             display(Markdown(
                 "Results stored in `stopping_results` "
-                "(model_price, error, early_ex_frac, mean_ex_day)."
+                "(dict keyed by ticker → model_price, error, early_ex_frac, mean_ex_day)."
             ))
         except Exception as exc:
             display(Markdown(f"**Error:** `{{type(exc).__name__}}: {{exc}}`"))
@@ -349,7 +325,7 @@ def _run_optimal_stopping(_=None):
 
 _btn_stop.on_click(_run_optimal_stopping)
 display(widgets.VBox([
-    widgets.HTML("<b>§6 Optimal stopping — SPY American calls (LSM)</b>"),
+    widgets.HTML("<b>§6 Optimal stopping — SPY / AAPL / MSFT American calls (LSM)</b>"),
     widgets.HBox([_stop_n_paths, _stop_seed, _btn_stop]),
     _stop_out,
 ]))
@@ -361,17 +337,9 @@ def reminder_markdown() -> str:
 
 1. **§4:** sliders → **Reestimate** → read parameter tables / rolling charts.
 2. **§5:** **Start** → Monte Carlo stock paths + expected vs history (one pair per ticker).
-3. **§6:** **Compute stopping** → LSM exercise decision + model vs market on SPY calls (needs §4).
+3. **§6:** **Compute stopping** → LSM exercise decision + model vs market on SPY / AAPL / MSFT calls (needs §4).
 4. **Restart** (§5) only changes the random seed for path plots.
 """
-
-
-def fix_source_newlines(text: str) -> list:
-    if not text.endswith("\n"):
-        text += "\n"
-    return [line + "\n" for line in text.split("\n")[:-1]] + (
-        [text.split("\n")[-1] + "\n"] if text.split("\n")[-1] != "" or text.endswith("\n") else []
-    )
 
 
 def cell_text(cell: dict) -> str:
@@ -383,11 +351,18 @@ def patch_notebook(path: Path, model_key: str) -> None:
     nb = json.loads(path.read_text())
     cells = nb["cells"]
 
-    # Remove prior §6 Optimal stopping + old reminder if re-injecting
+    # Remove prior §6 Optimal stopping + old reminder if re-injecting.
+    # Also drop stray markdown cells that accidentally contain path-builder code.
     new_cells = []
     skip_next_code = False
     for c in cells:
         t = cell_text(c).lstrip()
+        raw = cell_text(c)
+        if c["cell_type"] == "markdown" and (
+            "def _rn_paths_for_contract" in raw or "Compute stopping" in raw and "lsm_american_call" in raw
+        ):
+            # leftover code pasted into markdown
+            continue
         if c["cell_type"] == "markdown" and t.startswith("## 6. Optimal stopping"):
             skip_next_code = True
             continue
@@ -430,7 +405,6 @@ def patch_notebook(path: Path, model_key: str) -> None:
 def main():
     for key, cfg in MODELS.items():
         files = sorted(cfg["folder"].glob(cfg["glob"]))
-        # exclude accidental advanced matches (none in these folders)
         for f in files:
             if "advanced" in f.name:
                 continue

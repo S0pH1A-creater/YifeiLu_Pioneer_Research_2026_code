@@ -1,0 +1,642 @@
+[
+  {
+    "model": "GBM",
+    "regime": "2008-2009",
+    "stem": "2008-2009_gbm",
+    "modes": {
+      "none": {
+        "rmse": 2.6818233623479126,
+        "mae": 2.2451981297620383,
+        "bias": 1.7229272698773295,
+        "early": 0.246375,
+        "n_updates": 1,
+        "t_cal": 0.0006201267242431641,
+        "t_lsm": 0.08412480354309082,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 2.2773616396337517,
+        "mae": 1.9361502132835788,
+        "bias": 1.6032321650035548,
+        "early": 0.24962499999999999,
+        "n_updates": 25,
+        "t_cal": 0.00444793701171875,
+        "t_lsm": 0.08557915687561035,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 2.1441746642567585,
+        "mae": 1.8399459141701173,
+        "bias": 1.519100304250282,
+        "early": 0.247125,
+        "n_updates": 505,
+        "t_cal": 0.06727814674377441,
+        "t_lsm": 0.0883629322052002,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  },
+  {
+    "model": "Merton",
+    "regime": "2008-2009",
+    "stem": "2008-2009_merton",
+    "modes": {
+      "none": {
+        "rmse": 2.686185813743201,
+        "mae": 2.2723361571758924,
+        "bias": 1.773284263828611,
+        "early": 0.23285416666666667,
+        "n_updates": 1,
+        "t_cal": 0.0007872581481933594,
+        "t_lsm": 0.10728597640991211,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 2.2953160526359295,
+        "mae": 1.8749577821083505,
+        "bias": 1.5916835010386159,
+        "early": 0.22841666666666663,
+        "n_updates": 25,
+        "t_cal": 0.007379055023193359,
+        "t_lsm": 0.10973072052001953,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 2.092859502576799,
+        "mae": 1.737731174874958,
+        "bias": 1.4775955499496511,
+        "early": 0.22799999999999998,
+        "n_updates": 505,
+        "t_cal": 0.13312530517578125,
+        "t_lsm": 0.1280651092529297,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  },
+  {
+    "model": "Heston\u2013Merton",
+    "regime": "2008-2009",
+    "stem": "2008-2009_heston_merton",
+    "modes": {
+      "none": {
+        "rmse": 2.1383086884304165,
+        "mae": 1.7405654403785802,
+        "bias": 1.0709289471024916,
+        "early": 0.30922916666666667,
+        "n_updates": 1,
+        "t_cal": 0.002359151840209961,
+        "t_lsm": 0.11956501007080078,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 4.887135496571545,
+        "mae": 3.908317601848475,
+        "bias": 3.5237329343025294,
+        "early": 0.15939583333333335,
+        "n_updates": 25,
+        "t_cal": 0.04032111167907715,
+        "t_lsm": 0.13421106338500977,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 4.912578772657632,
+        "mae": 3.776870882867589,
+        "bias": 3.4199114951835483,
+        "early": 0.1663125,
+        "n_updates": 505,
+        "t_cal": 0.8695549964904785,
+        "t_lsm": 0.12179923057556152,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  },
+  {
+    "model": "GARCH\u2013Merton",
+    "regime": "2008-2009",
+    "stem": "2008-2009_garch_merton",
+    "modes": {
+      "none": {
+        "rmse": 3.0727821643249693,
+        "mae": 2.604944277349302,
+        "bias": 2.206595573848846,
+        "early": 0.16068749999999998,
+        "n_updates": 1,
+        "t_cal": 0.035871028900146484,
+        "t_lsm": 0.11068201065063477,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 3.374937766174895,
+        "mae": 2.4868646171758364,
+        "bias": 2.134219802002685,
+        "early": 0.18406250000000002,
+        "n_updates": 25,
+        "t_cal": 0.9895429611206055,
+        "t_lsm": 0.10411596298217773,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 2.9585889939714525,
+        "mae": 2.274346078286762,
+        "bias": 1.88451855639042,
+        "early": 0.1746875,
+        "n_updates": 505,
+        "t_cal": 18.44084620475769,
+        "t_lsm": 0.14522719383239746,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  },
+  {
+    "model": "GBM",
+    "regime": "2013-2014",
+    "stem": "2013-2014_gbm",
+    "modes": {
+      "none": {
+        "rmse": 5.057764257933908,
+        "mae": 3.887520961947642,
+        "bias": 3.6375805249438353,
+        "early": 0.27066666666666667,
+        "n_updates": 1,
+        "t_cal": 0.0006730556488037109,
+        "t_lsm": 0.08505082130432129,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 3.5485891415548596,
+        "mae": 2.6324057378480457,
+        "bias": 2.3981336082980493,
+        "early": 0.2716041666666667,
+        "n_updates": 25,
+        "t_cal": 0.004857778549194336,
+        "t_lsm": 0.0852348804473877,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 3.4746428413108976,
+        "mae": 2.5451901780076938,
+        "bias": 2.3226268593684067,
+        "early": 0.2743333333333333,
+        "n_updates": 505,
+        "t_cal": 0.06613707542419434,
+        "t_lsm": 0.09003925323486328,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  },
+  {
+    "model": "Merton",
+    "regime": "2013-2014",
+    "stem": "2013-2014_merton",
+    "modes": {
+      "none": {
+        "rmse": 4.375415079892661,
+        "mae": 3.431036160144814,
+        "bias": 3.1358818563036035,
+        "early": 0.2129375,
+        "n_updates": 1,
+        "t_cal": 0.0017597675323486328,
+        "t_lsm": 0.12979602813720703,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 2.8580687926891204,
+        "mae": 2.2007885054188034,
+        "bias": 1.8925247313670288,
+        "early": 0.23199999999999998,
+        "n_updates": 25,
+        "t_cal": 0.010946989059448242,
+        "t_lsm": 0.30173707008361816,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 2.947308922560171,
+        "mae": 2.1998712655457386,
+        "bias": 1.9768074324721454,
+        "early": 0.21691666666666667,
+        "n_updates": 505,
+        "t_cal": 0.1270751953125,
+        "t_lsm": 0.1160879135131836,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  },
+  {
+    "model": "Heston\u2013Merton",
+    "regime": "2013-2014",
+    "stem": "2013-2014_heston_merton",
+    "modes": {
+      "none": {
+        "rmse": 3.054621342843381,
+        "mae": 2.0743034494944506,
+        "bias": 1.1147871414559136,
+        "early": 0.32768749999999996,
+        "n_updates": 1,
+        "t_cal": 0.0024662017822265625,
+        "t_lsm": 0.13372302055358887,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 7.524854994791088,
+        "mae": 4.902325412825596,
+        "bias": 3.457603009207608,
+        "early": 0.21252083333333335,
+        "n_updates": 25,
+        "t_cal": 0.04670095443725586,
+        "t_lsm": 0.13214325904846191,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 7.600505409016187,
+        "mae": 4.627324660601128,
+        "bias": 4.258958929592173,
+        "early": 0.2023125,
+        "n_updates": 505,
+        "t_cal": 1.1166608333587646,
+        "t_lsm": 0.14781999588012695,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  },
+  {
+    "model": "GARCH\u2013Merton",
+    "regime": "2013-2014",
+    "stem": "2013-2014_garch_merton",
+    "modes": {
+      "none": {
+        "rmse": 12.280322998972025,
+        "mae": 10.258885769628172,
+        "bias": 10.258885769628172,
+        "early": 0.17779166666666668,
+        "n_updates": 1,
+        "t_cal": 0.049424171447753906,
+        "t_lsm": 0.19755792617797852,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 7.449374586551642,
+        "mae": 5.596127119651171,
+        "bias": 5.568062427522288,
+        "early": 0.2113958333333333,
+        "n_updates": 25,
+        "t_cal": 1.3668427467346191,
+        "t_lsm": 0.1231691837310791,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 7.248103624933522,
+        "mae": 5.128007167040348,
+        "bias": 5.114114468952274,
+        "early": 0.2121666666666667,
+        "n_updates": 505,
+        "t_cal": 25.05306100845337,
+        "t_lsm": 0.11921405792236328,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  },
+  {
+    "model": "GBM",
+    "regime": "2018-2019",
+    "stem": "2018-2019_gbm",
+    "modes": {
+      "none": {
+        "rmse": 0.9191866708766221,
+        "mae": 0.7432062201251356,
+        "bias": -0.6415243919835163,
+        "early": 0.2394791666666667,
+        "n_updates": 1,
+        "t_cal": 0.003320932388305664,
+        "t_lsm": 0.19027209281921387,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 2.0397451068489643,
+        "mae": 1.442038357137304,
+        "bias": 0.9101257871377603,
+        "early": 0.233,
+        "n_updates": 25,
+        "t_cal": 0.004853963851928711,
+        "t_lsm": 0.11720609664916992,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 1.8063852919879526,
+        "mae": 1.210703814441499,
+        "bias": 0.8673804576247232,
+        "early": 0.23660416666666664,
+        "n_updates": 503,
+        "t_cal": 0.07952618598937988,
+        "t_lsm": 0.09605908393859863,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  },
+  {
+    "model": "Merton",
+    "regime": "2018-2019",
+    "stem": "2018-2019_merton",
+    "modes": {
+      "none": {
+        "rmse": 0.8663292722084157,
+        "mae": 0.6982736530758133,
+        "bias": -0.6017428922784132,
+        "early": 0.2490416666666667,
+        "n_updates": 1,
+        "t_cal": 0.0012137889862060547,
+        "t_lsm": 0.09815192222595215,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 1.9219814423765986,
+        "mae": 1.3645750801042746,
+        "bias": 0.8747839345644781,
+        "early": 0.24635416666666668,
+        "n_updates": 25,
+        "t_cal": 0.007121086120605469,
+        "t_lsm": 0.10091710090637207,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 1.7155196333754947,
+        "mae": 1.1587898052922954,
+        "bias": 0.8179209876915673,
+        "early": 0.24520833333333333,
+        "n_updates": 503,
+        "t_cal": 0.11924195289611816,
+        "t_lsm": 0.10410189628601074,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  },
+  {
+    "model": "Heston\u2013Merton",
+    "regime": "2018-2019",
+    "stem": "2018-2019_heston_merton",
+    "modes": {
+      "none": {
+        "rmse": 0.8858870841397279,
+        "mae": 0.6919907167635132,
+        "bias": -0.5962500172189013,
+        "early": 0.2835625,
+        "n_updates": 1,
+        "t_cal": 0.002774953842163086,
+        "t_lsm": 0.13168787956237793,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 3.956468841555574,
+        "mae": 2.895903398021479,
+        "bias": 2.523270792873381,
+        "early": 0.1573125,
+        "n_updates": 25,
+        "t_cal": 0.045327186584472656,
+        "t_lsm": 0.13313984870910645,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 4.865942198070295,
+        "mae": 3.8440966118059556,
+        "bias": 3.6048203377883716,
+        "early": 0.12481249999999999,
+        "n_updates": 503,
+        "t_cal": 1.0346333980560303,
+        "t_lsm": 0.1537771224975586,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  },
+  {
+    "model": "GARCH\u2013Merton",
+    "regime": "2018-2019",
+    "stem": "2018-2019_garch_merton",
+    "modes": {
+      "none": {
+        "rmse": 0.6696077162566411,
+        "mae": 0.5564250650965773,
+        "bias": -0.20485429024348178,
+        "early": 0.25575,
+        "n_updates": 1,
+        "t_cal": 0.0503392219543457,
+        "t_lsm": 0.10091066360473633,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 4.402218760115986,
+        "mae": 2.7817453249431896,
+        "bias": 2.6328245343808923,
+        "early": 0.22189583333333332,
+        "n_updates": 25,
+        "t_cal": 0.8020951747894287,
+        "t_lsm": 0.1063539981842041,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 3.9753730217083816,
+        "mae": 2.9800320744115347,
+        "bias": 2.9245872954920897,
+        "early": 0.209875,
+        "n_updates": 503,
+        "t_cal": 9.759971141815186,
+        "t_lsm": 0.11106395721435547,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  },
+  {
+    "model": "GBM",
+    "regime": "2019-2020",
+    "stem": "2019-2020_gbm",
+    "modes": {
+      "none": {
+        "rmse": 3.2126402602146626,
+        "mae": 2.673764474903854,
+        "bias": 2.619208833035944,
+        "early": 0.2946666666666667,
+        "n_updates": 1,
+        "t_cal": 0.0008521080017089844,
+        "t_lsm": 0.0942530632019043,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 2.191366258404545,
+        "mae": 1.7783752531837147,
+        "bias": 1.634739060649529,
+        "early": 0.3007916666666667,
+        "n_updates": 25,
+        "t_cal": 0.005240201950073242,
+        "t_lsm": 0.08587217330932617,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 2.0972468249202922,
+        "mae": 1.6606084148376563,
+        "bias": 1.5730403303714195,
+        "early": 0.29704166666666665,
+        "n_updates": 505,
+        "t_cal": 0.12977027893066406,
+        "t_lsm": 0.09059810638427734,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  },
+  {
+    "model": "Merton",
+    "regime": "2019-2020",
+    "stem": "2019-2020_merton",
+    "modes": {
+      "none": {
+        "rmse": 3.159902493241571,
+        "mae": 2.5943241507091552,
+        "bias": 2.5082369737993893,
+        "early": 0.26783333333333337,
+        "n_updates": 1,
+        "t_cal": 0.0009729862213134766,
+        "t_lsm": 0.1015937328338623,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 2.204932952699613,
+        "mae": 1.8113929265545572,
+        "bias": 1.598687091881203,
+        "early": 0.27418750000000003,
+        "n_updates": 25,
+        "t_cal": 0.0070819854736328125,
+        "t_lsm": 0.09986090660095215,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 2.057809288382007,
+        "mae": 1.6737113501810406,
+        "bias": 1.5688353276798168,
+        "early": 0.26527083333333334,
+        "n_updates": 505,
+        "t_cal": 0.12326192855834961,
+        "t_lsm": 0.1054372787475586,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  },
+  {
+    "model": "Heston\u2013Merton",
+    "regime": "2019-2020",
+    "stem": "2019-2020_heston_merton",
+    "modes": {
+      "none": {
+        "rmse": 2.2790682637633894,
+        "mae": 1.741881416386426,
+        "bias": 1.4091548625274424,
+        "early": 0.3864166666666667,
+        "n_updates": 1,
+        "t_cal": 0.003078937530517578,
+        "t_lsm": 0.12655305862426758,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 6.688029387173914,
+        "mae": 4.674615308035597,
+        "bias": 4.528325240495625,
+        "early": 0.17991666666666664,
+        "n_updates": 25,
+        "t_cal": 0.04441189765930176,
+        "t_lsm": 0.12512803077697754,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 6.519559244545235,
+        "mae": 4.868759761976782,
+        "bias": 4.8211880791717325,
+        "early": 0.11033333333333334,
+        "n_updates": 505,
+        "t_cal": 0.8813998699188232,
+        "t_lsm": 0.15011000633239746,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  },
+  {
+    "model": "GARCH\u2013Merton",
+    "regime": "2019-2020",
+    "stem": "2019-2020_garch_merton",
+    "modes": {
+      "none": {
+        "rmse": 8.046630012396141,
+        "mae": 7.147078488150169,
+        "bias": 7.147078488150169,
+        "early": 0.2080625,
+        "n_updates": 1,
+        "t_cal": 0.0497591495513916,
+        "t_lsm": 0.1070089340209961,
+        "panel": "none_panel.png",
+        "line": "none_path.png"
+      },
+      "monthly": {
+        "rmse": 4.1918215990697085,
+        "mae": 3.505374351595137,
+        "bias": 3.455281195883263,
+        "early": 0.22885416666666666,
+        "n_updates": 25,
+        "t_cal": 0.791140079498291,
+        "t_lsm": 0.11396098136901855,
+        "panel": "monthly_panel.png",
+        "line": "monthly_path.png"
+      },
+      "daily": {
+        "rmse": 4.1157994106121825,
+        "mae": 3.5165398321789616,
+        "bias": 3.475918852234159,
+        "early": 0.2212083333333333,
+        "n_updates": 505,
+        "t_cal": 12.466695785522461,
+        "t_lsm": 0.1676349639892578,
+        "panel": "daily_panel.png",
+        "line": "daily_path.png"
+      }
+    }
+  }
+]

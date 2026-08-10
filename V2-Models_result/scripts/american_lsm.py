@@ -3,6 +3,8 @@
 Used by §6 Optimal stopping in the GBM / Merton / Heston–Merton / GARCH–Merton
 regime notebooks. Path generation stays in each notebook (reuse §5 simulators
 under risk-neutral drift μ → r); this module only does LSM + contract sampling.
+
+Supports SPY (primary), AAPL, and MSFT call panels.
 """
 
 from __future__ import annotations
@@ -12,6 +14,8 @@ from typing import Optional
 
 import numpy as np
 import pandas as pd
+
+STOP_TICKERS = ("SPY", "AAPL", "MSFT")
 
 
 @dataclass
@@ -104,14 +108,14 @@ def params_asof(cal_table: pd.DataFrame, asof: pd.Timestamp) -> Optional[pd.Seri
     return usable.iloc[-1]
 
 
-def sample_spy_calls(
+def sample_calls(
     panel: pd.DataFrame,
     period_start,
     period_end,
     n_total: int = 24,
     seed: int = 42,
 ) -> pd.DataFrame:
-    """Stratified sample of SPY calls in [period_start, period_end]."""
+    """Stratified sample of American calls in [period_start, period_end]."""
     df = panel.copy()
     df["trading_date"] = pd.to_datetime(df["trading_date"])
     m = (df["trading_date"] >= pd.Timestamp(period_start)) & (
@@ -168,6 +172,23 @@ def sample_spy_calls(
     return out.reset_index(drop=True)
 
 
-def load_spy_calls(data_dir) -> pd.DataFrame:
-    path = data_dir / "options" / "processed" / "SPY_calls_panel.csv"
+def load_calls(data_dir, ticker: str = "SPY") -> pd.DataFrame:
+    """Load processed American-call panel for one underlying."""
+    ticker = str(ticker).upper()
+    path = data_dir / "options" / "processed" / f"{ticker}_calls_panel.csv"
     return pd.read_csv(path, parse_dates=["trading_date", "expiration"])
+
+
+# Back-compat aliases used by older notebook cells / runners
+def sample_spy_calls(
+    panel: pd.DataFrame,
+    period_start,
+    period_end,
+    n_total: int = 24,
+    seed: int = 42,
+) -> pd.DataFrame:
+    return sample_calls(panel, period_start, period_end, n_total=n_total, seed=seed)
+
+
+def load_spy_calls(data_dir) -> pd.DataFrame:
+    return load_calls(data_dir, "SPY")

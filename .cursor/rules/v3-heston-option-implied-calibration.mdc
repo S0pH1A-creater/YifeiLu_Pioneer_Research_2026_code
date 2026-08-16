@@ -1,0 +1,17 @@
+---
+description: Option-implied Heston calibration for V3 heston notebook period files
+globs: V3-Models_result/heston notebook/**
+alwaysApply: false
+---
+
+# V3 Heston period notebooks — option-implied calibration
+
+When editing files under `V3-Models_result/heston notebook/`:
+
+- This model is **Heston without jumps**: estimate \((\mu,\kappa,\theta,\xi,\rho,v_0)\). Do **not** add \(\lambda,\mu_J,\sigma_J,\kappa_J\) or a jump term in simulation.
+- **Do not** use Method A (AR(1) realized variance, RV-based \(\theta\), residual \(\xi\), historical \(\rho\)).
+- Calibrate \((\kappa,\theta,\xi,\rho,v_0)\) from listed call prices by nonlinear least squares vs Heston European Fourier prices (`scripts/heston_option_calibration.py`).
+- \(\mu\) remains the lookback mean of stock returns (P-measure; LSM still uses \(\mu\to r\)).
+- True rolling-window calibration: re-fit from the current lookback of option quotes; use those params for the next Monte Carlo segment.
+- Euler MC must use the current \(v_t\) for the stock return over \([t,t+\Delta t]\), then update \(v_{t+\Delta t}\). Do not look ahead. Leave the Fourier NLS calibrator and LSM algorithm unchanged.
+- See `V3-Models_result/heston notebook/ROLLING_CALIBRATION.md`.

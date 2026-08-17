@@ -1,0 +1,2455 @@
+{
+  "meta": {
+    "source": "same 72 contract CSVs as V3_1p5y_fixed_empirical_study",
+    "moneyness": "m = S/K (call)",
+    "rule": {
+      "DOTM": "m < 0.98",
+      "OTM": "0.98 \u2264 m < 0.995",
+      "ATM": "0.995 \u2264 m \u2264 1.005",
+      "ITM": "1.005 < m \u2264 1.02",
+      "DITM": "m > 1.02"
+    },
+    "n_paths": 10000,
+    "seed": 42,
+    "lookback": "1.5 years",
+    "rolling": "none",
+    "n_contracts_one_model": 802
+  },
+  "n_overall": {
+    "DOTM": 18,
+    "OTM": 58,
+    "ATM": 652,
+    "ITM": 58,
+    "DITM": 16
+  },
+  "n_regime": {
+    "2008-2009": {
+      "DOTM": 18,
+      "OTM": 43,
+      "ATM": 80,
+      "ITM": 43,
+      "DITM": 16
+    },
+    "2013-2014": {
+      "DOTM": 0,
+      "OTM": 5,
+      "ATM": 192,
+      "ITM": 3,
+      "DITM": 0
+    },
+    "2018-2019": {
+      "DOTM": 0,
+      "OTM": 4,
+      "ATM": 191,
+      "ITM": 7,
+      "DITM": 0
+    },
+    "2019-2020": {
+      "DOTM": 0,
+      "OTM": 6,
+      "ATM": 189,
+      "ITM": 5,
+      "DITM": 0
+    }
+  },
+  "analysis1": {
+    "DOTM": {
+      "bucket": "DOTM",
+      "n": 18,
+      "best_model": "Heston\u2013Merton",
+      "rows": [
+        {
+          "rmse_pct": 34.143584967702175,
+          "mae": 1.2322550048247747,
+          "bias": -0.420770781391496,
+          "bias_pct": -3.1547926356447027,
+          "early": 0.18806666666666666,
+          "n": 18,
+          "model": "GBM",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": 33.14115634416582,
+          "mae": 1.286829753789405,
+          "bias": -0.7615696265644165,
+          "bias_pct": -11.265646427171955,
+          "early": 0.1977722222222222,
+          "n": 18,
+          "model": "Modified GBM",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": 39.30024478049706,
+          "mae": 1.2346817264476777,
+          "bias": 0.034167240092901494,
+          "bias_pct": 10.689870879097287,
+          "early": 0.14483333333333331,
+          "n": 18,
+          "model": "GARCH",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": 30.930061204855708,
+          "mae": 1.2078860783201184,
+          "bias": -0.6935984412573282,
+          "bias_pct": -10.002990943390962,
+          "early": 0.20206666666666664,
+          "n": 18,
+          "model": "Heston",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": 35.228418880322614,
+          "mae": 1.25579375868812,
+          "bias": -0.41005917914377066,
+          "bias_pct": -3.296014253719368,
+          "early": 0.15785555555555555,
+          "n": 18,
+          "model": "Merton",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": 53.88805045913612,
+          "mae": 1.4953832704234538,
+          "bias": 0.6023230786142195,
+          "bias_pct": 25.641113636310926,
+          "early": 0.14139444444444443,
+          "n": 18,
+          "model": "GARCH\u2013Merton",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": 30.3622005746268,
+          "mae": 1.2047557525893065,
+          "bias": -0.7394252199223043,
+          "bias_pct": -11.46585776480004,
+          "early": 0.14195555555555556,
+          "n": 18,
+          "model": "Heston\u2013Merton",
+          "bucket": "DOTM"
+        }
+      ]
+    },
+    "OTM": {
+      "bucket": "OTM",
+      "n": 58,
+      "best_model": "Modified GBM",
+      "rows": [
+        {
+          "rmse_pct": 43.05257029723103,
+          "mae": 1.2320190552474621,
+          "bias": -0.0840190737383265,
+          "bias_pct": 5.783375079933404,
+          "early": 0.2165258620689655,
+          "n": 58,
+          "model": "GBM",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 40.2870018199414,
+          "mae": 1.1888870671433769,
+          "bias": -0.33580030078729023,
+          "bias_pct": 0.6152800562315569,
+          "early": 0.22683448275862073,
+          "n": 58,
+          "model": "Modified GBM",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 47.9757412441609,
+          "mae": 1.2856811404757933,
+          "bias": 0.29055091571962666,
+          "bias_pct": 19.829472893814504,
+          "early": 0.16817413793103447,
+          "n": 58,
+          "model": "GARCH",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 41.67086176780739,
+          "mae": 1.1988042720112213,
+          "bias": -0.048979861320864314,
+          "bias_pct": 6.773453938506262,
+          "early": 0.21301724137931036,
+          "n": 58,
+          "model": "Heston",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 42.06249036010987,
+          "mae": 1.2328332281736185,
+          "bias": -0.11062150151809391,
+          "bias_pct": 4.236243356540357,
+          "early": 0.18437931034482757,
+          "n": 58,
+          "model": "Merton",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 59.11901582974248,
+          "mae": 1.4946259597250005,
+          "bias": 0.6795570172492751,
+          "bias_pct": 31.704843024325246,
+          "early": 0.15967241379310343,
+          "n": 58,
+          "model": "GARCH\u2013Merton",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 40.92608381612126,
+          "mae": 1.1691405595616893,
+          "bias": -0.1628952915200688,
+          "bias_pct": 4.601646668199331,
+          "early": 0.1786741379310345,
+          "n": 58,
+          "model": "Heston\u2013Merton",
+          "bucket": "OTM"
+        }
+      ]
+    },
+    "ATM": {
+      "bucket": "ATM",
+      "n": 652,
+      "best_model": "Merton",
+      "rows": [
+        {
+          "rmse_pct": 41.63771130820726,
+          "mae": 4.448646272176402,
+          "bias": 0.8707725102813838,
+          "bias_pct": 14.162815020470534,
+          "early": 0.23962269938650305,
+          "n": 652,
+          "model": "GBM",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 41.49380023844936,
+          "mae": 4.518169556367961,
+          "bias": 1.1698693786532994,
+          "bias_pct": 12.757760255722777,
+          "early": 0.2451182515337423,
+          "n": 652,
+          "model": "Modified GBM",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 42.2243351597942,
+          "mae": 4.222259017972991,
+          "bias": 0.18166703347721516,
+          "bias_pct": 15.351869013056142,
+          "early": 0.20039831288343557,
+          "n": 652,
+          "model": "GARCH",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 52.44235591071244,
+          "mae": 5.5730475573529095,
+          "bias": 2.6250589153272577,
+          "bias_pct": 28.830237996965597,
+          "early": 0.23780935582822088,
+          "n": 652,
+          "model": "Heston",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 39.748774441205946,
+          "mae": 4.413408714559656,
+          "bias": 0.47610404997440386,
+          "bias_pct": 11.641740822941514,
+          "early": 0.19848052147239265,
+          "n": 652,
+          "model": "Merton",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 51.297191057124955,
+          "mae": 4.648827960953658,
+          "bias": 1.525875829227536,
+          "bias_pct": 26.289258947717798,
+          "early": 0.18434815950920244,
+          "n": 652,
+          "model": "GARCH\u2013Merton",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 52.6828615694415,
+          "mae": 5.510736551319496,
+          "bias": 3.525189100321785,
+          "bias_pct": 27.895796848054005,
+          "early": 0.20298082822085892,
+          "n": 652,
+          "model": "Heston\u2013Merton",
+          "bucket": "ATM"
+        }
+      ]
+    },
+    "ITM": {
+      "bucket": "ITM",
+      "n": 58,
+      "best_model": "Merton",
+      "rows": [
+        {
+          "rmse_pct": 28.03463082628866,
+          "mae": 1.006854674722153,
+          "bias": -0.4877101602648585,
+          "bias_pct": -10.202124114632028,
+          "early": 0.2762431034482759,
+          "n": 58,
+          "model": "GBM",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 28.236152373615788,
+          "mae": 0.9858090703226547,
+          "bias": -0.653801490116971,
+          "bias_pct": -12.901372690704829,
+          "early": 0.286598275862069,
+          "n": 58,
+          "model": "Modified GBM",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 29.398991382974437,
+          "mae": 1.0073375978163468,
+          "bias": -0.09334510643662179,
+          "bias_pct": 3.306220306959978,
+          "early": 0.21312586206896553,
+          "n": 58,
+          "model": "GARCH",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 29.042652512178364,
+          "mae": 1.0765377847842554,
+          "bias": -0.26251151018429464,
+          "bias_pct": -5.1659811532451725,
+          "early": 0.27770689655172415,
+          "n": 58,
+          "model": "Heston",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 27.870514837908917,
+          "mae": 1.0004917805437112,
+          "bias": -0.5357434621812867,
+          "bias_pct": -11.592075062503884,
+          "early": 0.23817758620689655,
+          "n": 58,
+          "model": "Merton",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 32.591172460361825,
+          "mae": 1.1341928498616418,
+          "bias": 0.2247343686010988,
+          "bias_pct": 10.229934105046185,
+          "early": 0.20032241379310345,
+          "n": 58,
+          "model": "GARCH\u2013Merton",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 28.192689991299147,
+          "mae": 1.0083616380028888,
+          "bias": -0.3951060872053657,
+          "bias_pct": -7.362737859006635,
+          "early": 0.23718103448275862,
+          "n": 58,
+          "model": "Heston\u2013Merton",
+          "bucket": "ITM"
+        }
+      ]
+    },
+    "DITM": {
+      "bucket": "DITM",
+      "n": 16,
+      "best_model": "Heston\u2013Merton",
+      "rows": [
+        {
+          "rmse_pct": 25.03651828255531,
+          "mae": 1.293331049447683,
+          "bias": -0.3293198054336234,
+          "bias_pct": -3.8998014594115658,
+          "early": 0.29224374999999997,
+          "n": 16,
+          "model": "GBM",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": 24.31431898704128,
+          "mae": 1.271034621587385,
+          "bias": -0.6582273516758725,
+          "bias_pct": -9.325875262601546,
+          "early": 0.30832499999999996,
+          "n": 16,
+          "model": "Modified GBM",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": 30.02968883257648,
+          "mae": 1.3144179038701815,
+          "bias": 0.22879111161153032,
+          "bias_pct": 9.43898830715221,
+          "early": 0.18931875,
+          "n": 16,
+          "model": "GARCH",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": 23.86900801248415,
+          "mae": 1.2470488106151492,
+          "bias": -0.45162451794907943,
+          "bias_pct": -4.935383940565877,
+          "early": 0.30575,
+          "n": 16,
+          "model": "Heston",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": 24.88918428192173,
+          "mae": 1.2947229257633626,
+          "bias": -0.3875910822939111,
+          "bias_pct": -5.13495040158905,
+          "early": 0.24911250000000001,
+          "n": 16,
+          "model": "Merton",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": 37.8655587135959,
+          "mae": 1.4532973971337773,
+          "bias": 0.7254722338542867,
+          "bias_pct": 18.848880447317597,
+          "early": 0.20821875,
+          "n": 16,
+          "model": "GARCH\u2013Merton",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": 23.209805165845573,
+          "mae": 1.2079839819404374,
+          "bias": -0.6334793445746167,
+          "bias_pct": -8.277177314680136,
+          "early": 0.21651874999999998,
+          "n": 16,
+          "model": "Heston\u2013Merton",
+          "bucket": "DITM"
+        }
+      ]
+    }
+  },
+  "analysis2": {
+    "2008-2009|DOTM": {
+      "regime": "2008-2009",
+      "bucket": "DOTM",
+      "n": 18,
+      "best_model": "Heston\u2013Merton",
+      "rows": [
+        {
+          "rmse_pct": 34.143584967702175,
+          "mae": 1.2322550048247747,
+          "bias": -0.420770781391496,
+          "bias_pct": -3.1547926356447027,
+          "early": 0.18806666666666666,
+          "n": 18,
+          "model": "GBM",
+          "regime": "2008-2009",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": 33.14115634416582,
+          "mae": 1.286829753789405,
+          "bias": -0.7615696265644165,
+          "bias_pct": -11.265646427171955,
+          "early": 0.1977722222222222,
+          "n": 18,
+          "model": "Modified GBM",
+          "regime": "2008-2009",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": 39.30024478049706,
+          "mae": 1.2346817264476777,
+          "bias": 0.034167240092901494,
+          "bias_pct": 10.689870879097287,
+          "early": 0.14483333333333331,
+          "n": 18,
+          "model": "GARCH",
+          "regime": "2008-2009",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": 30.930061204855708,
+          "mae": 1.2078860783201184,
+          "bias": -0.6935984412573282,
+          "bias_pct": -10.002990943390962,
+          "early": 0.20206666666666664,
+          "n": 18,
+          "model": "Heston",
+          "regime": "2008-2009",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": 35.228418880322614,
+          "mae": 1.25579375868812,
+          "bias": -0.41005917914377066,
+          "bias_pct": -3.296014253719368,
+          "early": 0.15785555555555555,
+          "n": 18,
+          "model": "Merton",
+          "regime": "2008-2009",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": 53.88805045913612,
+          "mae": 1.4953832704234538,
+          "bias": 0.6023230786142195,
+          "bias_pct": 25.641113636310926,
+          "early": 0.14139444444444443,
+          "n": 18,
+          "model": "GARCH\u2013Merton",
+          "regime": "2008-2009",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": 30.3622005746268,
+          "mae": 1.2047557525893065,
+          "bias": -0.7394252199223043,
+          "bias_pct": -11.46585776480004,
+          "early": 0.14195555555555556,
+          "n": 18,
+          "model": "Heston\u2013Merton",
+          "regime": "2008-2009",
+          "bucket": "DOTM"
+        }
+      ]
+    },
+    "2008-2009|OTM": {
+      "regime": "2008-2009",
+      "bucket": "OTM",
+      "n": 43,
+      "best_model": "Modified GBM",
+      "rows": [
+        {
+          "rmse_pct": 40.935986699185484,
+          "mae": 1.2524832930485679,
+          "bias": -0.0729999277433901,
+          "bias_pct": 0.11900984711310823,
+          "early": 0.2100837209302325,
+          "n": 43,
+          "model": "GBM",
+          "regime": "2008-2009",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 37.68890172522614,
+          "mae": 1.2212879104354148,
+          "bias": -0.34979128736279147,
+          "bias_pct": -5.581165764512766,
+          "early": 0.22664651162790694,
+          "n": 43,
+          "model": "Modified GBM",
+          "regime": "2008-2009",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 45.60881351549395,
+          "mae": 1.3276692490281832,
+          "bias": 0.41439460660008565,
+          "bias_pct": 17.581579498079503,
+          "early": 0.1581232558139535,
+          "n": 43,
+          "model": "GARCH",
+          "regime": "2008-2009",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 38.362720774364625,
+          "mae": 1.2431462195928773,
+          "bias": -0.20300216382017258,
+          "bias_pct": -1.573836551977002,
+          "early": 0.21039534883720928,
+          "n": 43,
+          "model": "Heston",
+          "regime": "2008-2009",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 40.973215621963696,
+          "mae": 1.25145104859908,
+          "bias": -0.08842810597497493,
+          "bias_pct": -0.7925596944111185,
+          "early": 0.18531627906976744,
+          "n": 43,
+          "model": "Merton",
+          "regime": "2008-2009",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 54.38164598298896,
+          "mae": 1.5903864635085152,
+          "bias": 0.7972940914680534,
+          "bias_pct": 28.07217298349492,
+          "early": 0.16110930232558138,
+          "n": 43,
+          "model": "GARCH\u2013Merton",
+          "regime": "2008-2009",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 37.86975033900462,
+          "mae": 1.2221301195254568,
+          "bias": -0.23911641161261138,
+          "bias_pct": -2.4253911574072657,
+          "early": 0.17610697674418604,
+          "n": 43,
+          "model": "Heston\u2013Merton",
+          "regime": "2008-2009",
+          "bucket": "OTM"
+        }
+      ]
+    },
+    "2008-2009|ATM": {
+      "regime": "2008-2009",
+      "bucket": "ATM",
+      "n": 80,
+      "best_model": "Heston\u2013Merton",
+      "rows": [
+        {
+          "rmse_pct": 34.224396845428124,
+          "mae": 1.2340494971105236,
+          "bias": -0.7048764313407333,
+          "bias_pct": -17.932943935680058,
+          "early": 0.24348999999999998,
+          "n": 80,
+          "model": "GBM",
+          "regime": "2008-2009",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 36.063348369229274,
+          "mae": 1.2669363654172376,
+          "bias": -0.9492926061269283,
+          "bias_pct": -23.588537961993552,
+          "early": 0.2549175,
+          "n": 80,
+          "model": "Modified GBM",
+          "regime": "2008-2009",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 33.574257077590666,
+          "mae": 1.2416970822795212,
+          "bias": -0.2055435248569834,
+          "bias_pct": -2.323740152579471,
+          "early": 0.19683875,
+          "n": 80,
+          "model": "GARCH",
+          "regime": "2008-2009",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 32.834498910800136,
+          "mae": 1.2102586527607195,
+          "bias": -0.6408039288972641,
+          "bias_pct": -15.126818519890866,
+          "early": 0.26852375000000006,
+          "n": 80,
+          "model": "Heston",
+          "regime": "2008-2009",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 34.29190238907668,
+          "mae": 1.2291874218430188,
+          "bias": -0.732550387525368,
+          "bias_pct": -18.683889058597796,
+          "early": 0.22501,
+          "n": 80,
+          "model": "Merton",
+          "regime": "2008-2009",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 36.008706425037154,
+          "mae": 1.299744610217694,
+          "bias": -0.05425362557435285,
+          "bias_pct": 1.607374773732926,
+          "early": 0.1902925,
+          "n": 80,
+          "model": "GARCH\u2013Merton",
+          "regime": "2008-2009",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 32.726061767684826,
+          "mae": 1.2068121534157217,
+          "bias": -0.641034554969465,
+          "bias_pct": -14.98499131325263,
+          "early": 0.23204124999999998,
+          "n": 80,
+          "model": "Heston\u2013Merton",
+          "regime": "2008-2009",
+          "bucket": "ATM"
+        }
+      ]
+    },
+    "2008-2009|ITM": {
+      "regime": "2008-2009",
+      "bucket": "ITM",
+      "n": 43,
+      "best_model": "Heston",
+      "rows": [
+        {
+          "rmse_pct": 29.65187842005364,
+          "mae": 1.0242485860312447,
+          "bias": -0.48489374986881273,
+          "bias_pct": -14.015279123942687,
+          "early": 0.2808441860465116,
+          "n": 43,
+          "model": "GBM",
+          "regime": "2008-2009",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 29.985760676037497,
+          "mae": 1.0026717129091434,
+          "bias": -0.6861067354166784,
+          "bias_pct": -17.14374268976511,
+          "early": 0.2872093023255814,
+          "n": 43,
+          "model": "Modified GBM",
+          "regime": "2008-2009",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 30.91080367762015,
+          "mae": 1.0677853218321978,
+          "bias": -0.03243489793573024,
+          "bias_pct": 3.170062266693388,
+          "early": 0.20816976744186041,
+          "n": 43,
+          "model": "GARCH",
+          "regime": "2008-2009",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 28.55937506352056,
+          "mae": 0.999509440509636,
+          "bias": -0.4920777456799066,
+          "bias_pct": -12.099784300468821,
+          "early": 0.29014651162790694,
+          "n": 43,
+          "model": "Heston",
+          "regime": "2008-2009",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 29.62735769423685,
+          "mae": 1.015592516240672,
+          "bias": -0.5398009250345448,
+          "bias_pct": -15.533869861760236,
+          "early": 0.24523255813953493,
+          "n": 43,
+          "model": "Merton",
+          "regime": "2008-2009",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 33.31734831745868,
+          "mae": 1.1066216285409174,
+          "bias": 0.19502692197681154,
+          "bias_pct": 9.15009486115631,
+          "early": 0.19865116279069767,
+          "n": 43,
+          "model": "GARCH\u2013Merton",
+          "regime": "2008-2009",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 28.727179274094322,
+          "mae": 0.9882243841874714,
+          "bias": -0.5467945794617222,
+          "bias_pct": -13.119110867044057,
+          "early": 0.2360418604651163,
+          "n": 43,
+          "model": "Heston\u2013Merton",
+          "regime": "2008-2009",
+          "bucket": "ITM"
+        }
+      ]
+    },
+    "2008-2009|DITM": {
+      "regime": "2008-2009",
+      "bucket": "DITM",
+      "n": 16,
+      "best_model": "Heston\u2013Merton",
+      "rows": [
+        {
+          "rmse_pct": 25.03651828255531,
+          "mae": 1.293331049447683,
+          "bias": -0.3293198054336234,
+          "bias_pct": -3.8998014594115658,
+          "early": 0.29224374999999997,
+          "n": 16,
+          "model": "GBM",
+          "regime": "2008-2009",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": 24.31431898704128,
+          "mae": 1.271034621587385,
+          "bias": -0.6582273516758725,
+          "bias_pct": -9.325875262601546,
+          "early": 0.30832499999999996,
+          "n": 16,
+          "model": "Modified GBM",
+          "regime": "2008-2009",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": 30.02968883257648,
+          "mae": 1.3144179038701815,
+          "bias": 0.22879111161153032,
+          "bias_pct": 9.43898830715221,
+          "early": 0.18931875,
+          "n": 16,
+          "model": "GARCH",
+          "regime": "2008-2009",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": 23.86900801248415,
+          "mae": 1.2470488106151492,
+          "bias": -0.45162451794907943,
+          "bias_pct": -4.935383940565877,
+          "early": 0.30575,
+          "n": 16,
+          "model": "Heston",
+          "regime": "2008-2009",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": 24.88918428192173,
+          "mae": 1.2947229257633626,
+          "bias": -0.3875910822939111,
+          "bias_pct": -5.13495040158905,
+          "early": 0.24911250000000001,
+          "n": 16,
+          "model": "Merton",
+          "regime": "2008-2009",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": 37.8655587135959,
+          "mae": 1.4532973971337773,
+          "bias": 0.7254722338542867,
+          "bias_pct": 18.848880447317597,
+          "early": 0.20821875,
+          "n": 16,
+          "model": "GARCH\u2013Merton",
+          "regime": "2008-2009",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": 23.209805165845573,
+          "mae": 1.2079839819404374,
+          "bias": -0.6334793445746167,
+          "bias_pct": -8.277177314680136,
+          "early": 0.21651874999999998,
+          "n": 16,
+          "model": "Heston\u2013Merton",
+          "regime": "2008-2009",
+          "bucket": "DITM"
+        }
+      ]
+    },
+    "2013-2014|DOTM": {
+      "regime": "2013-2014",
+      "bucket": "DOTM",
+      "n": 0,
+      "best_model": null,
+      "rows": [
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GBM",
+          "regime": "2013-2014",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Modified GBM",
+          "regime": "2013-2014",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GARCH",
+          "regime": "2013-2014",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Heston",
+          "regime": "2013-2014",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Merton",
+          "regime": "2013-2014",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GARCH\u2013Merton",
+          "regime": "2013-2014",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Heston\u2013Merton",
+          "regime": "2013-2014",
+          "bucket": "DOTM"
+        }
+      ]
+    },
+    "2013-2014|OTM": {
+      "regime": "2013-2014",
+      "bucket": "OTM",
+      "n": 5,
+      "best_model": "Merton",
+      "rows": [
+        {
+          "rmse_pct": 71.59706270134015,
+          "mae": 0.39522243250101974,
+          "bias": 0.39522243250101974,
+          "bias_pct": 60.96205520683048,
+          "early": 0.23212000000000002,
+          "n": 5,
+          "model": "GBM",
+          "regime": "2013-2014",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 72.01522040428989,
+          "mae": 0.395742315126952,
+          "bias": 0.395742315126952,
+          "bias_pct": 61.14547781353315,
+          "early": 0.24006,
+          "n": 5,
+          "model": "Modified GBM",
+          "regime": "2013-2014",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 83.44668894391981,
+          "mae": 0.47748183397081834,
+          "bias": 0.47748183397081834,
+          "bias_pct": 72.82900598650328,
+          "early": 0.209,
+          "n": 5,
+          "model": "GARCH",
+          "regime": "2013-2014",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 73.45550533787797,
+          "mae": 0.40267225194134093,
+          "bias": 0.40267225194134093,
+          "bias_pct": 62.148221767704804,
+          "early": 0.21216,
+          "n": 5,
+          "model": "Heston",
+          "regime": "2013-2014",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 64.37118117706308,
+          "mae": 0.3386435451348317,
+          "bias": 0.33729379631744244,
+          "bias_pct": 52.82308409531742,
+          "early": 0.13648,
+          "n": 5,
+          "model": "Merton",
+          "regime": "2013-2014",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 112.7774578411215,
+          "mae": 0.6779036512651518,
+          "bias": 0.6779036512651518,
+          "bias_pct": 101.8288623051117,
+          "early": 0.15462000000000004,
+          "n": 5,
+          "model": "GARCH\u2013Merton",
+          "regime": "2013-2014",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 75.2141342874786,
+          "mae": 0.40212549067013326,
+          "bias": 0.40212549067013326,
+          "bias_pct": 62.682895327355226,
+          "early": 0.14035999999999998,
+          "n": 5,
+          "model": "Heston\u2013Merton",
+          "regime": "2013-2014",
+          "bucket": "OTM"
+        }
+      ]
+    },
+    "2013-2014|ATM": {
+      "regime": "2013-2014",
+      "bucket": "ATM",
+      "n": 192,
+      "best_model": "Merton",
+      "rows": [
+        {
+          "rmse_pct": 47.86034977666242,
+          "mae": 1.9083748928240478,
+          "bias": 1.2447989886098465,
+          "bias_pct": 33.88922865537028,
+          "early": 0.25020885416666666,
+          "n": 192,
+          "model": "GBM",
+          "regime": "2013-2014",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 45.48539168212437,
+          "mae": 1.7806963173462016,
+          "bias": 1.109902970154273,
+          "bias_pct": 31.960852265428475,
+          "early": 0.2578916666666667,
+          "n": 192,
+          "model": "Modified GBM",
+          "regime": "2013-2014",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 48.294895060985496,
+          "mae": 1.7053469394660858,
+          "bias": 1.170589673605109,
+          "bias_pct": 34.42865653866793,
+          "early": 0.21137447916666666,
+          "n": 192,
+          "model": "GARCH",
+          "regime": "2013-2014",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 66.06486819335208,
+          "mae": 2.9196339059021317,
+          "bias": 2.885393260807087,
+          "bias_pct": 56.769682087520124,
+          "early": 0.22173958333333332,
+          "n": 192,
+          "model": "Heston",
+          "regime": "2013-2014",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 43.8171319038458,
+          "mae": 1.8004470938806314,
+          "bias": 1.0809102068763061,
+          "bias_pct": 30.178522069899955,
+          "early": 0.20716145833333333,
+          "n": 192,
+          "model": "Merton",
+          "regime": "2013-2014",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 64.18680640219651,
+          "mae": 2.349330220235946,
+          "bias": 2.1150550502990977,
+          "bias_pct": 50.7008699592026,
+          "early": 0.18783125,
+          "n": 192,
+          "model": "GARCH\u2013Merton",
+          "regime": "2013-2014",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 63.22392636780244,
+          "mae": 2.520928006035555,
+          "bias": 2.4254317743224356,
+          "bias_pct": 52.8897559184475,
+          "early": 0.2068640625,
+          "n": 192,
+          "model": "Heston\u2013Merton",
+          "regime": "2013-2014",
+          "bucket": "ATM"
+        }
+      ]
+    },
+    "2013-2014|ITM": {
+      "regime": "2013-2014",
+      "bucket": "ITM",
+      "n": 3,
+      "best_model": "Merton",
+      "rows": [
+        {
+          "rmse_pct": 33.44846250843852,
+          "mae": 0.21377814210674592,
+          "bias": 0.17953405148261112,
+          "bias_pct": 17.96335384567849,
+          "early": 0.2811666666666667,
+          "n": 3,
+          "model": "GBM",
+          "regime": "2013-2014",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 32.25494974240793,
+          "mae": 0.21626060845962145,
+          "bias": 0.16232080731456391,
+          "bias_pct": 16.734287688135908,
+          "early": 0.30316666666666664,
+          "n": 3,
+          "model": "Modified GBM",
+          "regime": "2013-2014",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 39.8143728394774,
+          "mae": 0.27112338167467637,
+          "bias": 0.27112338167467637,
+          "bias_pct": 25.48580865101613,
+          "early": 0.25089999999999996,
+          "n": 3,
+          "model": "GARCH",
+          "regime": "2013-2014",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 32.71645791966484,
+          "mae": 0.20881242097987776,
+          "bias": 0.17584305521267232,
+          "bias_pct": 17.5753223027459,
+          "early": 0.2501,
+          "n": 3,
+          "model": "Heston",
+          "regime": "2013-2014",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 30.631852613395633,
+          "mae": 0.21959024576583266,
+          "bias": 0.13875651870813624,
+          "bias_pct": 14.690056243332197,
+          "early": 0.19246666666666667,
+          "n": 3,
+          "model": "Merton",
+          "regime": "2013-2014",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 52.689668640886765,
+          "mae": 0.4543750883066175,
+          "bias": 0.4543750883066175,
+          "bias_pct": 40.45990835411652,
+          "early": 0.20863333333333334,
+          "n": 3,
+          "model": "GARCH\u2013Merton",
+          "regime": "2013-2014",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 34.52685651039815,
+          "mae": 0.23313373544207103,
+          "bias": 0.17221422565081015,
+          "bias_pct": 17.752680737909003,
+          "early": 0.24066666666666667,
+          "n": 3,
+          "model": "Heston\u2013Merton",
+          "regime": "2013-2014",
+          "bucket": "ITM"
+        }
+      ]
+    },
+    "2013-2014|DITM": {
+      "regime": "2013-2014",
+      "bucket": "DITM",
+      "n": 0,
+      "best_model": null,
+      "rows": [
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GBM",
+          "regime": "2013-2014",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Modified GBM",
+          "regime": "2013-2014",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GARCH",
+          "regime": "2013-2014",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Heston",
+          "regime": "2013-2014",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Merton",
+          "regime": "2013-2014",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GARCH\u2013Merton",
+          "regime": "2013-2014",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Heston\u2013Merton",
+          "regime": "2013-2014",
+          "bucket": "DITM"
+        }
+      ]
+    },
+    "2018-2019|DOTM": {
+      "regime": "2018-2019",
+      "bucket": "DOTM",
+      "n": 0,
+      "best_model": null,
+      "rows": [
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GBM",
+          "regime": "2018-2019",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Modified GBM",
+          "regime": "2018-2019",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GARCH",
+          "regime": "2018-2019",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Heston",
+          "regime": "2018-2019",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Merton",
+          "regime": "2018-2019",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GARCH\u2013Merton",
+          "regime": "2018-2019",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Heston\u2013Merton",
+          "regime": "2018-2019",
+          "bucket": "DOTM"
+        }
+      ]
+    },
+    "2018-2019|OTM": {
+      "regime": "2018-2019",
+      "bucket": "OTM",
+      "n": 4,
+      "best_model": "Heston\u2013Merton",
+      "rows": [
+        {
+          "rmse_pct": 24.5786974677905,
+          "mae": 1.5426712725932326,
+          "bias": -1.3193816897150954,
+          "bias_pct": -16.228118542110447,
+          "early": 0.22765,
+          "n": 4,
+          "model": "GBM",
+          "regime": "2018-2019",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 24.18319715271173,
+          "mae": 1.5179442452488112,
+          "bias": -1.260671194007524,
+          "bias_pct": -15.110588553276166,
+          "early": 0.20497500000000002,
+          "n": 4,
+          "model": "Modified GBM",
+          "regime": "2018-2019",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 22.857448364938815,
+          "mae": 1.420113330404197,
+          "bias": -1.1413129597226073,
+          "bias_pct": -13.385227191747385,
+          "early": 0.18875,
+          "n": 4,
+          "model": "GARCH",
+          "regime": "2018-2019",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 27.89630325775872,
+          "mae": 1.1883533569926579,
+          "bias": 0.5130101011505759,
+          "bias_pct": 13.993577618715102,
+          "early": 0.20469999999999997,
+          "n": 4,
+          "model": "Heston",
+          "regime": "2018-2019",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 25.52983273639471,
+          "mae": 1.6196562631732414,
+          "bias": -1.3787278849055982,
+          "bias_pct": -17.00719142248806,
+          "early": 0.193,
+          "n": 4,
+          "model": "Merton",
+          "regime": "2018-2019",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 21.9501793060742,
+          "mae": 1.1953117303612366,
+          "bias": -0.6061948238555988,
+          "bias_pct": -4.386887095933358,
+          "early": 0.156625,
+          "n": 4,
+          "model": "GARCH\u2013Merton",
+          "regime": "2018-2019",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 20.785791427340534,
+          "mae": 1.1718389553806423,
+          "bias": -0.29282530756288505,
+          "bias_pct": 0.2759405931202018,
+          "early": 0.2237,
+          "n": 4,
+          "model": "Heston\u2013Merton",
+          "regime": "2018-2019",
+          "bucket": "OTM"
+        }
+      ]
+    },
+    "2018-2019|ATM": {
+      "regime": "2018-2019",
+      "bucket": "ATM",
+      "n": 191,
+      "best_model": "Modified GBM",
+      "rows": [
+        {
+          "rmse_pct": 21.500542225970538,
+          "mae": 3.874112511967055,
+          "bias": -1.6214702231022768,
+          "bias_pct": -1.5410595427014269,
+          "early": 0.22544136125654446,
+          "n": 191,
+          "model": "GBM",
+          "regime": "2018-2019",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 21.170608253135413,
+          "mae": 3.8892438773454527,
+          "bias": -1.1264480063762998,
+          "bias_pct": -2.952004696246893,
+          "early": 0.2328607329842932,
+          "n": 191,
+          "model": "Modified GBM",
+          "regime": "2018-2019",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 22.04754533731112,
+          "mae": 3.947776935508362,
+          "bias": -1.120037367538334,
+          "bias_pct": -5.4265991177486175,
+          "early": 0.1840183246073298,
+          "n": 191,
+          "model": "GARCH",
+          "regime": "2018-2019",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 37.088424719974874,
+          "mae": 7.378336435860456,
+          "bias": 6.445033056068396,
+          "bias_pct": 21.76556921345404,
+          "early": 0.20275183246073303,
+          "n": 191,
+          "model": "Heston",
+          "regime": "2018-2019",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 21.556865635577832,
+          "mae": 3.9758525072638746,
+          "bias": -2.377800503027653,
+          "bias_pct": -4.054501643905787,
+          "early": 0.1686497382198953,
+          "n": 191,
+          "model": "Merton",
+          "regime": "2018-2019",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 24.057516063162755,
+          "mae": 4.2835202104233545,
+          "bias": 0.989890337024187,
+          "bias_pct": 4.774669295099343,
+          "early": 0.16538010471204187,
+          "n": 191,
+          "model": "GARCH\u2013Merton",
+          "regime": "2018-2019",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 33.21514556936012,
+          "mae": 6.473395847238953,
+          "bias": 5.141893856626362,
+          "bias_pct": 14.9436281952834,
+          "early": 0.17893036649214664,
+          "n": 191,
+          "model": "Heston\u2013Merton",
+          "regime": "2018-2019",
+          "bucket": "ATM"
+        }
+      ]
+    },
+    "2018-2019|ITM": {
+      "regime": "2018-2019",
+      "bucket": "ITM",
+      "n": 7,
+      "best_model": "Modified GBM",
+      "rows": [
+        {
+          "rmse_pct": 16.652503285838762,
+          "mae": 0.7617688967819858,
+          "bias": -0.1218565308787645,
+          "bias_pct": 0.9579193081152793,
+          "early": 0.2557857142857143,
+          "n": 7,
+          "model": "GBM",
+          "regime": "2018-2019",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 15.551360971467393,
+          "mae": 0.7302925661984211,
+          "bias": -0.0862352272796897,
+          "bias_pct": 1.1289286017752962,
+          "early": 0.27612857142857145,
+          "n": 7,
+          "model": "Modified GBM",
+          "regime": "2018-2019",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 16.27077448139239,
+          "mae": 0.7575646493070759,
+          "bias": -0.020001539082418814,
+          "bias_pct": 2.4258303227547553,
+          "early": 0.2219857142857143,
+          "n": 7,
+          "model": "GARCH",
+          "regime": "2018-2019",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 34.18794062810871,
+          "mae": 1.5396236959666425,
+          "bias": 1.5305285322955284,
+          "bias_pct": 28.833045387546484,
+          "early": 0.22005714285714287,
+          "n": 7,
+          "model": "Heston",
+          "regime": "2018-2019",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 16.931385171525896,
+          "mae": 0.7661124422454921,
+          "bias": -0.16043759690975165,
+          "bias_pct": 0.2968283517394338,
+          "early": 0.2061285714285714,
+          "n": 7,
+          "model": "Merton",
+          "regime": "2018-2019",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 20.794831224216363,
+          "mae": 0.9493485151493389,
+          "bias": 0.4542155263118923,
+          "bias_pct": 11.096339899265164,
+          "early": 0.2015,
+          "n": 7,
+          "model": "GARCH\u2013Merton",
+          "regime": "2018-2019",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 25.655643473322854,
+          "mae": 1.1381360003776178,
+          "bias": 0.8750265245528233,
+          "bias_pct": 18.33467008024051,
+          "early": 0.24481428571428568,
+          "n": 7,
+          "model": "Heston\u2013Merton",
+          "regime": "2018-2019",
+          "bucket": "ITM"
+        }
+      ]
+    },
+    "2018-2019|DITM": {
+      "regime": "2018-2019",
+      "bucket": "DITM",
+      "n": 0,
+      "best_model": null,
+      "rows": [
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GBM",
+          "regime": "2018-2019",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Modified GBM",
+          "regime": "2018-2019",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GARCH",
+          "regime": "2018-2019",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Heston",
+          "regime": "2018-2019",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Merton",
+          "regime": "2018-2019",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GARCH\u2013Merton",
+          "regime": "2018-2019",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Heston\u2013Merton",
+          "regime": "2018-2019",
+          "bucket": "DITM"
+        }
+      ]
+    },
+    "2019-2020|DOTM": {
+      "regime": "2019-2020",
+      "bucket": "DOTM",
+      "n": 0,
+      "best_model": null,
+      "rows": [
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GBM",
+          "regime": "2019-2020",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Modified GBM",
+          "regime": "2019-2020",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GARCH",
+          "regime": "2019-2020",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Heston",
+          "regime": "2019-2020",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Merton",
+          "regime": "2019-2020",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GARCH\u2013Merton",
+          "regime": "2019-2020",
+          "bucket": "DOTM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Heston\u2013Merton",
+          "regime": "2019-2020",
+          "bucket": "DOTM"
+        }
+      ]
+    },
+    "2019-2020|OTM": {
+      "regime": "2019-2020",
+      "bucket": "OTM",
+      "n": 6,
+      "best_model": "Modified GBM",
+      "rows": [
+        {
+          "rmse_pct": 35.118298214252434,
+          "mae": 1.5755877250643937,
+          "bias": 0.26121753541635373,
+          "bias_pct": 15.07008822409385,
+          "early": 0.2422833333333333,
+          "n": 6,
+          "model": "GBM",
+          "regime": "2019-2020",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 28.245074761529786,
+          "mae": 1.3982635314938345,
+          "bias": -0.2285698147779103,
+          "bias_pct": 5.065222713486375,
+          "early": 0.23173333333333335,
+          "n": 6,
+          "model": "Modified GBM",
+          "regime": "2019-2020",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 34.50438062934949,
+          "mae": 1.568644324652211,
+          "bias": 0.20180461616183365,
+          "bias_pct": 13.916231376382612,
+          "early": 0.19246666666666667,
+          "n": 6,
+          "model": "GARCH",
+          "regime": "2019-2020",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 34.97694878830566,
+          "mae": 1.5514309410799656,
+          "bias": 0.30380990389138035,
+          "bias_pct": 15.636646809164976,
+          "early": 0.23806666666666668,
+          "n": 6,
+          "model": "Heston",
+          "regime": "2019-2020",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 34.40628849221691,
+          "mae": 1.5866815609903868,
+          "bias": 0.20246733781827597,
+          "bias_pct": 13.94925445873065,
+          "early": 0.21183333333333335,
+          "n": 6,
+          "model": "Merton",
+          "regime": "2019-2020",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 40.877300896010745,
+          "mae": 1.6884870925688595,
+          "bias": 0.6943203510713832,
+          "bias_pct": 23.363448996459645,
+          "early": 0.15561666666666665,
+          "n": 6,
+          "model": "GARCH\u2013Merton",
+          "regime": "2019-2020",
+          "bucket": "OTM"
+        },
+        {
+          "rmse_pct": 30.181869371438363,
+          "mae": 1.4267623400183502,
+          "bias": -0.0008745719868046656,
+          "bias_pct": 9.444847919136107,
+          "early": 0.19898333333333332,
+          "n": 6,
+          "model": "Heston\u2013Merton",
+          "regime": "2019-2020",
+          "bucket": "OTM"
+        }
+      ]
+    },
+    "2019-2020|ATM": {
+      "regime": "2019-2020",
+      "bucket": "ATM",
+      "n": 189,
+      "best_model": "Merton",
+      "rows": [
+        {
+          "rmse_pct": 51.87362992037661,
+          "mae": 8.970528785620361,
+          "bias": 3.676366127037911,
+          "bias_pct": 23.578843275270216,
+          "early": 0.24156296296296295,
+          "n": 189,
+          "model": "GBM",
+          "regime": "2019-2020",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 53.23842387504616,
+          "mae": 9.310859090026874,
+          "bias": 4.448404456721471,
+          "bias_pct": 24.51053960693982,
+          "early": 0.24038148148148147,
+          "n": 189,
+          "model": "Modified GBM",
+          "regime": "2019-2020",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 53.03510548606224,
+          "mae": 8.318122254372714,
+          "bias": 0.6564249083774808,
+          "bias_pct": 24.452360766056646,
+          "early": 0.20730793650793644,
+          "n": 189,
+          "model": "GARCH",
+          "regime": "2019-2020",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 56.63189366463961,
+          "mae": 8.290869555506257,
+          "bias": -0.11742906179297165,
+          "bias_pct": 26.192899338832014,
+          "early": 0.2765619047619047,
+          "n": 189,
+          "model": "Heston",
+          "regime": "2019-2020",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 50.3257312369273,
+          "mae": 8.857850884830551,
+          "bias": 3.2574021584305366,
+          "bias_pct": 21.509310676248173,
+          "early": 0.208578835978836,
+          "n": 189,
+          "model": "Merton",
+          "regime": "2019-2020",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 61.307199050295814,
+          "mae": 8.77160052512279,
+          "bias": 2.137839717847911,
+          "bias_pct": 33.679777695674595,
+          "early": 0.1974624338624338,
+          "n": 189,
+          "model": "GARCH\u2013Merton",
+          "regime": "2019-2020",
+          "bucket": "ATM"
+        },
+        {
+          "rmse_pct": 62.81496616789426,
+          "mae": 9.396923149235915,
+          "bias": 4.772071060962002,
+          "bias_pct": 33.74493507063686,
+          "early": 0.21104021164021164,
+          "n": 189,
+          "model": "Heston\u2013Merton",
+          "regime": "2019-2020",
+          "bucket": "ATM"
+        }
+      ]
+    },
+    "2019-2020|ITM": {
+      "regime": "2019-2020",
+      "bucket": "ITM",
+      "n": 5,
+      "best_model": "Heston\u2013Merton",
+      "rows": [
+        {
+          "rmse_pct": 22.270846663282033,
+          "mae": 1.6762330461494415,
+          "bias": -1.424472897859866,
+          "bias_pct": -9.932338602592877,
+          "early": 0.26236000000000004,
+          "n": 5,
+          "model": "GBM",
+          "regime": "2019-2020",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 23.515641783014203,
+          "mae": 1.6602425269706025,
+          "bias": -1.6602425269706025,
+          "bias_pct": -13.840808735563032,
+          "early": 0.28606000000000004,
+          "n": 5,
+          "model": "Modified GBM",
+          "regime": "2019-2020",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 22.068873964399298,
+          "mae": 1.2788978288780117,
+          "bias": -0.9385349867069526,
+          "bias_pct": -7.598027575293731,
+          "early": 0.22068,
+          "n": 5,
+          "model": "GARCH",
+          "regime": "2019-2020",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 22.164619765413597,
+          "mae": 1.611296488173264,
+          "bias": -1.061510683631964,
+          "bias_pct": -6.778693317824755,
+          "early": 0.268,
+          "n": 5,
+          "model": "Heston",
+          "regime": "2019-2020",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 22.298954707593467,
+          "mae": 1.6672974480340819,
+          "bias": -1.4309774815570684,
+          "bias_pct": -10.106383352341561,
+          "early": 0.24980000000000002,
+          "n": 5,
+          "model": "Merton",
+          "regime": "2019-2020",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 22.44619637631534,
+          "mae": 2.037978078750107,
+          "bias": 0.021160356951547853,
+          "bias_pct": 0.16559894115032975,
+          "early": 0.20806,
+          "n": 5,
+          "model": "GARCH\u2013Merton",
+          "regime": "2019-2020",
+          "bucket": "ITM"
+        },
+        {
+          "rmse_pct": 22.047354463437365,
+          "mae": 1.4649946550273507,
+          "bias": -1.2091628979758708,
+          "bias_pct": -8.903552262980208,
+          "early": 0.23419999999999996,
+          "n": 5,
+          "model": "Heston\u2013Merton",
+          "regime": "2019-2020",
+          "bucket": "ITM"
+        }
+      ]
+    },
+    "2019-2020|DITM": {
+      "regime": "2019-2020",
+      "bucket": "DITM",
+      "n": 0,
+      "best_model": null,
+      "rows": [
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GBM",
+          "regime": "2019-2020",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Modified GBM",
+          "regime": "2019-2020",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GARCH",
+          "regime": "2019-2020",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Heston",
+          "regime": "2019-2020",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Merton",
+          "regime": "2019-2020",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "GARCH\u2013Merton",
+          "regime": "2019-2020",
+          "bucket": "DITM"
+        },
+        {
+          "rmse_pct": NaN,
+          "mae": NaN,
+          "bias": NaN,
+          "bias_pct": NaN,
+          "early": NaN,
+          "n": 0,
+          "model": "Heston\u2013Merton",
+          "regime": "2019-2020",
+          "bucket": "DITM"
+        }
+      ]
+    }
+  },
+  "winner_grid": [
+    {
+      "regime": "2008-2009",
+      "DOTM": "Heston\u2013Merton",
+      "n_DOTM": 18,
+      "OTM": "Modified GBM",
+      "n_OTM": 43,
+      "ATM": "Heston\u2013Merton",
+      "n_ATM": 80,
+      "ITM": "Heston",
+      "n_ITM": 43,
+      "DITM": "Heston\u2013Merton",
+      "n_DITM": 16
+    },
+    {
+      "regime": "2013-2014",
+      "DOTM": null,
+      "n_DOTM": 0,
+      "OTM": "Merton",
+      "n_OTM": 5,
+      "ATM": "Merton",
+      "n_ATM": 192,
+      "ITM": "Merton",
+      "n_ITM": 3,
+      "DITM": null,
+      "n_DITM": 0
+    },
+    {
+      "regime": "2018-2019",
+      "DOTM": null,
+      "n_DOTM": 0,
+      "OTM": "Heston\u2013Merton",
+      "n_OTM": 4,
+      "ATM": "Modified GBM",
+      "n_ATM": 191,
+      "ITM": "Modified GBM",
+      "n_ITM": 7,
+      "DITM": null,
+      "n_DITM": 0
+    },
+    {
+      "regime": "2019-2020",
+      "DOTM": null,
+      "n_DOTM": 0,
+      "OTM": "Modified GBM",
+      "n_OTM": 6,
+      "ATM": "Merton",
+      "n_ATM": 189,
+      "ITM": "Heston\u2013Merton",
+      "n_ITM": 5,
+      "DITM": null,
+      "n_DITM": 0
+    }
+  ],
+  "rmse_heat_overall": {
+    "GBM": {
+      "DOTM": 34.143584967702175,
+      "OTM": 43.05257029723103,
+      "ATM": 41.63771130820726,
+      "ITM": 28.03463082628866,
+      "DITM": 25.03651828255531
+    },
+    "Modified GBM": {
+      "DOTM": 33.14115634416582,
+      "OTM": 40.2870018199414,
+      "ATM": 41.49380023844936,
+      "ITM": 28.236152373615788,
+      "DITM": 24.31431898704128
+    },
+    "GARCH": {
+      "DOTM": 39.30024478049706,
+      "OTM": 47.9757412441609,
+      "ATM": 42.2243351597942,
+      "ITM": 29.398991382974437,
+      "DITM": 30.02968883257648
+    },
+    "Heston": {
+      "DOTM": 30.930061204855708,
+      "OTM": 41.67086176780739,
+      "ATM": 52.44235591071244,
+      "ITM": 29.042652512178364,
+      "DITM": 23.86900801248415
+    },
+    "Merton": {
+      "DOTM": 35.228418880322614,
+      "OTM": 42.06249036010987,
+      "ATM": 39.748774441205946,
+      "ITM": 27.870514837908917,
+      "DITM": 24.88918428192173
+    },
+    "GARCH\u2013Merton": {
+      "DOTM": 53.88805045913612,
+      "OTM": 59.11901582974248,
+      "ATM": 51.297191057124955,
+      "ITM": 32.591172460361825,
+      "DITM": 37.8655587135959
+    },
+    "Heston\u2013Merton": {
+      "DOTM": 30.3622005746268,
+      "OTM": 40.92608381612126,
+      "ATM": 52.6828615694415,
+      "ITM": 28.192689991299147,
+      "DITM": 23.209805165845573
+    }
+  },
+  "rmse_heat_regime": {
+    "2008-2009": {
+      "GBM": {
+        "DOTM": 34.143584967702175,
+        "OTM": 40.935986699185484,
+        "ATM": 34.224396845428124,
+        "ITM": 29.65187842005364,
+        "DITM": 25.03651828255531
+      },
+      "Modified GBM": {
+        "DOTM": 33.14115634416582,
+        "OTM": 37.68890172522614,
+        "ATM": 36.063348369229274,
+        "ITM": 29.985760676037497,
+        "DITM": 24.31431898704128
+      },
+      "GARCH": {
+        "DOTM": 39.30024478049706,
+        "OTM": 45.60881351549395,
+        "ATM": 33.574257077590666,
+        "ITM": 30.91080367762015,
+        "DITM": 30.02968883257648
+      },
+      "Heston": {
+        "DOTM": 30.930061204855708,
+        "OTM": 38.362720774364625,
+        "ATM": 32.834498910800136,
+        "ITM": 28.55937506352056,
+        "DITM": 23.86900801248415
+      },
+      "Merton": {
+        "DOTM": 35.228418880322614,
+        "OTM": 40.973215621963696,
+        "ATM": 34.29190238907668,
+        "ITM": 29.62735769423685,
+        "DITM": 24.88918428192173
+      },
+      "GARCH\u2013Merton": {
+        "DOTM": 53.88805045913612,
+        "OTM": 54.38164598298896,
+        "ATM": 36.008706425037154,
+        "ITM": 33.31734831745868,
+        "DITM": 37.8655587135959
+      },
+      "Heston\u2013Merton": {
+        "DOTM": 30.3622005746268,
+        "OTM": 37.86975033900462,
+        "ATM": 32.726061767684826,
+        "ITM": 28.727179274094322,
+        "DITM": 23.209805165845573
+      }
+    },
+    "2013-2014": {
+      "GBM": {
+        "DOTM": NaN,
+        "OTM": 71.59706270134015,
+        "ATM": 47.86034977666242,
+        "ITM": 33.44846250843852,
+        "DITM": NaN
+      },
+      "Modified GBM": {
+        "DOTM": NaN,
+        "OTM": 72.01522040428989,
+        "ATM": 45.48539168212437,
+        "ITM": 32.25494974240793,
+        "DITM": NaN
+      },
+      "GARCH": {
+        "DOTM": NaN,
+        "OTM": 83.44668894391981,
+        "ATM": 48.294895060985496,
+        "ITM": 39.8143728394774,
+        "DITM": NaN
+      },
+      "Heston": {
+        "DOTM": NaN,
+        "OTM": 73.45550533787797,
+        "ATM": 66.06486819335208,
+        "ITM": 32.71645791966484,
+        "DITM": NaN
+      },
+      "Merton": {
+        "DOTM": NaN,
+        "OTM": 64.37118117706308,
+        "ATM": 43.8171319038458,
+        "ITM": 30.631852613395633,
+        "DITM": NaN
+      },
+      "GARCH\u2013Merton": {
+        "DOTM": NaN,
+        "OTM": 112.7774578411215,
+        "ATM": 64.18680640219651,
+        "ITM": 52.689668640886765,
+        "DITM": NaN
+      },
+      "Heston\u2013Merton": {
+        "DOTM": NaN,
+        "OTM": 75.2141342874786,
+        "ATM": 63.22392636780244,
+        "ITM": 34.52685651039815,
+        "DITM": NaN
+      }
+    },
+    "2018-2019": {
+      "GBM": {
+        "DOTM": NaN,
+        "OTM": 24.5786974677905,
+        "ATM": 21.500542225970538,
+        "ITM": 16.652503285838762,
+        "DITM": NaN
+      },
+      "Modified GBM": {
+        "DOTM": NaN,
+        "OTM": 24.18319715271173,
+        "ATM": 21.170608253135413,
+        "ITM": 15.551360971467393,
+        "DITM": NaN
+      },
+      "GARCH": {
+        "DOTM": NaN,
+        "OTM": 22.857448364938815,
+        "ATM": 22.04754533731112,
+        "ITM": 16.27077448139239,
+        "DITM": NaN
+      },
+      "Heston": {
+        "DOTM": NaN,
+        "OTM": 27.89630325775872,
+        "ATM": 37.088424719974874,
+        "ITM": 34.18794062810871,
+        "DITM": NaN
+      },
+      "Merton": {
+        "DOTM": NaN,
+        "OTM": 25.52983273639471,
+        "ATM": 21.556865635577832,
+        "ITM": 16.931385171525896,
+        "DITM": NaN
+      },
+      "GARCH\u2013Merton": {
+        "DOTM": NaN,
+        "OTM": 21.9501793060742,
+        "ATM": 24.057516063162755,
+        "ITM": 20.794831224216363,
+        "DITM": NaN
+      },
+      "Heston\u2013Merton": {
+        "DOTM": NaN,
+        "OTM": 20.785791427340534,
+        "ATM": 33.21514556936012,
+        "ITM": 25.655643473322854,
+        "DITM": NaN
+      }
+    },
+    "2019-2020": {
+      "GBM": {
+        "DOTM": NaN,
+        "OTM": 35.118298214252434,
+        "ATM": 51.87362992037661,
+        "ITM": 22.270846663282033,
+        "DITM": NaN
+      },
+      "Modified GBM": {
+        "DOTM": NaN,
+        "OTM": 28.245074761529786,
+        "ATM": 53.23842387504616,
+        "ITM": 23.515641783014203,
+        "DITM": NaN
+      },
+      "GARCH": {
+        "DOTM": NaN,
+        "OTM": 34.50438062934949,
+        "ATM": 53.03510548606224,
+        "ITM": 22.068873964399298,
+        "DITM": NaN
+      },
+      "Heston": {
+        "DOTM": NaN,
+        "OTM": 34.97694878830566,
+        "ATM": 56.63189366463961,
+        "ITM": 22.164619765413597,
+        "DITM": NaN
+      },
+      "Merton": {
+        "DOTM": NaN,
+        "OTM": 34.40628849221691,
+        "ATM": 50.3257312369273,
+        "ITM": 22.298954707593467,
+        "DITM": NaN
+      },
+      "GARCH\u2013Merton": {
+        "DOTM": NaN,
+        "OTM": 40.877300896010745,
+        "ATM": 61.307199050295814,
+        "ITM": 22.44619637631534,
+        "DITM": NaN
+      },
+      "Heston\u2013Merton": {
+        "DOTM": NaN,
+        "OTM": 30.181869371438363,
+        "ATM": 62.81496616789426,
+        "ITM": 22.047354463437365,
+        "DITM": NaN
+      }
+    }
+  }
+}

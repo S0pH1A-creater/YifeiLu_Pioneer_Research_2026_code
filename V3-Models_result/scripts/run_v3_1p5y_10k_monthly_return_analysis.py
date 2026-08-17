@@ -39,7 +39,7 @@ NB_NAME = "V3_1p5y_monthly_return_analysis.ipynb"
 NAVY = emp.NAVY
 MUTED = emp.MUTED
 ALT_BG = emp.ALT_BG
-TICKER_COLORS = {"SPY": "#1F3A5F", "AAPL": "#C44E52", "MSFT": "#4C72B0"}
+TICKER_COLORS = {"SPY": "#1F3A5F", "AAPL": "#C44E52", "MSFT": "#4C72B0", "AMZN": "#C73E7B"}
 ROW_LABELS = (
     "Mean",
     "Std dev.",

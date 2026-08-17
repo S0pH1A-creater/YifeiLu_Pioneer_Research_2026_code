@@ -43,6 +43,7 @@ BUCKET_RULE = (
 )
 MODEL_STEM = {
     "GBM": "gbm",
+    "Modified GBM": "modified_gbm",
     "GARCH": "garch",
     "Heston": "heston",
     "Merton": "merton",
@@ -96,7 +97,8 @@ def load_panel() -> pd.DataFrame:
     rows = []
     for regime in main.REGIME_ORDER:
         for ticker in main.TICKERS:
-            for model, stem in MODEL_STEM.items():
+            for model in main.TABLE_MODELS:
+                stem = MODEL_STEM[model]
                 path = main.CACHE / "contracts" / regime / ticker / f"{regime}_{stem}.csv"
                 if not path.exists():
                     raise FileNotFoundError(path)
@@ -118,7 +120,7 @@ def load_panel() -> pd.DataFrame:
 
 def build_payload(panel: pd.DataFrame) -> dict:
     # counts from one model (identical across models)
-    one = panel.loc[panel["model"] == "GBM"]
+    one = panel.loc[panel["model"] == main.TABLE_MODELS[0]]
     n_overall = one["bucket"].value_counts().reindex(BUCKETS).fillna(0).astype(int).to_dict()
     n_regime = (
         pd.crosstab(one["regime"], one["bucket"])
@@ -179,12 +181,6 @@ def build_payload(panel: pd.DataFrame) -> dict:
             rec[f"n_{bucket}"] = analysis2[f"{regime}|{bucket}"]["n"]
         winner_grid.append(rec)
 
-    rmse_heat_overall = {
-        m: {b: analysis1[b]["rows"][i]["rmse_pct"] for i, b in enumerate(BUCKETS)}
-        for i, m in enumerate(main.TABLE_MODELS)
-        for m in [main.TABLE_MODELS[i]]
-    }
-    # cleaner:
     rmse_heat_overall = {}
     for model in main.TABLE_MODELS:
         rmse_heat_overall[model] = {
@@ -282,8 +278,8 @@ def _cover(pdf, payload: dict) -> None:
     fig.text(
         0.08,
         0.912,
-        f"Same 6 models · 3 companies · {len(main.REGIME_ORDER)} windows · {main.LOOKBACK_PHRASE} "
-        f"{getattr(main, 'ROLLING_MODE', 'monthly')} study  ·  classified by call moneyness m = S/K",
+        f"{main._models_phrase()} · {main._companies_phrase()} · {len(main.REGIME_ORDER)} windows · "
+        f"{main._rolling_phrase()}  ·  classified by call moneyness m = S/K",
         fontsize=9.2,
         color=main.MUTED,
         va="top",
@@ -318,7 +314,7 @@ def _cover(pdf, payload: dict) -> None:
     y = section(
         "Unchanged experimental design",
         [
-            f"Same six models, three companies (SPY, AAPL, MSFT), {len(main.REGIME_ORDER)} windows, {main.LOOKBACK_PHRASE} lookback, {getattr(main, 'ROLLING_MODE', 'monthly')} recalibration, V3 filters, Euler-corrected Heston step, LSM n_paths = {getattr(main, 'N_PATHS', 2000)} / seed 42.",
+            f"Same {main._models_phrase(cap=False)}, {main._companies_phrase()} ({', '.join(main.TICKERS)}), {len(main.REGIME_ORDER)} windows, {main.LOOKBACK_PHRASE} lookback, {getattr(main, 'ROLLING_MODE', 'monthly')} recalibration, V3 filters, Euler-corrected Heston step, LSM n_paths = {getattr(main, 'N_PATHS', 2000)} / seed 42.",
             "Same option contracts as the main study (nearest-ATM listed calls, DTE 7–60, |S/K − 1| ≤ 10%). No model-specific re-sampling.",
             f"Pooled n = {payload['meta']['n_contracts_one_model']} contracts per model (identical keys across models).",
         ],
@@ -344,7 +340,7 @@ def _cover(pdf, payload: dict) -> None:
         "Two analyses",
         [
             "Analysis 1 — Overall moneyness: pool all companies and regimes. Five tables (one per bucket) plus a Model × Moneyness RMSE% heatmap.",
-            f"Analysis 2 — Window × moneyness: keep the {len(main.REGIME_ORDER)} windows separate, pool the three companies. Compact RMSE tables/heatmaps and a winner grid showing whether the best model changes with moneyness inside each window.",
+            f"Analysis 2 — Window × moneyness: keep the {len(main.REGIME_ORDER)} windows separate, pool the {main._companies_phrase()}. Compact RMSE tables/heatmaps and a winner grid showing whether the best model changes with moneyness inside each window.",
         ],
         y,
     )
@@ -760,7 +756,7 @@ def build_notebook(payload: dict, path: Path | None = None) -> Path:
     n_all = payload["meta"]["n_contracts_one_model"]
     cells.append(
         md(
-            f"""# V3 moneyness performance — {main.LOOKBACK_PHRASE} monthly study
+            f"""# V3 moneyness performance — {main._rolling_phrase()}
 
 **This notebook is the computational source of truth.** The matching PDF is written from the same payload.
 
@@ -768,8 +764,8 @@ This report classifies the **same** option contracts as `{Path(main.PDF_NAME).st
 
 | Item | Setting |
 |------|---------|
-| Models | GBM, GARCH, Heston, Merton, GARCH–Merton, Heston–Merton |
-| Companies | SPY, AAPL, MSFT (pooled in both analyses) |
+| Models | {", ".join(main.TABLE_MODELS)} |
+| Companies | {", ".join(main.TICKERS)} (pooled in both analyses) |
 | Regimes | Crisis, Normal, Late-cycle, COVID (pooled in Analysis 1; separate in Analysis 2) |
 | Contracts | Monday nearest-ATM listed calls from the main study (`n = {n_all}` per model) |
 | Moneyness | `m = S/K` (calls) |
@@ -783,7 +779,7 @@ This report classifies the **same** option contracts as `{Path(main.PDF_NAME).st
             f"""## 0. Methodology
 
 ### Same design as the main study
-{main.LOOKBACK_PHRASE.capitalize()} lookback, monthly recalibration, V3 filters (no-arbitrage, DTE 7–60, |S/K−1|≤10%, liquidity), Euler-corrected Heston, option-implied Heston NLS, LSM with 2,000 paths and seed 42. No look-ahead.
+{main.LOOKBACK_PHRASE.capitalize()} lookback, `{getattr(main, 'ROLLING_MODE', 'monthly')}` recalibration, V3 filters (no-arbitrage, DTE 7–60, |S/K−1|≤10%, liquidity), Euler-corrected Heston, option-implied Heston NLS, LSM with {getattr(main, 'N_PATHS', 2000):,} paths and seed 42. No look-ahead.
 
 ### Moneyness rule (calls)
 Let `m = S/K`.

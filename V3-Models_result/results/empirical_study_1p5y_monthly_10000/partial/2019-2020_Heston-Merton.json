@@ -41,6 +41,19 @@
       "t_lsm": 3.144609212875366,
       "elapsed": 12.51005220413208,
       "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_heston_merton.csv"
+    },
+    "AMZN": {
+      "rmse_pct": 44.51768897790581,
+      "mae": 28.862734661157003,
+      "bias": 17.62838624036772,
+      "bias_pct": 27.614657406858463,
+      "early": 0.17283799999999996,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 6.063404083251953,
+      "t_lsm": 1.2879397869110107,
+      "elapsed": 7.3521928787231445,
+      "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_heston_merton.csv"
     }
   }
 }

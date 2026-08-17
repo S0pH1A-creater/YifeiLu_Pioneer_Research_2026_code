@@ -75,11 +75,41 @@ REGIME_ORDER = ["2008-2009", "2013-2014", "2018-2019", "2019-2020"]
 MODEL_ORDER = {"GBM": 0, "Merton": 1, "Heston": 2, "Heston–Merton": 3, "GARCH": 4, "GARCH–Merton": 5}
 
 
+def _patch_lbfgsb_nelder_mead() -> None:
+    """Route GARCH L-BFGS-B through Nelder-Mead.
+
+    SciPy's L-BFGS-B Fortran step can segfault on the GARCH NLL (overflowing
+    unconstrained omega / huge finite-difference gradients). Nelder-Mead uses
+    the same likelihood and does not need gradients.
+    """
+    try:
+        import scipy.optimize as so
+    except ImportError:
+        return
+    orig = getattr(so, "minimize", None)
+    if orig is None or getattr(orig, "_v3_nelder_patch", False):
+        return
+
+    def minimize(fun, x0, args=(), method=None, **kwargs):
+        if method in (None, "L-BFGS-B", "l-bfgs-b"):
+            method = "Nelder-Mead"
+            opts = dict(kwargs.pop("options", None) or {})
+            opts.setdefault("maxiter", 800)
+            kwargs["options"] = opts
+            kwargs.pop("jac", None)
+            kwargs.pop("bounds", None)
+        return orig(fun, x0, args=args, method=method, **kwargs)
+
+    minimize._v3_nelder_patch = True
+    so.minimize = minimize
+
+
 def _install_scipy_minimize_fallback() -> None:
     """If scipy is missing, provide a tiny optimize.minimize used by GARCH notebooks."""
     try:
         import scipy.optimize  # noqa: F401
 
+        _patch_lbfgsb_nelder_mead()
         return
     except ImportError:
         pass
@@ -218,7 +248,7 @@ def _extract_defs(src: str, *, keep_assigns: bool = False) -> str:
 
 def _regime_from_name(path: Path) -> str:
     stem = path.stem
-    for suffix in ("_heston_merton", "_garch_merton", "_heston", "_garch", "_merton", "_gbm"):
+    for suffix in ("_heston_merton", "_garch_merton", "_modified_gbm", "_heston", "_garch", "_merton", "_gbm"):
         if stem.endswith(suffix):
             return stem[: -len(suffix)]
     return stem

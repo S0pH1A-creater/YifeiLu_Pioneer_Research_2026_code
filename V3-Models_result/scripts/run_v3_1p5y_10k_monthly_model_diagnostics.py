@@ -229,6 +229,19 @@ def _residuals(model: str, r: np.ndarray):
         if not np.isfinite(sig) or sig <= 0:
             return None
         return (x - mu) / sig
+    if model == "Modified GBM":
+        up = x > 0
+        mag = np.abs(x)
+        if int(up.sum()) < 2 or int((~up).sum()) < 2:
+            return None
+        mu_u, sig_u = float(mag[up].mean()), float(mag[up].std(ddof=1))
+        mu_d, sig_d = float(mag[~up].mean()), float(mag[~up].std(ddof=1))
+        if min(sig_u, sig_d) <= 0 or not np.isfinite(sig_u) or not np.isfinite(sig_d):
+            return None
+        z = np.empty_like(x)
+        z[up] = (x[up] - mu_u) / sig_u
+        z[~up] = (x[~up] + mu_d) / sig_d
+        return z
     if model == "GARCH":
         fit = garch_rec.fit_garch11(x)
         if fit is None:
@@ -348,9 +361,9 @@ def _table_note(period: dict) -> str:
     end = ra._long_date(period["end"])
     n = period["n"]
     return (
-        f"Notes: This table reports residual diagnostics for GBM, GARCH, Heston, Merton, "
-        f"GARCH–Merton, and Heston–Merton fitted to daily continuously compounded returns "
-        f"R_t = ln(S_t / S_{{t-1}}) of SPY, AAPL, and MSFT. The sample is {start} to {end} "
+        f"Notes: This table reports residual diagnostics for {', '.join(emp.TABLE_MODELS)} "
+        f"fitted to daily continuously compounded returns "
+        f"R_t = ln(S_t / S_{{t-1}}) of {', '.join(emp.TICKERS)}. The sample is {start} to {end} "
         f"({n} trading days). Each model is estimated from that regime and company only. "
         f"Jump models use standardized residuals after the 3σ jump filter. "
         f"JB is the usual Jarque–Bera normality test for the standardized residuals. "
@@ -423,8 +436,8 @@ def _cover(pdf: PdfPages) -> None:
     y = section(
         "What this report is",
         [
-            "Return-based specification tests for each of the 72 model × company × regime cells. It does not price options and does not use LSM RMSE or MAE.",
-            "One table per regime. Rows are the six models. Columns are SPY, AAPL, and MSFT, each with JB, Q(20), Q²(20), and ARCH-LM.",
+            "Return-based specification tests for each model × company × regime cell. It does not price options and does not use LSM RMSE or MAE.",
+            f"One table per regime. Rows are {', '.join(emp.TABLE_MODELS)}. Columns are {', '.join(emp.TICKERS)}, each with JB, Q(20), Q²(20), and ARCH-LM.",
             "The companion notebook is the computational source of truth. This PDF is written from the same payload.",
         ],
         y,
@@ -433,7 +446,7 @@ def _cover(pdf: PdfPages) -> None:
         "Sample and residuals",
         [
             "Daily R_t = ln(S_t / S_{t-1}) inside that regime window only. No lookback from outside the window.",
-            "GBM: (R_t − μ̂) / σ̂.  GARCH: GARCH(1,1) z_t.  Merton: jump-adjusted diffusion σ.  GARCH–Merton / Heston–Merton: residuals after the 3σ jump filter.  Heston: filtered variance path from returns.",
+            "GBM: (R_t − μ̂) / σ̂.  Modified GBM: split-normal magnitude residual, up vs down.  GARCH: GARCH(1,1) z_t.  Merton: jump-adjusted diffusion σ.  GARCH–Merton / Heston–Merton: residuals after the 3σ jump filter.  Heston: filtered variance path from returns.",
             "A diagnostic is N/A if the residual series is not well-defined or the sample is too short for that test.",
         ],
         y,
@@ -589,12 +602,12 @@ Specification tests on realized returns in the four windows of `V3 1.5-year mont
 
 | Item | Setting |
 |------|---------|
-| Names | SPY, AAPL, MSFT |
-| Models | GBM, GARCH, Heston, Merton, GARCH–Merton, Heston–Merton |
+| Names | {", ".join(emp.TICKERS)} |
+| Models | {", ".join(emp.TABLE_MODELS)} |
 | Sample | Daily $R_t=\\ln(S_t/S_{{t-1}})$ inside each regime window only |
 | Tests | JB; Ljung–Box Q(20); Q²(20); ARCH-LM ({ARCH_LAGS} lags) |
 | Cell | Test statistic with p-value in brackets; N/A if not applicable |
-| Combinations | 4 regimes × 3 companies × 6 models = 72 |
+| Combinations | {len(emp.REGIME_ORDER)} regimes × {len(emp.TICKERS)} companies × {len(emp.TABLE_MODELS)} models = {len(emp.REGIME_ORDER) * len(emp.TICKERS) * len(emp.TABLE_MODELS)} |
 """
         )
     ]

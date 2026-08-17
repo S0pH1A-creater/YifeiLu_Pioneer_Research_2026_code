@@ -39,6 +39,7 @@ MUTED = emp.MUTED
 MODEL_COLORS = emp.MODEL_COLORS
 MODEL_STEM = {
     "GBM": "gbm",
+    "Modified GBM": "modified_gbm",
     "GARCH": "garch",
     "Heston": "heston",
     "Merton": "merton",
@@ -57,7 +58,10 @@ def _simulate_p_measure(g: dict, ticker: str, cal: pd.DataFrame):
     sched = g["param_schedule_for_steps"](ticker, cal)
     n_paths = emp.N_PATHS
     seed = emp.SEED
-    if "simulate_gbm_rolling" in g:
+    if "simulate_modified_gbm_rolling" in g:
+        _dates, steps, S0, hist = sched
+        paths = g["simulate_modified_gbm_rolling"](steps, S0, n_paths, seed)
+    elif "simulate_gbm_rolling" in g:
         _dates, mu, sig, S0, hist = sched
         paths = g["simulate_gbm_rolling"](mu, sig, S0, n_paths, seed)
     elif "simulate_garch_merton_rolling" in g:
@@ -139,14 +143,15 @@ def _partial_path(model: str, regime: str) -> Path:
     return cache / "partial" / f"{regime}_{safe}.json"
 
 
-def _run_one(model: str, nb_path: Path) -> dict:
+def _run_one(model: str, nb_path: Path, tickers=None) -> dict:
     import run_optimal_stopping_study as os_study
 
     g = emp._load_ns(nb_path)
     regime = os_study._regime_from_name(nb_path)
+    names = tuple(tickers) if tickers is not None else emp.TICKERS
     out = {"model": model, "regime": regime, "tickers": {}}
     cache, _, _ = _paths()
-    for ticker in emp.TICKERS:
+    for ticker in names:
         t0 = time.time()
         cal = g["calibrate_ticker"](ticker, emp.WINDOW_LABEL, emp.ROLLING_MODE)
         g["rolling"] = {ticker: cal}
@@ -295,8 +300,21 @@ def run_study(only=None) -> dict:
         regime = os_study._regime_from_name(nb)
         part = _partial_path(model, regime)
         if part.exists():
-            print(f"  resume {model} {regime}", flush=True)
-            completed.append(json.loads(part.read_text(encoding="utf-8")))
+            row = json.loads(part.read_text(encoding="utf-8"))
+            missing = [t for t in emp.TICKERS if t not in row.get("tickers", {})]
+            if missing:
+                print(f"  fill stock {model} {regime}: {', '.join(missing)}", flush=True)
+                try:
+                    extra = _run_one(model, nb, tickers=missing)
+                    row.setdefault("tickers", {}).update(extra["tickers"])
+                    part.write_text(json.dumps(row, indent=2, default=str), encoding="utf-8")
+                except Exception:
+                    failures.append(f"{model}/{regime}")
+                    print(f"FAILED {model} {regime}:\n{traceback.format_exc()}", flush=True)
+                    continue
+            else:
+                print(f"  resume {model} {regime}", flush=True)
+            completed.append(row)
             continue
         print(f"\n=== stock {model} | {regime} ===", flush=True)
         try:
@@ -328,12 +346,18 @@ def run_or_load(*, recompute: bool = False, only=None) -> dict:
 def _company_tables_page(pdf, payload, ticker, page_no):
     fig = plt.figure(figsize=(11, 8.5))
     fig.patch.set_facecolor("white")
-    fig.suptitle(f"Page {page_no}  ·  Table block  ·  {ticker}  ·  six models × four regimes", fontsize=13, color=NAVY, y=0.975, weight="bold")
+    fig.suptitle(
+        f"Page {page_no}  ·  Table block  ·  {ticker}  ·  {emp._models_phrase(cap=False)} × four regimes",
+        fontsize=13,
+        color=NAVY,
+        y=0.975,
+        weight="bold",
+    )
     fig.text(
         0.06,
         0.935,
         f"P-measure daily cloud, reported path = p50.  Bold green = lowest RMSE% vs realized S_t.  "
-        f"{emp.LOOKBACK_PHRASE} lookback, monthly rolling, n_paths={emp.N_PATHS}, seed={emp.SEED}.",
+        f"{emp.LOOKBACK_PHRASE} lookback, rolling={emp.ROLLING_MODE}, n_paths={emp.N_PATHS}, seed={emp.SEED}.",
         fontsize=7.8,
         color=MUTED,
     )
@@ -371,7 +395,7 @@ def _cover(pdf, payload):
         fig.text(
             0.08,
             0.912,
-            f"Six models  ·  three underlyings  ·  four volatility regimes  ·  {emp.LOOKBACK_PHRASE} monthly calibration",
+            emp._banner_line(payload),
             fontsize=9.5,
             color=MUTED,
             va="top",
@@ -407,18 +431,18 @@ def _cover(pdf, payload):
                 "What this report is",
                 [
                     "Computational source of truth: the companion Jupyter notebook. This PDF is written from the same payload; every table number is identical.",
-                    "Question: which of six models tracks realized stock price S_t most closely, and does the ranking change across companies and the four volatility regimes?",
+                    f"Question: which of {emp._models_phrase(cap=False)} tracks realized stock price S_t most closely, and does the ranking change across companies and the four volatility regimes?",
                     "This report does not price options. Option RMSE lives in the companion decision PDF.",
-                    "In every table the BEST row is the lowest percentage RMSE of the p50 path versus realized S_t. That row is bold and shaded green; Mark ranks 1–6.",
+                    f"In every table the BEST row is the lowest percentage RMSE of the p50 path versus realized S_t. That row is bold and shaded green; Mark ranks 1–{emp._n_models()}.",
                 ],
             ),
             (
                 "Experimental design (held fixed for every model)",
                 [
-                    "Models: GBM, GARCH(1,1), Heston (no jumps), Merton jump-diffusion, GARCH–Merton, Heston–Merton (Bates).",
-                    "Companies: SPY, AAPL, MSFT. Each name is calibrated and simulated separately.",
+                    f"Models: {emp._models_listed()}.",
+                    f"Companies: {', '.join(emp.TICKERS)}. Each name is calibrated and simulated separately.",
                     "Regimes: Crisis 2008-08-01→2009-07-31; Normal 2014-01-01→2014-12-31; Late-cycle 2018-10-01→2019-09-30; COVID 2019-09-01→2020-08-31.",
-                    f"Calibration window: {emp.LOOKBACK_PHRASE} ending at each monthly update. Rolling: monthly. No look-ahead.",
+                    emp._rolling_detail(),
                     "P-measure: keep the lookback drift μ. Do not replace μ → r (that replacement is only for LSM option pricing).",
                 ],
             ),
@@ -433,7 +457,11 @@ def _cover(pdf, payload):
                 [
                     f"One rolling path cloud per ticker × regime × model, n_paths = {emp.N_PATHS}, seed 42.",
                     "Clock: daily trading days from the first bar of the regime through the regime end. Δt = 1/252.",
-                    "Start at the observed open S_0. Refresh parameters at month-ends with data ≤ that date.",
+                    (
+                        "Start at the observed open S_0. Hold the single t0 calibration for every day of the regime."
+                        if emp.ROLLING_MODE == "none"
+                        else "Start at the observed open S_0. Refresh parameters at month-ends with data ≤ that date."
+                    ),
                     "At each day, summarize the cloud by p10, p25, p50, p75, p90. The reported path is p50, not the Monte Carlo mean.",
                 ],
             ),
@@ -462,10 +490,10 @@ def _stock_conclusion(pdf, payload):
     winner = overall[0]["model"]
     unique = sorted({r["rank1"] for r in payload["ranking_grid"]})
     bullets = [
-        f"On mean RMSE% of the p50 path versus realized S_t across 12 company×regime cells, {winner} is best "
-        f"(mean RMSE% = {overall[0]['mean_rmse_pct']:.2f}; {overall[0]['n_best']} of 12 cells).",
+        f"On mean RMSE% of the p50 path versus realized S_t across {emp._n_cells()} company×regime cells, {winner} is best "
+        f"(mean RMSE% = {overall[0]['mean_rmse_pct']:.2f}; {overall[0]['n_best']} of {emp._n_cells()} cells).",
         f"The ranking is {'stable: ' + unique[0] + ' is best in every cell' if len(unique)==1 else 'not stable. Best-in-cell models: ' + ', '.join(unique)}.",
-        f"These conclusions are conditional on {emp.LOOKBACK_PHRASE} monthly P-measure calibration, {emp.N_PATHS} paths, daily steps, and the p50 scoring convention.",
+        f"These conclusions are conditional on {emp._rolling_phrase()} P-measure calibration, {emp.N_PATHS} paths, daily steps, and the p50 scoring convention.",
     ]
     y = 0.88
     fig.text(0.08, y, "Which models track realized S_t most closely?", fontsize=11.5, weight="bold", color=NAVY, va="top")
@@ -533,7 +561,7 @@ def build_notebook(payload, path=None):
 
     cells = [
         md(
-            f"""# V3 stock-price study — {emp.LOOKBACK_PHRASE} monthly calibration
+            f"""# V3 stock-price study — {emp._rolling_phrase()}
 
 P-measure daily clouds vs realized S_t. Reported path = **p50**. `n_paths = {emp.N_PATHS}`, seed {emp.SEED}.
 """

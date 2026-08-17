@@ -41,6 +41,19 @@
       "t_lsm": 1.8577449321746826,
       "elapsed": 7.534536838531494,
       "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_heston_merton.csv"
+    },
+    "AMZN": {
+      "rmse_pct": 37.7131768770984,
+      "mae": 3.0378418234516578,
+      "bias": 2.531018196129039,
+      "bias_pct": 24.58192126022865,
+      "early": 0.16619,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 4.828762054443359,
+      "t_lsm": 1.2878494262695312,
+      "elapsed": 6.117485046386719,
+      "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_heston_merton.csv"
     }
   }
 }

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""V3 empirical study: 6 models × 3 tickers × 4 regimes.
+"""V3 empirical study: models × companies × four regimes.
 
-Lookback = 5 years, rolling = monthly. Shared contract sample per
+Default underlyings are SPY, AAPL, MSFT. The 1.5-year 10k reports add AMZN.
+Lookback and rolling are configured by the wrapper. Shared contract sample per
 (ticker × regime). Percentage RMSE is the ranking metric.
 
 The notebook in Results_In_Short is the user-facing source of truth;
@@ -15,6 +16,7 @@ import os
 import sys
 import time
 import traceback
+from contextlib import contextmanager
 from pathlib import Path
 
 os.environ.setdefault(
@@ -89,6 +91,7 @@ REGIME_META = {
 }
 MODEL_FOLDERS = {
     "GBM": ("gbm notebook", "20*_gbm.ipynb"),
+    "Modified GBM": ("modified gbm notebook", "20*_modified_gbm.ipynb"),
     "GARCH": ("garch notebook", "20*_garch.ipynb"),
     "Heston": ("heston notebook", "20*_heston.ipynb"),
     "Merton": ("merton notebook", "20*_merton.ipynb"),
@@ -119,9 +122,11 @@ def configure_lookback(
     notebook_import: str,
     engine_script: str,
     n_paths: int | None = None,
+    tickers: tuple[str, ...] | None = None,
+    rolling_mode: str | None = None,
 ) -> None:
     """Point this module at another lookback without rewriting the 5-year cache."""
-    global WINDOW_LABEL, LOOKBACK_OFFSET, LOOKBACK_PHRASE, N_PATHS
+    global WINDOW_LABEL, LOOKBACK_OFFSET, LOOKBACK_PHRASE, N_PATHS, TICKERS, ROLLING_MODE
     global CACHE, SHORT, PDF_NAME, NB_NAME, NOTEBOOK_IMPORT, ENGINE_SCRIPT
     global PAYLOAD_JSON, CONTRACTS_JSON, FILTER_JSON
     WINDOW_LABEL = window_label
@@ -131,6 +136,11 @@ def configure_lookback(
     if n_paths is not None:
         N_PATHS = int(n_paths)
         os_study.N_PATHS = int(n_paths)
+    if tickers is not None:
+        TICKERS = tuple(tickers)
+    if rolling_mode is not None:
+        ROLLING_MODE = rolling_mode
+        os_study.ROLLING_MODES = (rolling_mode,)
     CACHE = ROOT / "results" / cache_name
     SHORT = REPO / "Results_In_Short" / short_name
     PDF_NAME = pdf_name
@@ -151,6 +161,13 @@ def _load_ns(nb_path):
     if isinstance(wo, dict) and WINDOW_LABEL not in wo:
         wo[WINDOW_LABEL] = LOOKBACK_OFFSET
     g["WINDOW_LABEL"] = WINDOW_LABEL
+    prices = g.get("prices")
+    if prices is not None:
+        tickers = [t for t in TICKERS if t in prices.columns]
+        if tickers:
+            g["TICKERS"] = tickers
+            g["period_prices"] = prices.loc[g["PERIOD_START"] : g["PERIOD_END"], tickers].copy()
+            g["log_returns_all"] = np.log(prices[tickers]).diff()
     return g
 
 
@@ -162,12 +179,158 @@ BEST_BG = "#E4EED8"
 ALT_BG = "#F4F7FB"
 MODEL_COLORS = {
     "GBM": "#4C72B0",
+    "Modified GBM": "#C73E7B",
     "GARCH": "#C44E52",
     "Heston": "#DD8452",
     "Merton": "#55A868",
     "GARCH–Merton": "#8172B3",
     "Heston–Merton": "#937860",
 }
+MODEL_COVER_NAMES = {
+    "GBM": "GBM",
+    "Modified GBM": "Modified GBM (Markov direction)",
+    "GARCH": "GARCH(1,1)",
+    "Heston": "Heston (no jumps)",
+    "Merton": "Merton jump-diffusion",
+    "GARCH–Merton": "GARCH–Merton",
+    "Heston–Merton": "Heston–Merton (Bates)",
+}
+
+
+def _n_cells() -> int:
+    return len(TICKERS) * len(REGIME_ORDER)
+
+
+def _underlyings_phrase() -> str:
+    n = len(TICKERS)
+    if n == 1:
+        return TICKERS[0]
+    if n == 3:
+        return "three underlyings"
+    if n == 4:
+        return "four underlyings"
+    return f"{n} underlyings"
+
+
+def _ticker_grid_shape(n: int) -> tuple[int, int]:
+    if n <= 3:
+        return 1, max(n, 1)
+    if n == 4:
+        return 2, 2
+    return (n + 2) // 3, 3
+
+
+def _n_models() -> int:
+    return len(TABLE_MODELS)
+
+
+def _n_expected_cells() -> int:
+    return len(TICKERS) * len(REGIME_ORDER) * len(TABLE_MODELS)
+
+
+def _tickers_joined(sep: str = " / ") -> str:
+    return sep.join(TICKERS)
+
+
+def _tickers_listed() -> str:
+    names = list(TICKERS)
+    if names and names[0] == "SPY" and len(names) > 1:
+        return "SPY (primary), " + ", ".join(names[1:])
+    return ", ".join(names)
+
+
+def _companies_phrase() -> str:
+    n = len(TICKERS)
+    words = {1: "one company", 2: "two companies", 3: "three companies", 4: "four companies"}
+    return words.get(n, f"{n} companies")
+
+
+def _subplots_tickers(figsize):
+    n = len(TICKERS)
+    nrows, ncols = _ticker_grid_shape(n)
+    fig, axes = plt.subplots(nrows, ncols, figsize=figsize, sharey=False)
+    axes_list = list(np.atleast_1d(axes).ravel())
+    for ax in axes_list[n:]:
+        ax.set_visible(False)
+        ax.axis("off")
+    return fig, axes_list[:n]
+
+
+def _models_phrase(*, cap: bool = True) -> str:
+    words = {
+        1: "one model",
+        2: "two models",
+        3: "three models",
+        4: "four models",
+        5: "five models",
+        6: "six models",
+        7: "seven models",
+    }
+    phrase = words.get(_n_models(), f"{_n_models()} models")
+    return phrase[:1].upper() + phrase[1:] if cap else phrase
+
+
+def _models_listed() -> str:
+    return ", ".join(MODEL_COVER_NAMES.get(m, m) for m in TABLE_MODELS)
+
+
+def _rolling_phrase() -> str:
+    if ROLLING_MODE == "none":
+        return f"{LOOKBACK_PHRASE} fixed calibration"
+    if ROLLING_MODE == "monthly":
+        return f"{LOOKBACK_PHRASE} monthly calibration"
+    return f"{LOOKBACK_PHRASE} {ROLLING_MODE} calibration"
+
+
+def _rolling_detail() -> str:
+    if ROLLING_MODE == "none":
+        return (
+            f"Calibration window: {LOOKBACK_PHRASE} ending at the first session of each 1-year evaluation window. "
+            "Rolling: none (one estimate, held for the whole window). Parameters estimated at t0 are used only after t0."
+        )
+        return (
+            f"Calibration window: {LOOKBACK_PHRASE} ending at each monthly update. Rolling: monthly (period start plus month-ends). "
+            "Parameters estimated at t are used only after t (no look-ahead)."
+        )
+
+
+def _no_lookahead_note() -> str:
+    if ROLLING_MODE == "none":
+        return (
+            "At the first session t0 of each 1-year evaluation window, parameters use only returns and listed quotes with "
+            "`trading_date ≤ t0`. Those parameters are held for every Monday contract in the window. LSM prices each contract "
+            "with that single calibration row. Option quotes are as-of the grid timestamp (same session, else the prior session)."
+        )
+    return (
+        "At monthly update t, parameters use only returns and listed quotes with `trading_date ≤ t`. LSM prices a Monday "
+        "contract with the latest calibration row dated on or before that Monday. Option quotes are as-of the grid timestamp "
+        "(same session, else the prior session)."
+    )
+
+
+def _banner_line(payload: dict | None = None) -> str:
+    extra = ""
+    if payload:
+        extra = str(payload.get("meta", {}).get("banner_extra") or "").strip()
+    base = (
+        f"{_models_phrase()}  ·  {_underlyings_phrase()}  ·  four volatility regimes  ·  "
+        f"{_rolling_phrase()}"
+    )
+    return f"{base}  ·  {extra}" if extra else base
+
+
+@contextmanager
+def use_models(models):
+    """Temporarily restrict TABLE_MODELS for grouped companion reports."""
+    global TABLE_MODELS, MODELS
+    old_table, old_models = TABLE_MODELS, MODELS
+    TABLE_MODELS = tuple(models)
+    MODELS = tuple(models)
+    try:
+        yield
+    finally:
+        TABLE_MODELS = old_table
+        MODELS = old_models
 
 
 def _jobs() -> list[tuple[str, Path]]:
@@ -211,26 +374,48 @@ def _contracts_from_records(records: list[dict], ticker: str) -> pd.DataFrame:
 
 
 def sample_shared_contracts() -> dict:
-    """One contract list per (regime, ticker), reused by every model."""
-    if CONTRACTS_JSON.exists():
-        return json.loads(CONTRACTS_JSON.read_text(encoding="utf-8"))
+    """One contract list per (regime, ticker), reused by every model.
+
+    Existing frozen samples are kept. Missing tickers (e.g. AMZN added later)
+    are sampled and merged in without resampling names already on disk.
+    """
+    payload: dict = json.loads(CONTRACTS_JSON.read_text(encoding="utf-8")) if CONTRACTS_JSON.exists() else {}
+    missing = [
+        ticker
+        for ticker in TICKERS
+        if not payload
+        or any(ticker not in block.get("tickers", {}) for block in payload.values())
+    ]
+    if payload and not missing:
+        return payload
 
     os_study._install_notebook_stubs()
-    payload: dict = {}
-    print("  loading filtered call panels …", flush=True)
-    panels = {t: load_calls(os_study.DATA_ROOT, t) for t in TICKERS}
-    # Period bounds come from the GBM notebooks (identical across models).
+    panels: dict | None = None
+
+    def _panels() -> dict:
+        nonlocal panels
+        if panels is None:
+            print("  loading filtered call panels …", flush=True)
+            panels = {t: load_calls(os_study.DATA_ROOT, t) for t in TICKERS}
+        return panels
+
     for nb in sorted((ROOT / "gbm notebook").glob("20*_gbm.ipynb")):
         g = os_study._load_ns(nb)
         regime = os_study._regime_from_name(nb)
-        payload[regime] = {
-            "period_start": pd.Timestamp(g["PERIOD_START"]).date().isoformat(),
-            "period_end": pd.Timestamp(g["PERIOD_END"]).date().isoformat(),
-            "tickers": {},
-        }
+        payload.setdefault(
+            regime,
+            {
+                "period_start": pd.Timestamp(g["PERIOD_START"]).date().isoformat(),
+                "period_end": pd.Timestamp(g["PERIOD_END"]).date().isoformat(),
+                "tickers": {},
+            },
+        )
+        payload[regime].setdefault("tickers", {})
         for ticker in TICKERS:
+            if ticker in payload[regime]["tickers"]:
+                continue
             contracts = sample_calls(
-                panels[ticker],
+                _panels()[ticker],
                 g["PERIOD_START"],
                 g["PERIOD_END"],
             )
@@ -256,7 +441,9 @@ def sample_shared_contracts() -> dict:
 def filter_funnel() -> dict:
     """Observation counts after each V3 estimation filter, by ticker × regime."""
     if FILTER_JSON.exists():
-        return json.loads(FILTER_JSON.read_text(encoding="utf-8"))
+        out = json.loads(FILTER_JSON.read_text(encoding="utf-8"))
+        if all(t in out.get("tickers", {}) for t in TICKERS):
+            return out
 
     contracts = sample_shared_contracts()
     out: dict = {"tickers": {}, "note": "Same filters for every model. No model-specific data selection."}
@@ -323,12 +510,13 @@ def enrich_bias_pct(payload: dict) -> dict:
     return payload
 
 
-def _run_one(model: str, nb_path: Path, shared: dict) -> dict:
+def _run_one(model: str, nb_path: Path, shared: dict, tickers: tuple[str, ...] | list[str] | None = None) -> dict:
     os_study._install_notebook_stubs()
     g = os_study._load_ns(nb_path)
     regime = os_study._regime_from_name(nb_path)
+    names = tuple(tickers) if tickers is not None else TICKERS
     out = {"model": model, "regime": regime, "stem": nb_path.stem, "tickers": {}}
-    for ticker in TICKERS:
+    for ticker in names:
         recs = shared[regime]["tickers"][ticker]["records"]
         contracts = _contracts_from_records(recs, ticker)
         t0 = time.time()
@@ -375,6 +563,7 @@ def run_study(only: list[str] | None = None) -> dict:
         tokens = [t.lower().replace("–", "-").replace("_", "-") for t in only]
         model_alias = {
             "gbm": "GBM",
+            "modified-gbm": "Modified GBM",
             "garch": "GARCH",
             "heston": "Heston",
             "merton": "Merton",
@@ -402,8 +591,21 @@ def run_study(only: list[str] | None = None) -> dict:
         regime = os_study._regime_from_name(nb)
         part = _partial_path(model, regime)
         if part.exists():
-            print(f"  resume {model} {regime}", flush=True)
-            completed.append(json.loads(part.read_text(encoding="utf-8")))
+            row = json.loads(part.read_text(encoding="utf-8"))
+            missing = [t for t in TICKERS if t not in row.get("tickers", {})]
+            if missing:
+                print(f"  fill {model} {regime}: {', '.join(missing)}", flush=True)
+                try:
+                    extra = _run_one(model, nb, shared, tickers=missing)
+                    row.setdefault("tickers", {}).update(extra["tickers"])
+                    part.write_text(json.dumps(row, indent=2), encoding="utf-8")
+                except Exception:
+                    failures.append(f"{model}/{nb.name}")
+                    print(f"FAILED {nb}:\n{traceback.format_exc()}", flush=True)
+                    continue
+            else:
+                print(f"  resume {model} {regime}", flush=True)
+            completed.append(row)
             continue
         print(f"\n=== {model} | {regime} ===", flush=True)
         try:
@@ -563,6 +765,109 @@ def assemble_payload(shared, funnel, completed, failures, elapsed) -> dict:
     }
 
 
+def slice_payload_models(payload: dict, models, extra_meta: dict | None = None) -> dict:
+    """Rebuild tables and rankings from existing cells. No new LSM."""
+    models = tuple(models)
+    cells = {k: dict(v) for k, v in payload.get("cells", {}).items() if v.get("model") in models}
+    tables: dict[str, dict] = {}
+    for ticker in TICKERS:
+        for regime in REGIME_ORDER:
+            rows = [cells[f"{ticker}|{regime}|{model}"] for model in models if f"{ticker}|{regime}|{model}" in cells]
+            if not rows:
+                continue
+            tables[f"{ticker}|{regime}"] = {
+                "ticker": ticker,
+                "regime": regime,
+                "best_model": min(rows, key=lambda r: r["rmse_pct"])["model"],
+                "n_contracts": int(rows[0]["n"]) if rows else 0,
+                "n_contracts_identical": len({int(r["n"]) for r in rows}) == 1,
+                "rows": rows,
+            }
+    by_regime = []
+    for regime in REGIME_ORDER:
+        for model in models:
+            vals = [cells[f"{t}|{regime}|{model}"]["rmse_pct"] for t in TICKERS if f"{t}|{regime}|{model}" in cells]
+            if not vals:
+                continue
+            by_regime.append(
+                {
+                    "regime": regime,
+                    "model": model,
+                    "mean_rmse_pct": float(np.mean(vals)),
+                    "median_rmse_pct": float(np.median(vals)),
+                    "n_tickers": len(vals),
+                }
+            )
+    by_ticker = []
+    for ticker in TICKERS:
+        for model in models:
+            vals = [cells[f"{ticker}|{r}|{model}"]["rmse_pct"] for r in REGIME_ORDER if f"{ticker}|{r}|{model}" in cells]
+            if not vals:
+                continue
+            by_ticker.append(
+                {
+                    "ticker": ticker,
+                    "model": model,
+                    "mean_rmse_pct": float(np.mean(vals)),
+                    "median_rmse_pct": float(np.median(vals)),
+                    "n_regimes": len(vals),
+                    "n_best": sum(
+                        1
+                        for r in REGIME_ORDER
+                        if tables.get(f"{ticker}|{r}", {}).get("best_model") == model
+                    ),
+                }
+            )
+    overall = []
+    for model in models:
+        vals = [cells[k]["rmse_pct"] for k, v in cells.items() if v["model"] == model]
+        if not vals:
+            continue
+        overall.append(
+            {
+                "model": model,
+                "mean_rmse_pct": float(np.mean(vals)),
+                "median_rmse_pct": float(np.median(vals)),
+                "n_cells": len(vals),
+                "n_best": sum(1 for t in tables.values() if t["best_model"] == model),
+            }
+        )
+    overall = sorted(overall, key=lambda r: r["mean_rmse_pct"])
+    ranking_grid = []
+    for ticker in TICKERS:
+        for regime in REGIME_ORDER:
+            tab = tables.get(f"{ticker}|{regime}")
+            if not tab:
+                continue
+            order = sorted(tab["rows"], key=lambda r: r["rmse_pct"])
+            ranking_grid.append(
+                {
+                    "ticker": ticker,
+                    "regime": regime,
+                    "rank1": order[0]["model"],
+                    "rank2": order[1]["model"] if len(order) > 1 else "",
+                    "best_rmse_pct": order[0]["rmse_pct"],
+                    "ranks": {r["model"]: i + 1 for i, r in enumerate(order)},
+                }
+            )
+    meta = dict(payload.get("meta", {}))
+    meta["models"] = list(models)
+    meta["parent_models"] = list(payload.get("meta", {}).get("models", []))
+    if extra_meta:
+        meta.update(extra_meta)
+    return {
+        "meta": meta,
+        "shared_contracts": payload.get("shared_contracts", {}),
+        "filter_funnel": payload.get("filter_funnel", {}),
+        "cells": cells,
+        "tables": tables,
+        "summary_by_regime": by_regime,
+        "summary_by_ticker": by_ticker,
+        "summary_overall": overall,
+        "ranking_grid": ranking_grid,
+    }
+
+
 def load_payload() -> dict:
     if not PAYLOAD_JSON.exists():
         raise FileNotFoundError(PAYLOAD_JSON)
@@ -630,6 +935,66 @@ def _metric_rows(tab: dict) -> tuple[list[list[str]], list[str], int]:
     return rows, header, best_i + 1
 
 
+def _equity_tickers() -> tuple[str, ...]:
+    """Single-name companies shown on the post-SPY summary page."""
+    return tuple(t for t in TICKERS if t != "SPY")
+
+
+def _wants_company_summary(payload: dict) -> bool:
+    return bool(payload.get("meta", {}).get("grouped_report")) and len(_equity_tickers()) >= 2
+
+
+def _mean_or_nan(vals) -> float:
+    x = [float(v) for v in vals if v is not None and np.isfinite(v)]
+    return float(np.mean(x)) if x else float("nan")
+
+
+def _average_company_table(payload: dict, regime: str, names: tuple[str, ...]) -> dict:
+    """One regime table: arithmetic mean of each metric across `names`."""
+    rows = []
+    for model in TABLE_MODELS:
+        recs = []
+        for ticker in names:
+            tab = payload.get("tables", {}).get(f"{ticker}|{regime}")
+            if not tab:
+                continue
+            rec = next((r for r in tab["rows"] if r["model"] == model), None)
+            if rec is not None:
+                recs.append(rec)
+        if not recs:
+            continue
+        rows.append(
+            {
+                "model": model,
+                "rmse_pct": _mean_or_nan(r["rmse_pct"] for r in recs),
+                "mae": _mean_or_nan(r["mae"] for r in recs),
+                "bias": _mean_or_nan(r["bias"] for r in recs),
+                "bias_pct": _mean_or_nan(r.get("bias_pct") for r in recs),
+                "early": _mean_or_nan(r["early"] for r in recs),
+                "n": _mean_or_nan(r["n"] for r in recs),
+            }
+        )
+    if not rows:
+        return {
+            "ticker": "Companies",
+            "regime": regime,
+            "best_model": "",
+            "n_contracts": 0,
+            "n_contracts_identical": True,
+            "rows": [],
+            "summary_of": list(names),
+        }
+    return {
+        "ticker": "Companies",
+        "regime": regime,
+        "best_model": min(rows, key=lambda r: r["rmse_pct"])["model"],
+        "n_contracts": int(round(_mean_or_nan(r["n"] for r in rows))),
+        "n_contracts_identical": True,
+        "rows": rows,
+        "summary_of": list(names),
+    }
+
+
 def _cover(pdf: PdfPages, payload: dict) -> None:
     import textwrap
 
@@ -662,27 +1027,38 @@ def _cover(pdf: PdfPages, payload: dict) -> None:
         pdf.savefig(fig)
         plt.close(fig)
 
+    intro = [
+        "Computational source of truth: the companion Jupyter notebook. This PDF is written from the same payload; every table number is identical.",
+        f"Question: which of {_n_models()} American-call pricing models tracks listed market prices most closely, and does the ranking change across companies and volatility regimes?",
+        "In every table the BEST row is the lowest percentage RMSE. That row is bold and shaded green, and the Mark column says BEST.",
+    ]
+    intro = list(payload.get("meta", {}).get("group_intro") or []) + intro
     _instruction_page(
         "V3 empirical study  ·  Instruction",
-        f"Six models  ·  three underlyings  ·  four volatility regimes  ·  {LOOKBACK_PHRASE} monthly calibration",
+        _banner_line(payload),
         [
             (
                 "What this report is",
-                [
-                    "Computational source of truth: the companion Jupyter notebook. This PDF is written from the same payload; every table number is identical.",
-                    "Question: which of six American-call pricing models tracks listed market prices most closely, and does the ranking change across companies and volatility regimes?",
-                    "In every table the BEST row is the lowest percentage RMSE. That row is bold and shaded green, and the Mark column says BEST.",
-                ],
+                intro,
             ),
             (
                 "Experimental design (held fixed for every model)",
                 [
-                    "Models: GBM, GARCH(1,1), Heston (no jumps), Merton jump-diffusion, GARCH–Merton, Heston–Merton (Bates).",
-                    "Companies: SPY (primary), AAPL, MSFT. Each name is calibrated and priced separately.",
-                    "Regimes (V3 one-year evaluation windows): Crisis 2008-08-01→2009-07-31; Normal 2014-01-01→2014-12-31; Late-cycle 2018-10-01→2019-09-30; COVID 2019-09-01→2020-08-31.",
-                    "The late-cycle and COVID files share September 2019 (V3 notebook dates). All other regime days are disjoint. Contracts are built independently in each window.",
-                    f"Calibration window: {LOOKBACK_PHRASE} ending at each monthly update. Rolling: monthly (period start plus month-ends). Parameters estimated at t are used only after t (no look-ahead).",
-                    "If history is shorter than the requested lookback, the estimator uses all available observations up to the update date (equity starts 2003-12-01; listed-option panels start 2008-01).",
+                    b
+                    for b in [
+                        f"Models: {_models_listed()}.",
+                        (
+                            "Modified GBM (Markov direction + split-normal magnitudes) is specified in V3_modified_gbm_model.pdf in this folder."
+                            if "Modified GBM" in TABLE_MODELS
+                            else None
+                        ),
+                        f"Companies: {_tickers_listed()}. Each name is calibrated and priced separately.",
+                        "Regimes (V3 one-year evaluation windows): Crisis 2008-08-01→2009-07-31; Normal 2014-01-01→2014-12-31; Late-cycle 2018-10-01→2019-09-30; COVID 2019-09-01→2020-08-31.",
+                        "The late-cycle and COVID files share September 2019 (V3 notebook dates). All other regime days are disjoint. Contracts are built independently in each window.",
+                        _rolling_detail(),
+                        "If history is shorter than the requested lookback, the estimator uses all available observations up to the update date (equity starts 2003-12-01; listed-option panels start 2008-01).",
+                    ]
+                    if b
                 ],
             ),
         ],
@@ -690,12 +1066,12 @@ def _cover(pdf: PdfPages, payload: dict) -> None:
     )
     _instruction_page(
         "V3 empirical study  ·  Instruction (continued)",
-        f"Six models  ·  three underlyings  ·  four volatility regimes  ·  {LOOKBACK_PHRASE} monthly calibration",
+        _banner_line(payload),
         [
             (
                 "Shared market sample and filters (not model-specific)",
                 [
-                    "For each company × regime, one listed-call sample is drawn once and reused by all six models: nearest-ATM call on each Monday (next session if Monday is closed), DTE 7–60, listed expiry, as-of that date.",
+                    f"For each company × regime, one listed-call sample is drawn once and reused by all {_models_phrase(cap=False)} in this report: nearest-ATM call on each Monday (next session if Monday is closed), DTE 7–60, listed expiry, as-of that date.",
                     "Estimation filters, applied in order to every quote used for Heston/Heston–Merton calibration and to the LSM comparison set: (1) calls only, finite S, K, C; (2) no-arbitrage C ≥ max(0, S−K); (3) 7 ≤ DTE ≤ 60; (4) |S/K − 1| ≤ 10%; (5) premium ≥ 0.05, valid bid–ask with relative spread ≤ 50% when those columns exist, volume ≥ 1 when present.",
                     "Return-based models (GBM, Merton, GARCH, GARCH–Merton) never see option quotes in §4; they still price the same filtered LSM contracts in evaluation.",
                 ],
@@ -716,7 +1092,7 @@ def _cover(pdf: PdfPages, payload: dict) -> None:
                 ],
             ),
         ],
-        "Page map: p.1–2 method  ·  p.3 filters & sample  ·  p.4–6 detailed tables (one company per page, four regimes)  ·  then summaries, figures, ranking, conclusion.",
+        "Page map: p.1–2 method  ·  p.3 filters & sample  ·  then detailed tables (one company per page, four regimes; grouped reports add a company-summary page after SPY)  ·  then summaries, figures, ranking, conclusion.",
     )
 
 
@@ -729,8 +1105,14 @@ def _filters_page(pdf: PdfPages, payload: dict) -> None:
     # shared n table
     ax = fig.add_axes([0.08, 0.62, 0.84, 0.26])
     ax.axis("off")
-    ax.set_title("Shared evaluation sample  ·  n listed calls (identical for all six models)", loc="left", fontsize=10.5, color=NAVY, weight="bold")
-    header = ["Regime", "Window", "SPY n", "AAPL n", "MSFT n"]
+    ax.set_title(
+        f"Shared evaluation sample  ·  n listed calls (identical for all {_models_phrase(cap=False)} in this report)",
+        loc="left",
+        fontsize=10.5,
+        color=NAVY,
+        weight="bold",
+    )
+    header = ["Regime", "Window"] + [f"{t} n" for t in TICKERS]
     rows = []
     for regime in REGIME_ORDER:
         info = payload["shared_contracts"][regime]
@@ -738,9 +1120,7 @@ def _filters_page(pdf: PdfPages, payload: dict) -> None:
             [
                 f"{regime}  {REGIME_META[regime]['title']}",
                 info["period_start"] + " → " + info["period_end"],
-                str(info["n"]["SPY"]),
-                str(info["n"]["AAPL"]),
-                str(info["n"]["MSFT"]),
+                *[str(info["n"][t]) for t in TICKERS],
             ]
         )
     tbl = ax.table(cellText=rows, colLabels=header, loc="center", cellLoc="center", bbox=[0.0, 0.05, 1.0, 0.9])
@@ -806,7 +1186,7 @@ def _filters_page(pdf: PdfPages, payload: dict) -> None:
         0.08,
         0.105,
         "SPY 2008–2009 uses bid–ask mid when the source mark is $0.01 (a GitHub field error, not missing trades). "
-        "After that repair the processed panel has weekly coverage, so n matches AAPL/MSFT (~50). All six models still share that exact sample.",
+        f"After that repair the processed panel has weekly coverage, so n matches AAPL/MSFT (~50). All {_models_phrase(cap=False)} in this report still share that exact sample.",
         fontsize=8.0,
         color="#222222",
         va="top",
@@ -830,7 +1210,7 @@ def _company_tables_page(pdf: PdfPages, payload: dict, ticker: str, page_no: int
     fig = plt.figure(figsize=(11, 8.5))
     fig.patch.set_facecolor("white")
     fig.suptitle(
-        f"Page {page_no}  ·  Table block  ·  {ticker}  ·  six models × four regimes",
+        f"Page {page_no}  ·  Table block  ·  {ticker}  ·  {_models_phrase(cap=False)} × four regimes",
         fontsize=13,
         color=NAVY,
         y=0.975,
@@ -840,7 +1220,7 @@ def _company_tables_page(pdf: PdfPages, payload: dict, ticker: str, page_no: int
         0.06,
         0.935,
         f"Same contracts and LSM settings for every model.  Bold green row = lowest RMSE%.  "
-        f"{LOOKBACK_PHRASE} lookback, monthly rolling, n_paths={N_PATHS}, seed={SEED}.",
+        f"{LOOKBACK_PHRASE} lookback, rolling={ROLLING_MODE}, n_paths={N_PATHS}, seed={SEED}.",
         fontsize=8.2,
         color=MUTED,
     )
@@ -872,6 +1252,54 @@ def _company_tables_page(pdf: PdfPages, payload: dict, ticker: str, page_no: int
     plt.close(fig)
 
 
+def _company_summary_page(pdf: PdfPages, payload: dict, page_no: int) -> None:
+    names = _equity_tickers()
+    names_txt = ", ".join(names)
+    fig = plt.figure(figsize=(11, 8.5))
+    fig.patch.set_facecolor("white")
+    fig.suptitle(
+        f"Page {page_no}  ·  Table block  ·  Company summary  ·  {_models_phrase(cap=False)} × four regimes",
+        fontsize=13,
+        color=NAVY,
+        y=0.975,
+        weight="bold",
+    )
+    fig.text(
+        0.06,
+        0.935,
+        f"Each number is the arithmetic mean of {names_txt}.  Same columns as the SPY page.  "
+        f"Bold green row = lowest mean RMSE%.  {LOOKBACK_PHRASE} lookback, rolling={ROLLING_MODE}, "
+        f"n_paths={N_PATHS}, seed={SEED}.",
+        fontsize=8.2,
+        color=MUTED,
+    )
+    for i, regime in enumerate(REGIME_ORDER):
+        ax = fig.add_subplot(2, 2, i + 1)
+        tab = _average_company_table(payload, regime, names)
+        rows, header, best = _metric_rows(tab)
+        meta = REGIME_META[regime]
+        title = (
+            f"Table Co-{i+1}   Company summary  ·  {regime}  {meta['title']}\n"
+            f"{meta['window']}   ·   mean of {names_txt}   ·   n̄ = {tab['n_contracts']}"
+        )
+        ax.axis("off")
+        ax.set_title(title, loc="left", fontsize=9.3, color=NAVY, pad=8, weight="bold")
+        tbl = ax.table(cellText=rows, colLabels=header, loc="center", cellLoc="center", bbox=[0.02, 0.08, 0.96, 0.78])
+        _style_table(tbl, best)
+        tbl.auto_set_column_width(list(range(len(header))))
+    fig.text(
+        0.06,
+        0.03,
+        "RMSE%, MAE, Bias $, Bias%, and early-exercise fraction are each averaged across "
+        f"{names_txt}.  This is not a pooled re-pricing of a combined contract sample.  Ranking uses the mean RMSE% only.",
+        fontsize=7.6,
+        color="#555555",
+    )
+    fig.tight_layout(rect=(0.03, 0.05, 0.97, 0.92))
+    pdf.savefig(fig)
+    plt.close(fig)
+
+
 def _summary_pages(pdf: PdfPages, payload: dict) -> None:
     # overall + by regime
     fig = plt.figure(figsize=(11, 8.5))
@@ -880,8 +1308,8 @@ def _summary_pages(pdf: PdfPages, payload: dict) -> None:
 
     ax = fig.add_axes([0.06, 0.55, 0.42, 0.35])
     ax.axis("off")
-    ax.set_title("Table S1  ·  Overall ranking (mean RMSE% over 12 cells)", loc="left", fontsize=10, color=NAVY, weight="bold")
-    header = ["Rank", "Model", "Mean RMSE%", "Median RMSE%", "# of 12 cells best"]
+    ax.set_title(f"Table S1  ·  Overall ranking (mean RMSE% over {_n_cells()} cells)", loc="left", fontsize=10, color=NAVY, weight="bold")
+    header = ["Rank", "Model", "Mean RMSE%", "Median RMSE%", f"# of {_n_cells()} cells best"]
     rows = []
     best_i = 1
     for i, rec in enumerate(payload["summary_overall"], start=1):
@@ -900,7 +1328,7 @@ def _summary_pages(pdf: PdfPages, payload: dict) -> None:
     ax2 = fig.add_axes([0.52, 0.55, 0.42, 0.35])
     ax2.axis("off")
     ax2.set_title("Table S2  ·  Wins by company (lowest RMSE% in that company×regime)", loc="left", fontsize=10, color=NAVY, weight="bold")
-    header2 = ["Model", "SPY wins", "AAPL wins", "MSFT wins", "Total"]
+    header2 = ["Model"] + [f"{t} wins" for t in TICKERS] + ["Total"]
     rows2 = []
     win_counts = {m: {t: 0 for t in TICKERS} for m in TABLE_MODELS}
     for rec in payload["ranking_grid"]:
@@ -910,7 +1338,7 @@ def _summary_pages(pdf: PdfPages, payload: dict) -> None:
     best_row = None
     for i, m in enumerate(TABLE_MODELS):
         tot = sum(win_counts[m].values())
-        rows2.append([m, str(win_counts[m]["SPY"]), str(win_counts[m]["AAPL"]), str(win_counts[m]["MSFT"]), str(tot)])
+        rows2.append([m, *[str(win_counts[m][t]) for t in TICKERS], str(tot)])
         if m == best_model:
             best_row = i + 1
     tbl2 = ax2.table(cellText=rows2, colLabels=header2, loc="center", cellLoc="center", bbox=[0.0, 0.05, 1.0, 0.9])
@@ -918,7 +1346,7 @@ def _summary_pages(pdf: PdfPages, payload: dict) -> None:
 
     ax3 = fig.add_axes([0.06, 0.08, 0.88, 0.42])
     ax3.axis("off")
-    ax3.set_title("Table S3  ·  Mean RMSE% by regime (equal-weight mean of SPY / AAPL / MSFT)", loc="left", fontsize=10, color=NAVY, weight="bold")
+    ax3.set_title(f"Table S3  ·  Mean RMSE% by regime (equal-weight mean of {_tickers_joined()})", loc="left", fontsize=10, color=NAVY, weight="bold")
     header3 = ["Model"] + [f"{r}\n{REGIME_META[r]['title']}" for r in REGIME_ORDER] + ["Mean of 4"]
     by = {(r["regime"], r["model"]): r["mean_rmse_pct"] for r in payload["summary_by_regime"]}
     rows3 = []
@@ -948,8 +1376,9 @@ def _summary_pages(pdf: PdfPages, payload: dict) -> None:
     fig.patch.set_facecolor("white")
     fig.suptitle("Page 8  ·  Summary by company  ·  mean RMSE% across four regimes", fontsize=13, color=NAVY, y=0.97, weight="bold")
     by_t = {(r["ticker"], r["model"]): r for r in payload["summary_by_ticker"]}
+    nrows, ncols = _ticker_grid_shape(len(TICKERS))
     for i, ticker in enumerate(TICKERS):
-        ax = fig.add_subplot(1, 3, i + 1)
+        ax = fig.add_subplot(nrows, ncols, i + 1)
         ax.axis("off")
         ax.set_title(f"Table S4.{i+1}  ·  {ticker}", loc="left", fontsize=10.5, color=NAVY, weight="bold")
         header = ["Model", "Mean RMSE%", "Median", "# regimes best"]
@@ -972,7 +1401,7 @@ def _summary_pages(pdf: PdfPages, payload: dict) -> None:
     fig.text(
         0.06,
         0.06,
-        "Each column is one company. Green row = lowest mean RMSE% across the four V3 regimes for that name.",
+        "Each panel is one company. Green row = lowest mean RMSE% across the four V3 regimes for that name.",
         fontsize=8.5,
         color="#555555",
     )
@@ -986,7 +1415,7 @@ def _figure_pages(pdf: PdfPages, payload: dict) -> None:
 
     # RMSE bars 2x2 regimes, mean of tickers? Better: 3 pages or one 2x2 with grouped bars per ticker
     fig, axes = plt.subplots(2, 2, figsize=(11, 8.5))
-    fig.suptitle("Page 9  ·  Figure 1  ·  RMSE% by model and regime  ·  mean of SPY / AAPL / MSFT", fontsize=12.5, color=NAVY, y=0.98, weight="bold")
+    fig.suptitle(f"Page 9  ·  Figure 1  ·  RMSE% by model and regime  ·  mean of {_tickers_joined()}", fontsize=12.5, color=NAVY, y=0.98, weight="bold")
     x = np.arange(len(TABLE_MODELS))
     for ax, regime in zip(axes.ravel(), REGIME_ORDER):
         vals = []
@@ -1009,13 +1438,13 @@ def _figure_pages(pdf: PdfPages, payload: dict) -> None:
         ax.spines["top"].set_visible(False)
         ax.spines["right"].set_visible(False)
         ax.set_ylim(0, ymax * 1.22 if ymax > 0 else 1)
-    fig.text(0.06, 0.03, "Outlined bar = lowest mean RMSE% in that regime. Equal-weight mean of the three companies.", fontsize=8, color="#555555")
+    fig.text(0.06, 0.03, f"Outlined bar = lowest mean RMSE% in that regime. Equal-weight mean of the {_companies_phrase()}.", fontsize=8, color="#555555")
     fig.tight_layout(rect=(0.03, 0.05, 0.97, 0.94))
     pdf.savefig(fig)
     plt.close(fig)
 
     # per-ticker RMSE
-    fig, axes = plt.subplots(1, 3, figsize=(11, 8.5), sharey=False)
+    fig, axes = _subplots_tickers((11, 8.5))
     fig.suptitle("Page 10  ·  Figure 2  ·  RMSE% by model  ·  each company (mean across four regimes)", fontsize=12.5, color=NAVY, y=0.98, weight="bold")
     by_t = {(r["ticker"], r["model"]): r["mean_rmse_pct"] for r in payload["summary_by_ticker"]}
     for ax, ticker in zip(axes, TICKERS):
@@ -1058,7 +1487,8 @@ def _figure_pages(pdf: PdfPages, payload: dict) -> None:
             j += 1
     ax = fig.add_axes([0.16, 0.18, 0.78, 0.68])
     cmap = plt.cm.RdYlGn_r
-    im = ax.imshow(rank, cmap=cmap, vmin=1, vmax=6, aspect="auto")
+    n_m = len(TABLE_MODELS)
+    im = ax.imshow(rank, cmap=cmap, vmin=1, vmax=max(n_m, 2), aspect="auto")
     ax.set_xticks(range(rank.shape[1]))
     ax.set_xticklabels(col_labels, fontsize=7.4)
     ax.set_yticks(range(len(TABLE_MODELS)))
@@ -1066,7 +1496,16 @@ def _figure_pages(pdf: PdfPages, payload: dict) -> None:
     for i in range(rank.shape[0]):
         for j in range(rank.shape[1]):
             val = int(rank[i, j])
-            ax.text(j, i, str(val), ha="center", va="center", fontsize=8.5, color="black" if val not in (1, 6) else ("#0B3D0B" if val == 1 else "white"), fontweight="bold" if val == 1 else "normal")
+            ax.text(
+                j,
+                i,
+                str(val),
+                ha="center",
+                va="center",
+                fontsize=8.5,
+                color="black" if val not in (1, n_m) else ("#0B3D0B" if val == 1 else "white"),
+                fontweight="bold" if val == 1 else "normal",
+            )
     cbar = fig.colorbar(im, ax=ax, fraction=0.03, pad=0.02)
     cbar.set_label("Rank (1 = best)", fontsize=8)
     fig.text(0.16, 0.06, "Green / 1 = lowest RMSE% in that company×regime cell. Rankings can and do change across names and volatility states.", fontsize=8.5, color="#555555")
@@ -1075,7 +1514,7 @@ def _figure_pages(pdf: PdfPages, payload: dict) -> None:
 
     # bias figure
     fig, axes = plt.subplots(2, 2, figsize=(11, 8.5))
-    fig.suptitle("Page 12  ·  Figure 4  ·  Bias (model − market, $)  ·  mean of three companies", fontsize=12.5, color=NAVY, y=0.98, weight="bold")
+    fig.suptitle(f"Page 12  ·  Figure 4  ·  Bias (model − market, $)  ·  mean of {_companies_phrase()}", fontsize=12.5, color=NAVY, y=0.98, weight="bold")
     for ax, regime in zip(axes.ravel(), REGIME_ORDER):
         vals = [float(np.mean([cells[f"{t}|{regime}|{m}"]["bias"] for t in TICKERS])) for m in TABLE_MODELS]
         colors = [MODEL_COLORS[m] for m in TABLE_MODELS]
@@ -1103,8 +1542,8 @@ def _analysis_text(payload: dict) -> list[str]:
     winner = overall[0]["model"]
     runner = overall[1]["model"] if len(overall) > 1 else ""
     lines = [
-        f"On mean percentage RMSE across the 12 company×regime cells, {winner} is the best overall model "
-        f"(mean RMSE% = {overall[0]['mean_rmse_pct']:.2f}; {overall[0]['n_best']} of 12 cells).",
+        f"On mean percentage RMSE across the {_n_cells()} company×regime cells, {winner} is the best overall model "
+        f"(mean RMSE% = {overall[0]['mean_rmse_pct']:.2f}; {overall[0]['n_best']} of {_n_cells()} cells).",
     ]
     if runner:
         lines.append(
@@ -1117,7 +1556,7 @@ def _analysis_text(payload: dict) -> list[str]:
         lines.append(f"The ranking is stable: {unique_winners[0]} is best in every company and every regime.")
     else:
         lines.append(
-            f"The ranking is not stable. Best-in-cell models across the 12 tables: {', '.join(unique_winners)}."
+            f"The ranking is not stable. Best-in-cell models across the {_n_cells()} tables: {', '.join(unique_winners)}."
         )
     # by company
     by_t = {(r["ticker"], r["model"]): r for r in payload["summary_by_ticker"]}
@@ -1133,19 +1572,22 @@ def _analysis_text(payload: dict) -> list[str]:
         lines.append(
             f"{regime} ({REGIME_META[regime]['title']}): best mean RMSE% is {pick} ({by_r[(regime, pick)]:.2f})."
         )
-    # jump vs no jump
-    jump = ["Merton", "GARCH–Merton", "Heston–Merton"]
-    nojump = ["GBM", "GARCH", "Heston"]
-    jump_mean = float(np.mean([r["mean_rmse_pct"] for r in overall if r["model"] in jump]))
-    nojump_mean = float(np.mean([r["mean_rmse_pct"] for r in overall if r["model"] in nojump]))
-    if jump_mean < nojump_mean:
-        lines.append(
-            f"Jump models as a group have lower mean RMSE% ({jump_mean:.2f}) than the three no-jump models ({nojump_mean:.2f})."
-        )
-    else:
-        lines.append(
-            f"No-jump models as a group have lower mean RMSE% ({nojump_mean:.2f}) than the three jump models ({jump_mean:.2f})."
-        )
+    # jump vs no jump (only models present in this report)
+    jump = [m for m in ("Merton", "GARCH–Merton", "Heston–Merton") if m in TABLE_MODELS]
+    nojump = [m for m in ("GBM", "Modified GBM", "GARCH", "Heston") if m in TABLE_MODELS]
+    jump_vals = [r["mean_rmse_pct"] for r in overall if r["model"] in jump]
+    nojump_vals = [r["mean_rmse_pct"] for r in overall if r["model"] in nojump]
+    if jump_vals and nojump_vals:
+        jump_mean = float(np.mean(jump_vals))
+        nojump_mean = float(np.mean(nojump_vals))
+        if jump_mean < nojump_mean:
+            lines.append(
+                f"Jump models as a group have lower mean RMSE% ({jump_mean:.2f}) than the no-jump models in this report ({nojump_mean:.2f})."
+            )
+        else:
+            lines.append(
+                f"No-jump models as a group have lower mean RMSE% ({nojump_mean:.2f}) than the jump models in this report ({jump_mean:.2f})."
+            )
     # crisis vs normal
     crisis = by_r[("2008-2009", winner)]
     normal = by_r[("2013-2014", winner)]
@@ -1154,7 +1596,7 @@ def _analysis_text(payload: dict) -> list[str]:
         "absolute pricing error is regime-dependent even when the ranking is not."
     )
     lines.append(
-        f"These conclusions are conditional on the V3 filters, {LOOKBACK_PHRASE} monthly calibration, Monday ATM sample, "
+        f"These conclusions are conditional on the V3 filters, {_rolling_phrase()}, Monday ATM sample, "
         f"LSM with {N_PATHS:,} paths, and American-call quotes only. They are not a statement about European options or other tenors."
     )
     return lines
@@ -1186,7 +1628,7 @@ def _conclusion_page(pdf: PdfPages, payload: dict) -> None:
     fig.text(0.08, y, "How to read the 12 detailed tables", fontsize=11.5, weight="bold", color=NAVY, va="top")
     y -= 0.035
     notes = [
-        "Each of Tables SPY-1…MSFT-4 uses exactly the same option contracts for all six models. Differences are the dynamics, not the sample.",
+        f"Each of Tables SPY-1…MSFT-4 uses exactly the same option contracts for all {_models_phrase(cap=False)} in this report. Differences are the dynamics, not the sample.",
         "BEST is always lowest RMSE%. MAE, Bias $, Bias%, and early-exercise are reported, not used for the ranking.",
         "A model that is BEST on RMSE% can still be biased (systematically expensive or cheap).",
         "Early-exercise fractions are a model implication, not an accuracy score; American calls on these tenors often have modest early-exercise value.",
@@ -1201,10 +1643,11 @@ def _conclusion_page(pdf: PdfPages, payload: dict) -> None:
             y -= 0.022
         y -= 0.008
 
+    nb_shown = payload.get("meta", {}).get("nb_name") or NB_NAME
     fig.text(
         0.08,
         0.05,
-        f"Notebook: {SHORT.relative_to(REPO) / NB_NAME}\n"
+        f"Notebook: {SHORT.relative_to(REPO) / nb_shown}\n"
         f"Engine: V3-Models_result/scripts/{ENGINE_SCRIPT}  ·  payload.json is the shared number store.",
         fontsize=7.6,
         color="#666666",
@@ -1223,8 +1666,13 @@ def write_pdf(payload: dict, path: Path | None = None) -> Path:
     with PdfPages(path) as pdf:
         _cover(pdf, payload)
         _filters_page(pdf, payload)
-        for i, ticker in enumerate(TICKERS):
-            _company_tables_page(pdf, payload, ticker, page_no=4 + i)
+        page_no = 4
+        for ticker in TICKERS:
+            _company_tables_page(pdf, payload, ticker, page_no=page_no)
+            page_no += 1
+            if ticker == "SPY" and _wants_company_summary(payload):
+                _company_summary_page(pdf, payload, page_no=page_no)
+                page_no += 1
         _summary_pages(pdf, payload)
         _figure_pages(pdf, payload)
         _conclusion_page(pdf, payload)
@@ -1313,18 +1761,26 @@ def build_notebook(payload: dict, path: Path | None = None) -> Path:
         return buf.getvalue()
 
     cells = []
+    grouped_id = payload.get("meta", {}).get("grouped_report")
+    rerun_note = (
+        "This notebook is a grouped companion. It loads stored cells and does **not** re-run LSM. "
+        "To rebuild only this group's PDF/notebook, call `groups.write_group(...)`. "
+        "Do not set RECOMPUTE on the six-model engine; that would overwrite the original study files."
+        if grouped_id
+        else "Set `RECOMPUTE = True` in the next cell and Run All. Default loads `payload.json` if the company×regime×model cells are already complete, then rewrites the PDF from that payload."
+    )
     cells.append(
         md(
-            f"""# V3 empirical study — {LOOKBACK_PHRASE} monthly calibration
+            f"""# V3 empirical study — {_rolling_phrase()}{payload.get("meta", {}).get("notebook_title_suffix", "")}
 
 **This notebook is the computational source of truth.** The PDF in this folder is written from the same `payload` dict, so every table number matches.
 
 | Item | Setting |
 |------|---------|
-| Models | GBM, GARCH, Heston, Merton, GARCH–Merton, Heston–Merton |
-| Companies | SPY, AAPL, MSFT |
+| Models | {", ".join(TABLE_MODELS)} |
+| Companies | {_tickers_listed()} |
 | Regimes | Crisis 2008-08-01→2009-07-31 · Normal 2014-01-01→2014-12-31 · Late-cycle 2018-10-01→2019-09-30 · COVID 2019-09-01→2020-08-31 |
-| Calibration | **{LOOKBACK_PHRASE}** lookback, **monthly** recalibration |
+| Calibration | **{LOOKBACK_PHRASE}** lookback, **{ROLLING_MODE}** recalibration |
 | Primary metric | Percentage RMSE |
 | Secondary | MAE, Bias $ (model − market), Bias%, Early-exercise fraction |
 | Paths | LSM American calls, `n_paths={N_PATHS}`, `seed=42` |
@@ -1336,13 +1792,13 @@ In every table the **BEST** model is the lowest RMSE%. That row is **bold and gr
     )
     cells.append(
         md(
-            """## 0. Methodology and conditions
+            f"""## 0. Methodology and conditions
 
 ### No look-ahead
-At monthly update t, parameters use only returns and listed quotes with `trading_date ≤ t`. LSM prices a Monday contract with the latest calibration row dated on or before that Monday. Option quotes are as-of the grid timestamp (same session, else the prior session).
+{_no_lookahead_note()}
 
 ### Shared sample (no model-specific data selection)
-For each company × regime the Monday nearest-ATM listed-call sample is drawn **once** and passed to all six models. Filters, testing dates, simulation settings, and the market benchmark are therefore identical.
+For each company × regime the Monday nearest-ATM listed-call sample is drawn **once** and passed to all {_models_phrase(cap=False)} in this report. Filters, testing dates, simulation settings, and the market benchmark are therefore identical.
 
 ### Filters (applied in this order)
 1. Calls only; finite S, K, C.
@@ -1358,19 +1814,40 @@ For each company × regime the Monday nearest-ATM listed-call sample is drawn **
 
 ### Model-correctness adjustments
 - Heston / Heston–Merton: option-implied Fourier NLS for (κ, θ, ξ, ρ, v0). Not Method A.
-- Euler: stock return over [t, t+Δt] uses **current** v_t; then update v_{t+Δt}.
+- Euler: stock return over [t, t+Δt] uses **current** v_t; then update v_{{t+Δt}}.
 - LSM never averages paths before stopping.
 
 ### Data limits
 Equity adj-close starts **2003-12-01**. Listed-option panels start **2008-01**. Estimators use all available history when the requested lookback is longer than the file.
 
 ### Re-run
-Set `RECOMPUTE = True` in the next cell and Run All. Default loads `payload.json` if the 12×6 cells are already complete, then rewrites the PDF from that payload.
+{rerun_note}
 """
         )
     )
-    cells.append(
-        code(
+    grouped_id = payload.get("meta", {}).get("grouped_report")
+    if grouped_id:
+        bootstrap = (
+            "import sys\n"
+            "from pathlib import Path\n"
+            "from IPython.display import display, HTML, Markdown, Image\n"
+            "ROOT = Path.cwd()\n"
+            "for cand in [ROOT, *ROOT.parents]:\n"
+            "    scripts = cand / 'V3-Models_result' / 'scripts'\n"
+            "    if scripts.exists():\n"
+            "        sys.path.insert(0, str(scripts))\n"
+            "        break\n"
+            "import run_v3_1p5y_10k_monthly_empirical_study_groups as groups\n"
+            f"payload = groups.load_group({grouped_id!r})\n"
+            "print('cells', len(payload['cells']), 'models', payload['meta']['models'])\n"
+            "# Rebuild this group's PDF/notebook only (does not overwrite the six-model study):\n"
+            f"# groups.write_group({grouped_id!r})"
+        )
+        bootstrap_html = (
+            f"<pre>cells {len(payload['cells'])} models {payload['meta']['models']}</pre>"
+        )
+    else:
+        bootstrap = (
             "import sys\n"
             "from pathlib import Path\n"
             "from IPython.display import display, HTML, Markdown, Image\n"
@@ -1381,35 +1858,41 @@ Set `RECOMPUTE = True` in the next cell and Run All. Default loads `payload.json
             "        sys.path.insert(0, str(scripts))\n"
             "        break\n"
             f"import {NOTEBOOK_IMPORT} as study\n"
-            "RECOMPUTE = False  # True to re-run all 72 calibrations + LSM\n"
+            "RECOMPUTE = False  # True to re-run all calibrations + LSM\n"
             "payload = study.run_or_load(recompute=RECOMPUTE)\n"
             "print('cells', len(payload['cells']), 'failures', payload['meta']['failures'])\n"
             "pdf_path = study.write_pdf(payload)\n"
-            "print('PDF', pdf_path)",
-            html=f"<pre>cells {len(payload['cells'])} failures {payload['meta']['failures']}</pre>",
+            "print('PDF', pdf_path)"
         )
-    )
+        bootstrap_html = f"<pre>cells {len(payload['cells'])} failures {payload['meta']['failures']}</pre>"
+    cells.append(code(bootstrap, html=bootstrap_html))
 
     # filter / sample
     n_rows = []
     n_rows.append("<h2>1. Shared evaluation sample</h2>")
-    n_rows.append("<p>One Monday ATM listed-call sample per company × regime. Copied to all six models.</p>")
+    n_rows.append(
+        f"<p>One Monday ATM listed-call sample per company × regime. Copied to all {_models_phrase(cap=False)} in this report.</p>"
+    )
     n_rows.append(
         "<table style='border-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:13px;'>"
         f"<tr><th style='background:{NAVY};color:white;padding:6px 8px;'>Regime</th>"
         f"<th style='background:{NAVY};color:white;padding:6px 8px;'>Window</th>"
-        f"<th style='background:{NAVY};color:white;padding:6px 8px;'>SPY</th>"
-        f"<th style='background:{NAVY};color:white;padding:6px 8px;'>AAPL</th>"
-        f"<th style='background:{NAVY};color:white;padding:6px 8px;'>MSFT</th></tr>"
+        + "".join(
+            f"<th style='background:{NAVY};color:white;padding:6px 8px;'>{t}</th>"
+            for t in TICKERS
+        )
+        + "</tr>"
     )
     for regime in REGIME_ORDER:
         info = payload["shared_contracts"][regime]
+        n_cells = "".join(
+            f"<td style='padding:5px 8px;border:1px solid #D0D5DD;text-align:center;'>{info['n'][t]}</td>"
+            for t in TICKERS
+        )
         n_rows.append(
             f"<tr><td style='padding:5px 8px;border:1px solid #D0D5DD;'>{regime} {REGIME_META[regime]['title']}</td>"
             f"<td style='padding:5px 8px;border:1px solid #D0D5DD;'>{info['period_start']} → {info['period_end']}</td>"
-            f"<td style='padding:5px 8px;border:1px solid #D0D5DD;text-align:center;'>{info['n']['SPY']}</td>"
-            f"<td style='padding:5px 8px;border:1px solid #D0D5DD;text-align:center;'>{info['n']['AAPL']}</td>"
-            f"<td style='padding:5px 8px;border:1px solid #D0D5DD;text-align:center;'>{info['n']['MSFT']}</td></tr>"
+            f"{n_cells}</tr>"
         )
     n_rows.append("</table>")
     cells.append(md("## 1. Shared evaluation sample"))
@@ -1427,8 +1910,10 @@ Set `RECOMPUTE = True` in the next cell and Run All. Default loads `payload.json
     )
 
     k = 1
+    sec = 1
     for ticker in TICKERS:
-        cells.append(md(f"## 2.{TICKERS.index(ticker)+1} Detailed tables — `{ticker}`"))
+        cells.append(md(f"## 2.{sec} Detailed tables — `{ticker}`"))
+        sec += 1
         for i, regime in enumerate(REGIME_ORDER, start=1):
             tab = payload["tables"][f"{ticker}|{regime}"]
             meta = REGIME_META[regime]
@@ -1445,13 +1930,42 @@ Set `RECOMPUTE = True` in the next cell and Run All. Default loads `payload.json
                 )
             )
             k += 1
+        if ticker == "SPY" and _wants_company_summary(payload):
+            names = _equity_tickers()
+            names_txt = ", ".join(names)
+            cells.append(md(f"## 2.{sec} Detailed tables — Company summary"))
+            cells.append(
+                md(
+                    f"Same four-regime layout as SPY. Each value is the arithmetic mean of **{names_txt}**. "
+                    "Ranking uses mean RMSE%."
+                )
+            )
+            sec += 1
+            for i, regime in enumerate(REGIME_ORDER, start=1):
+                tab = _average_company_table(payload, regime, names)
+                meta = REGIME_META[regime]
+                title = (
+                    f"### Table Co-{i}. Company summary · {regime} · {meta['title']}\n\n"
+                    f"{meta['window']} · mean of {names_txt} · n̄ = {tab['n_contracts']} · "
+                    f"**BEST = {tab['best_model']}** (lowest mean RMSE%)."
+                )
+                cells.append(md(title))
+                cells.append(
+                    code(
+                        "display(HTML(study._html_table("
+                        f"study._average_company_table(payload, '{regime}', study._equity_tickers())"
+                        ")))",
+                        html=_html_table(tab),
+                    )
+                )
+                k += 1
 
     # summaries as markdown+html
     cells.append(md("## 3. Summary tables"))
     # S1
     s1 = payload["summary_overall"]
     html = [
-        f"<h3>Table S1 · Overall ranking (mean RMSE% over 12 cells)</h3>",
+        f"<h3>Table S1 · Overall ranking (mean RMSE% over {_n_cells()} cells)</h3>",
         "<table style='border-collapse:collapse;font-family:Helvetica,Arial,sans-serif;font-size:13px;'>",
         f"<tr><th style='background:{NAVY};color:white;padding:6px 8px;'>Rank</th>"
         f"<th style='background:{NAVY};color:white;padding:6px 8px;'>Model</th>"
@@ -1478,7 +1992,7 @@ Set `RECOMPUTE = True` in the next cell and Run All. Default loads `payload.json
 
     def draw_fig1():
         fig, axes = plt.subplots(2, 2, figsize=(10.5, 7.6))
-        fig.suptitle("Figure 1 · RMSE% by model and regime · mean of SPY / AAPL / MSFT", color=NAVY, fontsize=12, weight="bold")
+        fig.suptitle(f"Figure 1 · RMSE% by model and regime · mean of {_tickers_joined()}", color=NAVY, fontsize=12, weight="bold")
         x = np.arange(len(TABLE_MODELS))
         cells_ = payload["cells"]
         for ax, regime in zip(axes.ravel(), REGIME_ORDER):
@@ -1497,11 +2011,11 @@ Set `RECOMPUTE = True` in the next cell and Run All. Default loads `payload.json
         fig.tight_layout()
         return fig
 
-    cells.append(md("### Figure 1 — RMSE% by regime (mean of three companies)"))
+    cells.append(md(f"### Figure 1 — RMSE% by regime (mean of {_companies_phrase()})"))
     cells.append(code("pass  # figure embedded from the same payload used for the PDF", png=fig_png(draw_fig1)))
 
     def draw_fig2():
-        fig, axes = plt.subplots(1, 3, figsize=(10.5, 4.2))
+        fig, axes = _subplots_tickers((10.5, 7.6 if len(TICKERS) > 3 else 4.2))
         fig.suptitle("Figure 2 · Mean RMSE% by company", color=NAVY, fontsize=12, weight="bold")
         x = np.arange(len(TABLE_MODELS))
         by_t = {(r["ticker"], r["model"]): r["mean_rmse_pct"] for r in payload["summary_by_ticker"]}
@@ -1525,7 +2039,8 @@ Set `RECOMPUTE = True` in the next cell and Run All. Default loads `payload.json
 
     def draw_fig3():
         fig = plt.figure(figsize=(10.5, 5.2))
-        rank = np.zeros((len(TABLE_MODELS), 12))
+        n_cells = len(TICKERS) * len(REGIME_ORDER)
+        rank = np.zeros((len(TABLE_MODELS), n_cells))
         labels = []
         j = 0
         for ticker in TICKERS:
@@ -1537,13 +2052,14 @@ Set `RECOMPUTE = True` in the next cell and Run All. Default loads `payload.json
                 labels.append(f"{ticker}\n{regime[-7:]}")
                 j += 1
         ax = fig.add_subplot(111)
-        im = ax.imshow(rank, cmap="RdYlGn_r", vmin=1, vmax=6, aspect="auto")
-        ax.set_xticks(range(12))
+        n_m = len(TABLE_MODELS)
+        im = ax.imshow(rank, cmap="RdYlGn_r", vmin=1, vmax=max(n_m, 2), aspect="auto")
+        ax.set_xticks(range(n_cells))
         ax.set_xticklabels(labels, fontsize=7)
-        ax.set_yticks(range(6))
+        ax.set_yticks(range(n_m))
         ax.set_yticklabels(list(TABLE_MODELS))
-        for i in range(6):
-            for j in range(12):
+        for i in range(n_m):
+            for j in range(n_cells):
                 ax.text(j, i, str(int(rank[i, j])), ha="center", va="center", fontsize=8, fontweight="bold" if rank[i, j] == 1 else "normal")
         fig.colorbar(im, ax=ax, fraction=0.03, pad=0.02).set_label("Rank")
         fig.suptitle("Figure 3 · Rank heatmap (1 = best RMSE%)", color=NAVY, fontsize=12, weight="bold")
@@ -1554,9 +2070,23 @@ Set `RECOMPUTE = True` in the next cell and Run All. Default loads `payload.json
     cells.append(code("pass", png=fig_png(draw_fig3)))
 
     cells.append(md("## 5. Final analysis\n\n" + "\n\n".join(f"- {b}" for b in _analysis_text(payload))))
-    cells.append(
-        md(
-            f"""## 6. Reproducibility
+    if grouped_id:
+        repro = f"""## 6. Reproducibility
+
+This grouped report is assembled from the frozen 10,000-path cells. No new calibration or LSM.
+
+```python
+import run_v3_1p5y_10k_monthly_empirical_study_groups as groups
+payload = groups.load_group({grouped_id!r})
+groups.write_group({grouped_id!r})
+```
+
+The original six-model files `V3_1p5y_monthly_empirical_study.pdf` / `.ipynb` are not rewritten.
+Partial results remain in `{CACHE.relative_to(REPO)}/partial/`.
+Shared contracts are frozen in `shared_contracts.json`.
+"""
+    else:
+        repro = f"""## 6. Reproducibility
 
 ```python
 RECOMPUTE = True
@@ -1568,8 +2098,7 @@ study.build_notebook(payload)
 Partial results resume from `{CACHE.relative_to(REPO)}/partial/`.
 Shared contracts are frozen in `shared_contracts.json` so a resumed run cannot silently change the sample.
 """
-        )
-    )
+    cells.append(md(repro))
 
     nb = {
         "nbformat": 4,
@@ -1606,17 +2135,17 @@ def main(argv: list[str] | None = None) -> int:
             completed.append(json.loads(part.read_text(encoding="utf-8")))
         payload = enrich_bias_pct(assemble_payload(shared, funnel, completed, [], 0.0))
         PAYLOAD_JSON.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-        print(f"assembled {len(payload.get('cells', {}))}/72 cells", flush=True)
-        if len(payload.get("cells", {})) == 72:
+        print(f"assembled {len(payload.get('cells', {}))}/{_n_expected_cells()} cells", flush=True)
+        if len(payload.get("cells", {})) == _n_expected_cells():
             write_outputs(payload)
             return 0
         return 1
     payload = run_or_load(recompute=recompute, only=only or None)
-    if len(payload.get("cells", {})) == 72 and not payload["meta"]["failures"]:
+    if len(payload.get("cells", {})) == _n_expected_cells() and not payload["meta"]["failures"]:
         write_outputs(payload)
         return 0
     print(
-        f"Incomplete: {len(payload.get('cells', {}))}/72 cells, "
+        f"Incomplete: {len(payload.get('cells', {}))}/{_n_expected_cells()} cells, "
         f"failures={payload['meta']['failures']}. PDF/notebook not finalized.",
         flush=True,
     )

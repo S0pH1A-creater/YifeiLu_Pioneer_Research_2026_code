@@ -47,6 +47,16 @@ REGIME_TAG = {
 }
 PARAM_SPEC = {
     "GBM": [("mu", "μ"), ("sigma", "σ")],
+    "Modified GBM": [
+        ("p_uu", "P(U|U)"),
+        ("p_dd", "P(D|D)"),
+        ("p_ud", "P(U|D)"),
+        ("p_du", "P(D|U)"),
+        ("mu_u", "μ_U"),
+        ("sig_u", "σ_U"),
+        ("mu_d", "μ_D"),
+        ("sig_d", "σ_D"),
+    ],
     "GARCH": [("mu", "μ"), ("omega", "ω"), ("alpha", "α"), ("beta", "β"), ("sigma0", "σ₀")],
     "Heston": [("mu", "μ"), ("kappa", "κ"), ("theta", "θ"), ("xi", "ξ"), ("rho", "ρ"), ("v0", "v₀")],
     "Merton": [
@@ -158,7 +168,7 @@ def run_estimation() -> dict:
             tables[model][f"{ticker}|{regime}"] = rec
     payload = {
         "meta": {
-            "study": "V3 1.5-year monthly empirical study 10000 paths",
+            "study": emp.SHORT.name,
             "window_label": emp.WINDOW_LABEL,
             "lookback": emp.LOOKBACK_PHRASE,
             "rolling": emp.ROLLING_MODE,
@@ -193,7 +203,7 @@ def _table_rows(model: str, payload: dict) -> tuple[list[list[str]], list[str], 
             payload["n_updates"][model].get(f"{t}|{regime}", 0) for t in emp.TICKERS
         ]
         n_txt = ns[0] if len(set(ns)) == 1 else "/".join(str(n) for n in ns)
-        banner = [f"{tag}  {title}  (n = {n_txt})"] + [""] * (3 * len(STATS))
+        banner = [f"{tag}  {title}  (n = {n_txt})"] + [""] * (len(STATS) * len(emp.TICKERS))
         rows.append(banner)
         banner_idx.add(r0)
         r0 += 1
@@ -210,12 +220,21 @@ def _table_rows(model: str, payload: dict) -> tuple[list[list[str]], list[str], 
 
 def _table_note(model: str, payload: dict) -> str:
     params = ", ".join(lab for _k, lab in PARAM_SPEC[model])
+    if emp.ROLLING_MODE == "none":
+        how = (
+            "Each company×regime cell is one estimate: 18-month lookback ending on the first session of the window, held for the year. "
+            "n is 1. SD is undefined with a single update (shown as —)."
+        )
+    else:
+        how = (
+            "Each month-end update uses an 18-month lookback ending on that date, with no look-ahead. "
+            "R1–R4 are Crisis, Normal, Late-cycle, and COVID. n is the number of monthly updates "
+            "in that regime. SD is the sample standard deviation across those monthly estimates. "
+        )
     return (
-        f"Notes: This table reports Mean, SD, Min, and Max of the monthly rolling "
-        f"{model} estimates for SPY, AAPL, and MSFT. Parameters are {params}. "
-        f"Each month-end update uses an 18-month lookback ending on that date, with no look-ahead. "
-        f"R1–R4 are Crisis, Normal, Late-cycle, and COVID. n is the number of monthly updates "
-        f"in that regime. SD is the sample standard deviation across those monthly estimates. "
+        f"Notes: This table reports Mean, SD, Min, and Max of the {emp.ROLLING_MODE} "
+        f"{model} estimates for {', '.join(emp.TICKERS)}. Parameters are {params}. "
+        f"{how} "
         f"This is parameter estimation only; it is not an LSM pricing table."
     )
 
@@ -259,7 +278,7 @@ def _cover(pdf: PdfPages) -> None:
     fig.text(
         0.08,
         0.912,
-        f"Six models  ·  SPY, AAPL, MSFT  ·  four windows  ·  {emp.LOOKBACK_PHRASE} monthly rolling",
+        f"{emp._models_phrase()}  ·  {', '.join(emp.TICKERS)}  ·  four windows  ·  {emp._rolling_phrase()}",
         fontsize=9.0,
         color=MUTED,
         va="top",
@@ -284,7 +303,11 @@ def _cover(pdf: PdfPages) -> None:
     y = section(
         "What this report is",
         [
-            "The monthly rolling parameter paths used in the 1.5-year study, summarized by regime. One table per model.",
+            (
+                "The rolling parameter paths used in this study, summarized by regime. One table per model."
+                if emp.ROLLING_MODE != "none"
+                else "The single t0 parameter vector used in this study, summarized by regime. One table per model. n = 1 so SD is —."
+            ),
             "No LSM, no option prices, and no simulated paths. Only calibrate_ticker with the 18-month lookback.",
             "The companion notebook is the computational source of truth. This PDF is written from the same payload.",
         ],
@@ -293,25 +316,28 @@ def _cover(pdf: PdfPages) -> None:
     y = section(
         "How estimates are formed",
         [
-            "At each month-end (plus the first trading day of the regime), parameters use only returns and listed quotes with date ≤ that update.",
-            "Lookback = 18 months. Rolling = monthly. Same four windows as the decision study.",
-            "Cells are Mean, SD, Min, and Max of those monthly estimates inside the regime.",
+            emp._no_lookahead_note(),
+            emp._rolling_detail(),
+            (
+                "Cells are Mean, SD, Min, and Max of those monthly estimates inside the regime."
+                if emp.ROLLING_MODE != "none"
+                else "Cells are Mean, SD, Min, and Max. With n = 1, Mean = Min = Max and SD is —."
+            ),
         ],
         y,
     )
     y = section(
         "Tables",
         [
-            "P1 GBM (μ, σ).  P2 GARCH (μ, ω, α, β, σ₀).  P3 Heston (μ, κ, θ, ξ, ρ, v₀).",
-            "P4 Merton (μ, σ, λ, μ_J, σ_J, κ).  P5 GARCH–Merton.  P6 Heston–Merton.",
-            "R1 Crisis, R2 Normal, R3 Late-cycle, R4 COVID. Columns are SPY, AAPL, MSFT.",
+            "  ".join(f"P{i} {m}." for i, m in enumerate(emp.TABLE_MODELS, start=1)),
+            f"R1 Crisis, R2 Normal, R3 Late-cycle, R4 COVID. Columns are {', '.join(emp.TICKERS)}.",
         ],
         y,
     )
     fig.text(
         0.08,
         0.045,
-        "Page map: cover  ·  Tables P1–P6. Pricing results live in the companion empirical-study PDF.",
+        "Page map: cover  ·  Tables P1–P{len(emp.TABLE_MODELS)}. Pricing results live in the companion empirical-study PDF.",
         fontsize=7.6,
         color="#666666",
         va="bottom",
@@ -326,7 +352,7 @@ def _model_page(pdf: PdfPages, payload: dict, model: str, idx: int) -> None:
     fig.text(
         0.055,
         0.955,
-        f"Table P{idx}  ·  {model}  ·  monthly rolling parameter estimates",
+        f"Table P{idx}  ·  {model}  ·  {emp.ROLLING_MODE} parameter estimates",
         fontsize=13.0,
         weight="bold",
         color=NAVY,
@@ -335,7 +361,7 @@ def _model_page(pdf: PdfPages, payload: dict, model: str, idx: int) -> None:
     fig.text(
         0.055,
         0.920,
-        f"{emp.LOOKBACK_PHRASE} lookback  ·  monthly updates  ·  Mean, SD, Min, Max within each regime",
+        f"{emp.LOOKBACK_PHRASE} lookback  ·  rolling={emp.ROLLING_MODE}  ·  Mean, SD, Min, Max within each regime",
         fontsize=8.8,
         color=MUTED,
         va="top",
@@ -387,8 +413,9 @@ def _html_table(model: str, payload: dict) -> str:
         ns = [payload["n_updates"][model].get(f"{t}|{regime}", 0) for t in emp.TICKERS]
         n_txt = ns[0] if len(set(ns)) == 1 else "/".join(str(n) for n in ns)
         parts.append("<tr>")
+        ncols = 1 + len(STATS) * len(emp.TICKERS)
         parts.append(
-            f"<td colspan='13' style='background:#D9E2EC;color:{NAVY};font-weight:700;padding:6px 8px;"
+            f"<td colspan='{ncols}' style='background:#D9E2EC;color:{NAVY};font-weight:700;padding:6px 8px;"
             f"border:1px solid #D0D5DD;'>{tag}  {title}  (n = {n_txt})</td>"
         )
         parts.append("</tr>")
@@ -449,19 +476,19 @@ def build_notebook(payload: dict, path: Path | None = None) -> Path:
 
     cells = [
         md(
-            f"""# V3 parameter estimation — {emp.LOOKBACK_PHRASE} monthly rolling
+            f"""# V3 parameter estimation — {emp._rolling_phrase()}
 
 **This notebook is the computational source of truth.** The matching PDF is written from the same payload.
 
-Monthly `calibrate_ticker` paths for `V3 1.5-year monthly empirical study 10000 paths`. **No LSM.**
+`calibrate_ticker` paths for `{emp.SHORT.name}`. **No LSM.**
 
 | Item | Setting |
 |------|---------|
 | Lookback | 18 months ending at each update |
-| Rolling | monthly (month-ends plus the first session of the regime) |
-| Names | SPY, AAPL, MSFT |
+| Rolling | `{emp.ROLLING_MODE}` |
+| Names | {", ".join(emp.TICKERS)} |
 | Windows | R1 Crisis, R2 Normal, R3 Late-cycle, R4 COVID |
-| Cell | Mean, SD, Min, Max of the monthly estimates inside that regime |
+| Cell | Mean, SD, Min, Max of the estimates inside that regime |
 """
         )
     ]

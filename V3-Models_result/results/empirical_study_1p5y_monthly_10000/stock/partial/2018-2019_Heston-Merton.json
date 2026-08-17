@@ -43,6 +43,20 @@
       "n_updates": 13,
       "elapsed": 9.113965034484863,
       "series_csv": "series/2018-2019/MSFT/2018-2019_heston_merton.csv"
+    },
+    "AMZN": {
+      "rmse_pct": 37.89835674921515,
+      "mae": 31.86723994692053,
+      "bias": 31.86723994692053,
+      "bias_pct": 36.48209163550425,
+      "icp": 0.00398406374501992,
+      "abw": 39.76194649897051,
+      "icp_10_90": 0.7131474103585658,
+      "n": 251,
+      "early": NaN,
+      "n_updates": 13,
+      "elapsed": 6.324977874755859,
+      "series_csv": "series/2018-2019/AMZN/2018-2019_heston_merton.csv"
     }
   }
 }

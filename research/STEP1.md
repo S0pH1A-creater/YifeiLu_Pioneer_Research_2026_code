@@ -21,6 +21,7 @@ Checklist from [`../docs/DataCollection.md`](../docs/DataCollection.md) / [`../d
 | Crisis | 2008-01-01 → 2009-12-31 | same |
 | Normal | 2013-01-01 → 2014-12-31 | same |
 | Late | 2018-01-01 → 2019-12-31 | same |
+| COVID | 2019-01-01 → 2020-12-31 | same |
 
 ## Tickers
 

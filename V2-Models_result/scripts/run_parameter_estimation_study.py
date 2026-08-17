@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Headless §4 parameter-estimation export (V2).
 
-For each of GBM / Merton / Heston–Merton / GARCH–Merton × four regimes:
+For each of GBM / Merton / Heston / Heston–Merton / GARCH / GARCH–Merton × four regimes:
   lookback = 6 months
   rolling  = none, monthly, daily
   underlyings = AAPL, MSFT, SPY (calibrated separately, plotted together)
@@ -55,12 +55,14 @@ COLORS = {"AAPL": "#1f77b4", "MSFT": "#ff7f0e", "SPY": "#2ca02c"}
 STUDIES = [
     ("GBM", "gbm notebook", "*_gbm.ipynb", "gbm"),
     ("Merton", "merton notebook", "*_merton.ipynb", "merton"),
+    ("Heston", "heston notebook", "20*_heston.ipynb", "heston"),
     ("Heston–Merton", "heston merton notebook", "*_heston_merton.ipynb", "heston_merton"),
+    ("GARCH", "garch notebook", "20*_garch.ipynb", "garch"),
     ("GARCH–Merton", "garch merton notebook", "*_garch_merton.ipynb", "garch_merton"),
 ]
 
 REGIME_ORDER = ["2008-2009", "2013-2014", "2018-2019", "2019-2020"]
-MODEL_ORDER = {"GBM": 0, "Merton": 1, "Heston–Merton": 2, "GARCH–Merton": 3}
+MODEL_ORDER = {"GBM": 0, "Merton": 1, "Heston": 2, "Heston–Merton": 3, "GARCH": 4, "GARCH–Merton": 5}
 
 # Plot panels + short-table value columns per model key
 MODEL_PANELS = {
@@ -75,6 +77,14 @@ MODEL_PANELS = {
         ("mu_j", "μ̂_J (log jump)", "Estimated jump size (mean)"),
         ("kappa", "κ̂", "Jump compensation"),
     ],
+    "heston": [
+        ("mu", "μ̂ (annual)", "Estimated drift"),
+        ("theta", "θ̂ (var)", "Long-run variance"),
+        ("kappa", "κ̂", "Mean-reversion speed"),
+        ("xi", "ξ̂", "Vol-of-vol"),
+        ("rho", "ρ̂", "Price–vol correlation"),
+        ("v0", "v̂₀ (var)", "Initial variance"),
+    ],
     "heston_merton": [
         ("mu", "μ̂ (annual)", "Estimated drift"),
         ("theta", "θ̂ (var)", "Long-run variance"),
@@ -82,6 +92,13 @@ MODEL_PANELS = {
         ("xi", "ξ̂", "Vol-of-vol"),
         ("rho", "ρ̂", "Price–vol correlation"),
         ("lam", "λ̂ (jumps/year)", "Estimated jump intensity"),
+    ],
+    "garch": [
+        ("mu", "μ̂ (annual)", "Estimated drift"),
+        ("omega", "ω̂", "GARCH intercept"),
+        ("alpha", "α̂", "ARCH reaction"),
+        ("beta", "β̂", "GARCH persistence"),
+        ("sigma0", "σ̂₀", "Initial conditional vol"),
     ],
     "garch_merton": [
         ("mu", "μ̂ (annual)", "Estimated drift"),
@@ -221,14 +238,14 @@ def _extract_defs(src: str, *, keep_assigns: bool = False) -> str:
 
 def _regime_from_name(path: Path) -> str:
     stem = path.stem
-    for suffix in ("_heston_merton", "_garch_merton", "_merton", "_gbm"):
+    for suffix in ("_heston_merton", "_garch_merton", "_heston", "_garch", "_merton", "_gbm"):
         if stem.endswith(suffix):
             return stem[: -len(suffix)]
     return stem
 
 
 def _model_key_from_stem(stem: str) -> str:
-    for key in ("heston_merton", "garch_merton", "merton", "gbm"):
+    for key in ("heston_merton", "garch_merton", "heston", "garch", "merton", "gbm"):
         if stem.endswith(key):
             return key
     return "gbm"
@@ -468,7 +485,7 @@ Lookback fixed at **6 months**. Parameters estimated **separately** for AAPL / M
 | Underlyings | AAPL, MSFT, SPY |
 
 ## Layout
-16 studies: regimes 2008-2009 → 2019-2020; within each GBM → Merton → Heston–Merton → GARCH–Merton.  
+Regimes 2008-2009 → 2019-2020; within each GBM → Merton → Heston → Heston–Merton → GARCH → GARCH–Merton.  
 Each block: parameter graph + short value table ({table_note}).
 """
         )

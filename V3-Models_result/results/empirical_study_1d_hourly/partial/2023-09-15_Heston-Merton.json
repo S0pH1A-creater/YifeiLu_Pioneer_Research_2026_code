@@ -1,0 +1,46 @@
+{
+  "model": "Heston\u2013Merton",
+  "regime": "2023-09-15",
+  "stem": "1d_1min_heston_merton",
+  "tickers": {
+    "SPY": {
+      "rmse_pct": 100.0,
+      "mae": 5.82,
+      "bias": -5.82,
+      "bias_pct": -100.0,
+      "early": 0.0,
+      "n": 6,
+      "n_updates": 7,
+      "t_cal": 2.029171943664551,
+      "t_lsm": 1.0895650386810303,
+      "elapsed": 3.1210439205169678,
+      "contracts_csv": "contracts/2023-09-15/SPY/2023-09-15_heston_merton.csv"
+    },
+    "AAPL": {
+      "rmse_pct": 99.96004974606784,
+      "mae": 3.823471207985506,
+      "bias": -3.823471207985506,
+      "bias_pct": -99.96003158132042,
+      "early": 0.0017000000000000001,
+      "n": 6,
+      "n_updates": 7,
+      "t_cal": 0.6279029846191406,
+      "t_lsm": 1.18357515335083,
+      "elapsed": 1.8129990100860596,
+      "contracts_csv": "contracts/2023-09-15/AAPL/2023-09-15_heston_merton.csv"
+    },
+    "MSFT": {
+      "rmse_pct": 100.0,
+      "mae": 9.6,
+      "bias": -9.6,
+      "bias_pct": -100.0,
+      "early": 0.0,
+      "n": 6,
+      "n_updates": 7,
+      "t_cal": 0.8882219791412354,
+      "t_lsm": 1.2937836647033691,
+      "elapsed": 2.1839208602905273,
+      "contracts_csv": "contracts/2023-09-15/MSFT/2023-09-15_heston_merton.csv"
+    }
+  }
+}

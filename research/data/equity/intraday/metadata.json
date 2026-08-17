@@ -1,0 +1,164 @@
+{
+  "fetched_at_utc": "2026-08-13T07:59:30Z",
+  "source": "FirstRate free 1-minute sample (Yahoo 7d/60d/2y blocked). 7d/60d/1h derived from that 1-minute file; 1h is ~1 year, not 2 years.",
+  "session": "regular hours 09:30\u201316:00 ET (source_1min keeps extended hours)",
+  "timezone": "America/New_York (tz-naive)",
+  "tickers": [
+    "SPY",
+    "AAPL",
+    "MSFT"
+  ],
+  "used_by_notebooks": [
+    "7d_1min"
+  ],
+  "stored_unused": [
+    "source_1min",
+    "60d_2min",
+    "60d_5min",
+    "60d_15min",
+    "60d_30min",
+    "1h"
+  ],
+  "datasets": {
+    "source_1min": {
+      "SPY": {
+        "path": "research/data/equity/intraday/source_1min/SPY.csv",
+        "n_bars": 207824,
+        "start": "2022-09-30 04:00:00",
+        "end": "2023-09-29 19:48:00"
+      },
+      "AAPL": {
+        "path": "research/data/equity/intraday/source_1min/AAPL.csv",
+        "n_bars": 193829,
+        "start": "2022-09-30 04:00:00",
+        "end": "2023-09-29 19:49:00"
+      },
+      "MSFT": {
+        "path": "research/data/equity/intraday/source_1min/MSFT.csv",
+        "n_bars": 158999,
+        "start": "2022-09-30 04:00:00",
+        "end": "2023-09-29 19:55:00"
+      }
+    },
+    "7d_1min": {
+      "SPY": {
+        "path": "research/data/equity/intraday/7d_1min/SPY.csv",
+        "n_bars": 3120,
+        "start": "2023-09-20 09:30:00",
+        "end": "2023-09-29 15:59:00"
+      },
+      "AAPL": {
+        "path": "research/data/equity/intraday/7d_1min/AAPL.csv",
+        "n_bars": 3120,
+        "start": "2023-09-20 09:30:00",
+        "end": "2023-09-29 15:59:00"
+      },
+      "MSFT": {
+        "path": "research/data/equity/intraday/7d_1min/MSFT.csv",
+        "n_bars": 3120,
+        "start": "2023-09-20 09:30:00",
+        "end": "2023-09-29 15:59:00"
+      }
+    },
+    "60d_2min": {
+      "SPY": {
+        "path": "research/data/equity/intraday/60d_2min/SPY.csv",
+        "n_bars": 11760,
+        "start": "2023-07-07 09:30:00",
+        "end": "2023-09-29 16:00:00"
+      },
+      "AAPL": {
+        "path": "research/data/equity/intraday/60d_2min/AAPL.csv",
+        "n_bars": 11760,
+        "start": "2023-07-07 09:30:00",
+        "end": "2023-09-29 16:00:00"
+      },
+      "MSFT": {
+        "path": "research/data/equity/intraday/60d_2min/MSFT.csv",
+        "n_bars": 11760,
+        "start": "2023-07-07 09:30:00",
+        "end": "2023-09-29 16:00:00"
+      }
+    },
+    "60d_5min": {
+      "SPY": {
+        "path": "research/data/equity/intraday/60d_5min/SPY.csv",
+        "n_bars": 4740,
+        "start": "2023-07-07 09:30:00",
+        "end": "2023-09-29 16:00:00"
+      },
+      "AAPL": {
+        "path": "research/data/equity/intraday/60d_5min/AAPL.csv",
+        "n_bars": 4740,
+        "start": "2023-07-07 09:30:00",
+        "end": "2023-09-29 16:00:00"
+      },
+      "MSFT": {
+        "path": "research/data/equity/intraday/60d_5min/MSFT.csv",
+        "n_bars": 4740,
+        "start": "2023-07-07 09:30:00",
+        "end": "2023-09-29 16:00:00"
+      }
+    },
+    "60d_15min": {
+      "SPY": {
+        "path": "research/data/equity/intraday/60d_15min/SPY.csv",
+        "n_bars": 1620,
+        "start": "2023-07-07 09:30:00",
+        "end": "2023-09-29 16:00:00"
+      },
+      "AAPL": {
+        "path": "research/data/equity/intraday/60d_15min/AAPL.csv",
+        "n_bars": 1620,
+        "start": "2023-07-07 09:30:00",
+        "end": "2023-09-29 16:00:00"
+      },
+      "MSFT": {
+        "path": "research/data/equity/intraday/60d_15min/MSFT.csv",
+        "n_bars": 1620,
+        "start": "2023-07-07 09:30:00",
+        "end": "2023-09-29 16:00:00"
+      }
+    },
+    "60d_30min": {
+      "SPY": {
+        "path": "research/data/equity/intraday/60d_30min/SPY.csv",
+        "n_bars": 840,
+        "start": "2023-07-07 09:30:00",
+        "end": "2023-09-29 16:00:00"
+      },
+      "AAPL": {
+        "path": "research/data/equity/intraday/60d_30min/AAPL.csv",
+        "n_bars": 840,
+        "start": "2023-07-07 09:30:00",
+        "end": "2023-09-29 16:00:00"
+      },
+      "MSFT": {
+        "path": "research/data/equity/intraday/60d_30min/MSFT.csv",
+        "n_bars": 840,
+        "start": "2023-07-07 09:30:00",
+        "end": "2023-09-29 16:00:00"
+      }
+    },
+    "1h": {
+      "SPY": {
+        "path": "research/data/equity/intraday/1h/SPY.csv",
+        "n_bars": 1757,
+        "start": "2022-09-30 10:00:00",
+        "end": "2023-09-29 16:00:00"
+      },
+      "AAPL": {
+        "path": "research/data/equity/intraday/1h/AAPL.csv",
+        "n_bars": 1757,
+        "start": "2022-09-30 10:00:00",
+        "end": "2023-09-29 16:00:00"
+      },
+      "MSFT": {
+        "path": "research/data/equity/intraday/1h/MSFT.csv",
+        "n_bars": 1757,
+        "start": "2022-09-30 10:00:00",
+        "end": "2023-09-29 16:00:00"
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Headless optimal-stopping study across 16 regime notebooks.
 
-For each of GBM / Merton / Heston–Merton / GARCH–Merton × four regimes:
+For each of GBM / Merton / Heston / Heston–Merton / GARCH / GARCH–Merton × four regimes:
   lookback = 6 months
   rolling  = none, monthly, daily
 Write one succinct comparison markdown + figures under research/results/.
@@ -53,7 +53,9 @@ N_CONTRACTS = 24
 STUDIES = [
     ("GBM", "gbm notebook", "*_gbm.ipynb", "gbm"),
     ("Merton", "merton notebook", "*_merton.ipynb", "merton"),
+    ("Heston", "heston notebook", "20*_heston.ipynb", "heston"),
     ("Heston–Merton", "heston merton notebook", "*_heston_merton.ipynb", "heston_merton"),
+    ("GARCH", "garch notebook", "20*_garch.ipynb", "garch"),
     ("GARCH–Merton", "garch merton notebook", "*_garch_merton.ipynb", "garch_merton"),
 ]
 
@@ -204,7 +206,7 @@ def _extract_defs(src: str, *, keep_assigns: bool = False) -> str:
 def _regime_from_name(path: Path) -> str:
     # 2008-2009_gbm.ipynb → 2008-2009  (longest suffixes first)
     stem = path.stem
-    for suffix in ("_heston_merton", "_garch_merton", "_merton", "_gbm"):
+    for suffix in ("_heston_merton", "_garch_merton", "_heston", "_garch", "_merton", "_gbm"):
         if stem.endswith(suffix):
             return stem[: -len(suffix)]
     return stem
@@ -465,7 +467,7 @@ def _write_study_md(
 def _write_index(completed: list[tuple[str, str, str, dict]]) -> None:
     """One-page cross-model index for quick comparison."""
     path = RESULTS / "INDEX.md"
-    order = {"GBM": 0, "Merton": 1, "Heston–Merton": 2, "GARCH–Merton": 3}
+    order = {"GBM": 0, "Merton": 1, "Heston": 2, "Heston–Merton": 3, "GARCH": 4, "GARCH–Merton": 5}
     completed = sorted(completed, key=lambda r: (r[1], order.get(r[0], 9)))
     lines = [
         "# Optimal stopping — index (6-month lookback)",

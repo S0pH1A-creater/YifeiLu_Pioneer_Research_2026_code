@@ -57,6 +57,23 @@ MODELS = {
     )
 ''',
     },
+    "heston": {
+        "folder": ROOT / "heston notebook",
+        "glob": "*_heston.ipynb",
+        "label": "Heston",
+        "path_builder": _PATH_COMMON_HEAD
+        + '''
+    kappa_step = np.full(dte, float(p["kappa"]), dtype=float)
+    theta_step = np.full(dte, float(p["theta"]), dtype=float)
+    xi_step = np.full(dte, float(p["xi"]), dtype=float)
+    rho_step = np.full(dte, float(p["rho"]), dtype=float)
+    v0_step = np.full(dte, float(p["v0"]), dtype=float)
+    return simulate_heston_rolling(
+        mu_step, kappa_step, theta_step, xi_step, rho_step, v0_step,
+        S0, n_paths, seed,
+    )
+''',
+    },
     "heston_merton": {
         "folder": ROOT / "heston merton notebook",
         "glob": "*_heston_merton.ipynb",
@@ -96,6 +113,22 @@ MODELS = {
         "kappa": np.full(dte, float(p["kappa"]), dtype=float),
     }
     return simulate_garch_merton_rolling(steps, S0, n_paths, seed)
+''',
+    },
+    "garch": {
+        "folder": ROOT / "garch notebook",
+        "glob": "*_garch.ipynb",
+        "label": "GARCH",
+        "path_builder": _PATH_COMMON_HEAD
+        + '''
+    steps = {
+        "mu": np.full(dte, r, dtype=float),
+        "omega": np.full(dte, float(p["omega"]), dtype=float),
+        "alpha": np.full(dte, float(p["alpha"]), dtype=float),
+        "beta": np.full(dte, float(p["beta"]), dtype=float),
+        "sigma0": np.full(dte, float(p["sigma0"]), dtype=float),
+    }
+    return simulate_garch_rolling(steps, S0, n_paths, seed)
 ''',
     },
 }

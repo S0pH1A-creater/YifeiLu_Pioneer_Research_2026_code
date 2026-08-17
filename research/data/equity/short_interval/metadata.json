@@ -1,0 +1,37 @@
+{
+  "eval_window": "2022-09-30_to_2023-09-29",
+  "daily_lookback_start": "2022-03-30",
+  "tickers": [
+    "SPY",
+    "AAPL",
+    "MSFT"
+  ],
+  "filters": {
+    "atm_band": 0.1,
+    "min_dte": 7,
+    "max_dte": 60,
+    "min_volume": 1
+  },
+  "does_not_overwrite": [
+    "equity/prices_clean.csv",
+    "rates/risk_free_dgs3mo.csv",
+    "options/processed/*_calls_panel.csv"
+  ],
+  "seconds": 20.1,
+  "coverage": {
+    "daily_prices": "2022-03-30 → 2023-09-29, 378 sessions (includes 6-month lookback)",
+    "daily_log_returns": "2022-03-31 → 2023-09-29, 377 sessions",
+    "rth_1min": "2022-09-30 09:30 → 2023-09-29 15:59, 251 sessions",
+    "dgs3mo": "2022-03-01 → 2023-09-29, 414 business days, percent (divide by 100 for r)",
+    "options": "ATM ±10%, DTE 7–60, live bid/ask, min volume 1, American, no every-5th-day subsample"
+  },
+  "option_counts": {
+    "SPY": {"quotes": 300344, "calls": 142608, "dates": 251},
+    "AAPL": {"quotes": 39040, "calls": 19569, "dates": 249},
+    "MSFT": {"quotes": 38221, "calls": 19500, "dates": 249}
+  },
+  "known_gaps": [
+    "1-min equity starts 2022-09-30 (no 2022-09-29 bar in FirstRate source)",
+    "AAPL/MSFT cobweb dumps for 2023-03-23 and 2023-03-24 exist but every option field is <empty>; those two dates have equity and SPY options but no AAPL/MSFT listed quotes"
+  ]
+}

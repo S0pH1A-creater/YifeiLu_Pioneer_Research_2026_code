@@ -1,0 +1,3110 @@
+{
+  "2022-10-21": {
+    "period_start": "2022-10-14T09:30:00",
+    "period_end": "2022-10-14T15:59:00",
+    "sessions": [
+      "2022-10-14"
+    ],
+    "n_stamps": 7,
+    "tickers": {
+      "SPY": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2022-10-14T09:59:00",
+            "evaluation_timestamp": "2022-10-14T09:59:00",
+            "expiration": "2022-12-02T00:00:00",
+            "K": 357.5,
+            "S_t": 372.7525603980077,
+            "dte": 49,
+            "r": 0.0381,
+            "option_price": 15.71,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2022-10-14T10:59:00",
+            "evaluation_timestamp": "2022-10-14T10:59:00",
+            "expiration": "2022-12-02T00:00:00",
+            "K": 357.5,
+            "S_t": 368.1365700169523,
+            "dte": 49,
+            "r": 0.0381,
+            "option_price": 15.71,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2022-10-14T11:59:00",
+            "evaluation_timestamp": "2022-10-14T11:59:00",
+            "expiration": "2022-12-02T00:00:00",
+            "K": 357.5,
+            "S_t": 365.78251456732477,
+            "dte": 49,
+            "r": 0.0381,
+            "option_price": 15.71,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2022-10-14T12:59:00",
+            "evaluation_timestamp": "2022-10-14T12:59:00",
+            "expiration": "2022-12-02T00:00:00",
+            "K": 357.5,
+            "S_t": 365.36054972126595,
+            "dte": 49,
+            "r": 0.0381,
+            "option_price": 15.71,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2022-10-14T13:59:00",
+            "evaluation_timestamp": "2022-10-14T13:59:00",
+            "expiration": "2022-12-02T00:00:00",
+            "K": 357.5,
+            "S_t": 366.16380810292003,
+            "dte": 49,
+            "r": 0.0381,
+            "option_price": 15.71,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2022-10-14T14:59:00",
+            "evaluation_timestamp": "2022-10-14T14:59:00",
+            "expiration": "2022-12-02T00:00:00",
+            "K": 357.5,
+            "S_t": 364.48438801560565,
+            "dte": 49,
+            "r": 0.0381,
+            "option_price": 15.71,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "AAPL": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2022-10-14T09:59:00",
+            "evaluation_timestamp": "2022-10-14T09:59:00",
+            "expiration": "2022-11-11T00:00:00",
+            "K": 143.0,
+            "S_t": 146.8756954251975,
+            "dte": 28,
+            "r": 0.0381,
+            "option_price": 6.9,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2022-10-14T10:59:00",
+            "evaluation_timestamp": "2022-10-14T10:59:00",
+            "expiration": "2022-11-11T00:00:00",
+            "K": 143.0,
+            "S_t": 144.99581879299907,
+            "dte": 28,
+            "r": 0.0381,
+            "option_price": 6.9,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2022-10-14T11:59:00",
+            "evaluation_timestamp": "2022-10-14T11:59:00",
+            "expiration": "2022-11-11T00:00:00",
+            "K": 143.0,
+            "S_t": 144.29747851813121,
+            "dte": 28,
+            "r": 0.0381,
+            "option_price": 6.9,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2022-10-14T12:59:00",
+            "evaluation_timestamp": "2022-10-14T12:59:00",
+            "expiration": "2022-11-11T00:00:00",
+            "K": 143.0,
+            "S_t": 143.77046824855057,
+            "dte": 28,
+            "r": 0.0381,
+            "option_price": 6.9,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2022-10-14T13:59:00",
+            "evaluation_timestamp": "2022-10-14T13:59:00",
+            "expiration": "2022-11-11T00:00:00",
+            "K": 143.0,
+            "S_t": 144.1528090323639,
+            "dte": 28,
+            "r": 0.0381,
+            "option_price": 6.9,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2022-10-14T14:59:00",
+            "evaluation_timestamp": "2022-10-14T14:59:00",
+            "expiration": "2022-11-11T00:00:00",
+            "K": 143.0,
+            "S_t": 143.4346283708766,
+            "dte": 28,
+            "r": 0.0381,
+            "option_price": 6.9,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "MSFT": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2022-10-14T09:59:00",
+            "evaluation_timestamp": "2022-10-14T09:59:00",
+            "expiration": "2022-11-11T00:00:00",
+            "K": 235.0,
+            "S_t": 244.3158654969187,
+            "dte": 28,
+            "r": 0.0381,
+            "option_price": 10.675,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2022-10-14T10:59:00",
+            "evaluation_timestamp": "2022-10-14T10:59:00",
+            "expiration": "2022-11-11T00:00:00",
+            "K": 235.0,
+            "S_t": 241.51986874428508,
+            "dte": 28,
+            "r": 0.0381,
+            "option_price": 10.675,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2022-10-14T11:59:00",
+            "evaluation_timestamp": "2022-10-14T11:59:00",
+            "expiration": "2022-11-11T00:00:00",
+            "K": 235.0,
+            "S_t": 240.21993891078444,
+            "dte": 28,
+            "r": 0.0381,
+            "option_price": 10.675,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2022-10-14T12:59:00",
+            "evaluation_timestamp": "2022-10-14T12:59:00",
+            "expiration": "2022-11-11T00:00:00",
+            "K": 235.0,
+            "S_t": 239.7358558909255,
+            "dte": 28,
+            "r": 0.0381,
+            "option_price": 10.675,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2022-10-14T13:59:00",
+            "evaluation_timestamp": "2022-10-14T13:59:00",
+            "expiration": "2022-11-11T00:00:00",
+            "K": 235.0,
+            "S_t": 240.65394437686493,
+            "dte": 28,
+            "r": 0.0381,
+            "option_price": 10.675,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2022-10-14T14:59:00",
+            "evaluation_timestamp": "2022-10-14T14:59:00",
+            "expiration": "2022-11-11T00:00:00",
+            "K": 235.0,
+            "S_t": 239.86115410360884,
+            "dte": 28,
+            "r": 0.0381,
+            "option_price": 10.675,
+            "window_end": "2022-10-14T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      }
+    }
+  },
+  "2022-11-18": {
+    "period_start": "2022-11-11T09:30:00",
+    "period_end": "2022-11-11T15:59:00",
+    "sessions": [
+      "2022-11-11"
+    ],
+    "n_stamps": 7,
+    "tickers": {
+      "SPY": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2022-11-11T09:59:00",
+            "evaluation_timestamp": "2022-11-11T09:59:00",
+            "expiration": "2022-12-12T00:00:00",
+            "K": 398.0,
+            "S_t": 370.6203275509254,
+            "dte": 31,
+            "r": 0.0428,
+            "option_price": 10.06,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2022-11-11T10:59:00",
+            "evaluation_timestamp": "2022-11-11T10:59:00",
+            "expiration": "2022-12-12T00:00:00",
+            "K": 398.0,
+            "S_t": 371.71766985084076,
+            "dte": 31,
+            "r": 0.0428,
+            "option_price": 10.06,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2022-11-11T11:59:00",
+            "evaluation_timestamp": "2022-11-11T11:59:00",
+            "expiration": "2022-12-12T00:00:00",
+            "K": 398.0,
+            "S_t": 370.6484645329746,
+            "dte": 31,
+            "r": 0.0428,
+            "option_price": 10.06,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2022-11-11T12:59:00",
+            "evaluation_timestamp": "2022-11-11T12:59:00",
+            "expiration": "2022-12-12T00:00:00",
+            "K": 398.0,
+            "S_t": 371.5629164495706,
+            "dte": 31,
+            "r": 0.0428,
+            "option_price": 10.06,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2022-11-11T13:59:00",
+            "evaluation_timestamp": "2022-11-11T13:59:00",
+            "expiration": "2022-12-12T00:00:00",
+            "K": 398.0,
+            "S_t": 373.45278374386953,
+            "dte": 31,
+            "r": 0.0428,
+            "option_price": 10.06,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2022-11-11T14:59:00",
+            "evaluation_timestamp": "2022-11-11T14:59:00",
+            "expiration": "2022-12-12T00:00:00",
+            "K": 398.0,
+            "S_t": 374.4375781155884,
+            "dte": 31,
+            "r": 0.0428,
+            "option_price": 10.06,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "AAPL": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2022-11-11T09:59:00",
+            "evaluation_timestamp": "2022-11-11T09:59:00",
+            "expiration": "2022-12-09T00:00:00",
+            "K": 147.0,
+            "S_t": 137.5108679970443,
+            "dte": 28,
+            "r": 0.0428,
+            "option_price": 5.35,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2022-11-11T10:59:00",
+            "evaluation_timestamp": "2022-11-11T10:59:00",
+            "expiration": "2022-12-09T00:00:00",
+            "K": 147.0,
+            "S_t": 140.0400317201748,
+            "dte": 28,
+            "r": 0.0428,
+            "option_price": 5.35,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2022-11-11T11:59:00",
+            "evaluation_timestamp": "2022-11-11T11:59:00",
+            "expiration": "2022-12-09T00:00:00",
+            "K": 147.0,
+            "S_t": 139.34510262241744,
+            "dte": 28,
+            "r": 0.0428,
+            "option_price": 5.35,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2022-11-11T12:59:00",
+            "evaluation_timestamp": "2022-11-11T12:59:00",
+            "expiration": "2022-12-09T00:00:00",
+            "K": 147.0,
+            "S_t": 140.16776630671492,
+            "dte": 28,
+            "r": 0.0428,
+            "option_price": 5.35,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2022-11-11T13:59:00",
+            "evaluation_timestamp": "2022-11-11T13:59:00",
+            "expiration": "2022-12-09T00:00:00",
+            "K": 147.0,
+            "S_t": 141.4487995510025,
+            "dte": 28,
+            "r": 0.0428,
+            "option_price": 5.35,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2022-11-11T14:59:00",
+            "evaluation_timestamp": "2022-11-11T14:59:00",
+            "expiration": "2022-12-09T00:00:00",
+            "K": 147.0,
+            "S_t": 141.8033552131236,
+            "dte": 28,
+            "r": 0.0428,
+            "option_price": 5.35,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "MSFT": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2022-11-11T09:59:00",
+            "evaluation_timestamp": "2022-11-11T09:59:00",
+            "expiration": "2022-11-25T00:00:00",
+            "K": 242.5,
+            "S_t": 237.21458152904063,
+            "dte": 14,
+            "r": 0.0428,
+            "option_price": 6.2,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2022-11-11T10:59:00",
+            "evaluation_timestamp": "2022-11-11T10:59:00",
+            "expiration": "2022-11-25T00:00:00",
+            "K": 242.5,
+            "S_t": 239.1810264031091,
+            "dte": 14,
+            "r": 0.0428,
+            "option_price": 6.2,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2022-11-11T11:59:00",
+            "evaluation_timestamp": "2022-11-11T11:59:00",
+            "expiration": "2022-11-25T00:00:00",
+            "K": 242.5,
+            "S_t": 238.02257620501916,
+            "dte": 14,
+            "r": 0.0428,
+            "option_price": 6.2,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2022-11-11T12:59:00",
+            "evaluation_timestamp": "2022-11-11T12:59:00",
+            "expiration": "2022-11-25T00:00:00",
+            "K": 242.5,
+            "S_t": 239.9310985691832,
+            "dte": 14,
+            "r": 0.0428,
+            "option_price": 6.2,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2022-11-11T13:59:00",
+            "evaluation_timestamp": "2022-11-11T13:59:00",
+            "expiration": "2022-11-25T00:00:00",
+            "K": 242.5,
+            "S_t": 240.98684582954343,
+            "dte": 14,
+            "r": 0.0428,
+            "option_price": 6.2,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2022-11-11T14:59:00",
+            "evaluation_timestamp": "2022-11-11T14:59:00",
+            "expiration": "2022-11-25T00:00:00",
+            "K": 242.5,
+            "S_t": 240.63639030743215,
+            "dte": 14,
+            "r": 0.0428,
+            "option_price": 6.2,
+            "window_end": "2022-11-11T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      }
+    }
+  },
+  "2022-12-16": {
+    "period_start": "2022-12-09T09:30:00",
+    "period_end": "2022-12-09T15:59:00",
+    "sessions": [
+      "2022-12-09"
+    ],
+    "n_stamps": 7,
+    "tickers": {
+      "SPY": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2022-12-09T09:59:00",
+            "evaluation_timestamp": "2022-12-09T09:59:00",
+            "expiration": "2023-01-06T00:00:00",
+            "K": 393.0,
+            "S_t": 376.8102362587212,
+            "dte": 28,
+            "r": 0.0431,
+            "option_price": 9.04,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2022-12-09T10:59:00",
+            "evaluation_timestamp": "2022-12-09T10:59:00",
+            "expiration": "2023-01-06T00:00:00",
+            "K": 393.0,
+            "S_t": 378.11421924805904,
+            "dte": 28,
+            "r": 0.0431,
+            "option_price": 9.04,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2022-12-09T11:59:00",
+            "evaluation_timestamp": "2022-12-09T11:59:00",
+            "expiration": "2023-01-06T00:00:00",
+            "K": 393.0,
+            "S_t": 378.3502596884071,
+            "dte": 28,
+            "r": 0.0431,
+            "option_price": 9.04,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2022-12-09T12:59:00",
+            "evaluation_timestamp": "2022-12-09T12:59:00",
+            "expiration": "2023-01-06T00:00:00",
+            "K": 393.0,
+            "S_t": 377.58853176473417,
+            "dte": 28,
+            "r": 0.0431,
+            "option_price": 9.04,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2022-12-09T13:59:00",
+            "evaluation_timestamp": "2022-12-09T13:59:00",
+            "expiration": "2023-01-06T00:00:00",
+            "K": 393.0,
+            "S_t": 377.04132546756534,
+            "dte": 28,
+            "r": 0.0431,
+            "option_price": 9.04,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2022-12-09T14:59:00",
+            "evaluation_timestamp": "2022-12-09T14:59:00",
+            "expiration": "2023-01-06T00:00:00",
+            "K": 393.0,
+            "S_t": 376.9124982324744,
+            "dte": 28,
+            "r": 0.0431,
+            "option_price": 9.04,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "AAPL": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2022-12-09T09:59:00",
+            "evaluation_timestamp": "2022-12-09T09:59:00",
+            "expiration": "2023-01-06T00:00:00",
+            "K": 143.0,
+            "S_t": 141.17074010506042,
+            "dte": 28,
+            "r": 0.0431,
+            "option_price": 5.275,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2022-12-09T10:59:00",
+            "evaluation_timestamp": "2022-12-09T10:59:00",
+            "expiration": "2023-01-06T00:00:00",
+            "K": 143.0,
+            "S_t": 143.69013468387604,
+            "dte": 28,
+            "r": 0.0431,
+            "option_price": 5.275,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2022-12-09T11:59:00",
+            "evaluation_timestamp": "2022-12-09T11:59:00",
+            "expiration": "2023-01-06T00:00:00",
+            "K": 143.0,
+            "S_t": 144.4011416914944,
+            "dte": 28,
+            "r": 0.0431,
+            "option_price": 5.275,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2022-12-09T12:59:00",
+            "evaluation_timestamp": "2022-12-09T12:59:00",
+            "expiration": "2023-01-06T00:00:00",
+            "K": 143.0,
+            "S_t": 143.82924908018464,
+            "dte": 28,
+            "r": 0.0431,
+            "option_price": 5.275,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2022-12-09T13:59:00",
+            "evaluation_timestamp": "2022-12-09T13:59:00",
+            "expiration": "2023-01-06T00:00:00",
+            "K": 143.0,
+            "S_t": 143.59553291115373,
+            "dte": 28,
+            "r": 0.0431,
+            "option_price": 5.275,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2022-12-09T14:59:00",
+            "evaluation_timestamp": "2022-12-09T14:59:00",
+            "expiration": "2023-01-06T00:00:00",
+            "K": 143.0,
+            "S_t": 143.24700006428205,
+            "dte": 28,
+            "r": 0.0431,
+            "option_price": 5.275,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "MSFT": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2022-12-09T09:59:00",
+            "evaluation_timestamp": "2022-12-09T09:59:00",
+            "expiration": "2022-12-23T00:00:00",
+            "K": 247.5,
+            "S_t": 251.17864989620958,
+            "dte": 14,
+            "r": 0.0431,
+            "option_price": 6.65,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2022-12-09T10:59:00",
+            "evaluation_timestamp": "2022-12-09T10:59:00",
+            "expiration": "2022-12-23T00:00:00",
+            "K": 247.5,
+            "S_t": 253.5013463898725,
+            "dte": 14,
+            "r": 0.0431,
+            "option_price": 6.65,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2022-12-09T11:59:00",
+            "evaluation_timestamp": "2022-12-09T11:59:00",
+            "expiration": "2022-12-23T00:00:00",
+            "K": 247.5,
+            "S_t": 253.15345352298021,
+            "dte": 14,
+            "r": 0.0431,
+            "option_price": 6.65,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2022-12-09T12:59:00",
+            "evaluation_timestamp": "2022-12-09T12:59:00",
+            "expiration": "2022-12-23T00:00:00",
+            "K": 247.5,
+            "S_t": 253.12285941497993,
+            "dte": 14,
+            "r": 0.0431,
+            "option_price": 6.65,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2022-12-09T13:59:00",
+            "evaluation_timestamp": "2022-12-09T13:59:00",
+            "expiration": "2022-12-23T00:00:00",
+            "K": 247.5,
+            "S_t": 252.71347136779292,
+            "dte": 14,
+            "r": 0.0431,
+            "option_price": 6.65,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2022-12-09T14:59:00",
+            "evaluation_timestamp": "2022-12-09T14:59:00",
+            "expiration": "2022-12-23T00:00:00",
+            "K": 247.5,
+            "S_t": 252.6418463657858,
+            "dte": 14,
+            "r": 0.0431,
+            "option_price": 6.65,
+            "window_end": "2022-12-09T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      }
+    }
+  },
+  "2023-01-20": {
+    "period_start": "2023-01-13T09:30:00",
+    "period_end": "2023-01-13T15:59:00",
+    "sessions": [
+      "2023-01-13"
+    ],
+    "n_stamps": 7,
+    "tickers": {
+      "SPY": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-01-13T09:59:00",
+            "evaluation_timestamp": "2023-01-13T09:59:00",
+            "expiration": "2023-02-10T00:00:00",
+            "K": 398.0,
+            "S_t": 368.7066596009059,
+            "dte": 28,
+            "r": 0.0467,
+            "option_price": 8.12,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-01-13T10:59:00",
+            "evaluation_timestamp": "2023-01-13T10:59:00",
+            "expiration": "2023-02-10T00:00:00",
+            "K": 398.0,
+            "S_t": 370.2478801525273,
+            "dte": 28,
+            "r": 0.0467,
+            "option_price": 8.12,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-01-13T11:59:00",
+            "evaluation_timestamp": "2023-01-13T11:59:00",
+            "expiration": "2023-02-10T00:00:00",
+            "K": 398.0,
+            "S_t": 369.706117776806,
+            "dte": 28,
+            "r": 0.0467,
+            "option_price": 8.12,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-01-13T12:59:00",
+            "evaluation_timestamp": "2023-01-13T12:59:00",
+            "expiration": "2023-02-10T00:00:00",
+            "K": 398.0,
+            "S_t": 370.54678353223574,
+            "dte": 28,
+            "r": 0.0467,
+            "option_price": 8.12,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-01-13T13:59:00",
+            "evaluation_timestamp": "2023-01-13T13:59:00",
+            "expiration": "2023-02-10T00:00:00",
+            "K": 398.0,
+            "S_t": 371.31272344273845,
+            "dte": 28,
+            "r": 0.0467,
+            "option_price": 8.12,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-01-13T14:59:00",
+            "evaluation_timestamp": "2023-01-13T14:59:00",
+            "expiration": "2023-02-10T00:00:00",
+            "K": 398.0,
+            "S_t": 371.4248122101292,
+            "dte": 28,
+            "r": 0.0467,
+            "option_price": 8.12,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "AAPL": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-01-13T09:59:00",
+            "evaluation_timestamp": "2023-01-13T09:59:00",
+            "expiration": "2023-02-10T00:00:00",
+            "K": 133.0,
+            "S_t": 128.4406423165094,
+            "dte": 28,
+            "r": 0.0467,
+            "option_price": 5.675,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-01-13T10:59:00",
+            "evaluation_timestamp": "2023-01-13T10:59:00",
+            "expiration": "2023-02-10T00:00:00",
+            "K": 133.0,
+            "S_t": 129.5887746375976,
+            "dte": 28,
+            "r": 0.0467,
+            "option_price": 5.675,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-01-13T11:59:00",
+            "evaluation_timestamp": "2023-01-13T11:59:00",
+            "expiration": "2023-02-10T00:00:00",
+            "K": 133.0,
+            "S_t": 129.0685786517814,
+            "dte": 28,
+            "r": 0.0467,
+            "option_price": 5.675,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-01-13T12:59:00",
+            "evaluation_timestamp": "2023-01-13T12:59:00",
+            "expiration": "2023-02-10T00:00:00",
+            "K": 133.0,
+            "S_t": 129.3843392622815,
+            "dte": 28,
+            "r": 0.0467,
+            "option_price": 5.675,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-01-13T13:59:00",
+            "evaluation_timestamp": "2023-01-13T13:59:00",
+            "expiration": "2023-02-10T00:00:00",
+            "K": 133.0,
+            "S_t": 129.96324986299905,
+            "dte": 28,
+            "r": 0.0467,
+            "option_price": 5.675,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-01-13T14:59:00",
+            "evaluation_timestamp": "2023-01-13T14:59:00",
+            "expiration": "2023-02-10T00:00:00",
+            "K": 133.0,
+            "S_t": 129.95782409000483,
+            "dte": 28,
+            "r": 0.0467,
+            "option_price": 5.675,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "MSFT": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-01-13T09:59:00",
+            "evaluation_timestamp": "2023-01-13T09:59:00",
+            "expiration": "2023-01-27T00:00:00",
+            "K": 237.5,
+            "S_t": 243.23874494671531,
+            "dte": 14,
+            "r": 0.0467,
+            "option_price": 7.875,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-01-13T10:59:00",
+            "evaluation_timestamp": "2023-01-13T10:59:00",
+            "expiration": "2023-01-27T00:00:00",
+            "K": 237.5,
+            "S_t": 243.33128589634828,
+            "dte": 14,
+            "r": 0.0467,
+            "option_price": 7.875,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-01-13T11:59:00",
+            "evaluation_timestamp": "2023-01-13T11:59:00",
+            "expiration": "2023-01-27T00:00:00",
+            "K": 237.5,
+            "S_t": 242.2465003200937,
+            "dte": 14,
+            "r": 0.0467,
+            "option_price": 7.875,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-01-13T12:59:00",
+            "evaluation_timestamp": "2023-01-13T12:59:00",
+            "expiration": "2023-01-27T00:00:00",
+            "K": 237.5,
+            "S_t": 243.0947923583972,
+            "dte": 14,
+            "r": 0.0467,
+            "option_price": 7.875,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-01-13T13:59:00",
+            "evaluation_timestamp": "2023-01-13T13:59:00",
+            "expiration": "2023-01-27T00:00:00",
+            "K": 237.5,
+            "S_t": 244.29782470362727,
+            "dte": 14,
+            "r": 0.0467,
+            "option_price": 7.875,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-01-13T14:59:00",
+            "evaluation_timestamp": "2023-01-13T14:59:00",
+            "expiration": "2023-01-27T00:00:00",
+            "K": 237.5,
+            "S_t": 244.85307040142584,
+            "dte": 14,
+            "r": 0.0467,
+            "option_price": 7.875,
+            "window_end": "2023-01-13T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      }
+    }
+  },
+  "2023-02-17": {
+    "period_start": "2023-02-10T09:30:00",
+    "period_end": "2023-02-10T15:59:00",
+    "sessions": [
+      "2023-02-10"
+    ],
+    "n_stamps": 7,
+    "tickers": {
+      "SPY": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-02-10T09:59:00",
+            "evaluation_timestamp": "2023-02-10T09:59:00",
+            "expiration": "2023-03-10T00:00:00",
+            "K": 408.0,
+            "S_t": 387.7695737414182,
+            "dte": 28,
+            "r": 0.0479,
+            "option_price": 9.16,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-02-10T10:59:00",
+            "evaluation_timestamp": "2023-02-10T10:59:00",
+            "expiration": "2023-03-10T00:00:00",
+            "K": 408.0,
+            "S_t": 387.9603958337074,
+            "dte": 28,
+            "r": 0.0479,
+            "option_price": 9.16,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-02-10T11:59:00",
+            "evaluation_timestamp": "2023-02-10T11:59:00",
+            "expiration": "2023-03-10T00:00:00",
+            "K": 408.0,
+            "S_t": 387.59792926940383,
+            "dte": 28,
+            "r": 0.0479,
+            "option_price": 9.16,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-02-10T12:59:00",
+            "evaluation_timestamp": "2023-02-10T12:59:00",
+            "expiration": "2023-03-10T00:00:00",
+            "K": 408.0,
+            "S_t": 388.2275467629128,
+            "dte": 28,
+            "r": 0.0479,
+            "option_price": 9.16,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-02-10T13:59:00",
+            "evaluation_timestamp": "2023-02-10T13:59:00",
+            "expiration": "2023-03-10T00:00:00",
+            "K": 408.0,
+            "S_t": 388.0653479844667,
+            "dte": 28,
+            "r": 0.0479,
+            "option_price": 9.16,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-02-10T14:59:00",
+            "evaluation_timestamp": "2023-02-10T14:59:00",
+            "expiration": "2023-03-10T00:00:00",
+            "K": 408.0,
+            "S_t": 388.71414309825093,
+            "dte": 28,
+            "r": 0.0479,
+            "option_price": 9.16,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "AAPL": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-02-10T09:59:00",
+            "evaluation_timestamp": "2023-02-10T09:59:00",
+            "expiration": "2023-03-10T00:00:00",
+            "K": 150.0,
+            "S_t": 147.65601777236935,
+            "dte": 28,
+            "r": 0.0479,
+            "option_price": 5.725,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-02-10T10:59:00",
+            "evaluation_timestamp": "2023-02-10T10:59:00",
+            "expiration": "2023-03-10T00:00:00",
+            "K": 150.0,
+            "S_t": 148.0893443102193,
+            "dte": 28,
+            "r": 0.0479,
+            "option_price": 5.725,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-02-10T11:59:00",
+            "evaluation_timestamp": "2023-02-10T11:59:00",
+            "expiration": "2023-03-10T00:00:00",
+            "K": 150.0,
+            "S_t": 147.5476861379069,
+            "dte": 28,
+            "r": 0.0479,
+            "option_price": 5.725,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-02-10T12:59:00",
+            "evaluation_timestamp": "2023-02-10T12:59:00",
+            "expiration": "2023-03-10T00:00:00",
+            "K": 150.0,
+            "S_t": 147.8776052064972,
+            "dte": 28,
+            "r": 0.0479,
+            "option_price": 5.725,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-02-10T13:59:00",
+            "evaluation_timestamp": "2023-02-10T13:59:00",
+            "expiration": "2023-03-10T00:00:00",
+            "K": 150.0,
+            "S_t": 148.17797928387034,
+            "dte": 28,
+            "r": 0.0479,
+            "option_price": 5.725,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-02-10T14:59:00",
+            "evaluation_timestamp": "2023-02-10T14:59:00",
+            "expiration": "2023-03-10T00:00:00",
+            "K": 150.0,
+            "S_t": 148.36509756157835,
+            "dte": 28,
+            "r": 0.0479,
+            "option_price": 5.725,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "MSFT": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-02-10T09:59:00",
+            "evaluation_timestamp": "2023-02-10T09:59:00",
+            "expiration": "2023-02-24T00:00:00",
+            "K": 262.5,
+            "S_t": 256.82592834896064,
+            "dte": 14,
+            "r": 0.0479,
+            "option_price": 7.4,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-02-10T10:59:00",
+            "evaluation_timestamp": "2023-02-10T10:59:00",
+            "expiration": "2023-02-24T00:00:00",
+            "K": 262.5,
+            "S_t": 257.0070143826446,
+            "dte": 14,
+            "r": 0.0479,
+            "option_price": 7.4,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-02-10T11:59:00",
+            "evaluation_timestamp": "2023-02-10T11:59:00",
+            "expiration": "2023-02-24T00:00:00",
+            "K": 262.5,
+            "S_t": 255.9590854694923,
+            "dte": 14,
+            "r": 0.0479,
+            "option_price": 7.4,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-02-10T12:59:00",
+            "evaluation_timestamp": "2023-02-10T12:59:00",
+            "expiration": "2023-02-24T00:00:00",
+            "K": 262.5,
+            "S_t": 256.2723868333404,
+            "dte": 14,
+            "r": 0.0479,
+            "option_price": 7.4,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-02-10T13:59:00",
+            "evaluation_timestamp": "2023-02-10T13:59:00",
+            "expiration": "2023-02-24T00:00:00",
+            "K": 262.5,
+            "S_t": 256.3312471395838,
+            "dte": 14,
+            "r": 0.0479,
+            "option_price": 7.4,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-02-10T14:59:00",
+            "evaluation_timestamp": "2023-02-10T14:59:00",
+            "expiration": "2023-02-24T00:00:00",
+            "K": 262.5,
+            "S_t": 256.47325619790814,
+            "dte": 14,
+            "r": 0.0479,
+            "option_price": 7.4,
+            "window_end": "2023-02-10T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      }
+    }
+  },
+  "2023-03-17": {
+    "period_start": "2023-03-10T09:30:00",
+    "period_end": "2023-03-10T15:59:00",
+    "sessions": [
+      "2023-03-10"
+    ],
+    "n_stamps": 7,
+    "tickers": {
+      "SPY": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-03-10T09:59:00",
+            "evaluation_timestamp": "2023-03-10T09:59:00",
+            "expiration": "2023-04-06T00:00:00",
+            "K": 386.0,
+            "S_t": 384.5459828500975,
+            "dte": 27,
+            "r": 0.0501,
+            "option_price": 9.18,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-03-10T10:59:00",
+            "evaluation_timestamp": "2023-03-10T10:59:00",
+            "expiration": "2023-04-06T00:00:00",
+            "K": 386.0,
+            "S_t": 386.6359603747744,
+            "dte": 27,
+            "r": 0.0501,
+            "option_price": 9.18,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-03-10T11:59:00",
+            "evaluation_timestamp": "2023-03-10T11:59:00",
+            "expiration": "2023-04-06T00:00:00",
+            "K": 386.0,
+            "S_t": 385.257464560626,
+            "dte": 27,
+            "r": 0.0501,
+            "option_price": 9.18,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-03-10T12:59:00",
+            "evaluation_timestamp": "2023-03-10T12:59:00",
+            "expiration": "2023-04-06T00:00:00",
+            "K": 386.0,
+            "S_t": 383.2465405593412,
+            "dte": 27,
+            "r": 0.0501,
+            "option_price": 9.18,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-03-10T13:59:00",
+            "evaluation_timestamp": "2023-03-10T13:59:00",
+            "expiration": "2023-04-06T00:00:00",
+            "K": 386.0,
+            "S_t": 380.3561461103203,
+            "dte": 27,
+            "r": 0.0501,
+            "option_price": 9.18,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-03-10T14:59:00",
+            "evaluation_timestamp": "2023-03-10T14:59:00",
+            "expiration": "2023-04-06T00:00:00",
+            "K": 386.0,
+            "S_t": 382.85621378759305,
+            "dte": 27,
+            "r": 0.0501,
+            "option_price": 9.18,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "AAPL": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-03-10T09:59:00",
+            "evaluation_timestamp": "2023-03-10T09:59:00",
+            "expiration": "2023-03-31T00:00:00",
+            "K": 150.0,
+            "S_t": 150.42471691622444,
+            "dte": 21,
+            "r": 0.0501,
+            "option_price": 4.625,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-03-10T10:59:00",
+            "evaluation_timestamp": "2023-03-10T10:59:00",
+            "expiration": "2023-03-31T00:00:00",
+            "K": 150.0,
+            "S_t": 151.11268841405524,
+            "dte": 21,
+            "r": 0.0501,
+            "option_price": 4.625,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-03-10T11:59:00",
+            "evaluation_timestamp": "2023-03-10T11:59:00",
+            "expiration": "2023-03-31T00:00:00",
+            "K": 150.0,
+            "S_t": 150.50004226270232,
+            "dte": 21,
+            "r": 0.0501,
+            "option_price": 4.625,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-03-10T12:59:00",
+            "evaluation_timestamp": "2023-03-10T12:59:00",
+            "expiration": "2023-03-31T00:00:00",
+            "K": 150.0,
+            "S_t": 149.81679115325068,
+            "dte": 21,
+            "r": 0.0501,
+            "option_price": 4.625,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-03-10T13:59:00",
+            "evaluation_timestamp": "2023-03-10T13:59:00",
+            "expiration": "2023-03-31T00:00:00",
+            "K": 150.0,
+            "S_t": 148.84288464018996,
+            "dte": 21,
+            "r": 0.0501,
+            "option_price": 4.625,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-03-10T14:59:00",
+            "evaluation_timestamp": "2023-03-10T14:59:00",
+            "expiration": "2023-03-31T00:00:00",
+            "K": 150.0,
+            "S_t": 149.29483671905703,
+            "dte": 21,
+            "r": 0.0501,
+            "option_price": 4.625,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "MSFT": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-03-10T09:59:00",
+            "evaluation_timestamp": "2023-03-10T09:59:00",
+            "expiration": "2023-03-17T00:00:00",
+            "K": 252.5,
+            "S_t": 247.39753662635462,
+            "dte": 7,
+            "r": 0.0501,
+            "option_price": 5.2,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-03-10T10:59:00",
+            "evaluation_timestamp": "2023-03-10T10:59:00",
+            "expiration": "2023-03-17T00:00:00",
+            "K": 252.5,
+            "S_t": 250.9492686638185,
+            "dte": 7,
+            "r": 0.0501,
+            "option_price": 5.2,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-03-10T11:59:00",
+            "evaluation_timestamp": "2023-03-10T11:59:00",
+            "expiration": "2023-03-17T00:00:00",
+            "K": 252.5,
+            "S_t": 249.51663725374902,
+            "dte": 7,
+            "r": 0.0501,
+            "option_price": 5.2,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-03-10T12:59:00",
+            "evaluation_timestamp": "2023-03-10T12:59:00",
+            "expiration": "2023-03-17T00:00:00",
+            "K": 252.5,
+            "S_t": 248.54165198856282,
+            "dte": 7,
+            "r": 0.0501,
+            "option_price": 5.2,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-03-10T13:59:00",
+            "evaluation_timestamp": "2023-03-10T13:59:00",
+            "expiration": "2023-03-17T00:00:00",
+            "K": 252.5,
+            "S_t": 246.55188614124435,
+            "dte": 7,
+            "r": 0.0501,
+            "option_price": 5.2,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-03-10T14:59:00",
+            "evaluation_timestamp": "2023-03-10T14:59:00",
+            "expiration": "2023-03-17T00:00:00",
+            "K": 252.5,
+            "S_t": 248.32277774535785,
+            "dte": 7,
+            "r": 0.0501,
+            "option_price": 5.2,
+            "window_end": "2023-03-10T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      }
+    }
+  },
+  "2023-04-21": {
+    "period_start": "2023-04-14T09:30:00",
+    "period_end": "2023-04-14T15:59:00",
+    "sessions": [
+      "2023-04-14"
+    ],
+    "n_stamps": 7,
+    "tickers": {
+      "SPY": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-04-14T09:59:00",
+            "evaluation_timestamp": "2023-04-14T09:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 412.5,
+            "S_t": 404.40242821336153,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 7.79,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-04-14T10:59:00",
+            "evaluation_timestamp": "2023-04-14T10:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 412.5,
+            "S_t": 401.86152317719393,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 7.79,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-04-14T11:59:00",
+            "evaluation_timestamp": "2023-04-14T11:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 412.5,
+            "S_t": 401.4241958294252,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 7.79,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-04-14T12:59:00",
+            "evaluation_timestamp": "2023-04-14T12:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 412.5,
+            "S_t": 400.0385135019202,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 7.79,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-04-14T13:59:00",
+            "evaluation_timestamp": "2023-04-14T13:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 412.5,
+            "S_t": 400.69167739626937,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 7.79,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-04-14T14:59:00",
+            "evaluation_timestamp": "2023-04-14T14:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 412.5,
+            "S_t": 401.7270883995361,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 7.79,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "AAPL": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-04-14T09:59:00",
+            "evaluation_timestamp": "2023-04-14T09:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 165.0,
+            "S_t": 165.0408758897561,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 5.5,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-04-14T10:59:00",
+            "evaluation_timestamp": "2023-04-14T10:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 165.0,
+            "S_t": 164.17346735114086,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 5.5,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-04-14T11:59:00",
+            "evaluation_timestamp": "2023-04-14T11:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 165.0,
+            "S_t": 164.18212849458857,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 5.5,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-04-14T12:59:00",
+            "evaluation_timestamp": "2023-04-14T12:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 165.0,
+            "S_t": 163.26753165718938,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 5.5,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-04-14T13:59:00",
+            "evaluation_timestamp": "2023-04-14T13:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 165.0,
+            "S_t": 163.71263478770112,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 5.5,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-04-14T14:59:00",
+            "evaluation_timestamp": "2023-04-14T14:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 165.0,
+            "S_t": 164.2461413134028,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 5.5,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "MSFT": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-04-14T09:59:00",
+            "evaluation_timestamp": "2023-04-14T09:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 285.0,
+            "S_t": 284.12894506622865,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 9.875,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-04-14T10:59:00",
+            "evaluation_timestamp": "2023-04-14T10:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 285.0,
+            "S_t": 282.5891112836916,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 9.875,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-04-14T11:59:00",
+            "evaluation_timestamp": "2023-04-14T11:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 285.0,
+            "S_t": 282.55949909556574,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 9.875,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-04-14T12:59:00",
+            "evaluation_timestamp": "2023-04-14T12:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 285.0,
+            "S_t": 280.51625811489146,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 9.875,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-04-14T13:59:00",
+            "evaluation_timestamp": "2023-04-14T13:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 285.0,
+            "S_t": 281.2496533074716,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 9.875,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-04-14T14:59:00",
+            "evaluation_timestamp": "2023-04-14T14:59:00",
+            "expiration": "2023-05-12T00:00:00",
+            "K": 285.0,
+            "S_t": 282.0857040855543,
+            "dte": 28,
+            "r": 0.0513999999999999,
+            "option_price": 9.875,
+            "window_end": "2023-04-14T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      }
+    }
+  },
+  "2023-05-19": {
+    "period_start": "2023-05-12T09:30:00",
+    "period_end": "2023-05-12T15:59:00",
+    "sessions": [
+      "2023-05-12"
+    ],
+    "n_stamps": 7,
+    "tickers": {
+      "SPY": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-05-12T09:59:00",
+            "evaluation_timestamp": "2023-05-12T09:59:00",
+            "expiration": "2023-06-09T00:00:00",
+            "K": 412.0,
+            "S_t": 401.014151108148,
+            "dte": 28,
+            "r": 0.0525,
+            "option_price": 6.78,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-05-12T10:59:00",
+            "evaluation_timestamp": "2023-05-12T10:59:00",
+            "expiration": "2023-06-09T00:00:00",
+            "K": 412.0,
+            "S_t": 399.82460437008274,
+            "dte": 28,
+            "r": 0.0525,
+            "option_price": 6.78,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-05-12T11:59:00",
+            "evaluation_timestamp": "2023-05-12T11:59:00",
+            "expiration": "2023-06-09T00:00:00",
+            "K": 412.0,
+            "S_t": 399.7899177585097,
+            "dte": 28,
+            "r": 0.0525,
+            "option_price": 6.78,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-05-12T12:59:00",
+            "evaluation_timestamp": "2023-05-12T12:59:00",
+            "expiration": "2023-06-09T00:00:00",
+            "K": 412.0,
+            "S_t": 397.94385159635635,
+            "dte": 28,
+            "r": 0.0525,
+            "option_price": 6.78,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-05-12T13:59:00",
+            "evaluation_timestamp": "2023-05-12T13:59:00",
+            "expiration": "2023-06-09T00:00:00",
+            "K": 412.0,
+            "S_t": 397.6913291776494,
+            "dte": 28,
+            "r": 0.0525,
+            "option_price": 6.78,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-05-12T14:59:00",
+            "evaluation_timestamp": "2023-05-12T14:59:00",
+            "expiration": "2023-06-09T00:00:00",
+            "K": 412.0,
+            "S_t": 398.2644841403094,
+            "dte": 28,
+            "r": 0.0525,
+            "option_price": 6.78,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "AAPL": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-05-12T09:59:00",
+            "evaluation_timestamp": "2023-05-12T09:59:00",
+            "expiration": "2023-06-16T00:00:00",
+            "K": 175.0,
+            "S_t": 168.08454607637563,
+            "dte": 35,
+            "r": 0.0525,
+            "option_price": 4.25,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-05-12T10:59:00",
+            "evaluation_timestamp": "2023-05-12T10:59:00",
+            "expiration": "2023-06-16T00:00:00",
+            "K": 175.0,
+            "S_t": 167.79320470924543,
+            "dte": 35,
+            "r": 0.0525,
+            "option_price": 4.25,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-05-12T11:59:00",
+            "evaluation_timestamp": "2023-05-12T11:59:00",
+            "expiration": "2023-06-16T00:00:00",
+            "K": 175.0,
+            "S_t": 167.6815238518454,
+            "dte": 35,
+            "r": 0.0525,
+            "option_price": 4.25,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-05-12T12:59:00",
+            "evaluation_timestamp": "2023-05-12T12:59:00",
+            "expiration": "2023-06-16T00:00:00",
+            "K": 175.0,
+            "S_t": 166.58899372510677,
+            "dte": 35,
+            "r": 0.0525,
+            "option_price": 4.25,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-05-12T13:59:00",
+            "evaluation_timestamp": "2023-05-12T13:59:00",
+            "expiration": "2023-06-16T00:00:00",
+            "K": 175.0,
+            "S_t": 166.33649787359383,
+            "dte": 35,
+            "r": 0.0525,
+            "option_price": 4.25,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-05-12T14:59:00",
+            "evaluation_timestamp": "2023-05-12T14:59:00",
+            "expiration": "2023-06-16T00:00:00",
+            "K": 175.0,
+            "S_t": 166.70543315816982,
+            "dte": 35,
+            "r": 0.0525,
+            "option_price": 4.25,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "MSFT": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-05-12T09:59:00",
+            "evaluation_timestamp": "2023-05-12T09:59:00",
+            "expiration": "2023-06-16T00:00:00",
+            "K": 310.0,
+            "S_t": 291.0397185250752,
+            "dte": 35,
+            "r": 0.0525,
+            "option_price": 8.775,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-05-12T10:59:00",
+            "evaluation_timestamp": "2023-05-12T10:59:00",
+            "expiration": "2023-06-16T00:00:00",
+            "K": 310.0,
+            "S_t": 291.0113797014603,
+            "dte": 35,
+            "r": 0.0525,
+            "option_price": 8.775,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-05-12T11:59:00",
+            "evaluation_timestamp": "2023-05-12T11:59:00",
+            "expiration": "2023-06-16T00:00:00",
+            "K": 310.0,
+            "S_t": 291.46480087929893,
+            "dte": 35,
+            "r": 0.0525,
+            "option_price": 8.775,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-05-12T12:59:00",
+            "evaluation_timestamp": "2023-05-12T12:59:00",
+            "expiration": "2023-06-16T00:00:00",
+            "K": 310.0,
+            "S_t": 290.0354850789084,
+            "dte": 35,
+            "r": 0.0525,
+            "option_price": 8.775,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-05-12T13:59:00",
+            "evaluation_timestamp": "2023-05-12T13:59:00",
+            "expiration": "2023-06-16T00:00:00",
+            "K": 310.0,
+            "S_t": 290.15176871847507,
+            "dte": 35,
+            "r": 0.0525,
+            "option_price": 8.775,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-05-12T14:59:00",
+            "evaluation_timestamp": "2023-05-12T14:59:00",
+            "expiration": "2023-06-16T00:00:00",
+            "K": 310.0,
+            "S_t": 290.5565415824411,
+            "dte": 35,
+            "r": 0.0525,
+            "option_price": 8.775,
+            "window_end": "2023-05-12T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      }
+    }
+  },
+  "2023-06-16": {
+    "period_start": "2023-06-09T09:30:00",
+    "period_end": "2023-06-09T15:59:00",
+    "sessions": [
+      "2023-06-09"
+    ],
+    "n_stamps": 7,
+    "tickers": {
+      "SPY": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-06-09T09:59:00",
+            "evaluation_timestamp": "2023-06-09T09:59:00",
+            "expiration": "2023-07-07T00:00:00",
+            "K": 430.0,
+            "S_t": 411.9892161506063,
+            "dte": 28,
+            "r": 0.0537,
+            "option_price": 5.22,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-06-09T10:59:00",
+            "evaluation_timestamp": "2023-06-09T10:59:00",
+            "expiration": "2023-07-07T00:00:00",
+            "K": 430.0,
+            "S_t": 412.1373999546236,
+            "dte": 28,
+            "r": 0.0537,
+            "option_price": 5.22,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-06-09T11:59:00",
+            "evaluation_timestamp": "2023-06-09T11:59:00",
+            "expiration": "2023-07-07T00:00:00",
+            "K": 430.0,
+            "S_t": 410.5646439804989,
+            "dte": 28,
+            "r": 0.0537,
+            "option_price": 5.22,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-06-09T12:59:00",
+            "evaluation_timestamp": "2023-06-09T12:59:00",
+            "expiration": "2023-07-07T00:00:00",
+            "K": 430.0,
+            "S_t": 410.8993481726702,
+            "dte": 28,
+            "r": 0.0537,
+            "option_price": 5.22,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-06-09T13:59:00",
+            "evaluation_timestamp": "2023-06-09T13:59:00",
+            "expiration": "2023-07-07T00:00:00",
+            "K": 430.0,
+            "S_t": 411.6450473154684,
+            "dte": 28,
+            "r": 0.0537,
+            "option_price": 5.22,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-06-09T14:59:00",
+            "evaluation_timestamp": "2023-06-09T14:59:00",
+            "expiration": "2023-07-07T00:00:00",
+            "K": 430.0,
+            "S_t": 411.32955921659226,
+            "dte": 28,
+            "r": 0.0537,
+            "option_price": 5.22,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "AAPL": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-06-09T09:59:00",
+            "evaluation_timestamp": "2023-06-09T09:59:00",
+            "expiration": "2023-06-23T00:00:00",
+            "K": 177.5,
+            "S_t": 170.4827793365626,
+            "dte": 14,
+            "r": 0.0537,
+            "option_price": 3.45,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-06-09T10:59:00",
+            "evaluation_timestamp": "2023-06-09T10:59:00",
+            "expiration": "2023-06-23T00:00:00",
+            "K": 177.5,
+            "S_t": 170.31377999588318,
+            "dte": 14,
+            "r": 0.0537,
+            "option_price": 3.45,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-06-09T11:59:00",
+            "evaluation_timestamp": "2023-06-09T11:59:00",
+            "expiration": "2023-06-23T00:00:00",
+            "K": 177.5,
+            "S_t": 169.86311508740445,
+            "dte": 14,
+            "r": 0.0537,
+            "option_price": 3.45,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-06-09T12:59:00",
+            "evaluation_timestamp": "2023-06-09T12:59:00",
+            "expiration": "2023-06-23T00:00:00",
+            "K": 177.5,
+            "S_t": 170.30439114362315,
+            "dte": 14,
+            "r": 0.0537,
+            "option_price": 3.45,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-06-09T13:59:00",
+            "evaluation_timestamp": "2023-06-09T13:59:00",
+            "expiration": "2023-06-23T00:00:00",
+            "K": 177.5,
+            "S_t": 170.90058326213133,
+            "dte": 14,
+            "r": 0.0537,
+            "option_price": 3.45,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-06-09T14:59:00",
+            "evaluation_timestamp": "2023-06-09T14:59:00",
+            "expiration": "2023-06-23T00:00:00",
+            "K": 177.5,
+            "S_t": 170.90997211439128,
+            "dte": 14,
+            "r": 0.0537,
+            "option_price": 3.45,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "MSFT": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-06-09T09:59:00",
+            "evaluation_timestamp": "2023-06-09T09:59:00",
+            "expiration": "2023-06-23T00:00:00",
+            "K": 322.5,
+            "S_t": 303.872239773534,
+            "dte": 14,
+            "r": 0.0537,
+            "option_price": 6.8,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-06-09T10:59:00",
+            "evaluation_timestamp": "2023-06-09T10:59:00",
+            "expiration": "2023-06-23T00:00:00",
+            "K": 322.5,
+            "S_t": 301.9174251829713,
+            "dte": 14,
+            "r": 0.0537,
+            "option_price": 6.8,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-06-09T11:59:00",
+            "evaluation_timestamp": "2023-06-09T11:59:00",
+            "expiration": "2023-06-23T00:00:00",
+            "K": 322.5,
+            "S_t": 300.1470270632164,
+            "dte": 14,
+            "r": 0.0537,
+            "option_price": 6.8,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-06-09T12:59:00",
+            "evaluation_timestamp": "2023-06-09T12:59:00",
+            "expiration": "2023-06-23T00:00:00",
+            "K": 322.5,
+            "S_t": 301.345734123467,
+            "dte": 14,
+            "r": 0.0537,
+            "option_price": 6.8,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-06-09T13:59:00",
+            "evaluation_timestamp": "2023-06-09T13:59:00",
+            "expiration": "2023-06-23T00:00:00",
+            "K": 322.5,
+            "S_t": 302.8487283605507,
+            "dte": 14,
+            "r": 0.0537,
+            "option_price": 6.8,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-06-09T14:59:00",
+            "evaluation_timestamp": "2023-06-09T14:59:00",
+            "expiration": "2023-06-23T00:00:00",
+            "K": 322.5,
+            "S_t": 302.406128830612,
+            "dte": 14,
+            "r": 0.0537,
+            "option_price": 6.8,
+            "window_end": "2023-06-09T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      }
+    }
+  },
+  "2023-07-21": {
+    "period_start": "2023-07-14T09:30:00",
+    "period_end": "2023-07-14T15:59:00",
+    "sessions": [
+      "2023-07-14"
+    ],
+    "n_stamps": 7,
+    "tickers": {
+      "SPY": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-07-14T09:59:00",
+            "evaluation_timestamp": "2023-07-14T09:59:00",
+            "expiration": "2023-08-11T00:00:00",
+            "K": 449.0,
+            "S_t": 435.49727270898757,
+            "dte": 28,
+            "r": 0.0549,
+            "option_price": 6.47,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-07-14T10:59:00",
+            "evaluation_timestamp": "2023-07-14T10:59:00",
+            "expiration": "2023-08-11T00:00:00",
+            "K": 449.0,
+            "S_t": 434.65240626192144,
+            "dte": 28,
+            "r": 0.0549,
+            "option_price": 6.47,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-07-14T11:59:00",
+            "evaluation_timestamp": "2023-07-14T11:59:00",
+            "expiration": "2023-08-11T00:00:00",
+            "K": 449.0,
+            "S_t": 434.97586941594096,
+            "dte": 28,
+            "r": 0.0549,
+            "option_price": 6.47,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-07-14T12:59:00",
+            "evaluation_timestamp": "2023-07-14T12:59:00",
+            "expiration": "2023-08-11T00:00:00",
+            "K": 449.0,
+            "S_t": 434.31890126670237,
+            "dte": 28,
+            "r": 0.0549,
+            "option_price": 6.47,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-07-14T13:59:00",
+            "evaluation_timestamp": "2023-07-14T13:59:00",
+            "expiration": "2023-08-11T00:00:00",
+            "K": 449.0,
+            "S_t": 434.3469991108276,
+            "dte": 28,
+            "r": 0.0549,
+            "option_price": 6.47,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-07-14T14:59:00",
+            "evaluation_timestamp": "2023-07-14T14:59:00",
+            "expiration": "2023-08-11T00:00:00",
+            "K": 449.0,
+            "S_t": 433.79778764215155,
+            "dte": 28,
+            "r": 0.0549,
+            "option_price": 6.47,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "AAPL": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-07-14T09:59:00",
+            "evaluation_timestamp": "2023-07-14T09:59:00",
+            "expiration": "2023-08-11T00:00:00",
+            "K": 190.0,
+            "S_t": 178.91134424020166,
+            "dte": 28,
+            "r": 0.0549,
+            "option_price": 5.55,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-07-14T10:59:00",
+            "evaluation_timestamp": "2023-07-14T10:59:00",
+            "expiration": "2023-08-11T00:00:00",
+            "K": 190.0,
+            "S_t": 178.73319238544752,
+            "dte": 28,
+            "r": 0.0549,
+            "option_price": 5.55,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-07-14T11:59:00",
+            "evaluation_timestamp": "2023-07-14T11:59:00",
+            "expiration": "2023-08-11T00:00:00",
+            "K": 190.0,
+            "S_t": 178.60192259773382,
+            "dte": 28,
+            "r": 0.0549,
+            "option_price": 5.55,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-07-14T12:59:00",
+            "evaluation_timestamp": "2023-07-14T12:59:00",
+            "expiration": "2023-08-11T00:00:00",
+            "K": 190.0,
+            "S_t": 178.1713576940334,
+            "dte": 28,
+            "r": 0.0549,
+            "option_price": 5.55,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-07-14T13:59:00",
+            "evaluation_timestamp": "2023-07-14T13:59:00",
+            "expiration": "2023-08-11T00:00:00",
+            "K": 190.0,
+            "S_t": 178.35344764241893,
+            "dte": 28,
+            "r": 0.0549,
+            "option_price": 5.55,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-07-14T14:59:00",
+            "evaluation_timestamp": "2023-07-14T14:59:00",
+            "expiration": "2023-08-11T00:00:00",
+            "K": 190.0,
+            "S_t": 178.18936040777692,
+            "dte": 28,
+            "r": 0.0549,
+            "option_price": 5.55,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "MSFT": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-07-14T09:59:00",
+            "evaluation_timestamp": "2023-07-14T09:59:00",
+            "expiration": "2023-07-28T00:00:00",
+            "K": 342.5,
+            "S_t": 314.29642617602974,
+            "dte": 14,
+            "r": 0.0549,
+            "option_price": 10.4,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-07-14T10:59:00",
+            "evaluation_timestamp": "2023-07-14T10:59:00",
+            "expiration": "2023-07-28T00:00:00",
+            "K": 342.5,
+            "S_t": 316.0561787822477,
+            "dte": 14,
+            "r": 0.0549,
+            "option_price": 10.4,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-07-14T11:59:00",
+            "evaluation_timestamp": "2023-07-14T11:59:00",
+            "expiration": "2023-07-28T00:00:00",
+            "K": 342.5,
+            "S_t": 315.80620621835385,
+            "dte": 14,
+            "r": 0.0549,
+            "option_price": 10.4,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-07-14T12:59:00",
+            "evaluation_timestamp": "2023-07-14T12:59:00",
+            "expiration": "2023-07-28T00:00:00",
+            "K": 342.5,
+            "S_t": 313.75399023267977,
+            "dte": 14,
+            "r": 0.0549,
+            "option_price": 10.4,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-07-14T13:59:00",
+            "evaluation_timestamp": "2023-07-14T13:59:00",
+            "expiration": "2023-07-28T00:00:00",
+            "K": 342.5,
+            "S_t": 313.05777369938994,
+            "dte": 14,
+            "r": 0.0549,
+            "option_price": 10.4,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-07-14T14:59:00",
+            "evaluation_timestamp": "2023-07-14T14:59:00",
+            "expiration": "2023-07-28T00:00:00",
+            "K": 342.5,
+            "S_t": 312.0951307119248,
+            "dte": 14,
+            "r": 0.0549,
+            "option_price": 10.4,
+            "window_end": "2023-07-14T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      }
+    }
+  },
+  "2023-08-18": {
+    "period_start": "2023-08-11T09:30:00",
+    "period_end": "2023-08-11T15:59:00",
+    "sessions": [
+      "2023-08-11"
+    ],
+    "n_stamps": 7,
+    "tickers": {
+      "SPY": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-08-11T09:59:00",
+            "evaluation_timestamp": "2023-08-11T09:59:00",
+            "expiration": "2023-09-08T00:00:00",
+            "K": 446.0,
+            "S_t": 424.2576371921844,
+            "dte": 28,
+            "r": 0.0554,
+            "option_price": 7.23,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-08-11T10:59:00",
+            "evaluation_timestamp": "2023-08-11T10:59:00",
+            "expiration": "2023-09-08T00:00:00",
+            "K": 446.0,
+            "S_t": 425.33683628820995,
+            "dte": 28,
+            "r": 0.0554,
+            "option_price": 7.23,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-08-11T11:59:00",
+            "evaluation_timestamp": "2023-08-11T11:59:00",
+            "expiration": "2023-09-08T00:00:00",
+            "K": 446.0,
+            "S_t": 425.37514030994026,
+            "dte": 28,
+            "r": 0.0554,
+            "option_price": 7.23,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-08-11T12:59:00",
+            "evaluation_timestamp": "2023-08-11T12:59:00",
+            "expiration": "2023-09-08T00:00:00",
+            "K": 446.0,
+            "S_t": 424.7830040737688,
+            "dte": 28,
+            "r": 0.0554,
+            "option_price": 7.23,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-08-11T13:59:00",
+            "evaluation_timestamp": "2023-08-11T13:59:00",
+            "expiration": "2023-09-08T00:00:00",
+            "K": 446.0,
+            "S_t": 425.020565425496,
+            "dte": 28,
+            "r": 0.0554,
+            "option_price": 7.23,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-08-11T14:59:00",
+            "evaluation_timestamp": "2023-08-11T14:59:00",
+            "expiration": "2023-09-08T00:00:00",
+            "K": 446.0,
+            "S_t": 426.07254096493057,
+            "dte": 28,
+            "r": 0.0554,
+            "option_price": 7.23,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "AAPL": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-08-11T09:59:00",
+            "evaluation_timestamp": "2023-08-11T09:59:00",
+            "expiration": "2023-08-25T00:00:00",
+            "K": 177.5,
+            "S_t": 164.21985171972526,
+            "dte": 14,
+            "r": 0.0554,
+            "option_price": 3.4,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-08-11T10:59:00",
+            "evaluation_timestamp": "2023-08-11T10:59:00",
+            "expiration": "2023-08-25T00:00:00",
+            "K": 177.5,
+            "S_t": 165.28766145328674,
+            "dte": 14,
+            "r": 0.0554,
+            "option_price": 3.4,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-08-11T11:59:00",
+            "evaluation_timestamp": "2023-08-11T11:59:00",
+            "expiration": "2023-08-25T00:00:00",
+            "K": 177.5,
+            "S_t": 165.00910239235756,
+            "dte": 14,
+            "r": 0.0554,
+            "option_price": 3.4,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-08-11T12:59:00",
+            "evaluation_timestamp": "2023-08-11T12:59:00",
+            "expiration": "2023-08-25T00:00:00",
+            "K": 177.5,
+            "S_t": 164.7166153783821,
+            "dte": 14,
+            "r": 0.0554,
+            "option_price": 3.4,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-08-11T13:59:00",
+            "evaluation_timestamp": "2023-08-11T13:59:00",
+            "expiration": "2023-08-25T00:00:00",
+            "K": 177.5,
+            "S_t": 165.05088625149696,
+            "dte": 14,
+            "r": 0.0554,
+            "option_price": 3.4,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-08-11T14:59:00",
+            "evaluation_timestamp": "2023-08-11T14:59:00",
+            "expiration": "2023-08-25T00:00:00",
+            "K": 177.5,
+            "S_t": 165.59305503708532,
+            "dte": 14,
+            "r": 0.0554,
+            "option_price": 3.4,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "MSFT": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-08-11T09:59:00",
+            "evaluation_timestamp": "2023-08-11T09:59:00",
+            "expiration": "2023-08-25T00:00:00",
+            "K": 322.5,
+            "S_t": 286.1873514355034,
+            "dte": 14,
+            "r": 0.0554,
+            "option_price": 6.95,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-08-11T10:59:00",
+            "evaluation_timestamp": "2023-08-11T10:59:00",
+            "expiration": "2023-08-25T00:00:00",
+            "K": 322.5,
+            "S_t": 287.21667355394607,
+            "dte": 14,
+            "r": 0.0554,
+            "option_price": 6.95,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-08-11T11:59:00",
+            "evaluation_timestamp": "2023-08-11T11:59:00",
+            "expiration": "2023-08-25T00:00:00",
+            "K": 322.5,
+            "S_t": 286.62593216423113,
+            "dte": 14,
+            "r": 0.0554,
+            "option_price": 6.95,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-08-11T12:59:00",
+            "evaluation_timestamp": "2023-08-11T12:59:00",
+            "expiration": "2023-08-25T00:00:00",
+            "K": 322.5,
+            "S_t": 286.67963592693246,
+            "dte": 14,
+            "r": 0.0554,
+            "option_price": 6.95,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-08-11T13:59:00",
+            "evaluation_timestamp": "2023-08-11T13:59:00",
+            "expiration": "2023-08-25T00:00:00",
+            "K": 322.5,
+            "S_t": 287.3688342149332,
+            "dte": 14,
+            "r": 0.0554,
+            "option_price": 6.95,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-08-11T14:59:00",
+            "evaluation_timestamp": "2023-08-11T14:59:00",
+            "expiration": "2023-08-25T00:00:00",
+            "K": 322.5,
+            "S_t": 288.3623538249083,
+            "dte": 14,
+            "r": 0.0554,
+            "option_price": 6.95,
+            "window_end": "2023-08-11T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      }
+    }
+  },
+  "2023-09-15": {
+    "period_start": "2023-09-08T09:30:00",
+    "period_end": "2023-09-08T15:59:00",
+    "sessions": [
+      "2023-09-08"
+    ],
+    "n_stamps": 7,
+    "tickers": {
+      "SPY": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-09-08T09:59:00",
+            "evaluation_timestamp": "2023-09-08T09:59:00",
+            "expiration": "2023-10-06T00:00:00",
+            "K": 446.0,
+            "S_t": 419.68268629037465,
+            "dte": 28,
+            "r": 0.0555,
+            "option_price": 5.82,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-09-08T10:59:00",
+            "evaluation_timestamp": "2023-09-08T10:59:00",
+            "expiration": "2023-10-06T00:00:00",
+            "K": 446.0,
+            "S_t": 419.76279710777686,
+            "dte": 28,
+            "r": 0.0555,
+            "option_price": 5.82,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-09-08T11:59:00",
+            "evaluation_timestamp": "2023-09-08T11:59:00",
+            "expiration": "2023-10-06T00:00:00",
+            "K": 446.0,
+            "S_t": 420.02158046505014,
+            "dte": 28,
+            "r": 0.0555,
+            "option_price": 5.82,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-09-08T12:59:00",
+            "evaluation_timestamp": "2023-09-08T12:59:00",
+            "expiration": "2023-10-06T00:00:00",
+            "K": 446.0,
+            "S_t": 419.94730615843366,
+            "dte": 28,
+            "r": 0.0555,
+            "option_price": 5.82,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-09-08T13:59:00",
+            "evaluation_timestamp": "2023-09-08T13:59:00",
+            "expiration": "2023-10-06T00:00:00",
+            "K": 446.0,
+            "S_t": 419.74020416279853,
+            "dte": 28,
+            "r": 0.0555,
+            "option_price": 5.82,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-09-08T14:59:00",
+            "evaluation_timestamp": "2023-09-08T14:59:00",
+            "expiration": "2023-10-06T00:00:00",
+            "K": 446.0,
+            "S_t": 418.83554499095595,
+            "dte": 28,
+            "r": 0.0555,
+            "option_price": 5.82,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "AAPL": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-09-08T09:59:00",
+            "evaluation_timestamp": "2023-09-08T09:59:00",
+            "expiration": "2023-09-22T00:00:00",
+            "K": 177.5,
+            "S_t": 169.0659859601946,
+            "dte": 14,
+            "r": 0.0555,
+            "option_price": 3.825,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-09-08T10:59:00",
+            "evaluation_timestamp": "2023-09-08T10:59:00",
+            "expiration": "2023-09-22T00:00:00",
+            "K": 177.5,
+            "S_t": 168.94249674638147,
+            "dte": 14,
+            "r": 0.0555,
+            "option_price": 3.825,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-09-08T11:59:00",
+            "evaluation_timestamp": "2023-09-08T11:59:00",
+            "expiration": "2023-09-22T00:00:00",
+            "K": 177.5,
+            "S_t": 169.50971631563962,
+            "dte": 14,
+            "r": 0.0555,
+            "option_price": 3.825,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-09-08T12:59:00",
+            "evaluation_timestamp": "2023-09-08T12:59:00",
+            "expiration": "2023-09-22T00:00:00",
+            "K": 177.5,
+            "S_t": 169.57873054751835,
+            "dte": 14,
+            "r": 0.0555,
+            "option_price": 3.825,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-09-08T13:59:00",
+            "evaluation_timestamp": "2023-09-08T13:59:00",
+            "expiration": "2023-09-22T00:00:00",
+            "K": 177.5,
+            "S_t": 169.65605292222247,
+            "dte": 14,
+            "r": 0.0555,
+            "option_price": 3.825,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-09-08T14:59:00",
+            "evaluation_timestamp": "2023-09-08T14:59:00",
+            "expiration": "2023-09-22T00:00:00",
+            "K": 177.5,
+            "S_t": 168.244612749052,
+            "dte": 14,
+            "r": 0.0555,
+            "option_price": 3.825,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      },
+      "MSFT": {
+        "n": 6,
+        "records": [
+          {
+            "trading_date": "2023-09-08T09:59:00",
+            "evaluation_timestamp": "2023-09-08T09:59:00",
+            "expiration": "2023-10-06T00:00:00",
+            "K": 330.0,
+            "S_t": 285.33087226476096,
+            "dte": 28,
+            "r": 0.0555,
+            "option_price": 9.6,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 360,
+            "n_steps": 360
+          },
+          {
+            "trading_date": "2023-09-08T10:59:00",
+            "evaluation_timestamp": "2023-09-08T10:59:00",
+            "expiration": "2023-10-06T00:00:00",
+            "K": 330.0,
+            "S_t": 285.7672103302933,
+            "dte": 28,
+            "r": 0.0555,
+            "option_price": 9.6,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 300,
+            "n_steps": 300
+          },
+          {
+            "trading_date": "2023-09-08T11:59:00",
+            "evaluation_timestamp": "2023-09-08T11:59:00",
+            "expiration": "2023-10-06T00:00:00",
+            "K": 330.0,
+            "S_t": 286.8537776699524,
+            "dte": 28,
+            "r": 0.0555,
+            "option_price": 9.6,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 240,
+            "n_steps": 240
+          },
+          {
+            "trading_date": "2023-09-08T12:59:00",
+            "evaluation_timestamp": "2023-09-08T12:59:00",
+            "expiration": "2023-10-06T00:00:00",
+            "K": 330.0,
+            "S_t": 286.44310654945133,
+            "dte": 28,
+            "r": 0.0555,
+            "option_price": 9.6,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 180,
+            "n_steps": 180
+          },
+          {
+            "trading_date": "2023-09-08T13:59:00",
+            "evaluation_timestamp": "2023-09-08T13:59:00",
+            "expiration": "2023-10-06T00:00:00",
+            "K": 330.0,
+            "S_t": 286.8327307750267,
+            "dte": 28,
+            "r": 0.0555,
+            "option_price": 9.6,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 120,
+            "n_steps": 120
+          },
+          {
+            "trading_date": "2023-09-08T14:59:00",
+            "evaluation_timestamp": "2023-09-08T14:59:00",
+            "expiration": "2023-10-06T00:00:00",
+            "K": 330.0,
+            "S_t": 285.5276521766679,
+            "dte": 28,
+            "r": 0.0555,
+            "option_price": 9.6,
+            "window_end": "2023-09-08T15:59:00",
+            "remaining_horizon": 60,
+            "n_steps": 60
+          }
+        ]
+      }
+    }
+  }
+}

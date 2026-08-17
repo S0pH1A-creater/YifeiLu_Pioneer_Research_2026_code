@@ -18,7 +18,7 @@ Physical drift \(\mu\) is the lookback mean of stock returns. LSM continues to r
 | Quantity | Estimator |
 |----------|-----------|
 | \(\hat\kappa,\hat\theta,\hat\xi,\hat\rho,\hat v_0\) | \(\min\sum_i w_i(C^{\mathrm{Bates}}(K_i,T_i)-C_i^{\mathrm{mkt}})^2\) with jumps held from the return window |
-| Quotes | calls, moneyness \(0.8\)–\(1.2\), DTE \(5\)–\(365\), subsampled to \(\leq 24\) contracts |
+| Quotes | calls, no-arbitrage \(C\ge\max(0,S-K)\), moneyness \(\lvert S/K-1\rvert\le 10\%\), DTE \(7\)–\(60\), liquid bid–ask; subsampled to \(\leq 24\) contracts |
 | \(\hat\mu\) | mean of lookback log returns \(\times N_{\mathrm{days}}\) |
 | Jump days | \(\lvert r_t\rvert > 3\cdot\hat\sigma\) |
 | \(\hat\lambda,\hat\mu_J,\hat\sigma_J\) | intensity / mean / std of jump-bar returns |
@@ -43,6 +43,10 @@ v_{t+\Delta t}=\max\big(0,\ v_t+\kappa(\theta-v_t)\Delta t+\xi\sqrt{v_t}\sqrt{\D
 \]
 
 with \(\mathrm{Corr}(Z_S,Z_v)=\rho\), \(N_{\Delta t}\sim\mathrm{Poisson}(\lambda\Delta t)\), \(J_i\sim N(\mu_J,\sigma_J^2)\).
+
+## Lookback choices
+
+3 months · 6 months · 1 year · 2 years · 3 years · 5 years (calendar lookback; uses available history if the series is shorter). Default on 1-year regime notebooks: **3 years**, rolling **monthly**.
 
 ## Files
 

@@ -1,0 +1,16 @@
+---
+description: True rolling-window Merton calibration for research/merton notebook period files
+globs: research/merton notebook/**
+alwaysApply: false
+---
+
+# Merton period notebooks — rolling calibration
+
+When editing files under `research/merton notebook/`:
+
+- Use **true rolling-window calibration**: at each update point, re-estimate \((\mu,\sigma,\lambda,\mu_J,\sigma_J,\kappa)\) from only the current lookback window, then use those params for the **next** Monte Carlo segment.
+- Do **not** keep the initial (first-day) parameters fixed for the whole prediction period when rolling is `daily` or `monthly`.
+- `none` rolling = single estimate at period start (fixed params) is allowed.
+- Lookback options: 3m / 6m / 1y / 2y / 5y; rolling modes: daily / monthly / none; keep a **Reestimate** control.
+- §4 shows rolling graphs for \(\mu,\sigma,\lambda,\mu_J,\kappa\); §5 uses the Merton jump-diffusion update (not plain GBM).
+- See `research/merton notebook/ROLLING_CALIBRATION.md`.

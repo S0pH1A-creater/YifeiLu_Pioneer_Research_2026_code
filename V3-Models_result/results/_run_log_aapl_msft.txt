@@ -1,0 +1,313 @@
+Running 16 studies × 3 tickers → /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/V2-Models_result/results
+
+=== GBM | 2008-2009 (2008-2009_gbm.ipynb) ===
+  [SPY] rolling modes …
+    SPY/none: RMSE=0.6200 MAE=0.4401 updates=1 cal=0.0s lsm=0.2s
+    SPY/monthly: RMSE=0.8139 MAE=0.6378 updates=25 cal=0.0s lsm=0.1s
+    SPY/daily: RMSE=0.6678 MAE=0.5253 updates=505 cal=0.1s lsm=0.1s
+    wrote results/SPY/2008-2009_gbm.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=2.6818 MAE=2.2452 updates=1 cal=0.0s lsm=0.1s
+    AAPL/monthly: RMSE=2.2774 MAE=1.9362 updates=25 cal=0.0s lsm=0.1s
+    AAPL/daily: RMSE=2.1442 MAE=1.8399 updates=505 cal=0.1s lsm=0.1s
+    wrote results/AAPL/2008-2009_gbm.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=0.3358 MAE=0.2090 updates=1 cal=0.0s lsm=0.1s
+    MSFT/monthly: RMSE=0.5822 MAE=0.4708 updates=25 cal=0.0s lsm=0.1s
+    MSFT/daily: RMSE=0.5076 MAE=0.3999 updates=505 cal=0.1s lsm=0.1s
+    wrote results/MSFT/2008-2009_gbm.md
+
+=== GBM | 2013-2014 (2013-2014_gbm.ipynb) ===
+  [SPY] rolling modes …
+    SPY/none: RMSE=0.7724 MAE=0.6020 updates=1 cal=0.0s lsm=0.1s
+    SPY/monthly: RMSE=0.4572 MAE=0.3682 updates=25 cal=0.0s lsm=0.1s
+    SPY/daily: RMSE=0.4021 MAE=0.3317 updates=505 cal=0.1s lsm=0.1s
+    wrote results/SPY/2013-2014_gbm.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=5.0578 MAE=3.8875 updates=1 cal=0.0s lsm=0.1s
+    AAPL/monthly: RMSE=3.5486 MAE=2.6324 updates=25 cal=0.0s lsm=0.1s
+    AAPL/daily: RMSE=3.4746 MAE=2.5452 updates=505 cal=0.1s lsm=0.1s
+    wrote results/AAPL/2013-2014_gbm.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=0.2040 MAE=0.1647 updates=1 cal=0.0s lsm=0.1s
+    MSFT/monthly: RMSE=0.2378 MAE=0.1772 updates=25 cal=0.0s lsm=0.1s
+    MSFT/daily: RMSE=0.2282 MAE=0.1660 updates=505 cal=0.1s lsm=0.2s
+    wrote results/MSFT/2013-2014_gbm.md
+
+=== GBM | 2018-2019 (2018-2019_gbm.ipynb) ===
+  [SPY] rolling modes …
+    SPY/none: RMSE=0.9143 MAE=0.6779 updates=1 cal=0.0s lsm=0.1s
+    SPY/monthly: RMSE=1.6168 MAE=1.2303 updates=25 cal=0.0s lsm=0.1s
+    SPY/daily: RMSE=1.5356 MAE=1.1325 updates=503 cal=0.1s lsm=0.1s
+    wrote results/SPY/2018-2019_gbm.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=0.9192 MAE=0.7432 updates=1 cal=0.0s lsm=0.2s
+    AAPL/monthly: RMSE=2.0397 MAE=1.4420 updates=25 cal=0.0s lsm=0.1s
+    AAPL/daily: RMSE=1.8064 MAE=1.2107 updates=503 cal=0.1s lsm=0.1s
+    wrote results/AAPL/2018-2019_gbm.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=0.6724 MAE=0.4624 updates=1 cal=0.0s lsm=0.2s
+    MSFT/monthly: RMSE=1.0894 MAE=0.7308 updates=25 cal=0.0s lsm=0.1s
+    MSFT/daily: RMSE=1.0192 MAE=0.6682 updates=503 cal=0.2s lsm=0.3s
+    wrote results/MSFT/2018-2019_gbm.md
+
+=== GBM | 2019-2020 (2019-2020_gbm.ipynb) ===
+  [SPY] rolling modes …
+    SPY/none: RMSE=2.0618 MAE=1.8741 updates=1 cal=0.0s lsm=0.1s
+    SPY/monthly: RMSE=1.7747 MAE=1.4128 updates=25 cal=0.0s lsm=0.1s
+    SPY/daily: RMSE=1.7976 MAE=1.4235 updates=505 cal=0.1s lsm=0.1s
+    wrote results/SPY/2019-2020_gbm.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=3.2126 MAE=2.6738 updates=1 cal=0.0s lsm=0.1s
+    AAPL/monthly: RMSE=2.1914 MAE=1.7784 updates=25 cal=0.0s lsm=0.1s
+    AAPL/daily: RMSE=2.0972 MAE=1.6606 updates=505 cal=0.1s lsm=0.1s
+    wrote results/AAPL/2019-2020_gbm.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=1.4759 MAE=1.2637 updates=1 cal=0.0s lsm=0.1s
+    MSFT/monthly: RMSE=0.9960 MAE=0.7604 updates=25 cal=0.0s lsm=0.1s
+    MSFT/daily: RMSE=0.9498 MAE=0.7194 updates=505 cal=0.1s lsm=0.1s
+    wrote results/MSFT/2019-2020_gbm.md
+
+=== Merton | 2008-2009 (2008-2009_merton.ipynb) ===
+<unknown>:242: SyntaxWarning: invalid escape sequence '\('
+  [SPY] rolling modes …
+    SPY/none: RMSE=0.6200 MAE=0.4401 updates=1 cal=0.0s lsm=0.1s
+    SPY/monthly: RMSE=0.8320 MAE=0.6569 updates=25 cal=0.0s lsm=0.1s
+    SPY/daily: RMSE=0.6560 MAE=0.5329 updates=505 cal=0.1s lsm=0.1s
+    wrote results/SPY/2008-2009_merton.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=2.6862 MAE=2.2723 updates=1 cal=0.0s lsm=0.1s
+    AAPL/monthly: RMSE=2.2953 MAE=1.8750 updates=25 cal=0.0s lsm=0.1s
+    AAPL/daily: RMSE=2.0929 MAE=1.7377 updates=505 cal=0.1s lsm=0.1s
+    wrote results/AAPL/2008-2009_merton.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=0.3426 MAE=0.2275 updates=1 cal=0.0s lsm=0.1s
+    MSFT/monthly: RMSE=0.5647 MAE=0.4665 updates=25 cal=0.0s lsm=0.1s
+    MSFT/daily: RMSE=0.4913 MAE=0.4000 updates=505 cal=0.1s lsm=0.1s
+    wrote results/MSFT/2008-2009_merton.md
+
+=== Merton | 2013-2014 (2013-2014_merton.ipynb) ===
+<unknown>:242: SyntaxWarning: invalid escape sequence '\('
+  [SPY] rolling modes …
+    SPY/none: RMSE=0.7667 MAE=0.5874 updates=1 cal=0.0s lsm=0.1s
+    SPY/monthly: RMSE=0.4786 MAE=0.3845 updates=25 cal=0.0s lsm=0.2s
+    SPY/daily: RMSE=0.4155 MAE=0.3381 updates=505 cal=0.1s lsm=0.1s
+    wrote results/SPY/2013-2014_merton.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=4.3754 MAE=3.4310 updates=1 cal=0.0s lsm=0.1s
+    AAPL/monthly: RMSE=2.8581 MAE=2.2008 updates=25 cal=0.0s lsm=0.3s
+    AAPL/daily: RMSE=2.9473 MAE=2.1999 updates=505 cal=0.1s lsm=0.1s
+    wrote results/AAPL/2013-2014_merton.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=0.2040 MAE=0.1647 updates=1 cal=0.0s lsm=0.1s
+    MSFT/monthly: RMSE=0.2305 MAE=0.1719 updates=25 cal=0.0s lsm=0.1s
+    MSFT/daily: RMSE=0.2191 MAE=0.1629 updates=505 cal=0.1s lsm=0.1s
+    wrote results/MSFT/2013-2014_merton.md
+
+=== Merton | 2018-2019 (2018-2019_merton.ipynb) ===
+<unknown>:242: SyntaxWarning: invalid escape sequence '\('
+  [SPY] rolling modes …
+    SPY/none: RMSE=0.8772 MAE=0.6495 updates=1 cal=0.0s lsm=0.1s
+    SPY/monthly: RMSE=1.5545 MAE=1.2042 updates=25 cal=0.0s lsm=0.1s
+    SPY/daily: RMSE=1.4499 MAE=1.0616 updates=503 cal=0.1s lsm=0.1s
+    wrote results/SPY/2018-2019_merton.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=0.8663 MAE=0.6983 updates=1 cal=0.0s lsm=0.1s
+    AAPL/monthly: RMSE=1.9220 MAE=1.3646 updates=25 cal=0.0s lsm=0.1s
+    AAPL/daily: RMSE=1.7155 MAE=1.1588 updates=503 cal=0.1s lsm=0.1s
+    wrote results/AAPL/2018-2019_merton.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=0.7817 MAE=0.5655 updates=1 cal=0.0s lsm=0.1s
+    MSFT/monthly: RMSE=1.0932 MAE=0.7454 updates=25 cal=0.0s lsm=0.1s
+    MSFT/daily: RMSE=1.0099 MAE=0.6574 updates=503 cal=0.1s lsm=0.1s
+    wrote results/MSFT/2018-2019_merton.md
+
+=== Merton | 2019-2020 (2019-2020_merton.ipynb) ===
+<unknown>:242: SyntaxWarning: invalid escape sequence '\('
+  [SPY] rolling modes …
+    SPY/none: RMSE=2.1733 MAE=1.9500 updates=1 cal=0.0s lsm=0.1s
+    SPY/monthly: RMSE=1.8482 MAE=1.4788 updates=25 cal=0.0s lsm=0.3s
+    SPY/daily: RMSE=1.8588 MAE=1.4838 updates=505 cal=0.1s lsm=0.1s
+    wrote results/SPY/2019-2020_merton.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=3.1599 MAE=2.5943 updates=1 cal=0.0s lsm=0.1s
+    AAPL/monthly: RMSE=2.2049 MAE=1.8114 updates=25 cal=0.0s lsm=0.1s
+    AAPL/daily: RMSE=2.0578 MAE=1.6737 updates=505 cal=0.1s lsm=0.1s
+    wrote results/AAPL/2019-2020_merton.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=1.5104 MAE=1.2809 updates=1 cal=0.0s lsm=0.1s
+    MSFT/monthly: RMSE=1.0564 MAE=0.7926 updates=25 cal=0.0s lsm=0.1s
+    MSFT/daily: RMSE=0.9964 MAE=0.7450 updates=505 cal=0.1s lsm=0.1s
+    wrote results/MSFT/2019-2020_merton.md
+
+=== Heston–Merton | 2008-2009 (2008-2009_heston_merton.ipynb) ===
+  [SPY] rolling modes …
+    SPY/none: RMSE=0.5686 MAE=0.4244 updates=1 cal=0.0s lsm=0.2s
+    SPY/monthly: RMSE=0.8097 MAE=0.6424 updates=25 cal=0.1s lsm=0.3s
+    SPY/daily: RMSE=0.6731 MAE=0.5142 updates=505 cal=1.1s lsm=0.2s
+    wrote results/SPY/2008-2009_heston_merton.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=2.1383 MAE=1.7406 updates=1 cal=0.0s lsm=0.1s
+    AAPL/monthly: RMSE=4.8871 MAE=3.9083 updates=25 cal=0.0s lsm=0.1s
+    AAPL/daily: RMSE=4.9126 MAE=3.7769 updates=505 cal=0.9s lsm=0.1s
+    wrote results/AAPL/2008-2009_heston_merton.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=0.3301 MAE=0.2146 updates=1 cal=0.0s lsm=0.1s
+    MSFT/monthly: RMSE=1.4610 MAE=1.0351 updates=25 cal=0.0s lsm=0.2s
+    MSFT/daily: RMSE=1.6848 MAE=1.0986 updates=505 cal=0.8s lsm=0.1s
+    wrote results/MSFT/2008-2009_heston_merton.md
+
+=== Heston–Merton | 2013-2014 (2013-2014_heston_merton.ipynb) ===
+  [SPY] rolling modes …
+    SPY/none: RMSE=2.5391 MAE=2.1449 updates=1 cal=0.0s lsm=0.1s
+    SPY/monthly: RMSE=0.6535 MAE=0.4730 updates=25 cal=0.0s lsm=0.1s
+    SPY/daily: RMSE=0.5309 MAE=0.4135 updates=505 cal=0.8s lsm=0.1s
+    wrote results/SPY/2013-2014_heston_merton.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=3.0546 MAE=2.0743 updates=1 cal=0.0s lsm=0.1s
+    AAPL/monthly: RMSE=7.5249 MAE=4.9023 updates=25 cal=0.0s lsm=0.1s
+    AAPL/daily: RMSE=7.6005 MAE=4.6273 updates=505 cal=1.1s lsm=0.1s
+    wrote results/AAPL/2013-2014_heston_merton.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=1.3031 MAE=1.0510 updates=1 cal=0.0s lsm=0.1s
+    MSFT/monthly: RMSE=0.5959 MAE=0.4974 updates=25 cal=0.0s lsm=0.2s
+    MSFT/daily: RMSE=0.7551 MAE=0.5297 updates=505 cal=1.9s lsm=0.3s
+    wrote results/MSFT/2013-2014_heston_merton.md
+
+=== Heston–Merton | 2018-2019 (2018-2019_heston_merton.ipynb) ===
+  [SPY] rolling modes …
+    SPY/none: RMSE=0.8801 MAE=0.6480 updates=1 cal=0.0s lsm=0.1s
+    SPY/monthly: RMSE=1.3155 MAE=1.0910 updates=25 cal=0.0s lsm=0.1s
+    SPY/daily: RMSE=2.3372 MAE=1.4655 updates=503 cal=1.0s lsm=0.2s
+    wrote results/SPY/2018-2019_heston_merton.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=0.8859 MAE=0.6920 updates=1 cal=0.0s lsm=0.1s
+    AAPL/monthly: RMSE=3.9565 MAE=2.8959 updates=25 cal=0.0s lsm=0.1s
+    AAPL/daily: RMSE=4.8659 MAE=3.8441 updates=503 cal=1.0s lsm=0.2s
+    wrote results/AAPL/2018-2019_heston_merton.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=2.5064 MAE=1.9703 updates=1 cal=0.0s lsm=0.1s
+    MSFT/monthly: RMSE=1.1402 MAE=0.8694 updates=25 cal=0.0s lsm=0.1s
+    MSFT/daily: RMSE=1.2707 MAE=0.9792 updates=503 cal=0.8s lsm=0.1s
+    wrote results/MSFT/2018-2019_heston_merton.md
+
+=== Heston–Merton | 2019-2020 (2019-2020_heston_merton.ipynb) ===
+  [SPY] rolling modes …
+    SPY/none: RMSE=1.4705 MAE=1.0153 updates=1 cal=0.0s lsm=0.1s
+    SPY/monthly: RMSE=1.0868 MAE=0.8753 updates=25 cal=0.0s lsm=0.1s
+    SPY/daily: RMSE=1.0636 MAE=0.8733 updates=505 cal=0.8s lsm=0.1s
+    wrote results/SPY/2019-2020_heston_merton.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=2.2791 MAE=1.7419 updates=1 cal=0.0s lsm=0.1s
+    AAPL/monthly: RMSE=6.6880 MAE=4.6746 updates=25 cal=0.0s lsm=0.1s
+    AAPL/daily: RMSE=6.5196 MAE=4.8688 updates=505 cal=0.9s lsm=0.2s
+    wrote results/AAPL/2019-2020_heston_merton.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=1.5278 MAE=1.2883 updates=1 cal=0.0s lsm=0.1s
+    MSFT/monthly: RMSE=1.3027 MAE=1.0520 updates=25 cal=0.0s lsm=0.1s
+    MSFT/daily: RMSE=1.1950 MAE=0.9280 updates=505 cal=0.9s lsm=0.1s
+    wrote results/MSFT/2019-2020_heston_merton.md
+
+=== GARCH–Merton | 2008-2009 (2008-2009_garch_merton.ipynb) ===
+  [SPY] rolling modes …
+    SPY/none: RMSE=0.6538 MAE=0.4773 updates=1 cal=0.0s lsm=0.1s
+    SPY/monthly: RMSE=0.6302 MAE=0.4605 updates=25 cal=0.9s lsm=0.1s
+    SPY/daily: RMSE=0.6990 MAE=0.4570 updates=505 cal=15.4s lsm=0.1s
+    wrote results/SPY/2008-2009_garch_merton.md
+  [AAPL] rolling modes …
+FAILED /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/V2-Models_result/garch merton notebook/2008-2009_garch_merton.ipynb:
+Traceback (most recent call last):
+  File "/Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/V2-Models_result/scripts/run_optimal_stopping_study.py", line 795, in main
+    per = run_one(nb, model, tickers)
+  File "/Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/V2-Models_result/scripts/run_optimal_stopping_study.py", line 733, in run_one
+    out[ticker] = run_one_ticker(nb_path, model, ticker, g)
+                  ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/V2-Models_result/scripts/run_optimal_stopping_study.py", line 711, in run_one_ticker
+    out = _run_mode(g, mode, contracts, ticker)
+  File "/Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/V2-Models_result/scripts/run_optimal_stopping_study.py", line 287, in _run_mode
+    paths = g["_rn_paths_for_contract"](row, N_PATHS, SEED + i)
+  File "<string>", line 16, in _rn_paths_for_contract
+KeyError: 'SPY'
+
+
+=== GARCH–Merton | 2013-2014 (2013-2014_garch_merton.ipynb) ===
+  [SPY] rolling modes …
+    SPY/none: RMSE=1.0072 MAE=0.8093 updates=1 cal=0.1s lsm=0.1s
+    SPY/monthly: RMSE=0.6103 MAE=0.4818 updates=25 cal=0.7s lsm=0.1s
+    SPY/daily: RMSE=0.5655 MAE=0.4460 updates=505 cal=6.3s lsm=0.1s
+    wrote results/SPY/2013-2014_garch_merton.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=12.2803 MAE=10.2589 updates=1 cal=0.0s lsm=0.2s
+    AAPL/monthly: RMSE=7.4494 MAE=5.5961 updates=25 cal=1.4s lsm=0.1s
+    AAPL/daily: RMSE=7.2481 MAE=5.1280 updates=505 cal=25.1s lsm=0.1s
+    wrote results/AAPL/2013-2014_garch_merton.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=0.2338 MAE=0.1917 updates=1 cal=0.1s lsm=0.1s
+    MSFT/monthly: RMSE=0.4485 MAE=0.3563 updates=25 cal=1.1s lsm=0.1s
+    MSFT/daily: RMSE=0.4488 MAE=0.3391 updates=505 cal=16.0s lsm=0.1s
+    wrote results/MSFT/2013-2014_garch_merton.md
+
+=== GARCH–Merton | 2018-2019 (2018-2019_garch_merton.ipynb) ===
+  [SPY] rolling modes …
+    SPY/none: RMSE=0.7625 MAE=0.5523 updates=1 cal=0.0s lsm=0.1s
+    SPY/monthly: RMSE=3.0739 MAE=2.1487 updates=25 cal=0.8s lsm=0.1s
+    SPY/daily: RMSE=2.0580 MAE=1.5759 updates=503 cal=10.4s lsm=0.1s
+    wrote results/SPY/2018-2019_garch_merton.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=0.6696 MAE=0.5564 updates=1 cal=0.1s lsm=0.1s
+    AAPL/monthly: RMSE=4.4022 MAE=2.7817 updates=25 cal=0.8s lsm=0.1s
+    AAPL/daily: RMSE=3.9754 MAE=2.9800 updates=503 cal=9.8s lsm=0.1s
+    wrote results/AAPL/2018-2019_garch_merton.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=0.6083 MAE=0.5206 updates=1 cal=0.0s lsm=0.1s
+    MSFT/monthly: RMSE=1.3586 MAE=0.9917 updates=25 cal=0.9s lsm=0.1s
+    MSFT/daily: RMSE=1.3519 MAE=0.9245 updates=503 cal=9.2s lsm=0.1s
+    wrote results/MSFT/2018-2019_garch_merton.md
+
+=== GARCH–Merton | 2019-2020 (2019-2020_garch_merton.ipynb) ===
+  [SPY] rolling modes …
+    SPY/none: RMSE=7.2019 MAE=6.7792 updates=1 cal=0.0s lsm=0.1s
+    SPY/monthly: RMSE=3.2224 MAE=2.3905 updates=25 cal=0.7s lsm=0.1s
+    SPY/daily: RMSE=2.6584 MAE=2.1964 updates=505 cal=10.4s lsm=0.1s
+    wrote results/SPY/2019-2020_garch_merton.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=8.0466 MAE=7.1471 updates=1 cal=0.0s lsm=0.1s
+    AAPL/monthly: RMSE=4.1918 MAE=3.5054 updates=25 cal=0.8s lsm=0.1s
+    AAPL/daily: RMSE=4.1158 MAE=3.5165 updates=505 cal=12.5s lsm=0.2s
+    wrote results/AAPL/2019-2020_garch_merton.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=4.2725 MAE=3.8936 updates=1 cal=0.0s lsm=0.1s
+    MSFT/monthly: RMSE=1.5011 MAE=1.1000 updates=25 cal=0.9s lsm=0.1s
+    MSFT/daily: RMSE=1.2630 MAE=0.9537 updates=505 cal=12.5s lsm=0.3s
+    wrote results/MSFT/2019-2020_garch_merton.md
+  wrote compare_rolling_none.ipynb
+  wrote compare_rolling_monthly.ipynb
+  wrote compare_rolling_daily.ipynb
+
+Done 45 ticker-studies in 3.4 min
+Failures: 2008-2009_garch_merton.ipynb
+Index: /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/V2-Models_result/results/INDEX.md
+Running 1 studies × 3 tickers → /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/V2-Models_result/results
+
+=== GARCH–Merton | 2008-2009 (2008-2009_garch_merton.ipynb) ===
+  [SPY] rolling modes …
+    SPY/none: RMSE=0.6538 MAE=0.4773 updates=1 cal=0.0s lsm=0.1s
+    SPY/monthly: RMSE=0.6302 MAE=0.4605 updates=25 cal=0.9s lsm=0.1s
+    SPY/daily: RMSE=0.6990 MAE=0.4570 updates=505 cal=16.5s lsm=0.1s
+    wrote results/SPY/2008-2009_garch_merton.md
+  [AAPL] rolling modes …
+    AAPL/none: RMSE=3.0728 MAE=2.6049 updates=1 cal=0.0s lsm=0.1s
+    AAPL/monthly: RMSE=3.3749 MAE=2.4869 updates=25 cal=1.0s lsm=0.1s
+    AAPL/daily: RMSE=2.9586 MAE=2.2743 updates=505 cal=18.4s lsm=0.1s
+    wrote results/AAPL/2008-2009_garch_merton.md
+  [MSFT] rolling modes …
+    MSFT/none: RMSE=0.4026 MAE=0.3296 updates=1 cal=0.0s lsm=0.1s
+    MSFT/monthly: RMSE=0.9186 MAE=0.7568 updates=25 cal=1.0s lsm=0.1s
+    MSFT/daily: RMSE=1.0189 MAE=0.7611 updates=505 cal=18.1s lsm=0.1s
+    wrote results/MSFT/2008-2009_garch_merton.md
+  wrote compare_rolling_none.ipynb
+  wrote compare_rolling_monthly.ipynb
+  wrote compare_rolling_daily.ipynb
+
+Done 3 ticker-studies in 1.0 min
+Index: /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/V2-Models_result/results/INDEX.md

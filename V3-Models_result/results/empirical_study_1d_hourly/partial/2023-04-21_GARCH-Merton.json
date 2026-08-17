@@ -1,0 +1,46 @@
+{
+  "model": "GARCH\u2013Merton",
+  "regime": "2023-04-21",
+  "stem": "1d_1min_garch_merton",
+  "tickers": {
+    "SPY": {
+      "rmse_pct": 100.0,
+      "mae": 7.79,
+      "bias": -7.79,
+      "bias_pct": -100.0,
+      "early": 0.0,
+      "n": 6,
+      "n_updates": 7,
+      "t_cal": 0.09580492973327637,
+      "t_lsm": 0.9546060562133789,
+      "elapsed": 1.0517210960388184,
+      "contracts_csv": "contracts/2023-04-21/SPY/2023-04-21_garch_merton.csv"
+    },
+    "AAPL": {
+      "rmse_pct": 97.13866160296976,
+      "mae": 5.339839080030135,
+      "bias": -5.339839080030135,
+      "bias_pct": -97.08798327327519,
+      "early": 0.12436666666666667,
+      "n": 6,
+      "n_updates": 7,
+      "t_cal": 0.24573206901550293,
+      "t_lsm": 2.013911008834839,
+      "elapsed": 2.262108087539673,
+      "contracts_csv": "contracts/2023-04-21/AAPL/2023-04-21_garch_merton.csv"
+    },
+    "MSFT": {
+      "rmse_pct": 98.76874384237314,
+      "mae": 9.751756901179185,
+      "bias": -9.751756901179185,
+      "bias_pct": -98.75196861953609,
+      "early": 0.06665,
+      "n": 6,
+      "n_updates": 7,
+      "t_cal": 0.13774895668029785,
+      "t_lsm": 1.4672648906707764,
+      "elapsed": 1.6070771217346191,
+      "contracts_csv": "contracts/2023-04-21/MSFT/2023-04-21_garch_merton.csv"
+    }
+  }
+}

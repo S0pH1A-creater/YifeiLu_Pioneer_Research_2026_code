@@ -1,0 +1,1775 @@
+{
+  "tickers": {
+    "SPY": {
+      "2022-10-21": {
+        "lookback_start": "2022-10-05",
+        "period_end": "2022-10-14",
+        "steps": [
+          {
+            "step": "input",
+            "n": 5108
+          },
+          {
+            "step": "calls only",
+            "n": 5108
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 5108
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 5108
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 5108
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 5068
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 5068
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 2778,
+          "ATM": 1343,
+          "ITM": 947,
+          "deep ITM": 40,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 2778,
+          "ATM": 1343,
+          "ITM": 947,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2022-11-18": {
+        "lookback_start": "2022-11-02",
+        "period_end": "2022-11-11",
+        "steps": [
+          {
+            "step": "input",
+            "n": 5565
+          },
+          {
+            "step": "calls only",
+            "n": 5565
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 5565
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 5562
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 5562
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 5476
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 5476
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 2494,
+          "ATM": 1523,
+          "ITM": 1462,
+          "deep ITM": 86,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 2494,
+          "ATM": 1523,
+          "ITM": 1459,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2022-12-16": {
+        "lookback_start": "2022-11-30",
+        "period_end": "2022-12-09",
+        "steps": [
+          {
+            "step": "input",
+            "n": 4199
+          },
+          {
+            "step": "calls only",
+            "n": 4199
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 4199
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 4164
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 4164
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 4085
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 4085
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 1599,
+          "ITM": 1328,
+          "ATM": 1190,
+          "deep ITM": 82,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 1599,
+          "ITM": 1296,
+          "ATM": 1190,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-01-20": {
+        "lookback_start": "2023-01-04",
+        "period_end": "2023-01-13",
+        "steps": [
+          {
+            "step": "input",
+            "n": 3747
+          },
+          {
+            "step": "calls only",
+            "n": 3747
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 3747
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 3747
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 3747
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 3710
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 3710
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 1464,
+          "ATM": 1191,
+          "ITM": 1055,
+          "deep ITM": 37,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 1464,
+          "ATM": 1191,
+          "ITM": 1055,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-02-17": {
+        "lookback_start": "2023-02-01",
+        "period_end": "2023-02-10",
+        "steps": [
+          {
+            "step": "input",
+            "n": 4384
+          },
+          {
+            "step": "calls only",
+            "n": 4384
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 4384
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 4281
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 4281
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 4229
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 4229
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 1651,
+          "ITM": 1462,
+          "ATM": 1214,
+          "deep ITM": 57,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 1651,
+          "ITM": 1364,
+          "ATM": 1214,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-03-17": {
+        "lookback_start": "2023-03-01",
+        "period_end": "2023-03-10",
+        "steps": [
+          {
+            "step": "input",
+            "n": 3983
+          },
+          {
+            "step": "calls only",
+            "n": 3983
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 3983
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 3983
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 3983
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 3942
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 3942
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 1705,
+          "ATM": 1281,
+          "ITM": 956,
+          "deep ITM": 41,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 1705,
+          "ATM": 1281,
+          "ITM": 956,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-04-21": {
+        "lookback_start": "2023-04-04",
+        "period_end": "2023-04-14",
+        "steps": [
+          {
+            "step": "input",
+            "n": 3536
+          },
+          {
+            "step": "calls only",
+            "n": 3536
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 3536
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 3536
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 3536
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 3479
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 3479
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "ATM": 1322,
+          "ITM": 1120,
+          "OTM": 1037,
+          "deep ITM": 57,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "ATM": 1322,
+          "ITM": 1120,
+          "OTM": 1037,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-05-19": {
+        "lookback_start": "2023-05-03",
+        "period_end": "2023-05-12",
+        "steps": [
+          {
+            "step": "input",
+            "n": 3623
+          },
+          {
+            "step": "calls only",
+            "n": 3623
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 3623
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 3623
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 3623
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 3581
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 3581
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "ATM": 1442,
+          "OTM": 1112,
+          "ITM": 1027,
+          "deep ITM": 42,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "ATM": 1442,
+          "OTM": 1112,
+          "ITM": 1027,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-06-16": {
+        "lookback_start": "2023-05-31",
+        "period_end": "2023-06-09",
+        "steps": [
+          {
+            "step": "input",
+            "n": 3381
+          },
+          {
+            "step": "calls only",
+            "n": 3381
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 3381
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 3381
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 3381
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 3313
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 3313
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "ATM": 1229,
+          "ITM": 1217,
+          "OTM": 867,
+          "deep ITM": 68,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "ATM": 1229,
+          "ITM": 1217,
+          "OTM": 867,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-07-21": {
+        "lookback_start": "2023-07-05",
+        "period_end": "2023-07-14",
+        "steps": [
+          {
+            "step": "input",
+            "n": 3610
+          },
+          {
+            "step": "calls only",
+            "n": 3610
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 3610
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 3610
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 3610
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 3530
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 3530
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "ATM": 1373,
+          "ITM": 1300,
+          "OTM": 857,
+          "deep ITM": 80,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "ATM": 1373,
+          "ITM": 1300,
+          "OTM": 857,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-08-18": {
+        "lookback_start": "2023-08-02",
+        "period_end": "2023-08-11",
+        "steps": [
+          {
+            "step": "input",
+            "n": 4262
+          },
+          {
+            "step": "calls only",
+            "n": 4262
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 4262
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 4262
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 4262
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 4183
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 4183
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "ATM": 1490,
+          "OTM": 1360,
+          "ITM": 1333,
+          "deep ITM": 79,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "ATM": 1490,
+          "OTM": 1360,
+          "ITM": 1333,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-09-15": {
+        "lookback_start": "2023-08-29",
+        "period_end": "2023-09-08",
+        "steps": [
+          {
+            "step": "input",
+            "n": 3569
+          },
+          {
+            "step": "calls only",
+            "n": 3569
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 3569
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 3569
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 3569
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 3534
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 3534
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "ATM": 1440,
+          "ITM": 1108,
+          "OTM": 986,
+          "deep ITM": 35,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "ATM": 1440,
+          "ITM": 1108,
+          "OTM": 986,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      }
+    },
+    "AAPL": {
+      "2022-10-21": {
+        "lookback_start": "2022-10-05",
+        "period_end": "2022-10-14",
+        "steps": [
+          {
+            "step": "input",
+            "n": 787
+          },
+          {
+            "step": "calls only",
+            "n": 787
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 787
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 787
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 787
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 773
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 773
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 290,
+          "ITM": 278,
+          "ATM": 205,
+          "deep ITM": 14,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 290,
+          "ITM": 278,
+          "ATM": 205,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2022-11-18": {
+        "lookback_start": "2022-11-02",
+        "period_end": "2022-11-11",
+        "steps": [
+          {
+            "step": "input",
+            "n": 875
+          },
+          {
+            "step": "calls only",
+            "n": 875
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 875
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 875
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 875
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 844
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 844
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "ITM": 328,
+          "OTM": 315,
+          "ATM": 201,
+          "deep ITM": 31,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "ITM": 328,
+          "OTM": 315,
+          "ATM": 201,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2022-12-16": {
+        "lookback_start": "2022-11-30",
+        "period_end": "2022-12-09",
+        "steps": [
+          {
+            "step": "input",
+            "n": 793
+          },
+          {
+            "step": "calls only",
+            "n": 793
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 793
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 790
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 790
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 773
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 773
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "ITM": 329,
+          "OTM": 239,
+          "ATM": 207,
+          "deep ITM": 18,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "ITM": 327,
+          "OTM": 239,
+          "ATM": 207,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-01-20": {
+        "lookback_start": "2023-01-04",
+        "period_end": "2023-01-13",
+        "steps": [
+          {
+            "step": "input",
+            "n": 879
+          },
+          {
+            "step": "calls only",
+            "n": 879
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 879
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 879
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 879
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 861
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 861
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 378,
+          "ITM": 283,
+          "ATM": 200,
+          "deep ITM": 18,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 378,
+          "ITM": 283,
+          "ATM": 200,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-02-17": {
+        "lookback_start": "2023-02-01",
+        "period_end": "2023-02-10",
+        "steps": [
+          {
+            "step": "input",
+            "n": 776
+          },
+          {
+            "step": "calls only",
+            "n": 776
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 776
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 772
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 772
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 719
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 719
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "ITM": 376,
+          "OTM": 193,
+          "ATM": 150,
+          "deep ITM": 57,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "ITM": 376,
+          "OTM": 193,
+          "ATM": 150,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-03-17": {
+        "lookback_start": "2023-03-01",
+        "period_end": "2023-03-10",
+        "steps": [
+          {
+            "step": "input",
+            "n": 484
+          },
+          {
+            "step": "calls only",
+            "n": 484
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 484
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 484
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 484
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 467
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 467
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "ITM": 252,
+          "OTM": 133,
+          "ATM": 82,
+          "deep ITM": 17,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "ITM": 252,
+          "OTM": 133,
+          "ATM": 82,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-04-21": {
+        "lookback_start": "2023-04-04",
+        "period_end": "2023-04-14",
+        "steps": [
+          {
+            "step": "input",
+            "n": 496
+          },
+          {
+            "step": "calls only",
+            "n": 496
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 496
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 495
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 495
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 447
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 447
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "ITM": 186,
+          "OTM": 165,
+          "ATM": 97,
+          "deep ITM": 48,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "ITM": 185,
+          "OTM": 165,
+          "ATM": 97,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-05-19": {
+        "lookback_start": "2023-05-03",
+        "period_end": "2023-05-12",
+        "steps": [
+          {
+            "step": "input",
+            "n": 211
+          },
+          {
+            "step": "calls only",
+            "n": 211
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 211
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 209
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 209
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 195
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 195
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "ITM": 82,
+          "OTM": 79,
+          "ATM": 36,
+          "deep ITM": 14,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "ITM": 80,
+          "OTM": 79,
+          "ATM": 36,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-06-16": {
+        "lookback_start": "2023-05-31",
+        "period_end": "2023-06-09",
+        "steps": [
+          {
+            "step": "input",
+            "n": 126
+          },
+          {
+            "step": "calls only",
+            "n": 126
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 126
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 126
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 126
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 124
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 124
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 50,
+          "ITM": 48,
+          "ATM": 26,
+          "deep ITM": 2,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 50,
+          "ITM": 48,
+          "ATM": 26,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-07-21": {
+        "lookback_start": "2023-07-05",
+        "period_end": "2023-07-14",
+        "steps": [
+          {
+            "step": "input",
+            "n": 380
+          },
+          {
+            "step": "calls only",
+            "n": 380
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 380
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 380
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 380
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 359
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 359
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 152,
+          "ITM": 136,
+          "ATM": 71,
+          "deep ITM": 21,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 152,
+          "ITM": 136,
+          "ATM": 71,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-08-18": {
+        "lookback_start": "2023-08-02",
+        "period_end": "2023-08-11",
+        "steps": [
+          {
+            "step": "input",
+            "n": 402
+          },
+          {
+            "step": "calls only",
+            "n": 402
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 402
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 402
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 402
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 385
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 385
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 159,
+          "ITM": 136,
+          "ATM": 90,
+          "deep ITM": 17,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 159,
+          "ITM": 136,
+          "ATM": 90,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-09-15": {
+        "lookback_start": "2023-08-29",
+        "period_end": "2023-09-08",
+        "steps": [
+          {
+            "step": "input",
+            "n": 425
+          },
+          {
+            "step": "calls only",
+            "n": 425
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 425
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 425
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 425
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 399
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 399
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 163,
+          "ITM": 146,
+          "ATM": 90,
+          "deep ITM": 26,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 163,
+          "ITM": 146,
+          "ATM": 90,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      }
+    },
+    "MSFT": {
+      "2022-10-21": {
+        "lookback_start": "2022-10-05",
+        "period_end": "2022-10-14",
+        "steps": [
+          {
+            "step": "input",
+            "n": 476
+          },
+          {
+            "step": "calls only",
+            "n": 476
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 476
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 476
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 476
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 468
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 468
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 212,
+          "ITM": 143,
+          "ATM": 113,
+          "deep ITM": 8,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 212,
+          "ITM": 143,
+          "ATM": 113,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2022-11-18": {
+        "lookback_start": "2022-11-02",
+        "period_end": "2022-11-11",
+        "steps": [
+          {
+            "step": "input",
+            "n": 467
+          },
+          {
+            "step": "calls only",
+            "n": 467
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 467
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 464
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 464
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 448
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 448
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 202,
+          "ITM": 154,
+          "ATM": 94,
+          "deep ITM": 17,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 202,
+          "ITM": 152,
+          "ATM": 94,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2022-12-16": {
+        "lookback_start": "2022-11-30",
+        "period_end": "2022-12-09",
+        "steps": [
+          {
+            "step": "input",
+            "n": 520
+          },
+          {
+            "step": "calls only",
+            "n": 520
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 520
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 518
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 518
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 495
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 495
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 212,
+          "ITM": 178,
+          "ATM": 106,
+          "deep ITM": 24,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 212,
+          "ITM": 177,
+          "ATM": 106,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-01-20": {
+        "lookback_start": "2023-01-04",
+        "period_end": "2023-01-13",
+        "steps": [
+          {
+            "step": "input",
+            "n": 481
+          },
+          {
+            "step": "calls only",
+            "n": 481
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 481
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 481
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 481
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 468
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 468
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 201,
+          "ITM": 164,
+          "ATM": 103,
+          "deep ITM": 13,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 201,
+          "ITM": 164,
+          "ATM": 103,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-02-17": {
+        "lookback_start": "2023-02-01",
+        "period_end": "2023-02-10",
+        "steps": [
+          {
+            "step": "input",
+            "n": 564
+          },
+          {
+            "step": "calls only",
+            "n": 564
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 564
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 562
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 562
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 551
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 551
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 222,
+          "ITM": 207,
+          "ATM": 123,
+          "deep ITM": 12,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 222,
+          "ITM": 206,
+          "ATM": 123,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-03-17": {
+        "lookback_start": "2023-03-01",
+        "period_end": "2023-03-10",
+        "steps": [
+          {
+            "step": "input",
+            "n": 387
+          },
+          {
+            "step": "calls only",
+            "n": 387
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 387
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 386
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 386
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 374
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 374
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 159,
+          "ITM": 138,
+          "ATM": 78,
+          "deep ITM": 12,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 159,
+          "ITM": 137,
+          "ATM": 78,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-04-21": {
+        "lookback_start": "2023-04-04",
+        "period_end": "2023-04-14",
+        "steps": [
+          {
+            "step": "input",
+            "n": 546
+          },
+          {
+            "step": "calls only",
+            "n": 546
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 546
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 545
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 545
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 523
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 523
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 211,
+          "ITM": 193,
+          "ATM": 120,
+          "deep ITM": 22,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 211,
+          "ITM": 192,
+          "ATM": 120,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-05-19": {
+        "lookback_start": "2023-05-03",
+        "period_end": "2023-05-12",
+        "steps": [
+          {
+            "step": "input",
+            "n": 366
+          },
+          {
+            "step": "calls only",
+            "n": 366
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 366
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 362
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 362
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 344
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 344
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 145,
+          "ITM": 129,
+          "ATM": 74,
+          "deep ITM": 18,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 145,
+          "ITM": 125,
+          "ATM": 74,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-06-16": {
+        "lookback_start": "2023-05-31",
+        "period_end": "2023-06-09",
+        "steps": [
+          {
+            "step": "input",
+            "n": 207
+          },
+          {
+            "step": "calls only",
+            "n": 207
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 207
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 207
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 207
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 207
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 207
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 82,
+          "ITM": 77,
+          "ATM": 48,
+          "deep OTM": 0,
+          "deep ITM": 0
+        },
+        "moneyness_after": {
+          "OTM": 82,
+          "ITM": 77,
+          "ATM": 48,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-07-21": {
+        "lookback_start": "2023-07-05",
+        "period_end": "2023-07-14",
+        "steps": [
+          {
+            "step": "input",
+            "n": 734
+          },
+          {
+            "step": "calls only",
+            "n": 734
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 734
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 734
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 734
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 695
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 695
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 312,
+          "ITM": 248,
+          "ATM": 135,
+          "deep ITM": 39,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 312,
+          "ITM": 248,
+          "ATM": 135,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-08-18": {
+        "lookback_start": "2023-08-02",
+        "period_end": "2023-08-11",
+        "steps": [
+          {
+            "step": "input",
+            "n": 675
+          },
+          {
+            "step": "calls only",
+            "n": 675
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 675
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 673
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 673
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 656
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 656
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 298,
+          "ITM": 224,
+          "ATM": 136,
+          "deep ITM": 17,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 298,
+          "ITM": 222,
+          "ATM": 136,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      },
+      "2023-09-15": {
+        "lookback_start": "2023-08-29",
+        "period_end": "2023-09-08",
+        "steps": [
+          {
+            "step": "input",
+            "n": 715
+          },
+          {
+            "step": "calls only",
+            "n": 715
+          },
+          {
+            "step": "finite S, K, C",
+            "n": 715
+          },
+          {
+            "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+            "n": 715
+          },
+          {
+            "step": "2. maturity 7\u201360 DTE",
+            "n": 715
+          },
+          {
+            "step": "3a. |S/K \u2212 1| \u2264 10%",
+            "n": 696
+          },
+          {
+            "step": "3b. liquidity / wide bid\u2013ask",
+            "n": 696
+          }
+        ],
+        "n_eval_contracts": 34,
+        "moneyness_before": {
+          "OTM": 280,
+          "ITM": 259,
+          "ATM": 157,
+          "deep ITM": 19,
+          "deep OTM": 0
+        },
+        "moneyness_after": {
+          "OTM": 280,
+          "ITM": 259,
+          "ATM": 157,
+          "deep OTM": 0,
+          "deep ITM": 0
+        }
+      }
+    }
+  },
+  "note": "Same filters for every model. No model-specific data selection."
+}

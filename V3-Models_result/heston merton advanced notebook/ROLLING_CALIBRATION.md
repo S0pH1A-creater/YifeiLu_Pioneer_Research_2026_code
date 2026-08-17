@@ -55,7 +55,7 @@ Default UI rolling mode: **monthly** (daily Method B is available but slower).
 
 ## Lookback choices
 
-3 months · 6 months · 1 year · 2 years · 5 years (calendar lookback; uses available history if the series is shorter).
+3 months · 6 months · 1 year · 2 years · 3 years · 5 years (calendar lookback; uses available history if the series is shorter). Default on 1-year regime notebooks: **3 years**, rolling **monthly**.
 
 ## Notebook section split
 

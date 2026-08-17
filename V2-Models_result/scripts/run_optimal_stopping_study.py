@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Headless optimal-stopping study across 16 regime notebooks (V2).
 
-For each of GBM / Merton / Heston–Merton / GARCH–Merton × four regimes:
+For each of GBM / Merton / Heston / Heston–Merton / GARCH / GARCH–Merton × four regimes:
   lookback = 6 months
   rolling  = none, monthly, daily
   underlyings = SPY, AAPL, MSFT
@@ -64,13 +64,15 @@ COLORS = {"AAPL": "#1f77b4", "MSFT": "#ff7f0e", "SPY": "#2ca02c"}
 STUDIES = [
     ("GBM", "gbm notebook", "*_gbm.ipynb", "gbm"),
     ("Merton", "merton notebook", "*_merton.ipynb", "merton"),
+    ("Heston", "heston notebook", "20*_heston.ipynb", "heston"),
     ("Heston–Merton", "heston merton notebook", "*_heston_merton.ipynb", "heston_merton"),
+    ("GARCH", "garch notebook", "20*_garch.ipynb", "garch"),
     ("GARCH–Merton", "garch merton notebook", "*_garch_merton.ipynb", "garch_merton"),
 ]
 
 # Display order in compare notebooks (regime then model)
 REGIME_ORDER = ["2008-2009", "2013-2014", "2018-2019", "2019-2020"]
-MODEL_ORDER = {"GBM": 0, "Merton": 1, "Heston–Merton": 2, "GARCH–Merton": 3}
+MODEL_ORDER = {"GBM": 0, "Merton": 1, "Heston": 2, "Heston–Merton": 3, "GARCH": 4, "GARCH–Merton": 5}
 
 
 def _install_scipy_minimize_fallback() -> None:
@@ -216,7 +218,7 @@ def _extract_defs(src: str, *, keep_assigns: bool = False) -> str:
 
 def _regime_from_name(path: Path) -> str:
     stem = path.stem
-    for suffix in ("_heston_merton", "_garch_merton", "_merton", "_gbm"):
+    for suffix in ("_heston_merton", "_garch_merton", "_heston", "_garch", "_merton", "_gbm"):
         if stem.endswith(suffix):
             return stem[: -len(suffix)]
     return stem
@@ -610,7 +612,7 @@ Same contracts / seeds / LSM harness for **SPY**, **AAPL**, and **MSFT** (n={N_C
 | Underlyings | SPY, AAPL, MSFT |
 
 ## Layout
-For each ticker: regimes 2008-2009 → 2019-2020; within each GBM → Merton → Heston–Merton → GARCH–Merton.  
+For each ticker: regimes 2008-2009 → 2019-2020; within each GBM → Merton → Heston → Heston–Merton → GARCH → GARCH–Merton.  
 Each block: label + RMSE + three-panel graph.
 """
     cells.append(_md_cell(title))

@@ -1,0 +1,19 @@
+---
+description: True rolling-window Heston (no jumps) calibration for heston notebook period files
+globs: "{V1-Models_result,V2-Models_result}/heston notebook/**"
+alwaysApply: false
+---
+
+# Heston period notebooks — rolling calibration
+
+When editing files under `heston notebook/`:
+
+- This model is **Heston–Merton without jumps**: estimate only \((\mu,\kappa,\theta,\xi,\rho,v_0)\). Do **not** add \(\lambda,\mu_J,\sigma_J,\kappa_J\) or a jump term in simulation.
+- Use **true rolling-window calibration**: at each update point, re-estimate from only the current lookback window, then use those params for the **next** Monte Carlo segment.
+- Estimation: **Method A only** — realized-variance moments on **all** returns (no jump-day filter).
+- Do **not** keep the initial (first-day) parameters fixed for the whole prediction period when rolling is `daily` or `monthly`.
+- `none` rolling = single estimate at period start (fixed params) is allowed; variance \(v_t\) still updates via the Heston SDE inside each path.
+- Lookback options: 3m / 6m / 1y / 2y / 5y (2-year files) or 1 hour / 1 day (1-minute files); keep a **Reestimate** control.
+- §4 shows rolling graphs for \(\mu,\theta,\kappa,\xi,\rho,v_0\); §5 uses the Heston update (no Merton jumps).
+- Keep the same §4 / §5 / §6 workflow as the other model notebooks.
+- See `V2-Models_result/heston notebook/ROLLING_CALIBRATION.md` (V1/V2 Method A only; V3 is option-implied).

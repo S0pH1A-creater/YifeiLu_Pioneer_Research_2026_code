@@ -1,0 +1,25 @@
+Sampling shared contracts …
+Filter funnel …
+
+=== Heston | 2008-2009 ===
+    Heston           2008-2009 SPY: RMSE%=40.18 MAE=1.4881 n=9 updates=13 cal=2.3s lsm=0.1s
+    Heston           2008-2009 AAPL: RMSE%=32.43 MAE=1.6546 n=50 updates=13 cal=5.6s lsm=0.5s
+    Heston           2008-2009 MSFT: RMSE%=28.27 MAE=0.2618 n=50 updates=13 cal=2.8s lsm=0.3s
+
+=== Heston | 2013-2014 ===
+    Heston           2013-2014 SPY: RMSE%=49.92 MAE=0.9511 n=50 updates=13 cal=5.9s lsm=0.3s
+    Heston           2013-2014 AAPL: RMSE%=38.62 MAE=2.5601 n=50 updates=13 cal=3.1s lsm=0.3s
+    Heston           2013-2014 MSFT: RMSE%=32.71 MAE=0.1999 n=50 updates=13 cal=3.6s lsm=0.3s
+
+=== Heston | 2018-2019 ===
+    Heston           2018-2019 SPY: RMSE%=61.87 MAE=2.0402 n=50 updates=13 cal=5.6s lsm=0.3s
+    Heston           2018-2019 AAPL: RMSE%=45.30 MAE=2.3807 n=51 updates=13 cal=3.5s lsm=0.3s
+    Heston           2018-2019 MSFT: RMSE%=37.65 MAE=0.9636 n=50 updates=13 cal=3.2s lsm=0.4s
+
+=== Heston | 2019-2020 ===
+    Heston           2019-2020 SPY: RMSE%=68.26 MAE=3.7347 n=50 updates=13 cal=6.3s lsm=0.3s
+    Heston           2019-2020 AAPL: RMSE%=42.43 MAE=3.7882 n=50 updates=13 cal=4.2s lsm=0.3s
+    Heston           2019-2020 MSFT: RMSE%=41.31 MAE=2.1263 n=50 updates=13 cal=3.9s lsm=0.3s
+
+Wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/V3-Models_result/results/empirical_study_5y_monthly/payload.json in 0.9 min
+Incomplete: 12/72 cells, failures=[]. PDF/notebook not finalized.

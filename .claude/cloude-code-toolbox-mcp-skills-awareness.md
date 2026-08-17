@@ -1,6 +1,6 @@
 # Cloude Code ToolBox — MCP & Skills awareness
 
-_Generated: 2026-07-18T05:56:15.779Z_
+_Generated: 2026-08-15T07:43:39.648Z_
 
 ## How to use this report
 
@@ -15,7 +15,7 @@ _Generated: 2026-07-18T05:56:15.779Z_
 
 Workspace `mcp.json` _(folder: Coding tests)_
 
-- **/Users/sophia/Desktop/Study📄/202606 - Pioneer/Coding tests/.mcp.json** — _File missing_
+- **/Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/.mcp.json** — _File missing_
 
 _No active workspace servers in mcp.json._
 

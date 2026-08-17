@@ -1,6 +1,6 @@
 """Longstaff–Schwartz American call pricing helpers for research notebooks.
 
-Used by §6 Optimal stopping in the GBM / Merton / Heston–Merton / GARCH–Merton
+Used by §6 Optimal stopping in the GBM / Merton / Heston / Heston–Merton / GARCH / GARCH–Merton
 regime notebooks. Path generation stays in each notebook (reuse §5 simulators
 under risk-neutral drift μ → r); this module only does LSM + contract sampling.
 """
@@ -171,3 +171,88 @@ def sample_spy_calls(
 def load_spy_calls(data_dir) -> pd.DataFrame:
     path = data_dir / "options" / "processed" / "SPY_calls_panel.csv"
     return pd.read_csv(path, parse_dates=["trading_date", "expiration"])
+
+
+def bs_call(S: float, K: float, T: float, r: float, sigma: float) -> float:
+    """Black–Scholes European call (used as a 2023 quote substitute)."""
+    import math
+
+    S, K, T, r, sigma = float(S), float(K), float(T), float(r), float(sigma)
+    if T <= 0 or sigma <= 0:
+        return max(S - K, 0.0)
+    d1 = (math.log(S / K) + (r + 0.5 * sigma * sigma) * T) / (sigma * math.sqrt(T))
+    d2 = d1 - sigma * math.sqrt(T)
+    n = lambda x: 0.5 * (1.0 + math.erf(x / math.sqrt(2.0)))
+    return float(S * n(d1) - K * math.exp(-r * T) * n(d2))
+
+
+def make_synthetic_intraday_calls(
+    px: pd.Series,
+    rets: pd.Series,
+    *,
+    n_days: float,
+    period_start,
+    period_end,
+    rates: pd.Series,
+    ticker: str = "SPY",
+    dte_days: int = 2,
+    moneyness=(0.97, 1.00, 1.03),
+    clock_times=((9, 30), (11, 0), (13, 0), (15, 0)),
+    min_bars: int = 30,
+    vol_bars: int = 60,
+) -> pd.DataFrame:
+    """Build 2-day ATM/OTM/ITM calls when listed quotes do not cover the window.
+
+    Benchmark price is a Black–Scholes European call from 1-minute realized σ.
+    Vol window is the last `vol_bars` returns ending at the quote time (so a
+    Monday open can still use Friday's last hour).
+    """
+    px = px.dropna()
+    rets = rets.dropna()
+    start = pd.Timestamp(period_start)
+    end = pd.Timestamp(period_end)
+    day_px = px.loc[(px.index >= start) & (px.index <= end)]
+    days = pd.DatetimeIndex(day_px.index.normalize().unique()).sort_values()
+    targets = []
+    for d in days:
+        session = day_px.loc[day_px.index.normalize() == d]
+        if session.empty:
+            continue
+        for h, m in clock_times:
+            ts = pd.Timestamp(d) + pd.Timedelta(hours=h, minutes=m)
+            if ts in session.index:
+                targets.append(ts)
+            else:
+                later = session.index[session.index >= ts]
+                if len(later):
+                    targets.append(later[0])
+    rows = []
+    T = float(dte_days) / 252.0
+    for ts in pd.DatetimeIndex(sorted(set(targets))):
+        S = float(px.loc[ts])
+        if not np.isfinite(S) or S <= 0:
+            continue
+        win = rets.loc[rets.index <= ts].tail(int(vol_bars))
+        if len(win) < int(min_bars):
+            continue
+        sigma = float(win.std(ddof=1) * np.sqrt(float(n_days)))
+        r = float(rates.asof(ts.normalize()))
+        if not np.isfinite(r):
+            r = float(rates.dropna().iloc[-1])
+        for mny in moneyness:
+            K = round(S * float(mny), 2)
+            rows.append(
+                {
+                    "underlying": ticker,
+                    "trading_date": ts,
+                    "S_t": S,
+                    "K": K,
+                    "expiration": ts + pd.Timedelta(days=int(dte_days)),
+                    "dte": int(dte_days),
+                    "r": r,
+                    "moneyness": S / K,
+                    "option_price": bs_call(S, K, T, r, sigma),
+                    "sigma_bs": sigma,
+                }
+            )
+    return pd.DataFrame(rows).reset_index(drop=True)

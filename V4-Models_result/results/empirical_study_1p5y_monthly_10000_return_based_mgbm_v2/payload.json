@@ -1,0 +1,4765 @@
+{
+  "meta": {
+    "window_label": "1.5 years",
+    "rolling": "monthly",
+    "n_paths": 10000,
+    "seed": 42,
+    "models": [
+      "GBM",
+      "Modified GBM",
+      "Modified GBM v2",
+      "GARCH",
+      "Merton",
+      "GARCH\u2013Merton"
+    ],
+    "tickers": [
+      "SPY",
+      "AAPL",
+      "MSFT",
+      "AMZN"
+    ],
+    "regimes": [
+      "2008-2009",
+      "2013-2014",
+      "2018-2019",
+      "2019-2020"
+    ],
+    "regime_meta": {
+      "2008-2009": {
+        "title": "Crisis",
+        "window": "2008-08-01 \u2192 2009-07-31",
+        "note": "Global financial crisis / high realized volatility"
+      },
+      "2013-2014": {
+        "title": "Normal",
+        "window": "2014-01-01 \u2192 2014-12-31",
+        "note": "Low-volatility expansion year"
+      },
+      "2018-2019": {
+        "title": "Late-cycle",
+        "window": "2018-10-01 \u2192 2019-09-30",
+        "note": "Vol spike (Q4 2018) then recovery"
+      },
+      "2019-2020": {
+        "title": "COVID",
+        "window": "2019-09-01 \u2192 2020-08-31",
+        "note": "COVID crash and rebound (shares Sep 2019 with late-cycle file)"
+      }
+    },
+    "primary_metric": "percentage RMSE",
+    "bias_definition": "model \u2212 market (dollars)",
+    "bias_pct_definition": "100 \u00d7 mean((model \u2212 market) / market)",
+    "elapsed_sec": 35.47181820869446,
+    "failures": [],
+    "generated_at": "2026-08-23T06:36:42.789085+00:00"
+  },
+  "shared_contracts": {
+    "2008-2009": {
+      "period_start": "2008-08-01",
+      "period_end": "2009-07-31",
+      "n": {
+        "SPY": 50,
+        "AAPL": 50,
+        "MSFT": 50,
+        "AMZN": 50
+      }
+    },
+    "2013-2014": {
+      "period_start": "2014-01-01",
+      "period_end": "2014-12-31",
+      "n": {
+        "SPY": 50,
+        "AAPL": 50,
+        "MSFT": 50,
+        "AMZN": 50
+      }
+    },
+    "2018-2019": {
+      "period_start": "2018-10-01",
+      "period_end": "2019-09-30",
+      "n": {
+        "SPY": 50,
+        "AAPL": 51,
+        "MSFT": 50,
+        "AMZN": 51
+      }
+    },
+    "2019-2020": {
+      "period_start": "2019-09-01",
+      "period_end": "2020-08-31",
+      "n": {
+        "SPY": 50,
+        "AAPL": 50,
+        "MSFT": 50,
+        "AMZN": 50
+      }
+    }
+  },
+  "filter_funnel": {
+    "tickers": {
+      "SPY": {
+        "2008-2009": {
+          "lookback_start": "2008-01-31",
+          "period_end": "2009-07-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 3359
+            },
+            {
+              "step": "calls only",
+              "n": 3359
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 3359
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 3311
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 3311
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 3203
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 3203
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 1357,
+            "ITM": 1139,
+            "ATM": 747,
+            "deep ITM": 116,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 1357,
+            "ITM": 1099,
+            "ATM": 747,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2013-2014": {
+          "lookback_start": "2013-06-30",
+          "period_end": "2014-12-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 12815
+            },
+            {
+              "step": "calls only",
+              "n": 12815
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 12815
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 12548
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 12548
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 12405
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 12405
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "ATM": 5451,
+            "ITM": 4195,
+            "OTM": 2999,
+            "deep ITM": 170,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "ATM": 5448,
+            "ITM": 3958,
+            "OTM": 2999,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2018-2019": {
+          "lookback_start": "2018-03-30",
+          "period_end": "2019-09-30",
+          "steps": [
+            {
+              "step": "input",
+              "n": 35222
+            },
+            {
+              "step": "calls only",
+              "n": 35222
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 35222
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 35104
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 35104
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 34809
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 34809
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "ATM": 14873,
+            "OTM": 11106,
+            "ITM": 8932,
+            "deep ITM": 311,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "ATM": 14872,
+            "OTM": 11106,
+            "ITM": 8831,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2019-2020": {
+          "lookback_start": "2019-02-28",
+          "period_end": "2020-08-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 42100
+            },
+            {
+              "step": "calls only",
+              "n": 42100
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 42100
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 41961
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 41961
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 41379
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 41379
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 14711,
+            "ATM": 14694,
+            "ITM": 12082,
+            "deep ITM": 613,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 14711,
+            "ATM": 14693,
+            "ITM": 11975,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        }
+      },
+      "AAPL": {
+        "2008-2009": {
+          "lookback_start": "2008-01-31",
+          "period_end": "2009-07-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 685
+            },
+            {
+              "step": "calls only",
+              "n": 685
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 685
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 685
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 685
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 652
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 652
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 271,
+            "ITM": 248,
+            "ATM": 133,
+            "deep ITM": 33,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 271,
+            "ITM": 248,
+            "ATM": 133,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2013-2014": {
+          "lookback_start": "2013-06-30",
+          "period_end": "2014-12-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 8925
+            },
+            {
+              "step": "calls only",
+              "n": 8925
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 8925
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 8875
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 8875
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 8633
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 8633
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 3672,
+            "ITM": 2888,
+            "ATM": 2113,
+            "deep ITM": 252,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 3672,
+            "ITM": 2848,
+            "ATM": 2113,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2018-2019": {
+          "lookback_start": "2018-03-30",
+          "period_end": "2019-09-30",
+          "steps": [
+            {
+              "step": "input",
+              "n": 6309
+            },
+            {
+              "step": "calls only",
+              "n": 6309
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 6309
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 6297
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 6297
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 6084
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 6084
+            }
+          ],
+          "n_eval_contracts": 51,
+          "moneyness_before": {
+            "OTM": 2552,
+            "ITM": 2185,
+            "ATM": 1354,
+            "deep ITM": 218,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 2552,
+            "ITM": 2178,
+            "ATM": 1354,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2019-2020": {
+          "lookback_start": "2019-02-28",
+          "period_end": "2020-08-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 8010
+            },
+            {
+              "step": "calls only",
+              "n": 8010
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 8010
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 7992
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 7992
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 7713
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 7713
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 3176,
+            "ITM": 2805,
+            "ATM": 1744,
+            "deep ITM": 285,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 3176,
+            "ITM": 2793,
+            "ATM": 1744,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        }
+      },
+      "MSFT": {
+        "2008-2009": {
+          "lookback_start": "2008-01-31",
+          "period_end": "2009-07-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 566
+            },
+            {
+              "step": "calls only",
+              "n": 566
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 566
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 566
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 566
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 538
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 538
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 234,
+            "ITM": 188,
+            "ATM": 116,
+            "deep ITM": 28,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 234,
+            "ITM": 188,
+            "ATM": 116,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2013-2014": {
+          "lookback_start": "2013-06-30",
+          "period_end": "2014-12-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 3299
+            },
+            {
+              "step": "calls only",
+              "n": 3299
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 3299
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 3237
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 3237
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 3175
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 3175
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 1153,
+            "ITM": 1094,
+            "ATM": 975,
+            "deep ITM": 77,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 1153,
+            "ITM": 1047,
+            "ATM": 975,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2018-2019": {
+          "lookback_start": "2018-03-30",
+          "period_end": "2019-09-30",
+          "steps": [
+            {
+              "step": "input",
+              "n": 7814
+            },
+            {
+              "step": "calls only",
+              "n": 7814
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 7814
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 7752
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 7752
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 7583
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 7583
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 2986,
+            "ITM": 2614,
+            "ATM": 2032,
+            "deep ITM": 182,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 2986,
+            "ITM": 2565,
+            "ATM": 2032,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2019-2020": {
+          "lookback_start": "2019-02-28",
+          "period_end": "2020-08-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 6892
+            },
+            {
+              "step": "calls only",
+              "n": 6892
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 6892
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 6852
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 6852
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 6655
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 6655
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 2621,
+            "ITM": 2386,
+            "ATM": 1677,
+            "deep ITM": 208,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 2621,
+            "ITM": 2357,
+            "ATM": 1677,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        }
+      },
+      "AMZN": {
+        "2008-2009": {
+          "lookback_start": "2008-01-31",
+          "period_end": "2009-07-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 465
+            },
+            {
+              "step": "calls only",
+              "n": 465
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 465
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 465
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 465
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 442
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 442
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "ITM": 185,
+            "OTM": 173,
+            "ATM": 84,
+            "deep ITM": 23,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "ITM": 185,
+            "OTM": 173,
+            "ATM": 84,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2013-2014": {
+          "lookback_start": "2013-06-30",
+          "period_end": "2014-12-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 5715
+            },
+            {
+              "step": "calls only",
+              "n": 5715
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 5715
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 5692
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 5692
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 5598
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 5598
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 2583,
+            "ATM": 1522,
+            "ITM": 1509,
+            "deep ITM": 101,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 2583,
+            "ATM": 1522,
+            "ITM": 1493,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2018-2019": {
+          "lookback_start": "2018-03-30",
+          "period_end": "2019-09-30",
+          "steps": [
+            {
+              "step": "input",
+              "n": 28809
+            },
+            {
+              "step": "calls only",
+              "n": 28809
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 28809
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 28808
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 28808
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 28346
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 28346
+            }
+          ],
+          "n_eval_contracts": 51,
+          "moneyness_before": {
+            "OTM": 12200,
+            "ATM": 8464,
+            "ITM": 7683,
+            "deep ITM": 462,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 12200,
+            "ATM": 8464,
+            "ITM": 7682,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2019-2020": {
+          "lookback_start": "2019-02-28",
+          "period_end": "2020-08-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 26766
+            },
+            {
+              "step": "calls only",
+              "n": 26766
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 26766
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 26760
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 26760
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 26323
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 26323
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 11003,
+            "ATM": 8140,
+            "ITM": 7185,
+            "deep ITM": 438,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 11003,
+            "ATM": 8140,
+            "ITM": 7180,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        }
+      }
+    },
+    "note": "Same filters for every model. No model-specific data selection."
+  },
+  "cells": {
+    "SPY|2008-2009|GBM": {
+      "ticker": "SPY",
+      "regime": "2008-2009",
+      "model": "GBM",
+      "rmse_pct": 55.01033307367117,
+      "mae": 1.405385159394404,
+      "bias": 0.2704799204462225,
+      "bias_pct": 21.160400148945186,
+      "early": 0.24546800000000002,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.004318952560424805,
+      "t_lsm": 0.9757919311523438,
+      "elapsed": 0.982219934463501,
+      "contracts_csv": "contracts/2008-2009/SPY/2008-2009_gbm.csv"
+    },
+    "AAPL|2008-2009|GBM": {
+      "ticker": "AAPL",
+      "regime": "2008-2009",
+      "model": "GBM",
+      "rmse_pct": 57.66587325269342,
+      "mae": 2.432616409794846,
+      "bias": 1.3849239912937694,
+      "bias_pct": 31.097336795373103,
+      "early": 0.22751999999999994,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.002638101577758789,
+      "t_lsm": 1.1034700870513916,
+      "elapsed": 1.1098639965057373,
+      "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_gbm.csv"
+    },
+    "MSFT|2008-2009|GBM": {
+      "ticker": "MSFT",
+      "regime": "2008-2009",
+      "model": "GBM",
+      "rmse_pct": 44.01915637552489,
+      "mae": 0.3723332035785127,
+      "bias": 0.08970560559829993,
+      "bias_pct": 17.987966619262835,
+      "early": 0.24062600000000003,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.003206968307495117,
+      "t_lsm": 1.4844081401824951,
+      "elapsed": 1.490644931793213,
+      "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_gbm.csv"
+    },
+    "AMZN|2008-2009|GBM": {
+      "ticker": "AMZN",
+      "regime": "2008-2009",
+      "model": "GBM",
+      "rmse_pct": 46.922635151403966,
+      "mae": 1.5126124525784153,
+      "bias": 0.7402740737880555,
+      "bias_pct": 22.047011589869967,
+      "early": 0.22387,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.004726886749267578,
+      "t_lsm": 1.6312408447265625,
+      "elapsed": 1.640533208847046,
+      "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_gbm.csv"
+    },
+    "SPY|2013-2014|GBM": {
+      "ticker": "SPY",
+      "regime": "2013-2014",
+      "model": "GBM",
+      "rmse_pct": 38.08491580531299,
+      "mae": 0.6849633550754476,
+      "bias": 0.4678267203247314,
+      "bias_pct": 24.879310521713315,
+      "early": 0.26122999999999996,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.004565000534057617,
+      "t_lsm": 1.4462661743164062,
+      "elapsed": 1.45597505569458,
+      "contracts_csv": "contracts/2013-2014/SPY/2013-2014_gbm.csv"
+    },
+    "AAPL|2013-2014|GBM": {
+      "ticker": "AAPL",
+      "regime": "2013-2014",
+      "model": "GBM",
+      "rmse_pct": 50.20406427879235,
+      "mae": 3.576647819094097,
+      "bias": 3.538719154351501,
+      "bias_pct": 38.63341165376259,
+      "early": 0.2462,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.00407099723815918,
+      "t_lsm": 1.3471910953521729,
+      "elapsed": 1.3643100261688232,
+      "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_gbm.csv"
+    },
+    "MSFT|2013-2014|GBM": {
+      "ticker": "MSFT",
+      "regime": "2013-2014",
+      "model": "GBM",
+      "rmse_pct": 62.49030622414755,
+      "mae": 0.4282758001333296,
+      "bias": 0.4260539738278841,
+      "bias_pct": 52.97517175486899,
+      "early": 0.24705199999999997,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.007312774658203125,
+      "t_lsm": 1.041078805923462,
+      "elapsed": 1.0498571395874023,
+      "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_gbm.csv"
+    },
+    "AMZN|2013-2014|GBM": {
+      "ticker": "AMZN",
+      "regime": "2013-2014",
+      "model": "GBM",
+      "rmse_pct": 31.092910299711278,
+      "mae": 2.702388657964763,
+      "bias": 1.2412325875779593,
+      "bias_pct": 16.535649402837674,
+      "early": 0.24603199999999997,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.002574920654296875,
+      "t_lsm": 0.9268357753753662,
+      "elapsed": 0.9371058940887451,
+      "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_gbm.csv"
+    },
+    "SPY|2018-2019|GBM": {
+      "ticker": "SPY",
+      "regime": "2018-2019",
+      "model": "GBM",
+      "rmse_pct": 49.50652001528525,
+      "mae": 1.6628452334070414,
+      "bias": 1.1527711577932553,
+      "bias_pct": 32.89572331195774,
+      "early": 0.21776200000000004,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.002721071243286133,
+      "t_lsm": 1.2530498504638672,
+      "elapsed": 1.268254041671753,
+      "contracts_csv": "contracts/2018-2019/SPY/2018-2019_gbm.csv"
+    },
+    "AAPL|2018-2019|GBM": {
+      "ticker": "AAPL",
+      "regime": "2018-2019",
+      "model": "GBM",
+      "rmse_pct": 32.5265984454862,
+      "mae": 1.7033412915401425,
+      "bias": 1.0080645188014714,
+      "bias_pct": 18.75968517157856,
+      "early": 0.2385549019607843,
+      "n": 51,
+      "n_updates": 13,
+      "t_cal": 0.005729198455810547,
+      "t_lsm": 2.0753748416900635,
+      "elapsed": 2.0965051651000977,
+      "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_gbm.csv"
+    },
+    "MSFT|2018-2019|GBM": {
+      "ticker": "MSFT",
+      "regime": "2018-2019",
+      "model": "GBM",
+      "rmse_pct": 41.73114721231309,
+      "mae": 1.083921560197097,
+      "bias": 0.8053620310270675,
+      "bias_pct": 27.549267867960026,
+      "early": 0.229732,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.004897117614746094,
+      "t_lsm": 1.2987980842590332,
+      "elapsed": 1.3074769973754883,
+      "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_gbm.csv"
+    },
+    "AMZN|2018-2019|GBM": {
+      "ticker": "AMZN",
+      "regime": "2018-2019",
+      "model": "GBM",
+      "rmse_pct": 43.65765226114637,
+      "mae": 21.337303068894574,
+      "bias": 11.409509291871744,
+      "bias_pct": 25.210501105354705,
+      "early": 0.22862941176470586,
+      "n": 51,
+      "n_updates": 13,
+      "t_cal": 0.0050928592681884766,
+      "t_lsm": 1.3332560062408447,
+      "elapsed": 1.3458120822906494,
+      "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_gbm.csv"
+    },
+    "SPY|2019-2020|GBM": {
+      "ticker": "SPY",
+      "regime": "2019-2020",
+      "model": "GBM",
+      "rmse_pct": 64.87591091415682,
+      "mae": 3.600260818684438,
+      "bias": 1.6141058651634652,
+      "bias_pct": 44.13459968836676,
+      "early": 0.23863399999999996,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.004797935485839844,
+      "t_lsm": 1.4267239570617676,
+      "elapsed": 1.4369359016418457,
+      "contracts_csv": "contracts/2019-2020/SPY/2019-2020_gbm.csv"
+    },
+    "AAPL|2019-2020|GBM": {
+      "ticker": "AAPL",
+      "regime": "2019-2020",
+      "model": "GBM",
+      "rmse_pct": 46.18894560160604,
+      "mae": 3.999542988499727,
+      "bias": 2.3663298328549236,
+      "bias_pct": 30.75930385667801,
+      "early": 0.238072,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.006418943405151367,
+      "t_lsm": 1.6279699802398682,
+      "elapsed": 1.6374719142913818,
+      "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_gbm.csv"
+    },
+    "MSFT|2019-2020|GBM": {
+      "ticker": "MSFT",
+      "regime": "2019-2020",
+      "model": "GBM",
+      "rmse_pct": 45.93087115337497,
+      "mae": 2.0118341788655445,
+      "bias": 1.0018246704267937,
+      "bias_pct": 28.11944579284487,
+      "early": 0.24528999999999995,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.004850864410400391,
+      "t_lsm": 1.2354450225830078,
+      "elapsed": 1.243539810180664,
+      "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_gbm.csv"
+    },
+    "AMZN|2019-2020|GBM": {
+      "ticker": "AMZN",
+      "regime": "2019-2020",
+      "model": "GBM",
+      "rmse_pct": 52.41904125163002,
+      "mae": 25.836397384125902,
+      "bias": 10.799907539263724,
+      "bias_pct": 31.408101532799744,
+      "early": 0.23772,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.003854036331176758,
+      "t_lsm": 1.331805944442749,
+      "elapsed": 1.3422808647155762,
+      "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_gbm.csv"
+    },
+    "SPY|2008-2009|Modified GBM": {
+      "ticker": "SPY",
+      "regime": "2008-2009",
+      "model": "Modified GBM",
+      "rmse_pct": 47.671598393805546,
+      "mae": 1.2487806634435088,
+      "bias": -0.0854290903596724,
+      "bias_pct": 10.617978721745073,
+      "early": 0.2595,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.006245136260986328,
+      "t_lsm": 1.3491699695587158,
+      "elapsed": 1.3585999011993408,
+      "contracts_csv": "contracts/2008-2009/SPY/2008-2009_modified_gbm.csv"
+    },
+    "AAPL|2008-2009|Modified GBM": {
+      "ticker": "AAPL",
+      "regime": "2008-2009",
+      "model": "Modified GBM",
+      "rmse_pct": 51.941865250763996,
+      "mae": 2.159133442064795,
+      "bias": 0.9308934477243165,
+      "bias_pct": 23.66850987506812,
+      "early": 0.23549399999999995,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.0046558380126953125,
+      "t_lsm": 1.4028470516204834,
+      "elapsed": 1.4127869606018066,
+      "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_modified_gbm.csv"
+    },
+    "MSFT|2008-2009|Modified GBM": {
+      "ticker": "MSFT",
+      "regime": "2008-2009",
+      "model": "Modified GBM",
+      "rmse_pct": 41.988894062889834,
+      "mae": 0.3590105390605614,
+      "bias": 0.07989790795996538,
+      "bias_pct": 16.828751854700375,
+      "early": 0.252462,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.011449098587036133,
+      "t_lsm": 2.2515270709991455,
+      "elapsed": 2.2663769721984863,
+      "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_modified_gbm.csv"
+    },
+    "AMZN|2008-2009|Modified GBM": {
+      "ticker": "AMZN",
+      "regime": "2008-2009",
+      "model": "Modified GBM",
+      "rmse_pct": 40.248843012664906,
+      "mae": 1.319916549775895,
+      "bias": 0.32973314012899757,
+      "bias_pct": 12.794820280865924,
+      "early": 0.24895799999999998,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.00565791130065918,
+      "t_lsm": 2.1972270011901855,
+      "elapsed": 2.215287208557129,
+      "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_modified_gbm.csv"
+    },
+    "SPY|2013-2014|Modified GBM": {
+      "ticker": "SPY",
+      "regime": "2013-2014",
+      "model": "Modified GBM",
+      "rmse_pct": 37.08077999060945,
+      "mae": 0.6750391465865772,
+      "bias": 0.4371002654058419,
+      "bias_pct": 23.65640586284696,
+      "early": 0.26641200000000004,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.014925003051757812,
+      "t_lsm": 2.5085349082946777,
+      "elapsed": 2.5331788063049316,
+      "contracts_csv": "contracts/2013-2014/SPY/2013-2014_modified_gbm.csv"
+    },
+    "AAPL|2013-2014|Modified GBM": {
+      "ticker": "AAPL",
+      "regime": "2013-2014",
+      "model": "Modified GBM",
+      "rmse_pct": 45.441239965169004,
+      "mae": 3.1559043867952523,
+      "bias": 3.113114623937302,
+      "bias_pct": 34.56121846799782,
+      "early": 0.25442,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.010330915451049805,
+      "t_lsm": 2.347752332687378,
+      "elapsed": 2.3619399070739746,
+      "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_modified_gbm.csv"
+    },
+    "MSFT|2013-2014|Modified GBM": {
+      "ticker": "MSFT",
+      "regime": "2013-2014",
+      "model": "Modified GBM",
+      "rmse_pct": 59.38572542855799,
+      "mae": 0.40559850399270175,
+      "bias": 0.4024612446814723,
+      "bias_pct": 50.16341499512962,
+      "early": 0.256776,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.00741887092590332,
+      "t_lsm": 2.2427749633789062,
+      "elapsed": 2.257520914077759,
+      "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_modified_gbm.csv"
+    },
+    "AMZN|2013-2014|Modified GBM": {
+      "ticker": "AMZN",
+      "regime": "2013-2014",
+      "model": "Modified GBM",
+      "rmse_pct": 29.48259567483924,
+      "mae": 2.6248569217738758,
+      "bias": 1.0583594009793789,
+      "bias_pct": 14.83612570597503,
+      "early": 0.250812,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.00922703742980957,
+      "t_lsm": 2.312807083129883,
+      "elapsed": 2.329900026321411,
+      "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_modified_gbm.csv"
+    },
+    "SPY|2018-2019|Modified GBM": {
+      "ticker": "SPY",
+      "regime": "2018-2019",
+      "model": "Modified GBM",
+      "rmse_pct": 51.83455179132439,
+      "mae": 1.7486732578067885,
+      "bias": 1.2256610712183373,
+      "bias_pct": 34.674933890331886,
+      "early": 0.22171,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.008911848068237305,
+      "t_lsm": 1.9748878479003906,
+      "elapsed": 1.9870409965515137,
+      "contracts_csv": "contracts/2018-2019/SPY/2018-2019_modified_gbm.csv"
+    },
+    "AAPL|2018-2019|Modified GBM": {
+      "ticker": "AAPL",
+      "regime": "2018-2019",
+      "model": "Modified GBM",
+      "rmse_pct": 34.33068282244164,
+      "mae": 1.7907287261121876,
+      "bias": 1.1260483954369296,
+      "bias_pct": 20.690166721383036,
+      "early": 0.2397529411764706,
+      "n": 51,
+      "n_updates": 13,
+      "t_cal": 0.009279012680053711,
+      "t_lsm": 2.5012106895446777,
+      "elapsed": 2.5145161151885986,
+      "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_modified_gbm.csv"
+    },
+    "MSFT|2018-2019|Modified GBM": {
+      "ticker": "MSFT",
+      "regime": "2018-2019",
+      "model": "Modified GBM",
+      "rmse_pct": 33.43929877897403,
+      "mae": 0.8876863665763495,
+      "bias": 0.48487454276745945,
+      "bias_pct": 17.77950682996967,
+      "early": 0.25344,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.006766080856323242,
+      "t_lsm": 2.2115280628204346,
+      "elapsed": 2.2281739711761475,
+      "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_modified_gbm.csv"
+    },
+    "AMZN|2018-2019|Modified GBM": {
+      "ticker": "AMZN",
+      "regime": "2018-2019",
+      "model": "Modified GBM",
+      "rmse_pct": 47.58773596920982,
+      "mae": 22.54069364453548,
+      "bias": 14.272329136015472,
+      "bias_pct": 30.056563512994376,
+      "early": 0.229643137254902,
+      "n": 51,
+      "n_updates": 13,
+      "t_cal": 0.008027076721191406,
+      "t_lsm": 2.3164331912994385,
+      "elapsed": 2.3503479957580566,
+      "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_modified_gbm.csv"
+    },
+    "SPY|2019-2020|Modified GBM": {
+      "ticker": "SPY",
+      "regime": "2019-2020",
+      "model": "Modified GBM",
+      "rmse_pct": 64.56373613996936,
+      "mae": 3.4809900688333655,
+      "bias": 1.5419002415552183,
+      "bias_pct": 44.09072519980691,
+      "early": 0.24168000000000006,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.009114980697631836,
+      "t_lsm": 2.488859176635742,
+      "elapsed": 2.5051279067993164,
+      "contracts_csv": "contracts/2019-2020/SPY/2019-2020_modified_gbm.csv"
+    },
+    "AAPL|2019-2020|Modified GBM": {
+      "ticker": "AAPL",
+      "regime": "2019-2020",
+      "model": "Modified GBM",
+      "rmse_pct": 45.884667709833266,
+      "mae": 3.7712225566593762,
+      "bias": 2.1028864968143677,
+      "bias_pct": 29.59826448417128,
+      "early": 0.24419000000000002,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.016154050827026367,
+      "t_lsm": 2.402566909790039,
+      "elapsed": 2.422011137008667,
+      "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_modified_gbm.csv"
+    },
+    "MSFT|2019-2020|Modified GBM": {
+      "ticker": "MSFT",
+      "regime": "2019-2020",
+      "model": "Modified GBM",
+      "rmse_pct": 40.97220301010998,
+      "mae": 1.757903592723939,
+      "bias": 0.6597347034401281,
+      "bias_pct": 22.116271587109292,
+      "early": 0.250932,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.02385997772216797,
+      "t_lsm": 2.3545169830322266,
+      "elapsed": 2.3850719928741455,
+      "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_modified_gbm.csv"
+    },
+    "AMZN|2019-2020|Modified GBM": {
+      "ticker": "AMZN",
+      "regime": "2019-2020",
+      "model": "Modified GBM",
+      "rmse_pct": 54.348577790210626,
+      "mae": 26.313804377305406,
+      "bias": 11.36968342265427,
+      "bias_pct": 32.76411301492498,
+      "early": 0.242318,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.006473064422607422,
+      "t_lsm": 2.2287001609802246,
+      "elapsed": 2.245151996612549,
+      "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_modified_gbm.csv"
+    },
+    "SPY|2008-2009|Modified GBM v2": {
+      "ticker": "SPY",
+      "regime": "2008-2009",
+      "model": "Modified GBM v2",
+      "rmse_pct": 79.61290914872498,
+      "mae": 2.4569122846079927,
+      "bias": -0.5270563196453415,
+      "bias_pct": 4.607891615162589,
+      "early": 0.20322199999999999,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.005939960479736328,
+      "t_lsm": 2.411813974380493,
+      "elapsed": 2.421433925628662,
+      "contracts_csv": "contracts/2008-2009/SPY/2008-2009_modified_gbm_v2.csv"
+    },
+    "AAPL|2008-2009|Modified GBM v2": {
+      "ticker": "AAPL",
+      "regime": "2008-2009",
+      "model": "Modified GBM v2",
+      "rmse_pct": 63.77954661397246,
+      "mae": 3.8372982022468056,
+      "bias": -2.160774835879817,
+      "bias_pct": -22.885528487164947,
+      "early": 0.19576800000000003,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.005377054214477539,
+      "t_lsm": 1.7436089515686035,
+      "elapsed": 1.7517900466918945,
+      "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_modified_gbm_v2.csv"
+    },
+    "MSFT|2008-2009|Modified GBM v2": {
+      "ticker": "MSFT",
+      "regime": "2008-2009",
+      "model": "Modified GBM v2",
+      "rmse_pct": 45.95814850815023,
+      "mae": 0.3953109692495563,
+      "bias": 0.10994090159057483,
+      "bias_pct": 19.927956054377226,
+      "early": 0.222212,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.006106138229370117,
+      "t_lsm": 3.584613084793091,
+      "elapsed": 3.593430995941162,
+      "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_modified_gbm_v2.csv"
+    },
+    "AMZN|2008-2009|Modified GBM v2": {
+      "ticker": "AMZN",
+      "regime": "2008-2009",
+      "model": "Modified GBM v2",
+      "rmse_pct": 75.72274185473819,
+      "mae": 2.7408516959590865,
+      "bias": 0.08855757320036486,
+      "bias_pct": 10.010481359651305,
+      "early": 0.18588800000000003,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.006061077117919922,
+      "t_lsm": 1.9601118564605713,
+      "elapsed": 1.9698340892791748,
+      "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_modified_gbm_v2.csv"
+    },
+    "SPY|2013-2014|Modified GBM v2": {
+      "ticker": "SPY",
+      "regime": "2013-2014",
+      "model": "Modified GBM v2",
+      "rmse_pct": 96.58283298624771,
+      "mae": 2.463765744018969,
+      "bias": -2.463765744018969,
+      "bias_pct": -96.41832009577946,
+      "early": 0.004848000000000001,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.0059702396392822266,
+      "t_lsm": 1.4728338718414307,
+      "elapsed": 1.4812238216400146,
+      "contracts_csv": "contracts/2013-2014/SPY/2013-2014_modified_gbm_v2.csv"
+    },
+    "AAPL|2013-2014|Modified GBM v2": {
+      "ticker": "AAPL",
+      "regime": "2013-2014",
+      "model": "Modified GBM v2",
+      "rmse_pct": 80.85067429969286,
+      "mae": 4.66858147293411,
+      "bias": 2.0815367543829497,
+      "bias_pct": -13.461512051006864,
+      "early": 0.135066,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.006066799163818359,
+      "t_lsm": 3.0469539165496826,
+      "elapsed": 3.0569992065429688,
+      "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_modified_gbm_v2.csv"
+    },
+    "MSFT|2013-2014|Modified GBM v2": {
+      "ticker": "MSFT",
+      "regime": "2013-2014",
+      "model": "Modified GBM v2",
+      "rmse_pct": 91.63811816532275,
+      "mae": 0.8285299650894358,
+      "bias": -0.8285299650894358,
+      "bias_pct": -90.8317605433836,
+      "early": 0.056799999999999996,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.009984970092773438,
+      "t_lsm": 2.119036912918091,
+      "elapsed": 2.137540102005005,
+      "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_modified_gbm_v2.csv"
+    },
+    "AMZN|2013-2014|Modified GBM v2": {
+      "ticker": "AMZN",
+      "regime": "2013-2014",
+      "model": "Modified GBM v2",
+      "rmse_pct": 47.169112509713074,
+      "mae": 4.462056174715627,
+      "bias": -0.6008678375360776,
+      "bias_pct": 4.469880902022619,
+      "early": 0.220882,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.014241933822631836,
+      "t_lsm": 2.5684781074523926,
+      "elapsed": 2.589437961578369,
+      "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_modified_gbm_v2.csv"
+    },
+    "SPY|2018-2019|Modified GBM v2": {
+      "ticker": "SPY",
+      "regime": "2018-2019",
+      "model": "Modified GBM v2",
+      "rmse_pct": 56.808518040758024,
+      "mae": 2.0970100340252635,
+      "bias": -0.5008684010132028,
+      "bias_pct": -4.494180921964408,
+      "early": 0.099766,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.005849123001098633,
+      "t_lsm": 2.089000940322876,
+      "elapsed": 2.101533889770508,
+      "contracts_csv": "contracts/2018-2019/SPY/2018-2019_modified_gbm_v2.csv"
+    },
+    "AAPL|2018-2019|Modified GBM v2": {
+      "ticker": "AAPL",
+      "regime": "2018-2019",
+      "model": "Modified GBM v2",
+      "rmse_pct": 62.1921280591714,
+      "mae": 3.8763081795937024,
+      "bias": -3.8763081795937024,
+      "bias_pct": -58.528032878887295,
+      "early": 0.1052019607843137,
+      "n": 51,
+      "n_updates": 13,
+      "t_cal": 0.008524656295776367,
+      "t_lsm": 1.8341398239135742,
+      "elapsed": 1.8452398777008057,
+      "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_modified_gbm_v2.csv"
+    },
+    "MSFT|2018-2019|Modified GBM v2": {
+      "ticker": "MSFT",
+      "regime": "2018-2019",
+      "model": "Modified GBM v2",
+      "rmse_pct": 77.16790160917472,
+      "mae": 2.6199439126581394,
+      "bias": -2.6199439126581394,
+      "bias_pct": -76.37740652775169,
+      "early": 0.030813999999999998,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.012617349624633789,
+      "t_lsm": 2.069002866744995,
+      "elapsed": 2.085493803024292,
+      "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_modified_gbm_v2.csv"
+    },
+    "AMZN|2018-2019|Modified GBM v2": {
+      "ticker": "AMZN",
+      "regime": "2018-2019",
+      "model": "Modified GBM v2",
+      "rmse_pct": 79.14183711524393,
+      "mae": 49.51405233010117,
+      "bias": -49.51405233010117,
+      "bias_pct": -78.01098889896912,
+      "early": 0.04275098039215687,
+      "n": 51,
+      "n_updates": 13,
+      "t_cal": 0.0062940120697021484,
+      "t_lsm": 1.8597311973571777,
+      "elapsed": 1.8702499866485596,
+      "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_modified_gbm_v2.csv"
+    },
+    "SPY|2019-2020|Modified GBM v2": {
+      "ticker": "SPY",
+      "regime": "2019-2020",
+      "model": "Modified GBM v2",
+      "rmse_pct": 44.42336271659851,
+      "mae": 2.8810795490624823,
+      "bias": -2.3523931075006304,
+      "bias_pct": -25.449469625316727,
+      "early": 0.14465999999999998,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.006651878356933594,
+      "t_lsm": 2.279614210128784,
+      "elapsed": 2.288271188735962,
+      "contracts_csv": "contracts/2019-2020/SPY/2019-2020_modified_gbm_v2.csv"
+    },
+    "AAPL|2019-2020|Modified GBM v2": {
+      "ticker": "AAPL",
+      "regime": "2019-2020",
+      "model": "Modified GBM v2",
+      "rmse_pct": 77.6469664427794,
+      "mae": 8.80241633908831,
+      "bias": -8.036789240904472,
+      "bias_pct": -66.62155698558138,
+      "early": 0.09323400000000001,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.006371259689331055,
+      "t_lsm": 1.9543979167938232,
+      "elapsed": 1.963590145111084,
+      "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_modified_gbm_v2.csv"
+    },
+    "MSFT|2019-2020|Modified GBM v2": {
+      "ticker": "MSFT",
+      "regime": "2019-2020",
+      "model": "Modified GBM v2",
+      "rmse_pct": 89.98610465880247,
+      "mae": 5.5336968121399455,
+      "bias": -5.5336968121399455,
+      "bias_pct": -89.43206029967445,
+      "early": 0.013194,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.006396055221557617,
+      "t_lsm": 1.7313048839569092,
+      "elapsed": 1.7401812076568604,
+      "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_modified_gbm_v2.csv"
+    },
+    "AMZN|2019-2020|Modified GBM v2": {
+      "ticker": "AMZN",
+      "regime": "2019-2020",
+      "model": "Modified GBM v2",
+      "rmse_pct": 77.06782844032523,
+      "mae": 67.02716965903764,
+      "bias": -67.02716965903764,
+      "bias_pct": -74.79372892956312,
+      "early": 0.102906,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.006341218948364258,
+      "t_lsm": 1.8770110607147217,
+      "elapsed": 1.885876178741455,
+      "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_modified_gbm_v2.csv"
+    },
+    "SPY|2008-2009|GARCH": {
+      "ticker": "SPY",
+      "regime": "2008-2009",
+      "model": "GARCH",
+      "rmse_pct": 43.04035741244614,
+      "mae": 1.3272493046451106,
+      "bias": 1.2327922245912717,
+      "bias_pct": 33.41354040001064,
+      "early": 0.235428,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 2.993633985519409,
+      "t_lsm": 2.1265132427215576,
+      "elapsed": 5.131090879440308,
+      "contracts_csv": "contracts/2008-2009/SPY/2008-2009_garch.csv"
+    },
+    "AAPL|2008-2009|GARCH": {
+      "ticker": "AAPL",
+      "regime": "2008-2009",
+      "model": "GARCH",
+      "rmse_pct": 34.36046307813248,
+      "mae": 1.7479615085024733,
+      "bias": 1.5066050775692605,
+      "bias_pct": 25.46469611648868,
+      "early": 0.223402,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 3.401378870010376,
+      "t_lsm": 1.0678668022155762,
+      "elapsed": 4.475184917449951,
+      "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_garch.csv"
+    },
+    "MSFT|2008-2009|GARCH": {
+      "ticker": "MSFT",
+      "regime": "2008-2009",
+      "model": "GARCH",
+      "rmse_pct": 50.926099141734774,
+      "mae": 0.41303804081613166,
+      "bias": 0.35050562622612363,
+      "bias_pct": 35.86605871920358,
+      "early": 0.2882,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 4.5199360847473145,
+      "t_lsm": 1.84476900100708,
+      "elapsed": 6.373395919799805,
+      "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_garch.csv"
+    },
+    "AMZN|2008-2009|GARCH": {
+      "ticker": "AMZN",
+      "regime": "2008-2009",
+      "model": "GARCH",
+      "rmse_pct": 27.66667683469965,
+      "mae": 1.0223912525467622,
+      "bias": 0.3209964362342447,
+      "bias_pct": 10.568537819824341,
+      "early": 0.20930600000000002,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 4.79817795753479,
+      "t_lsm": 1.7026469707489014,
+      "elapsed": 6.510601997375488,
+      "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_garch.csv"
+    },
+    "SPY|2013-2014|GARCH": {
+      "ticker": "SPY",
+      "regime": "2013-2014",
+      "model": "GARCH",
+      "rmse_pct": 36.35061732620252,
+      "mae": 0.6565380806806003,
+      "bias": 0.42033284288599615,
+      "bias_pct": 22.861401319631057,
+      "early": 0.24374200000000001,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 3.6663599014282227,
+      "t_lsm": 1.9226551055908203,
+      "elapsed": 5.594411134719849,
+      "contracts_csv": "contracts/2013-2014/SPY/2013-2014_garch.csv"
+    },
+    "AAPL|2013-2014|GARCH": {
+      "ticker": "AAPL",
+      "regime": "2013-2014",
+      "model": "GARCH",
+      "rmse_pct": 40.07704928258421,
+      "mae": 2.758188265792614,
+      "bias": 2.503927686774111,
+      "bias_pct": 23.86289235882455,
+      "early": 0.24568400000000004,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 6.155147075653076,
+      "t_lsm": 1.5638060569763184,
+      "elapsed": 7.724225997924805,
+      "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_garch.csv"
+    },
+    "MSFT|2013-2014|GARCH": {
+      "ticker": "MSFT",
+      "regime": "2013-2014",
+      "model": "GARCH",
+      "rmse_pct": 85.93798617093114,
+      "mae": 0.6128974648042831,
+      "bias": 0.6118503305994513,
+      "bias_pct": 73.69168441705833,
+      "early": 0.25053400000000003,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 3.863550901412964,
+      "t_lsm": 1.807373046875,
+      "elapsed": 5.679229974746704,
+      "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_garch.csv"
+    },
+    "AMZN|2013-2014|GARCH": {
+      "ticker": "AMZN",
+      "regime": "2013-2014",
+      "model": "GARCH",
+      "rmse_pct": 34.57224106337989,
+      "mae": 2.917043022793129,
+      "bias": 1.612016646239747,
+      "bias_pct": 19.872849110433037,
+      "early": 0.230476,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 7.031682968139648,
+      "t_lsm": 2.153294801712036,
+      "elapsed": 9.19115686416626,
+      "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_garch.csv"
+    },
+    "SPY|2018-2019|GARCH": {
+      "ticker": "SPY",
+      "regime": "2018-2019",
+      "model": "GARCH",
+      "rmse_pct": 65.97503919838884,
+      "mae": 1.987152320118285,
+      "bias": 1.5637810060714767,
+      "bias_pct": 41.26403238337931,
+      "early": 0.22233799999999998,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 4.557429075241089,
+      "t_lsm": 1.9513108730316162,
+      "elapsed": 6.522113084793091,
+      "contracts_csv": "contracts/2018-2019/SPY/2018-2019_garch.csv"
+    },
+    "AAPL|2018-2019|GARCH": {
+      "ticker": "AAPL",
+      "regime": "2018-2019",
+      "model": "GARCH",
+      "rmse_pct": 40.82047502090263,
+      "mae": 1.7244568069258144,
+      "bias": 1.1159201678648558,
+      "bias_pct": 21.747433028114234,
+      "early": 0.22381176470588232,
+      "n": 51,
+      "n_updates": 13,
+      "t_cal": 3.8606839179992676,
+      "t_lsm": 2.50439715385437,
+      "elapsed": 6.369790077209473,
+      "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_garch.csv"
+    },
+    "MSFT|2018-2019|GARCH": {
+      "ticker": "MSFT",
+      "regime": "2018-2019",
+      "model": "GARCH",
+      "rmse_pct": 37.25494281745899,
+      "mae": 0.9394270127776524,
+      "bias": 0.7117751141093138,
+      "bias_pct": 24.435579809243627,
+      "early": 0.21464199999999997,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 5.155318975448608,
+      "t_lsm": 2.149055004119873,
+      "elapsed": 7.31715202331543,
+      "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_garch.csv"
+    },
+    "AMZN|2018-2019|GARCH": {
+      "ticker": "AMZN",
+      "regime": "2018-2019",
+      "model": "GARCH",
+      "rmse_pct": 32.444026681935114,
+      "mae": 16.126828744152508,
+      "bias": 9.757622608578854,
+      "bias_pct": 19.153330420507057,
+      "early": 0.2116392156862745,
+      "n": 51,
+      "n_updates": 13,
+      "t_cal": 3.7696759700775146,
+      "t_lsm": 2.3718881607055664,
+      "elapsed": 6.155290842056274,
+      "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_garch.csv"
+    },
+    "SPY|2019-2020|GARCH": {
+      "ticker": "SPY",
+      "regime": "2019-2020",
+      "model": "GARCH",
+      "rmse_pct": 53.61559123996681,
+      "mae": 2.8956514330718806,
+      "bias": 2.0455677765500604,
+      "bias_pct": 35.241856841587364,
+      "early": 0.290988,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 6.763506889343262,
+      "t_lsm": 7.300687074661255,
+      "elapsed": 14.120269060134888,
+      "contracts_csv": "contracts/2019-2020/SPY/2019-2020_garch.csv"
+    },
+    "AAPL|2019-2020|GARCH": {
+      "ticker": "AAPL",
+      "regime": "2019-2020",
+      "model": "GARCH",
+      "rmse_pct": 45.52728733935798,
+      "mae": 3.4285010348184106,
+      "bias": 2.6089991743953918,
+      "bias_pct": 29.34590391216932,
+      "early": 0.23434799999999995,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 6.6672210693359375,
+      "t_lsm": 3.5008559226989746,
+      "elapsed": 10.221504211425781,
+      "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_garch.csv"
+    },
+    "MSFT|2019-2020|GARCH": {
+      "ticker": "MSFT",
+      "regime": "2019-2020",
+      "model": "GARCH",
+      "rmse_pct": 49.19722665905075,
+      "mae": 2.02127487915657,
+      "bias": 1.2389795289437076,
+      "bias_pct": 25.36254247803958,
+      "early": 0.257914,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 8.091635942459106,
+      "t_lsm": 4.112401247024536,
+      "elapsed": 12.222189903259277,
+      "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_garch.csv"
+    },
+    "AMZN|2019-2020|GARCH": {
+      "ticker": "AMZN",
+      "regime": "2019-2020",
+      "model": "GARCH",
+      "rmse_pct": 30.116171763524648,
+      "mae": 18.853847566755807,
+      "bias": 3.884813392253548,
+      "bias_pct": 15.168879816310321,
+      "early": 0.22109200000000004,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 7.890604734420776,
+      "t_lsm": 2.3971939086914062,
+      "elapsed": 10.306847095489502,
+      "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_garch.csv"
+    },
+    "SPY|2008-2009|Merton": {
+      "ticker": "SPY",
+      "regime": "2008-2009",
+      "model": "Merton",
+      "rmse_pct": 51.72610222115124,
+      "mae": 1.2280720268134955,
+      "bias": 0.5307409253459404,
+      "bias_pct": 25.718392185534512,
+      "early": 0.199994,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.484295129776001,
+      "t_lsm": 1.8082239627838135,
+      "elapsed": 2.301846981048584,
+      "contracts_csv": "contracts/2008-2009/SPY/2008-2009_merton.csv"
+    },
+    "AAPL|2008-2009|Merton": {
+      "ticker": "AAPL",
+      "regime": "2008-2009",
+      "model": "Merton",
+      "rmse_pct": 55.36520646460954,
+      "mae": 2.2737702367847143,
+      "bias": 1.843539293692895,
+      "bias_pct": 36.39638296416153,
+      "early": 0.16879999999999998,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.25662899017333984,
+      "t_lsm": 2.3031671047210693,
+      "elapsed": 2.5694379806518555,
+      "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_merton.csv"
+    },
+    "MSFT|2008-2009|Merton": {
+      "ticker": "MSFT",
+      "regime": "2008-2009",
+      "model": "Merton",
+      "rmse_pct": 41.80050577306629,
+      "mae": 0.3513172700926866,
+      "bias": 0.1724023225909942,
+      "bias_pct": 23.07773019629714,
+      "early": 0.194248,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.27521204948425293,
+      "t_lsm": 2.1658191680908203,
+      "elapsed": 2.4495182037353516,
+      "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_merton.csv"
+    },
+    "AMZN|2008-2009|Merton": {
+      "ticker": "AMZN",
+      "regime": "2008-2009",
+      "model": "Merton",
+      "rmse_pct": 46.51371594751168,
+      "mae": 1.4637881321275181,
+      "bias": 1.1919770152740612,
+      "bias_pct": 31.26381864183461,
+      "early": 0.197396,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.33088207244873047,
+      "t_lsm": 2.356387138366699,
+      "elapsed": 2.7037601470947266,
+      "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_merton.csv"
+    },
+    "SPY|2013-2014|Merton": {
+      "ticker": "SPY",
+      "regime": "2013-2014",
+      "model": "Merton",
+      "rmse_pct": 37.3227531756111,
+      "mae": 0.6747361305396474,
+      "bias": 0.43845149728286537,
+      "bias_pct": 23.720429633870584,
+      "early": 0.24974199999999996,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.7467062473297119,
+      "t_lsm": 3.5714969635009766,
+      "elapsed": 4.330763101577759,
+      "contracts_csv": "contracts/2013-2014/SPY/2013-2014_merton.csv"
+    },
+    "AAPL|2013-2014|Merton": {
+      "ticker": "AAPL",
+      "regime": "2013-2014",
+      "model": "Merton",
+      "rmse_pct": 48.8678200814456,
+      "mae": 3.522186510621651,
+      "bias": 3.4863603551206346,
+      "bias_pct": 37.01524974652982,
+      "early": 0.18680599999999997,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.8859641551971436,
+      "t_lsm": 3.8414390087127686,
+      "elapsed": 4.73577880859375,
+      "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_merton.csv"
+    },
+    "MSFT|2013-2014|Merton": {
+      "ticker": "MSFT",
+      "regime": "2013-2014",
+      "model": "Merton",
+      "rmse_pct": 56.127875978816554,
+      "mae": 0.37884746643224176,
+      "bias": 0.3727944998978485,
+      "bias_pct": 46.76499908767188,
+      "early": 0.167298,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.5511350631713867,
+      "t_lsm": 2.353224992752075,
+      "elapsed": 2.9159061908721924,
+      "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_merton.csv"
+    },
+    "AMZN|2013-2014|Merton": {
+      "ticker": "AMZN",
+      "regime": "2013-2014",
+      "model": "Merton",
+      "rmse_pct": 35.61737597825495,
+      "mae": 2.8594485973386092,
+      "bias": 1.5813414904677614,
+      "bias_pct": 18.575422120165513,
+      "early": 0.18246400000000002,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.7396788597106934,
+      "t_lsm": 2.42106294631958,
+      "elapsed": 3.18953800201416,
+      "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_merton.csv"
+    },
+    "SPY|2018-2019|Merton": {
+      "ticker": "SPY",
+      "regime": "2018-2019",
+      "model": "Merton",
+      "rmse_pct": 60.59872126482785,
+      "mae": 2.143298876825441,
+      "bias": 1.806342674194371,
+      "bias_pct": 46.39190296748994,
+      "early": 0.13552,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 1.2028439044952393,
+      "t_lsm": 2.1405820846557617,
+      "elapsed": 3.358767032623291,
+      "contracts_csv": "contracts/2018-2019/SPY/2018-2019_merton.csv"
+    },
+    "AAPL|2018-2019|Merton": {
+      "ticker": "AAPL",
+      "regime": "2018-2019",
+      "model": "Merton",
+      "rmse_pct": 36.64861833318856,
+      "mae": 1.8944204544224192,
+      "bias": 1.6220378310170709,
+      "bias_pct": 28.28928828379995,
+      "early": 0.19545490196078427,
+      "n": 51,
+      "n_updates": 13,
+      "t_cal": 0.5570368766784668,
+      "t_lsm": 2.401332139968872,
+      "elapsed": 2.972709894180298,
+      "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_merton.csv"
+    },
+    "MSFT|2018-2019|Merton": {
+      "ticker": "MSFT",
+      "regime": "2018-2019",
+      "model": "Merton",
+      "rmse_pct": 43.31275942389722,
+      "mae": 1.1094765838565575,
+      "bias": 1.0129558481107752,
+      "bias_pct": 33.240996632131115,
+      "early": 0.19396800000000003,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.6714417934417725,
+      "t_lsm": 2.1439340114593506,
+      "elapsed": 2.8261749744415283,
+      "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_merton.csv"
+    },
+    "AMZN|2018-2019|Merton": {
+      "ticker": "AMZN",
+      "regime": "2018-2019",
+      "model": "Merton",
+      "rmse_pct": 49.33829861195713,
+      "mae": 25.39914802304015,
+      "bias": 18.735901914401015,
+      "bias_pct": 35.21837299809127,
+      "early": 0.17559803921568626,
+      "n": 51,
+      "n_updates": 13,
+      "t_cal": 0.8701388835906982,
+      "t_lsm": 1.974390983581543,
+      "elapsed": 2.85247802734375,
+      "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_merton.csv"
+    },
+    "SPY|2019-2020|Merton": {
+      "ticker": "SPY",
+      "regime": "2019-2020",
+      "model": "Merton",
+      "rmse_pct": 70.92458251183646,
+      "mae": 4.329099398096423,
+      "bias": 2.6459040110073295,
+      "bias_pct": 53.07753990209842,
+      "early": 0.17306999999999997,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 1.1849949359893799,
+      "t_lsm": 2.358212947845459,
+      "elapsed": 3.5570709705352783,
+      "contracts_csv": "contracts/2019-2020/SPY/2019-2020_merton.csv"
+    },
+    "AAPL|2019-2020|Merton": {
+      "ticker": "AAPL",
+      "regime": "2019-2020",
+      "model": "Merton",
+      "rmse_pct": 47.031515372590384,
+      "mae": 3.957574301374424,
+      "bias": 3.1377160415104304,
+      "bias_pct": 35.87195286647555,
+      "early": 0.171134,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.7622990608215332,
+      "t_lsm": 2.353955030441284,
+      "elapsed": 3.1213040351867676,
+      "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_merton.csv"
+    },
+    "MSFT|2019-2020|Merton": {
+      "ticker": "MSFT",
+      "regime": "2019-2020",
+      "model": "Merton",
+      "rmse_pct": 50.06480796547237,
+      "mae": 2.2979300716778566,
+      "bias": 1.5396177820799142,
+      "bias_pct": 34.80077466542174,
+      "early": 0.198598,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.809783935546875,
+      "t_lsm": 2.423046112060547,
+      "elapsed": 3.251195192337036,
+      "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_merton.csv"
+    },
+    "AMZN|2019-2020|Merton": {
+      "ticker": "AMZN",
+      "regime": "2019-2020",
+      "model": "Merton",
+      "rmse_pct": 59.45905824559253,
+      "mae": 35.9858670167739,
+      "bias": 23.826608427712653,
+      "bias_pct": 42.60611356740024,
+      "early": 0.18862399999999999,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 1.1399428844451904,
+      "t_lsm": 2.5411629676818848,
+      "elapsed": 3.688183069229126,
+      "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_merton.csv"
+    },
+    "SPY|2008-2009|GARCH\u2013Merton": {
+      "ticker": "SPY",
+      "regime": "2008-2009",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 60.327516362230085,
+      "mae": 1.9863153375620148,
+      "bias": 1.9456649899019585,
+      "bias_pct": 50.23145292134416,
+      "early": 0.20341,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 1.110321044921875,
+      "t_lsm": 2.063908100128174,
+      "elapsed": 3.177807092666626,
+      "contracts_csv": "contracts/2008-2009/SPY/2008-2009_garch_merton.csv"
+    },
+    "AAPL|2008-2009|GARCH\u2013Merton": {
+      "ticker": "AAPL",
+      "regime": "2008-2009",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 60.44738502611935,
+      "mae": 3.357940751990857,
+      "bias": 3.250985063886193,
+      "bias_pct": 52.395026559321586,
+      "early": 0.15622600000000003,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 1.0599360466003418,
+      "t_lsm": 2.1197259426116943,
+      "elapsed": 3.1913199424743652,
+      "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_garch_merton.csv"
+    },
+    "MSFT|2008-2009|GARCH\u2013Merton": {
+      "ticker": "MSFT",
+      "regime": "2008-2009",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 77.43103100158484,
+      "mae": 0.6754564662773613,
+      "bias": 0.652208240369891,
+      "bias_pct": 64.23271926735617,
+      "early": 0.273146,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 1.4835069179534912,
+      "t_lsm": 2.1937267780303955,
+      "elapsed": 3.6817729473114014,
+      "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_garch_merton.csv"
+    },
+    "AMZN|2008-2009|GARCH\u2013Merton": {
+      "ticker": "AMZN",
+      "regime": "2008-2009",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 48.95289021870927,
+      "mae": 1.7358102434775318,
+      "bias": 1.557883829632716,
+      "bias_pct": 37.718891447691504,
+      "early": 0.13797,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 1.4177589416503906,
+      "t_lsm": 1.8409650325775146,
+      "elapsed": 3.2628748416900635,
+      "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_garch_merton.csv"
+    },
+    "SPY|2013-2014|GARCH\u2013Merton": {
+      "ticker": "SPY",
+      "regime": "2013-2014",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 42.87012333904163,
+      "mae": 0.7767567957084799,
+      "bias": 0.61394063284571,
+      "bias_pct": 30.79805480231545,
+      "early": 0.224568,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.942540168762207,
+      "t_lsm": 1.9208040237426758,
+      "elapsed": 2.866992950439453,
+      "contracts_csv": "contracts/2013-2014/SPY/2013-2014_garch_merton.csv"
+    },
+    "AAPL|2013-2014|GARCH\u2013Merton": {
+      "ticker": "AAPL",
+      "regime": "2013-2014",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 75.10004712834156,
+      "mae": 5.518910147118871,
+      "bias": 5.518910147118871,
+      "bias_pct": 63.26789217833828,
+      "early": 0.181006,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 1.5561938285827637,
+      "t_lsm": 2.0107367038726807,
+      "elapsed": 3.571491003036499,
+      "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_garch_merton.csv"
+    },
+    "MSFT|2013-2014|GARCH\u2013Merton": {
+      "ticker": "MSFT",
+      "regime": "2013-2014",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 93.3002423606788,
+      "mae": 0.7006061224254749,
+      "bias": 0.7006061224254749,
+      "bias_pct": 84.41826991130857,
+      "early": 0.17997,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.9212548732757568,
+      "t_lsm": 1.4449090957641602,
+      "elapsed": 2.373756170272827,
+      "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_garch_merton.csv"
+    },
+    "AMZN|2013-2014|GARCH\u2013Merton": {
+      "ticker": "AMZN",
+      "regime": "2013-2014",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 59.06403479987126,
+      "mae": 4.891401130388472,
+      "bias": 4.78233353856544,
+      "bias_pct": 47.664817842560595,
+      "early": 0.17384800000000003,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 2.3245058059692383,
+      "t_lsm": 1.9438140392303467,
+      "elapsed": 4.272083282470703,
+      "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_garch_merton.csv"
+    },
+    "SPY|2018-2019|GARCH\u2013Merton": {
+      "ticker": "SPY",
+      "regime": "2018-2019",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 75.23045147275239,
+      "mae": 2.3002970456800993,
+      "bias": 2.050295503914181,
+      "bias_pct": 52.70721788986307,
+      "early": 0.192312,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 1.0173778533935547,
+      "t_lsm": 1.9505209922790527,
+      "elapsed": 2.986650228500366,
+      "contracts_csv": "contracts/2018-2019/SPY/2018-2019_garch_merton.csv"
+    },
+    "AAPL|2018-2019|GARCH\u2013Merton": {
+      "ticker": "AAPL",
+      "regime": "2018-2019",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 59.546723977719076,
+      "mae": 2.6650711340141675,
+      "bias": 2.4152942592517226,
+      "bias_pct": 42.97303798246005,
+      "early": 0.18317647058823527,
+      "n": 51,
+      "n_updates": 13,
+      "t_cal": 0.8940820693969727,
+      "t_lsm": 1.9843108654022217,
+      "elapsed": 2.8822388648986816,
+      "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_garch_merton.csv"
+    },
+    "MSFT|2018-2019|GARCH\u2013Merton": {
+      "ticker": "MSFT",
+      "regime": "2018-2019",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 52.7752719377511,
+      "mae": 1.364283678080121,
+      "bias": 1.2908932811009448,
+      "bias_pct": 41.959992484361706,
+      "early": 0.17267799999999997,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 1.0478310585021973,
+      "t_lsm": 1.8115239143371582,
+      "elapsed": 2.8650267124176025,
+      "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_garch_merton.csv"
+    },
+    "AMZN|2018-2019|GARCH\u2013Merton": {
+      "ticker": "AMZN",
+      "regime": "2018-2019",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 44.82428319836158,
+      "mae": 22.508006286061384,
+      "bias": 18.623860816239635,
+      "bias_pct": 33.50904979345074,
+      "early": 0.17973529411764708,
+      "n": 51,
+      "n_updates": 13,
+      "t_cal": 0.7320539951324463,
+      "t_lsm": 1.5529506206512451,
+      "elapsed": 2.2899551391601562,
+      "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_garch_merton.csv"
+    },
+    "SPY|2019-2020|GARCH\u2013Merton": {
+      "ticker": "SPY",
+      "regime": "2019-2020",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 66.90784476787731,
+      "mae": 3.4515617611119156,
+      "bias": 2.865515459954372,
+      "bias_pct": 47.3183191341305,
+      "early": 0.317874,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 2.1093719005584717,
+      "t_lsm": 1.6951079368591309,
+      "elapsed": 3.811060905456543,
+      "contracts_csv": "contracts/2019-2020/SPY/2019-2020_garch_merton.csv"
+    },
+    "AAPL|2019-2020|GARCH\u2013Merton": {
+      "ticker": "AAPL",
+      "regime": "2019-2020",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 70.13108267036664,
+      "mae": 5.532210864512792,
+      "bias": 5.301713940566048,
+      "bias_pct": 54.54980524556916,
+      "early": 0.205136,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 0.7783112525939941,
+      "t_lsm": 1.7436871528625488,
+      "elapsed": 2.5277371406555176,
+      "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_garch_merton.csv"
+    },
+    "MSFT|2019-2020|GARCH\u2013Merton": {
+      "ticker": "MSFT",
+      "regime": "2019-2020",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 260.37532320039713,
+      "mae": 5.443325835205042,
+      "bias": 5.000251877539914,
+      "bias_pct": 72.75591424429359,
+      "early": 0.255758,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 1.033740758895874,
+      "t_lsm": 1.7809948921203613,
+      "elapsed": 2.818425178527832,
+      "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_garch_merton.csv"
+    },
+    "AMZN|2019-2020|GARCH\u2013Merton": {
+      "ticker": "AMZN",
+      "regime": "2019-2020",
+      "model": "GARCH\u2013Merton",
+      "rmse_pct": 42.06626188512732,
+      "mae": 24.49391562616718,
+      "bias": 15.892089859456805,
+      "bias_pct": 30.18867201544588,
+      "early": 0.177212,
+      "n": 50,
+      "n_updates": 13,
+      "t_cal": 1.117427110671997,
+      "t_lsm": 1.605724811553955,
+      "elapsed": 2.726912021636963,
+      "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_garch_merton.csv"
+    }
+  },
+  "tables": {
+    "SPY|2008-2009": {
+      "ticker": "SPY",
+      "regime": "2008-2009",
+      "best_model": "GARCH",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "SPY",
+          "regime": "2008-2009",
+          "model": "GBM",
+          "rmse_pct": 55.01033307367117,
+          "mae": 1.405385159394404,
+          "bias": 0.2704799204462225,
+          "bias_pct": 21.160400148945186,
+          "early": 0.24546800000000002,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.004318952560424805,
+          "t_lsm": 0.9757919311523438,
+          "elapsed": 0.982219934463501,
+          "contracts_csv": "contracts/2008-2009/SPY/2008-2009_gbm.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2008-2009",
+          "model": "Modified GBM",
+          "rmse_pct": 47.671598393805546,
+          "mae": 1.2487806634435088,
+          "bias": -0.0854290903596724,
+          "bias_pct": 10.617978721745073,
+          "early": 0.2595,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.006245136260986328,
+          "t_lsm": 1.3491699695587158,
+          "elapsed": 1.3585999011993408,
+          "contracts_csv": "contracts/2008-2009/SPY/2008-2009_modified_gbm.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2008-2009",
+          "model": "Modified GBM v2",
+          "rmse_pct": 79.61290914872498,
+          "mae": 2.4569122846079927,
+          "bias": -0.5270563196453415,
+          "bias_pct": 4.607891615162589,
+          "early": 0.20322199999999999,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.005939960479736328,
+          "t_lsm": 2.411813974380493,
+          "elapsed": 2.421433925628662,
+          "contracts_csv": "contracts/2008-2009/SPY/2008-2009_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2008-2009",
+          "model": "GARCH",
+          "rmse_pct": 43.04035741244614,
+          "mae": 1.3272493046451106,
+          "bias": 1.2327922245912717,
+          "bias_pct": 33.41354040001064,
+          "early": 0.235428,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 2.993633985519409,
+          "t_lsm": 2.1265132427215576,
+          "elapsed": 5.131090879440308,
+          "contracts_csv": "contracts/2008-2009/SPY/2008-2009_garch.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2008-2009",
+          "model": "Merton",
+          "rmse_pct": 51.72610222115124,
+          "mae": 1.2280720268134955,
+          "bias": 0.5307409253459404,
+          "bias_pct": 25.718392185534512,
+          "early": 0.199994,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.484295129776001,
+          "t_lsm": 1.8082239627838135,
+          "elapsed": 2.301846981048584,
+          "contracts_csv": "contracts/2008-2009/SPY/2008-2009_merton.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2008-2009",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 60.327516362230085,
+          "mae": 1.9863153375620148,
+          "bias": 1.9456649899019585,
+          "bias_pct": 50.23145292134416,
+          "early": 0.20341,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 1.110321044921875,
+          "t_lsm": 2.063908100128174,
+          "elapsed": 3.177807092666626,
+          "contracts_csv": "contracts/2008-2009/SPY/2008-2009_garch_merton.csv"
+        }
+      ]
+    },
+    "SPY|2013-2014": {
+      "ticker": "SPY",
+      "regime": "2013-2014",
+      "best_model": "GARCH",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "SPY",
+          "regime": "2013-2014",
+          "model": "GBM",
+          "rmse_pct": 38.08491580531299,
+          "mae": 0.6849633550754476,
+          "bias": 0.4678267203247314,
+          "bias_pct": 24.879310521713315,
+          "early": 0.26122999999999996,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.004565000534057617,
+          "t_lsm": 1.4462661743164062,
+          "elapsed": 1.45597505569458,
+          "contracts_csv": "contracts/2013-2014/SPY/2013-2014_gbm.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2013-2014",
+          "model": "Modified GBM",
+          "rmse_pct": 37.08077999060945,
+          "mae": 0.6750391465865772,
+          "bias": 0.4371002654058419,
+          "bias_pct": 23.65640586284696,
+          "early": 0.26641200000000004,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.014925003051757812,
+          "t_lsm": 2.5085349082946777,
+          "elapsed": 2.5331788063049316,
+          "contracts_csv": "contracts/2013-2014/SPY/2013-2014_modified_gbm.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2013-2014",
+          "model": "Modified GBM v2",
+          "rmse_pct": 96.58283298624771,
+          "mae": 2.463765744018969,
+          "bias": -2.463765744018969,
+          "bias_pct": -96.41832009577946,
+          "early": 0.004848000000000001,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.0059702396392822266,
+          "t_lsm": 1.4728338718414307,
+          "elapsed": 1.4812238216400146,
+          "contracts_csv": "contracts/2013-2014/SPY/2013-2014_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2013-2014",
+          "model": "GARCH",
+          "rmse_pct": 36.35061732620252,
+          "mae": 0.6565380806806003,
+          "bias": 0.42033284288599615,
+          "bias_pct": 22.861401319631057,
+          "early": 0.24374200000000001,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 3.6663599014282227,
+          "t_lsm": 1.9226551055908203,
+          "elapsed": 5.594411134719849,
+          "contracts_csv": "contracts/2013-2014/SPY/2013-2014_garch.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2013-2014",
+          "model": "Merton",
+          "rmse_pct": 37.3227531756111,
+          "mae": 0.6747361305396474,
+          "bias": 0.43845149728286537,
+          "bias_pct": 23.720429633870584,
+          "early": 0.24974199999999996,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.7467062473297119,
+          "t_lsm": 3.5714969635009766,
+          "elapsed": 4.330763101577759,
+          "contracts_csv": "contracts/2013-2014/SPY/2013-2014_merton.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2013-2014",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 42.87012333904163,
+          "mae": 0.7767567957084799,
+          "bias": 0.61394063284571,
+          "bias_pct": 30.79805480231545,
+          "early": 0.224568,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.942540168762207,
+          "t_lsm": 1.9208040237426758,
+          "elapsed": 2.866992950439453,
+          "contracts_csv": "contracts/2013-2014/SPY/2013-2014_garch_merton.csv"
+        }
+      ]
+    },
+    "SPY|2018-2019": {
+      "ticker": "SPY",
+      "regime": "2018-2019",
+      "best_model": "GBM",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "SPY",
+          "regime": "2018-2019",
+          "model": "GBM",
+          "rmse_pct": 49.50652001528525,
+          "mae": 1.6628452334070414,
+          "bias": 1.1527711577932553,
+          "bias_pct": 32.89572331195774,
+          "early": 0.21776200000000004,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.002721071243286133,
+          "t_lsm": 1.2530498504638672,
+          "elapsed": 1.268254041671753,
+          "contracts_csv": "contracts/2018-2019/SPY/2018-2019_gbm.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2018-2019",
+          "model": "Modified GBM",
+          "rmse_pct": 51.83455179132439,
+          "mae": 1.7486732578067885,
+          "bias": 1.2256610712183373,
+          "bias_pct": 34.674933890331886,
+          "early": 0.22171,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.008911848068237305,
+          "t_lsm": 1.9748878479003906,
+          "elapsed": 1.9870409965515137,
+          "contracts_csv": "contracts/2018-2019/SPY/2018-2019_modified_gbm.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2018-2019",
+          "model": "Modified GBM v2",
+          "rmse_pct": 56.808518040758024,
+          "mae": 2.0970100340252635,
+          "bias": -0.5008684010132028,
+          "bias_pct": -4.494180921964408,
+          "early": 0.099766,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.005849123001098633,
+          "t_lsm": 2.089000940322876,
+          "elapsed": 2.101533889770508,
+          "contracts_csv": "contracts/2018-2019/SPY/2018-2019_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2018-2019",
+          "model": "GARCH",
+          "rmse_pct": 65.97503919838884,
+          "mae": 1.987152320118285,
+          "bias": 1.5637810060714767,
+          "bias_pct": 41.26403238337931,
+          "early": 0.22233799999999998,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 4.557429075241089,
+          "t_lsm": 1.9513108730316162,
+          "elapsed": 6.522113084793091,
+          "contracts_csv": "contracts/2018-2019/SPY/2018-2019_garch.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2018-2019",
+          "model": "Merton",
+          "rmse_pct": 60.59872126482785,
+          "mae": 2.143298876825441,
+          "bias": 1.806342674194371,
+          "bias_pct": 46.39190296748994,
+          "early": 0.13552,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 1.2028439044952393,
+          "t_lsm": 2.1405820846557617,
+          "elapsed": 3.358767032623291,
+          "contracts_csv": "contracts/2018-2019/SPY/2018-2019_merton.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2018-2019",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 75.23045147275239,
+          "mae": 2.3002970456800993,
+          "bias": 2.050295503914181,
+          "bias_pct": 52.70721788986307,
+          "early": 0.192312,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 1.0173778533935547,
+          "t_lsm": 1.9505209922790527,
+          "elapsed": 2.986650228500366,
+          "contracts_csv": "contracts/2018-2019/SPY/2018-2019_garch_merton.csv"
+        }
+      ]
+    },
+    "SPY|2019-2020": {
+      "ticker": "SPY",
+      "regime": "2019-2020",
+      "best_model": "Modified GBM v2",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "SPY",
+          "regime": "2019-2020",
+          "model": "GBM",
+          "rmse_pct": 64.87591091415682,
+          "mae": 3.600260818684438,
+          "bias": 1.6141058651634652,
+          "bias_pct": 44.13459968836676,
+          "early": 0.23863399999999996,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.004797935485839844,
+          "t_lsm": 1.4267239570617676,
+          "elapsed": 1.4369359016418457,
+          "contracts_csv": "contracts/2019-2020/SPY/2019-2020_gbm.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2019-2020",
+          "model": "Modified GBM",
+          "rmse_pct": 64.56373613996936,
+          "mae": 3.4809900688333655,
+          "bias": 1.5419002415552183,
+          "bias_pct": 44.09072519980691,
+          "early": 0.24168000000000006,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.009114980697631836,
+          "t_lsm": 2.488859176635742,
+          "elapsed": 2.5051279067993164,
+          "contracts_csv": "contracts/2019-2020/SPY/2019-2020_modified_gbm.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2019-2020",
+          "model": "Modified GBM v2",
+          "rmse_pct": 44.42336271659851,
+          "mae": 2.8810795490624823,
+          "bias": -2.3523931075006304,
+          "bias_pct": -25.449469625316727,
+          "early": 0.14465999999999998,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.006651878356933594,
+          "t_lsm": 2.279614210128784,
+          "elapsed": 2.288271188735962,
+          "contracts_csv": "contracts/2019-2020/SPY/2019-2020_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2019-2020",
+          "model": "GARCH",
+          "rmse_pct": 53.61559123996681,
+          "mae": 2.8956514330718806,
+          "bias": 2.0455677765500604,
+          "bias_pct": 35.241856841587364,
+          "early": 0.290988,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 6.763506889343262,
+          "t_lsm": 7.300687074661255,
+          "elapsed": 14.120269060134888,
+          "contracts_csv": "contracts/2019-2020/SPY/2019-2020_garch.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2019-2020",
+          "model": "Merton",
+          "rmse_pct": 70.92458251183646,
+          "mae": 4.329099398096423,
+          "bias": 2.6459040110073295,
+          "bias_pct": 53.07753990209842,
+          "early": 0.17306999999999997,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 1.1849949359893799,
+          "t_lsm": 2.358212947845459,
+          "elapsed": 3.5570709705352783,
+          "contracts_csv": "contracts/2019-2020/SPY/2019-2020_merton.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2019-2020",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 66.90784476787731,
+          "mae": 3.4515617611119156,
+          "bias": 2.865515459954372,
+          "bias_pct": 47.3183191341305,
+          "early": 0.317874,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 2.1093719005584717,
+          "t_lsm": 1.6951079368591309,
+          "elapsed": 3.811060905456543,
+          "contracts_csv": "contracts/2019-2020/SPY/2019-2020_garch_merton.csv"
+        }
+      ]
+    },
+    "AAPL|2008-2009": {
+      "ticker": "AAPL",
+      "regime": "2008-2009",
+      "best_model": "GARCH",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AAPL",
+          "regime": "2008-2009",
+          "model": "GBM",
+          "rmse_pct": 57.66587325269342,
+          "mae": 2.432616409794846,
+          "bias": 1.3849239912937694,
+          "bias_pct": 31.097336795373103,
+          "early": 0.22751999999999994,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.002638101577758789,
+          "t_lsm": 1.1034700870513916,
+          "elapsed": 1.1098639965057373,
+          "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_gbm.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2008-2009",
+          "model": "Modified GBM",
+          "rmse_pct": 51.941865250763996,
+          "mae": 2.159133442064795,
+          "bias": 0.9308934477243165,
+          "bias_pct": 23.66850987506812,
+          "early": 0.23549399999999995,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.0046558380126953125,
+          "t_lsm": 1.4028470516204834,
+          "elapsed": 1.4127869606018066,
+          "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_modified_gbm.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2008-2009",
+          "model": "Modified GBM v2",
+          "rmse_pct": 63.77954661397246,
+          "mae": 3.8372982022468056,
+          "bias": -2.160774835879817,
+          "bias_pct": -22.885528487164947,
+          "early": 0.19576800000000003,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.005377054214477539,
+          "t_lsm": 1.7436089515686035,
+          "elapsed": 1.7517900466918945,
+          "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2008-2009",
+          "model": "GARCH",
+          "rmse_pct": 34.36046307813248,
+          "mae": 1.7479615085024733,
+          "bias": 1.5066050775692605,
+          "bias_pct": 25.46469611648868,
+          "early": 0.223402,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 3.401378870010376,
+          "t_lsm": 1.0678668022155762,
+          "elapsed": 4.475184917449951,
+          "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_garch.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2008-2009",
+          "model": "Merton",
+          "rmse_pct": 55.36520646460954,
+          "mae": 2.2737702367847143,
+          "bias": 1.843539293692895,
+          "bias_pct": 36.39638296416153,
+          "early": 0.16879999999999998,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.25662899017333984,
+          "t_lsm": 2.3031671047210693,
+          "elapsed": 2.5694379806518555,
+          "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_merton.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2008-2009",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 60.44738502611935,
+          "mae": 3.357940751990857,
+          "bias": 3.250985063886193,
+          "bias_pct": 52.395026559321586,
+          "early": 0.15622600000000003,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 1.0599360466003418,
+          "t_lsm": 2.1197259426116943,
+          "elapsed": 3.1913199424743652,
+          "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_garch_merton.csv"
+        }
+      ]
+    },
+    "AAPL|2013-2014": {
+      "ticker": "AAPL",
+      "regime": "2013-2014",
+      "best_model": "GARCH",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AAPL",
+          "regime": "2013-2014",
+          "model": "GBM",
+          "rmse_pct": 50.20406427879235,
+          "mae": 3.576647819094097,
+          "bias": 3.538719154351501,
+          "bias_pct": 38.63341165376259,
+          "early": 0.2462,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.00407099723815918,
+          "t_lsm": 1.3471910953521729,
+          "elapsed": 1.3643100261688232,
+          "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_gbm.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2013-2014",
+          "model": "Modified GBM",
+          "rmse_pct": 45.441239965169004,
+          "mae": 3.1559043867952523,
+          "bias": 3.113114623937302,
+          "bias_pct": 34.56121846799782,
+          "early": 0.25442,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.010330915451049805,
+          "t_lsm": 2.347752332687378,
+          "elapsed": 2.3619399070739746,
+          "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_modified_gbm.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2013-2014",
+          "model": "Modified GBM v2",
+          "rmse_pct": 80.85067429969286,
+          "mae": 4.66858147293411,
+          "bias": 2.0815367543829497,
+          "bias_pct": -13.461512051006864,
+          "early": 0.135066,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.006066799163818359,
+          "t_lsm": 3.0469539165496826,
+          "elapsed": 3.0569992065429688,
+          "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2013-2014",
+          "model": "GARCH",
+          "rmse_pct": 40.07704928258421,
+          "mae": 2.758188265792614,
+          "bias": 2.503927686774111,
+          "bias_pct": 23.86289235882455,
+          "early": 0.24568400000000004,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 6.155147075653076,
+          "t_lsm": 1.5638060569763184,
+          "elapsed": 7.724225997924805,
+          "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_garch.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2013-2014",
+          "model": "Merton",
+          "rmse_pct": 48.8678200814456,
+          "mae": 3.522186510621651,
+          "bias": 3.4863603551206346,
+          "bias_pct": 37.01524974652982,
+          "early": 0.18680599999999997,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.8859641551971436,
+          "t_lsm": 3.8414390087127686,
+          "elapsed": 4.73577880859375,
+          "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_merton.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2013-2014",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 75.10004712834156,
+          "mae": 5.518910147118871,
+          "bias": 5.518910147118871,
+          "bias_pct": 63.26789217833828,
+          "early": 0.181006,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 1.5561938285827637,
+          "t_lsm": 2.0107367038726807,
+          "elapsed": 3.571491003036499,
+          "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_garch_merton.csv"
+        }
+      ]
+    },
+    "AAPL|2018-2019": {
+      "ticker": "AAPL",
+      "regime": "2018-2019",
+      "best_model": "GBM",
+      "n_contracts": 51,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AAPL",
+          "regime": "2018-2019",
+          "model": "GBM",
+          "rmse_pct": 32.5265984454862,
+          "mae": 1.7033412915401425,
+          "bias": 1.0080645188014714,
+          "bias_pct": 18.75968517157856,
+          "early": 0.2385549019607843,
+          "n": 51,
+          "n_updates": 13,
+          "t_cal": 0.005729198455810547,
+          "t_lsm": 2.0753748416900635,
+          "elapsed": 2.0965051651000977,
+          "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_gbm.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2018-2019",
+          "model": "Modified GBM",
+          "rmse_pct": 34.33068282244164,
+          "mae": 1.7907287261121876,
+          "bias": 1.1260483954369296,
+          "bias_pct": 20.690166721383036,
+          "early": 0.2397529411764706,
+          "n": 51,
+          "n_updates": 13,
+          "t_cal": 0.009279012680053711,
+          "t_lsm": 2.5012106895446777,
+          "elapsed": 2.5145161151885986,
+          "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_modified_gbm.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2018-2019",
+          "model": "Modified GBM v2",
+          "rmse_pct": 62.1921280591714,
+          "mae": 3.8763081795937024,
+          "bias": -3.8763081795937024,
+          "bias_pct": -58.528032878887295,
+          "early": 0.1052019607843137,
+          "n": 51,
+          "n_updates": 13,
+          "t_cal": 0.008524656295776367,
+          "t_lsm": 1.8341398239135742,
+          "elapsed": 1.8452398777008057,
+          "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2018-2019",
+          "model": "GARCH",
+          "rmse_pct": 40.82047502090263,
+          "mae": 1.7244568069258144,
+          "bias": 1.1159201678648558,
+          "bias_pct": 21.747433028114234,
+          "early": 0.22381176470588232,
+          "n": 51,
+          "n_updates": 13,
+          "t_cal": 3.8606839179992676,
+          "t_lsm": 2.50439715385437,
+          "elapsed": 6.369790077209473,
+          "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_garch.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2018-2019",
+          "model": "Merton",
+          "rmse_pct": 36.64861833318856,
+          "mae": 1.8944204544224192,
+          "bias": 1.6220378310170709,
+          "bias_pct": 28.28928828379995,
+          "early": 0.19545490196078427,
+          "n": 51,
+          "n_updates": 13,
+          "t_cal": 0.5570368766784668,
+          "t_lsm": 2.401332139968872,
+          "elapsed": 2.972709894180298,
+          "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_merton.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2018-2019",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 59.546723977719076,
+          "mae": 2.6650711340141675,
+          "bias": 2.4152942592517226,
+          "bias_pct": 42.97303798246005,
+          "early": 0.18317647058823527,
+          "n": 51,
+          "n_updates": 13,
+          "t_cal": 0.8940820693969727,
+          "t_lsm": 1.9843108654022217,
+          "elapsed": 2.8822388648986816,
+          "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_garch_merton.csv"
+        }
+      ]
+    },
+    "AAPL|2019-2020": {
+      "ticker": "AAPL",
+      "regime": "2019-2020",
+      "best_model": "GARCH",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AAPL",
+          "regime": "2019-2020",
+          "model": "GBM",
+          "rmse_pct": 46.18894560160604,
+          "mae": 3.999542988499727,
+          "bias": 2.3663298328549236,
+          "bias_pct": 30.75930385667801,
+          "early": 0.238072,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.006418943405151367,
+          "t_lsm": 1.6279699802398682,
+          "elapsed": 1.6374719142913818,
+          "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_gbm.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2019-2020",
+          "model": "Modified GBM",
+          "rmse_pct": 45.884667709833266,
+          "mae": 3.7712225566593762,
+          "bias": 2.1028864968143677,
+          "bias_pct": 29.59826448417128,
+          "early": 0.24419000000000002,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.016154050827026367,
+          "t_lsm": 2.402566909790039,
+          "elapsed": 2.422011137008667,
+          "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_modified_gbm.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2019-2020",
+          "model": "Modified GBM v2",
+          "rmse_pct": 77.6469664427794,
+          "mae": 8.80241633908831,
+          "bias": -8.036789240904472,
+          "bias_pct": -66.62155698558138,
+          "early": 0.09323400000000001,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.006371259689331055,
+          "t_lsm": 1.9543979167938232,
+          "elapsed": 1.963590145111084,
+          "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2019-2020",
+          "model": "GARCH",
+          "rmse_pct": 45.52728733935798,
+          "mae": 3.4285010348184106,
+          "bias": 2.6089991743953918,
+          "bias_pct": 29.34590391216932,
+          "early": 0.23434799999999995,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 6.6672210693359375,
+          "t_lsm": 3.5008559226989746,
+          "elapsed": 10.221504211425781,
+          "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_garch.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2019-2020",
+          "model": "Merton",
+          "rmse_pct": 47.031515372590384,
+          "mae": 3.957574301374424,
+          "bias": 3.1377160415104304,
+          "bias_pct": 35.87195286647555,
+          "early": 0.171134,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.7622990608215332,
+          "t_lsm": 2.353955030441284,
+          "elapsed": 3.1213040351867676,
+          "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_merton.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2019-2020",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 70.13108267036664,
+          "mae": 5.532210864512792,
+          "bias": 5.301713940566048,
+          "bias_pct": 54.54980524556916,
+          "early": 0.205136,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.7783112525939941,
+          "t_lsm": 1.7436871528625488,
+          "elapsed": 2.5277371406555176,
+          "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_garch_merton.csv"
+        }
+      ]
+    },
+    "MSFT|2008-2009": {
+      "ticker": "MSFT",
+      "regime": "2008-2009",
+      "best_model": "Merton",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "MSFT",
+          "regime": "2008-2009",
+          "model": "GBM",
+          "rmse_pct": 44.01915637552489,
+          "mae": 0.3723332035785127,
+          "bias": 0.08970560559829993,
+          "bias_pct": 17.987966619262835,
+          "early": 0.24062600000000003,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.003206968307495117,
+          "t_lsm": 1.4844081401824951,
+          "elapsed": 1.490644931793213,
+          "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_gbm.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2008-2009",
+          "model": "Modified GBM",
+          "rmse_pct": 41.988894062889834,
+          "mae": 0.3590105390605614,
+          "bias": 0.07989790795996538,
+          "bias_pct": 16.828751854700375,
+          "early": 0.252462,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.011449098587036133,
+          "t_lsm": 2.2515270709991455,
+          "elapsed": 2.2663769721984863,
+          "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_modified_gbm.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2008-2009",
+          "model": "Modified GBM v2",
+          "rmse_pct": 45.95814850815023,
+          "mae": 0.3953109692495563,
+          "bias": 0.10994090159057483,
+          "bias_pct": 19.927956054377226,
+          "early": 0.222212,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.006106138229370117,
+          "t_lsm": 3.584613084793091,
+          "elapsed": 3.593430995941162,
+          "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2008-2009",
+          "model": "GARCH",
+          "rmse_pct": 50.926099141734774,
+          "mae": 0.41303804081613166,
+          "bias": 0.35050562622612363,
+          "bias_pct": 35.86605871920358,
+          "early": 0.2882,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 4.5199360847473145,
+          "t_lsm": 1.84476900100708,
+          "elapsed": 6.373395919799805,
+          "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_garch.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2008-2009",
+          "model": "Merton",
+          "rmse_pct": 41.80050577306629,
+          "mae": 0.3513172700926866,
+          "bias": 0.1724023225909942,
+          "bias_pct": 23.07773019629714,
+          "early": 0.194248,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.27521204948425293,
+          "t_lsm": 2.1658191680908203,
+          "elapsed": 2.4495182037353516,
+          "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_merton.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2008-2009",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 77.43103100158484,
+          "mae": 0.6754564662773613,
+          "bias": 0.652208240369891,
+          "bias_pct": 64.23271926735617,
+          "early": 0.273146,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 1.4835069179534912,
+          "t_lsm": 2.1937267780303955,
+          "elapsed": 3.6817729473114014,
+          "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_garch_merton.csv"
+        }
+      ]
+    },
+    "MSFT|2013-2014": {
+      "ticker": "MSFT",
+      "regime": "2013-2014",
+      "best_model": "Merton",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "MSFT",
+          "regime": "2013-2014",
+          "model": "GBM",
+          "rmse_pct": 62.49030622414755,
+          "mae": 0.4282758001333296,
+          "bias": 0.4260539738278841,
+          "bias_pct": 52.97517175486899,
+          "early": 0.24705199999999997,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.007312774658203125,
+          "t_lsm": 1.041078805923462,
+          "elapsed": 1.0498571395874023,
+          "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_gbm.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2013-2014",
+          "model": "Modified GBM",
+          "rmse_pct": 59.38572542855799,
+          "mae": 0.40559850399270175,
+          "bias": 0.4024612446814723,
+          "bias_pct": 50.16341499512962,
+          "early": 0.256776,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.00741887092590332,
+          "t_lsm": 2.2427749633789062,
+          "elapsed": 2.257520914077759,
+          "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_modified_gbm.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2013-2014",
+          "model": "Modified GBM v2",
+          "rmse_pct": 91.63811816532275,
+          "mae": 0.8285299650894358,
+          "bias": -0.8285299650894358,
+          "bias_pct": -90.8317605433836,
+          "early": 0.056799999999999996,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.009984970092773438,
+          "t_lsm": 2.119036912918091,
+          "elapsed": 2.137540102005005,
+          "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2013-2014",
+          "model": "GARCH",
+          "rmse_pct": 85.93798617093114,
+          "mae": 0.6128974648042831,
+          "bias": 0.6118503305994513,
+          "bias_pct": 73.69168441705833,
+          "early": 0.25053400000000003,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 3.863550901412964,
+          "t_lsm": 1.807373046875,
+          "elapsed": 5.679229974746704,
+          "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_garch.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2013-2014",
+          "model": "Merton",
+          "rmse_pct": 56.127875978816554,
+          "mae": 0.37884746643224176,
+          "bias": 0.3727944998978485,
+          "bias_pct": 46.76499908767188,
+          "early": 0.167298,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.5511350631713867,
+          "t_lsm": 2.353224992752075,
+          "elapsed": 2.9159061908721924,
+          "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_merton.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2013-2014",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 93.3002423606788,
+          "mae": 0.7006061224254749,
+          "bias": 0.7006061224254749,
+          "bias_pct": 84.41826991130857,
+          "early": 0.17997,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.9212548732757568,
+          "t_lsm": 1.4449090957641602,
+          "elapsed": 2.373756170272827,
+          "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_garch_merton.csv"
+        }
+      ]
+    },
+    "MSFT|2018-2019": {
+      "ticker": "MSFT",
+      "regime": "2018-2019",
+      "best_model": "Modified GBM",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "MSFT",
+          "regime": "2018-2019",
+          "model": "GBM",
+          "rmse_pct": 41.73114721231309,
+          "mae": 1.083921560197097,
+          "bias": 0.8053620310270675,
+          "bias_pct": 27.549267867960026,
+          "early": 0.229732,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.004897117614746094,
+          "t_lsm": 1.2987980842590332,
+          "elapsed": 1.3074769973754883,
+          "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_gbm.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2018-2019",
+          "model": "Modified GBM",
+          "rmse_pct": 33.43929877897403,
+          "mae": 0.8876863665763495,
+          "bias": 0.48487454276745945,
+          "bias_pct": 17.77950682996967,
+          "early": 0.25344,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.006766080856323242,
+          "t_lsm": 2.2115280628204346,
+          "elapsed": 2.2281739711761475,
+          "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_modified_gbm.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2018-2019",
+          "model": "Modified GBM v2",
+          "rmse_pct": 77.16790160917472,
+          "mae": 2.6199439126581394,
+          "bias": -2.6199439126581394,
+          "bias_pct": -76.37740652775169,
+          "early": 0.030813999999999998,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.012617349624633789,
+          "t_lsm": 2.069002866744995,
+          "elapsed": 2.085493803024292,
+          "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2018-2019",
+          "model": "GARCH",
+          "rmse_pct": 37.25494281745899,
+          "mae": 0.9394270127776524,
+          "bias": 0.7117751141093138,
+          "bias_pct": 24.435579809243627,
+          "early": 0.21464199999999997,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 5.155318975448608,
+          "t_lsm": 2.149055004119873,
+          "elapsed": 7.31715202331543,
+          "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_garch.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2018-2019",
+          "model": "Merton",
+          "rmse_pct": 43.31275942389722,
+          "mae": 1.1094765838565575,
+          "bias": 1.0129558481107752,
+          "bias_pct": 33.240996632131115,
+          "early": 0.19396800000000003,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.6714417934417725,
+          "t_lsm": 2.1439340114593506,
+          "elapsed": 2.8261749744415283,
+          "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_merton.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2018-2019",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 52.7752719377511,
+          "mae": 1.364283678080121,
+          "bias": 1.2908932811009448,
+          "bias_pct": 41.959992484361706,
+          "early": 0.17267799999999997,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 1.0478310585021973,
+          "t_lsm": 1.8115239143371582,
+          "elapsed": 2.8650267124176025,
+          "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_garch_merton.csv"
+        }
+      ]
+    },
+    "MSFT|2019-2020": {
+      "ticker": "MSFT",
+      "regime": "2019-2020",
+      "best_model": "Modified GBM",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "MSFT",
+          "regime": "2019-2020",
+          "model": "GBM",
+          "rmse_pct": 45.93087115337497,
+          "mae": 2.0118341788655445,
+          "bias": 1.0018246704267937,
+          "bias_pct": 28.11944579284487,
+          "early": 0.24528999999999995,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.004850864410400391,
+          "t_lsm": 1.2354450225830078,
+          "elapsed": 1.243539810180664,
+          "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_gbm.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2019-2020",
+          "model": "Modified GBM",
+          "rmse_pct": 40.97220301010998,
+          "mae": 1.757903592723939,
+          "bias": 0.6597347034401281,
+          "bias_pct": 22.116271587109292,
+          "early": 0.250932,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.02385997772216797,
+          "t_lsm": 2.3545169830322266,
+          "elapsed": 2.3850719928741455,
+          "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_modified_gbm.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2019-2020",
+          "model": "Modified GBM v2",
+          "rmse_pct": 89.98610465880247,
+          "mae": 5.5336968121399455,
+          "bias": -5.5336968121399455,
+          "bias_pct": -89.43206029967445,
+          "early": 0.013194,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.006396055221557617,
+          "t_lsm": 1.7313048839569092,
+          "elapsed": 1.7401812076568604,
+          "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2019-2020",
+          "model": "GARCH",
+          "rmse_pct": 49.19722665905075,
+          "mae": 2.02127487915657,
+          "bias": 1.2389795289437076,
+          "bias_pct": 25.36254247803958,
+          "early": 0.257914,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 8.091635942459106,
+          "t_lsm": 4.112401247024536,
+          "elapsed": 12.222189903259277,
+          "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_garch.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2019-2020",
+          "model": "Merton",
+          "rmse_pct": 50.06480796547237,
+          "mae": 2.2979300716778566,
+          "bias": 1.5396177820799142,
+          "bias_pct": 34.80077466542174,
+          "early": 0.198598,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.809783935546875,
+          "t_lsm": 2.423046112060547,
+          "elapsed": 3.251195192337036,
+          "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_merton.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2019-2020",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 260.37532320039713,
+          "mae": 5.443325835205042,
+          "bias": 5.000251877539914,
+          "bias_pct": 72.75591424429359,
+          "early": 0.255758,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 1.033740758895874,
+          "t_lsm": 1.7809948921203613,
+          "elapsed": 2.818425178527832,
+          "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_garch_merton.csv"
+        }
+      ]
+    },
+    "AMZN|2008-2009": {
+      "ticker": "AMZN",
+      "regime": "2008-2009",
+      "best_model": "GARCH",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AMZN",
+          "regime": "2008-2009",
+          "model": "GBM",
+          "rmse_pct": 46.922635151403966,
+          "mae": 1.5126124525784153,
+          "bias": 0.7402740737880555,
+          "bias_pct": 22.047011589869967,
+          "early": 0.22387,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.004726886749267578,
+          "t_lsm": 1.6312408447265625,
+          "elapsed": 1.640533208847046,
+          "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_gbm.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2008-2009",
+          "model": "Modified GBM",
+          "rmse_pct": 40.248843012664906,
+          "mae": 1.319916549775895,
+          "bias": 0.32973314012899757,
+          "bias_pct": 12.794820280865924,
+          "early": 0.24895799999999998,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.00565791130065918,
+          "t_lsm": 2.1972270011901855,
+          "elapsed": 2.215287208557129,
+          "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_modified_gbm.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2008-2009",
+          "model": "Modified GBM v2",
+          "rmse_pct": 75.72274185473819,
+          "mae": 2.7408516959590865,
+          "bias": 0.08855757320036486,
+          "bias_pct": 10.010481359651305,
+          "early": 0.18588800000000003,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.006061077117919922,
+          "t_lsm": 1.9601118564605713,
+          "elapsed": 1.9698340892791748,
+          "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2008-2009",
+          "model": "GARCH",
+          "rmse_pct": 27.66667683469965,
+          "mae": 1.0223912525467622,
+          "bias": 0.3209964362342447,
+          "bias_pct": 10.568537819824341,
+          "early": 0.20930600000000002,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 4.79817795753479,
+          "t_lsm": 1.7026469707489014,
+          "elapsed": 6.510601997375488,
+          "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_garch.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2008-2009",
+          "model": "Merton",
+          "rmse_pct": 46.51371594751168,
+          "mae": 1.4637881321275181,
+          "bias": 1.1919770152740612,
+          "bias_pct": 31.26381864183461,
+          "early": 0.197396,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.33088207244873047,
+          "t_lsm": 2.356387138366699,
+          "elapsed": 2.7037601470947266,
+          "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_merton.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2008-2009",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 48.95289021870927,
+          "mae": 1.7358102434775318,
+          "bias": 1.557883829632716,
+          "bias_pct": 37.718891447691504,
+          "early": 0.13797,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 1.4177589416503906,
+          "t_lsm": 1.8409650325775146,
+          "elapsed": 3.2628748416900635,
+          "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_garch_merton.csv"
+        }
+      ]
+    },
+    "AMZN|2013-2014": {
+      "ticker": "AMZN",
+      "regime": "2013-2014",
+      "best_model": "Modified GBM",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AMZN",
+          "regime": "2013-2014",
+          "model": "GBM",
+          "rmse_pct": 31.092910299711278,
+          "mae": 2.702388657964763,
+          "bias": 1.2412325875779593,
+          "bias_pct": 16.535649402837674,
+          "early": 0.24603199999999997,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.002574920654296875,
+          "t_lsm": 0.9268357753753662,
+          "elapsed": 0.9371058940887451,
+          "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_gbm.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2013-2014",
+          "model": "Modified GBM",
+          "rmse_pct": 29.48259567483924,
+          "mae": 2.6248569217738758,
+          "bias": 1.0583594009793789,
+          "bias_pct": 14.83612570597503,
+          "early": 0.250812,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.00922703742980957,
+          "t_lsm": 2.312807083129883,
+          "elapsed": 2.329900026321411,
+          "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_modified_gbm.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2013-2014",
+          "model": "Modified GBM v2",
+          "rmse_pct": 47.169112509713074,
+          "mae": 4.462056174715627,
+          "bias": -0.6008678375360776,
+          "bias_pct": 4.469880902022619,
+          "early": 0.220882,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.014241933822631836,
+          "t_lsm": 2.5684781074523926,
+          "elapsed": 2.589437961578369,
+          "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2013-2014",
+          "model": "GARCH",
+          "rmse_pct": 34.57224106337989,
+          "mae": 2.917043022793129,
+          "bias": 1.612016646239747,
+          "bias_pct": 19.872849110433037,
+          "early": 0.230476,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 7.031682968139648,
+          "t_lsm": 2.153294801712036,
+          "elapsed": 9.19115686416626,
+          "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_garch.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2013-2014",
+          "model": "Merton",
+          "rmse_pct": 35.61737597825495,
+          "mae": 2.8594485973386092,
+          "bias": 1.5813414904677614,
+          "bias_pct": 18.575422120165513,
+          "early": 0.18246400000000002,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.7396788597106934,
+          "t_lsm": 2.42106294631958,
+          "elapsed": 3.18953800201416,
+          "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_merton.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2013-2014",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 59.06403479987126,
+          "mae": 4.891401130388472,
+          "bias": 4.78233353856544,
+          "bias_pct": 47.664817842560595,
+          "early": 0.17384800000000003,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 2.3245058059692383,
+          "t_lsm": 1.9438140392303467,
+          "elapsed": 4.272083282470703,
+          "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_garch_merton.csv"
+        }
+      ]
+    },
+    "AMZN|2018-2019": {
+      "ticker": "AMZN",
+      "regime": "2018-2019",
+      "best_model": "GARCH",
+      "n_contracts": 51,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AMZN",
+          "regime": "2018-2019",
+          "model": "GBM",
+          "rmse_pct": 43.65765226114637,
+          "mae": 21.337303068894574,
+          "bias": 11.409509291871744,
+          "bias_pct": 25.210501105354705,
+          "early": 0.22862941176470586,
+          "n": 51,
+          "n_updates": 13,
+          "t_cal": 0.0050928592681884766,
+          "t_lsm": 1.3332560062408447,
+          "elapsed": 1.3458120822906494,
+          "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_gbm.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2018-2019",
+          "model": "Modified GBM",
+          "rmse_pct": 47.58773596920982,
+          "mae": 22.54069364453548,
+          "bias": 14.272329136015472,
+          "bias_pct": 30.056563512994376,
+          "early": 0.229643137254902,
+          "n": 51,
+          "n_updates": 13,
+          "t_cal": 0.008027076721191406,
+          "t_lsm": 2.3164331912994385,
+          "elapsed": 2.3503479957580566,
+          "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_modified_gbm.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2018-2019",
+          "model": "Modified GBM v2",
+          "rmse_pct": 79.14183711524393,
+          "mae": 49.51405233010117,
+          "bias": -49.51405233010117,
+          "bias_pct": -78.01098889896912,
+          "early": 0.04275098039215687,
+          "n": 51,
+          "n_updates": 13,
+          "t_cal": 0.0062940120697021484,
+          "t_lsm": 1.8597311973571777,
+          "elapsed": 1.8702499866485596,
+          "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2018-2019",
+          "model": "GARCH",
+          "rmse_pct": 32.444026681935114,
+          "mae": 16.126828744152508,
+          "bias": 9.757622608578854,
+          "bias_pct": 19.153330420507057,
+          "early": 0.2116392156862745,
+          "n": 51,
+          "n_updates": 13,
+          "t_cal": 3.7696759700775146,
+          "t_lsm": 2.3718881607055664,
+          "elapsed": 6.155290842056274,
+          "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_garch.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2018-2019",
+          "model": "Merton",
+          "rmse_pct": 49.33829861195713,
+          "mae": 25.39914802304015,
+          "bias": 18.735901914401015,
+          "bias_pct": 35.21837299809127,
+          "early": 0.17559803921568626,
+          "n": 51,
+          "n_updates": 13,
+          "t_cal": 0.8701388835906982,
+          "t_lsm": 1.974390983581543,
+          "elapsed": 2.85247802734375,
+          "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_merton.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2018-2019",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 44.82428319836158,
+          "mae": 22.508006286061384,
+          "bias": 18.623860816239635,
+          "bias_pct": 33.50904979345074,
+          "early": 0.17973529411764708,
+          "n": 51,
+          "n_updates": 13,
+          "t_cal": 0.7320539951324463,
+          "t_lsm": 1.5529506206512451,
+          "elapsed": 2.2899551391601562,
+          "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_garch_merton.csv"
+        }
+      ]
+    },
+    "AMZN|2019-2020": {
+      "ticker": "AMZN",
+      "regime": "2019-2020",
+      "best_model": "GARCH",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AMZN",
+          "regime": "2019-2020",
+          "model": "GBM",
+          "rmse_pct": 52.41904125163002,
+          "mae": 25.836397384125902,
+          "bias": 10.799907539263724,
+          "bias_pct": 31.408101532799744,
+          "early": 0.23772,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.003854036331176758,
+          "t_lsm": 1.331805944442749,
+          "elapsed": 1.3422808647155762,
+          "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_gbm.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2019-2020",
+          "model": "Modified GBM",
+          "rmse_pct": 54.348577790210626,
+          "mae": 26.313804377305406,
+          "bias": 11.36968342265427,
+          "bias_pct": 32.76411301492498,
+          "early": 0.242318,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.006473064422607422,
+          "t_lsm": 2.2287001609802246,
+          "elapsed": 2.245151996612549,
+          "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_modified_gbm.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2019-2020",
+          "model": "Modified GBM v2",
+          "rmse_pct": 77.06782844032523,
+          "mae": 67.02716965903764,
+          "bias": -67.02716965903764,
+          "bias_pct": -74.79372892956312,
+          "early": 0.102906,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 0.006341218948364258,
+          "t_lsm": 1.8770110607147217,
+          "elapsed": 1.885876178741455,
+          "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_modified_gbm_v2.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2019-2020",
+          "model": "GARCH",
+          "rmse_pct": 30.116171763524648,
+          "mae": 18.853847566755807,
+          "bias": 3.884813392253548,
+          "bias_pct": 15.168879816310321,
+          "early": 0.22109200000000004,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 7.890604734420776,
+          "t_lsm": 2.3971939086914062,
+          "elapsed": 10.306847095489502,
+          "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_garch.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2019-2020",
+          "model": "Merton",
+          "rmse_pct": 59.45905824559253,
+          "mae": 35.9858670167739,
+          "bias": 23.826608427712653,
+          "bias_pct": 42.60611356740024,
+          "early": 0.18862399999999999,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 1.1399428844451904,
+          "t_lsm": 2.5411629676818848,
+          "elapsed": 3.688183069229126,
+          "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_merton.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2019-2020",
+          "model": "GARCH\u2013Merton",
+          "rmse_pct": 42.06626188512732,
+          "mae": 24.49391562616718,
+          "bias": 15.892089859456805,
+          "bias_pct": 30.18867201544588,
+          "early": 0.177212,
+          "n": 50,
+          "n_updates": 13,
+          "t_cal": 1.117427110671997,
+          "t_lsm": 1.605724811553955,
+          "elapsed": 2.726912021636963,
+          "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_garch_merton.csv"
+        }
+      ]
+    }
+  },
+  "summary_by_regime": [
+    {
+      "regime": "2008-2009",
+      "model": "GBM",
+      "mean_rmse_pct": 50.90449946332336,
+      "median_rmse_pct": 50.96648411253757,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2008-2009",
+      "model": "Modified GBM",
+      "mean_rmse_pct": 45.462800180031074,
+      "median_rmse_pct": 44.83024622834769,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2008-2009",
+      "model": "Modified GBM v2",
+      "mean_rmse_pct": 66.26833653139647,
+      "median_rmse_pct": 69.75114423435532,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2008-2009",
+      "model": "GARCH",
+      "mean_rmse_pct": 38.99839911675326,
+      "median_rmse_pct": 38.70041024528931,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2008-2009",
+      "model": "Merton",
+      "mean_rmse_pct": 48.85138260158469,
+      "median_rmse_pct": 49.119909084331454,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2008-2009",
+      "model": "GARCH\u2013Merton",
+      "mean_rmse_pct": 61.78970565216089,
+      "median_rmse_pct": 60.38745069417472,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2013-2014",
+      "model": "GBM",
+      "mean_rmse_pct": 45.46804915199104,
+      "median_rmse_pct": 44.14449004205267,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2013-2014",
+      "model": "Modified GBM",
+      "mean_rmse_pct": 42.84758526479393,
+      "median_rmse_pct": 41.26100997788923,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2013-2014",
+      "model": "Modified GBM v2",
+      "mean_rmse_pct": 79.0601844902441,
+      "median_rmse_pct": 86.2443962325078,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2013-2014",
+      "model": "GARCH",
+      "mean_rmse_pct": 49.23447346077444,
+      "median_rmse_pct": 38.21383330439336,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2013-2014",
+      "model": "Merton",
+      "mean_rmse_pct": 44.483956303532054,
+      "median_rmse_pct": 43.09528662852835,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2013-2014",
+      "model": "GARCH\u2013Merton",
+      "mean_rmse_pct": 67.58361190698331,
+      "median_rmse_pct": 67.08204096410641,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2018-2019",
+      "model": "GBM",
+      "mean_rmse_pct": 41.85547948355773,
+      "median_rmse_pct": 42.69439973672973,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2018-2019",
+      "model": "Modified GBM",
+      "mean_rmse_pct": 41.798067340487464,
+      "median_rmse_pct": 40.959209395825724,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2018-2019",
+      "model": "Modified GBM v2",
+      "mean_rmse_pct": 68.82759620608701,
+      "median_rmse_pct": 69.68001483417306,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2018-2019",
+      "model": "GARCH",
+      "mean_rmse_pct": 44.12362092967139,
+      "median_rmse_pct": 39.03770891918081,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2018-2019",
+      "model": "Merton",
+      "mean_rmse_pct": 47.47459940846769,
+      "median_rmse_pct": 46.325529017927174,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2018-2019",
+      "model": "GARCH\u2013Merton",
+      "mean_rmse_pct": 58.09418264664603,
+      "median_rmse_pct": 56.16099795773509,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2019-2020",
+      "model": "GBM",
+      "mean_rmse_pct": 52.35369223019197,
+      "median_rmse_pct": 49.30399342661803,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2019-2020",
+      "model": "Modified GBM",
+      "mean_rmse_pct": 51.44229616253081,
+      "median_rmse_pct": 50.116622750021946,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2019-2020",
+      "model": "Modified GBM v2",
+      "mean_rmse_pct": 72.2810655646264,
+      "median_rmse_pct": 77.35739744155231,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2019-2020",
+      "model": "GARCH",
+      "mean_rmse_pct": 44.61406925047505,
+      "median_rmse_pct": 47.36225699920436,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2019-2020",
+      "model": "Merton",
+      "mean_rmse_pct": 56.869991023872934,
+      "median_rmse_pct": 54.76193310553245,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2019-2020",
+      "model": "GARCH\u2013Merton",
+      "mean_rmse_pct": 109.8701281309421,
+      "median_rmse_pct": 68.51946371912197,
+      "n_tickers": 4
+    }
+  ],
+  "summary_by_ticker": [
+    {
+      "ticker": "SPY",
+      "model": "GBM",
+      "mean_rmse_pct": 51.869419952106554,
+      "median_rmse_pct": 52.25842654447821,
+      "n_regimes": 4,
+      "n_best": 1
+    },
+    {
+      "ticker": "SPY",
+      "model": "Modified GBM",
+      "mean_rmse_pct": 50.28766657892719,
+      "median_rmse_pct": 49.75307509256497,
+      "n_regimes": 4,
+      "n_best": 0
+    },
+    {
+      "ticker": "SPY",
+      "model": "Modified GBM v2",
+      "mean_rmse_pct": 69.3569057230823,
+      "median_rmse_pct": 68.2107135947415,
+      "n_regimes": 4,
+      "n_best": 1
+    },
+    {
+      "ticker": "SPY",
+      "model": "GARCH",
+      "mean_rmse_pct": 49.74540129425108,
+      "median_rmse_pct": 48.32797432620647,
+      "n_regimes": 4,
+      "n_best": 2
+    },
+    {
+      "ticker": "SPY",
+      "model": "Merton",
+      "mean_rmse_pct": 55.143039793356664,
+      "median_rmse_pct": 56.16241174298955,
+      "n_regimes": 4,
+      "n_best": 0
+    },
+    {
+      "ticker": "SPY",
+      "model": "GARCH\u2013Merton",
+      "mean_rmse_pct": 61.333983985475356,
+      "median_rmse_pct": 63.617680565053696,
+      "n_regimes": 4,
+      "n_best": 0
+    },
+    {
+      "ticker": "AAPL",
+      "model": "GBM",
+      "mean_rmse_pct": 46.6463703946445,
+      "median_rmse_pct": 48.19650494019919,
+      "n_regimes": 4,
+      "n_best": 1
+    },
+    {
+      "ticker": "AAPL",
+      "model": "Modified GBM",
+      "mean_rmse_pct": 44.39961393705198,
+      "median_rmse_pct": 45.662953837501135,
+      "n_regimes": 4,
+      "n_best": 0
+    },
+    {
+      "ticker": "AAPL",
+      "model": "Modified GBM v2",
+      "mean_rmse_pct": 71.11732885390403,
+      "median_rmse_pct": 70.71325652837592,
+      "n_regimes": 4,
+      "n_best": 0
+    },
+    {
+      "ticker": "AAPL",
+      "model": "GARCH",
+      "mean_rmse_pct": 40.19631868024433,
+      "median_rmse_pct": 40.44876215174342,
+      "n_regimes": 4,
+      "n_best": 3
+    },
+    {
+      "ticker": "AAPL",
+      "model": "Merton",
+      "mean_rmse_pct": 46.97829006295852,
+      "median_rmse_pct": 47.949667727017996,
+      "n_regimes": 4,
+      "n_best": 0
+    },
+    {
+      "ticker": "AAPL",
+      "model": "GARCH\u2013Merton",
+      "mean_rmse_pct": 66.30630970063666,
+      "median_rmse_pct": 65.28923384824299,
+      "n_regimes": 4,
+      "n_best": 0
+    },
+    {
+      "ticker": "MSFT",
+      "model": "GBM",
+      "mean_rmse_pct": 48.542870241340125,
+      "median_rmse_pct": 44.975013764449926,
+      "n_regimes": 4,
+      "n_best": 0
+    },
+    {
+      "ticker": "MSFT",
+      "model": "Modified GBM",
+      "mean_rmse_pct": 43.94653032013296,
+      "median_rmse_pct": 41.48054853649991,
+      "n_regimes": 4,
+      "n_best": 2
+    },
+    {
+      "ticker": "MSFT",
+      "model": "Modified GBM v2",
+      "mean_rmse_pct": 76.18756823536255,
+      "median_rmse_pct": 83.5770031339886,
+      "n_regimes": 4,
+      "n_best": 0
+    },
+    {
+      "ticker": "MSFT",
+      "model": "GARCH",
+      "mean_rmse_pct": 55.82906369729391,
+      "median_rmse_pct": 50.06166290039276,
+      "n_regimes": 4,
+      "n_best": 0
+    },
+    {
+      "ticker": "MSFT",
+      "model": "Merton",
+      "mean_rmse_pct": 47.82648728531311,
+      "median_rmse_pct": 46.688783694684794,
+      "n_regimes": 4,
+      "n_best": 2
+    },
+    {
+      "ticker": "MSFT",
+      "model": "GARCH\u2013Merton",
+      "mean_rmse_pct": 120.97046712510297,
+      "median_rmse_pct": 85.36563668113182,
+      "n_regimes": 4,
+      "n_best": 0
+    },
+    {
+      "ticker": "AMZN",
+      "model": "GBM",
+      "mean_rmse_pct": 43.52305974097291,
+      "median_rmse_pct": 45.29014370627517,
+      "n_regimes": 4,
+      "n_best": 0
+    },
+    {
+      "ticker": "AMZN",
+      "model": "Modified GBM",
+      "mean_rmse_pct": 42.91693811173115,
+      "median_rmse_pct": 43.91828949093736,
+      "n_regimes": 4,
+      "n_best": 1
+    },
+    {
+      "ticker": "AMZN",
+      "model": "Modified GBM v2",
+      "mean_rmse_pct": 69.77537998000511,
+      "median_rmse_pct": 76.39528514753171,
+      "n_regimes": 4,
+      "n_best": 0
+    },
+    {
+      "ticker": "AMZN",
+      "model": "GARCH",
+      "mean_rmse_pct": 31.199779085884828,
+      "median_rmse_pct": 31.28009922272988,
+      "n_regimes": 4,
+      "n_best": 3
+    },
+    {
+      "ticker": "AMZN",
+      "model": "Merton",
+      "mean_rmse_pct": 47.732112195829075,
+      "median_rmse_pct": 47.92600727973441,
+      "n_regimes": 4,
+      "n_best": 0
+    },
+    {
+      "ticker": "AMZN",
+      "model": "GARCH\u2013Merton",
+      "mean_rmse_pct": 48.726867525517356,
+      "median_rmse_pct": 46.88858670853543,
+      "n_regimes": 4,
+      "n_best": 0
+    }
+  ],
+  "summary_overall": [
+    {
+      "model": "GARCH",
+      "mean_rmse_pct": 44.242640689418536,
+      "median_rmse_pct": 40.44876215174342,
+      "n_cells": 16,
+      "n_best": 8
+    },
+    {
+      "model": "Modified GBM",
+      "mean_rmse_pct": 45.387687236960815,
+      "median_rmse_pct": 45.662953837501135,
+      "n_cells": 16,
+      "n_best": 3
+    },
+    {
+      "model": "GBM",
+      "mean_rmse_pct": 47.645430082266024,
+      "median_rmse_pct": 46.555790376505,
+      "n_cells": 16,
+      "n_best": 2
+    },
+    {
+      "model": "Merton",
+      "mean_rmse_pct": 49.41998233436434,
+      "median_rmse_pct": 49.103059346701365,
+      "n_cells": 16,
+      "n_best": 2
+    },
+    {
+      "model": "Modified GBM v2",
+      "mean_rmse_pct": 71.60929569808849,
+      "median_rmse_pct": 77.11786502474997,
+      "n_cells": 16,
+      "n_best": 1
+    },
+    {
+      "model": "GARCH\u2013Merton",
+      "mean_rmse_pct": 74.33440708418308,
+      "median_rmse_pct": 60.38745069417472,
+      "n_cells": 16,
+      "n_best": 0
+    }
+  ],
+  "ranking_grid": [
+    {
+      "ticker": "SPY",
+      "regime": "2008-2009",
+      "rank1": "GARCH",
+      "rank2": "Modified GBM",
+      "best_rmse_pct": 43.04035741244614,
+      "ranks": {
+        "GARCH": 1,
+        "Modified GBM": 2,
+        "Merton": 3,
+        "GBM": 4,
+        "GARCH\u2013Merton": 5,
+        "Modified GBM v2": 6
+      }
+    },
+    {
+      "ticker": "SPY",
+      "regime": "2013-2014",
+      "rank1": "GARCH",
+      "rank2": "Modified GBM",
+      "best_rmse_pct": 36.35061732620252,
+      "ranks": {
+        "GARCH": 1,
+        "Modified GBM": 2,
+        "Merton": 3,
+        "GBM": 4,
+        "GARCH\u2013Merton": 5,
+        "Modified GBM v2": 6
+      }
+    },
+    {
+      "ticker": "SPY",
+      "regime": "2018-2019",
+      "rank1": "GBM",
+      "rank2": "Modified GBM",
+      "best_rmse_pct": 49.50652001528525,
+      "ranks": {
+        "GBM": 1,
+        "Modified GBM": 2,
+        "Modified GBM v2": 3,
+        "Merton": 4,
+        "GARCH": 5,
+        "GARCH\u2013Merton": 6
+      }
+    },
+    {
+      "ticker": "SPY",
+      "regime": "2019-2020",
+      "rank1": "Modified GBM v2",
+      "rank2": "GARCH",
+      "best_rmse_pct": 44.42336271659851,
+      "ranks": {
+        "Modified GBM v2": 1,
+        "GARCH": 2,
+        "Modified GBM": 3,
+        "GBM": 4,
+        "GARCH\u2013Merton": 5,
+        "Merton": 6
+      }
+    },
+    {
+      "ticker": "AAPL",
+      "regime": "2008-2009",
+      "rank1": "GARCH",
+      "rank2": "Modified GBM",
+      "best_rmse_pct": 34.36046307813248,
+      "ranks": {
+        "GARCH": 1,
+        "Modified GBM": 2,
+        "Merton": 3,
+        "GBM": 4,
+        "GARCH\u2013Merton": 5,
+        "Modified GBM v2": 6
+      }
+    },
+    {
+      "ticker": "AAPL",
+      "regime": "2013-2014",
+      "rank1": "GARCH",
+      "rank2": "Modified GBM",
+      "best_rmse_pct": 40.07704928258421,
+      "ranks": {
+        "GARCH": 1,
+        "Modified GBM": 2,
+        "Merton": 3,
+        "GBM": 4,
+        "GARCH\u2013Merton": 5,
+        "Modified GBM v2": 6
+      }
+    },
+    {
+      "ticker": "AAPL",
+      "regime": "2018-2019",
+      "rank1": "GBM",
+      "rank2": "Modified GBM",
+      "best_rmse_pct": 32.5265984454862,
+      "ranks": {
+        "GBM": 1,
+        "Modified GBM": 2,
+        "Merton": 3,
+        "GARCH": 4,
+        "GARCH\u2013Merton": 5,
+        "Modified GBM v2": 6
+      }
+    },
+    {
+      "ticker": "AAPL",
+      "regime": "2019-2020",
+      "rank1": "GARCH",
+      "rank2": "Modified GBM",
+      "best_rmse_pct": 45.52728733935798,
+      "ranks": {
+        "GARCH": 1,
+        "Modified GBM": 2,
+        "GBM": 3,
+        "Merton": 4,
+        "GARCH\u2013Merton": 5,
+        "Modified GBM v2": 6
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "regime": "2008-2009",
+      "rank1": "Merton",
+      "rank2": "Modified GBM",
+      "best_rmse_pct": 41.80050577306629,
+      "ranks": {
+        "Merton": 1,
+        "Modified GBM": 2,
+        "GBM": 3,
+        "Modified GBM v2": 4,
+        "GARCH": 5,
+        "GARCH\u2013Merton": 6
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "regime": "2013-2014",
+      "rank1": "Merton",
+      "rank2": "Modified GBM",
+      "best_rmse_pct": 56.127875978816554,
+      "ranks": {
+        "Merton": 1,
+        "Modified GBM": 2,
+        "GBM": 3,
+        "GARCH": 4,
+        "Modified GBM v2": 5,
+        "GARCH\u2013Merton": 6
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "regime": "2018-2019",
+      "rank1": "Modified GBM",
+      "rank2": "GARCH",
+      "best_rmse_pct": 33.43929877897403,
+      "ranks": {
+        "Modified GBM": 1,
+        "GARCH": 2,
+        "GBM": 3,
+        "Merton": 4,
+        "GARCH\u2013Merton": 5,
+        "Modified GBM v2": 6
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "regime": "2019-2020",
+      "rank1": "Modified GBM",
+      "rank2": "GBM",
+      "best_rmse_pct": 40.97220301010998,
+      "ranks": {
+        "Modified GBM": 1,
+        "GBM": 2,
+        "GARCH": 3,
+        "Merton": 4,
+        "Modified GBM v2": 5,
+        "GARCH\u2013Merton": 6
+      }
+    },
+    {
+      "ticker": "AMZN",
+      "regime": "2008-2009",
+      "rank1": "GARCH",
+      "rank2": "Modified GBM",
+      "best_rmse_pct": 27.66667683469965,
+      "ranks": {
+        "GARCH": 1,
+        "Modified GBM": 2,
+        "Merton": 3,
+        "GBM": 4,
+        "GARCH\u2013Merton": 5,
+        "Modified GBM v2": 6
+      }
+    },
+    {
+      "ticker": "AMZN",
+      "regime": "2013-2014",
+      "rank1": "Modified GBM",
+      "rank2": "GBM",
+      "best_rmse_pct": 29.48259567483924,
+      "ranks": {
+        "Modified GBM": 1,
+        "GBM": 2,
+        "GARCH": 3,
+        "Merton": 4,
+        "Modified GBM v2": 5,
+        "GARCH\u2013Merton": 6
+      }
+    },
+    {
+      "ticker": "AMZN",
+      "regime": "2018-2019",
+      "rank1": "GARCH",
+      "rank2": "GBM",
+      "best_rmse_pct": 32.444026681935114,
+      "ranks": {
+        "GARCH": 1,
+        "GBM": 2,
+        "GARCH\u2013Merton": 3,
+        "Modified GBM": 4,
+        "Merton": 5,
+        "Modified GBM v2": 6
+      }
+    },
+    {
+      "ticker": "AMZN",
+      "regime": "2019-2020",
+      "rank1": "GARCH",
+      "rank2": "GARCH\u2013Merton",
+      "best_rmse_pct": 30.116171763524648,
+      "ranks": {
+        "GARCH": 1,
+        "GARCH\u2013Merton": 2,
+        "GBM": 3,
+        "Modified GBM": 4,
+        "Merton": 5,
+        "Modified GBM v2": 6
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "ticker": "SPY",
+  "regime": "2018-2019",
+  "model": "Heston",
+  "n_updates": 1,
+  "asof": "2018-10-01 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.1419101745953745,
+    "kappa": 20.0,
+    "theta": 0.012143013506454853,
+    "xi": 3.0,
+    "rho": -0.39098167849279575,
+    "v0": 0.003201753354104873,
+    "variance_drift": "\u03ba(\u03b8 \u2212 v)"
+  },
+  "premium": {
+    "eta_v": -29.984072727547407,
+    "source": "listed calls (Pan 2002 \u03b7_v); not from returns",
+    "q_explosive": false,
+    "n_quotes": 24
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "kappa_q": 49.98407272754741,
+    "theta_q": 0.00485875313628157,
+    "xi": 3.0,
+    "rho": -0.39098167849279575,
+    "v0_q": 0.023209276597883934,
+    "mean_equation": "r_f \u2212 \u00bd v",
+    "variance_drift": "\u03ba(\u03b8 \u2212 v) + \u03b7_v v"
+  }
+}

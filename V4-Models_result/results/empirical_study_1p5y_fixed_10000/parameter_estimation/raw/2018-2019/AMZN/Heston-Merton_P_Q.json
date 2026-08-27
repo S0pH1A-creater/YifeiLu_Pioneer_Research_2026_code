@@ -1,0 +1,43 @@
+{
+  "ticker": "AMZN",
+  "regime": "2018-2019",
+  "model": "Heston\u2013Merton",
+  "n_updates": 1,
+  "asof": "2018-10-01 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.5438359073244179,
+    "kappa": 20.0,
+    "theta": 0.05922112404171132,
+    "xi": 3.0,
+    "rho": 0.21049842906630784,
+    "v0": 0.05281274368640807,
+    "variance_drift": "\u03ba(\u03b8 \u2212 v)",
+    "lam": 2.0,
+    "mu_j": 0.007584633433012596,
+    "sigma_j": 0.10097003052332694,
+    "kappa_j": 0.012762865920283417
+  },
+  "premium": {
+    "eta_v": 17.17604710824036,
+    "source": "listed calls (Pan 2002 \u03b7_v); not from returns",
+    "q_explosive": false,
+    "n_quotes": 24,
+    "mu_j_minus_mu_j_q": 0.21689811486352936,
+    "jump_premium_identified": true
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "kappa_q": 2.823952891759639,
+    "theta_q": 0.4194200562942814,
+    "xi": 3.0,
+    "rho": 0.21049842906630784,
+    "v0_q": 0.018609092699553284,
+    "mean_equation": "r_f \u2212 \u03bb \u03ba^Q \u2212 \u00bd v",
+    "variance_drift": "\u03ba(\u03b8 \u2212 v) + \u03b7_v v",
+    "lam": 2.0,
+    "mu_j_q": -0.20931348143051676,
+    "sigma_j": 0.10097003052332694,
+    "kappa_j_q": -0.18471375610274754
+  }
+}

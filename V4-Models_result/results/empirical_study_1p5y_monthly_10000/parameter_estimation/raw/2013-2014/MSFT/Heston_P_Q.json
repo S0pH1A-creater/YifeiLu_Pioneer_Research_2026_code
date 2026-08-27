@@ -1,0 +1,33 @@
+{
+  "ticker": "MSFT",
+  "regime": "2013-2014",
+  "model": "Heston",
+  "n_updates": 13,
+  "asof": "2014-12-31 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.2234599092639597,
+    "kappa": 20.0,
+    "theta": 0.05215481186709663,
+    "xi": 3.0,
+    "rho": -0.19864109269673472,
+    "v0": 0.049934205731237406,
+    "variance_drift": "\u03ba(\u03b8 \u2212 v)"
+  },
+  "premium": {
+    "eta_v": -0.3380640716761922,
+    "source": "listed calls (Pan 2002 \u03b7_v); not from returns",
+    "q_explosive": false,
+    "n_quotes": 20
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "kappa_q": 20.338064071676193,
+    "theta_q": 0.051287882350346245,
+    "xi": 3.0,
+    "rho": -0.19864109269673472,
+    "v0_q": 0.04670246175412767,
+    "mean_equation": "r_f \u2212 \u00bd v",
+    "variance_drift": "\u03ba(\u03b8 \u2212 v) + \u03b7_v v"
+  }
+}

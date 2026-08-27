@@ -1,0 +1,35 @@
+{
+  "ticker": "AAPL",
+  "regime": "2008-2009",
+  "model": "GARCH",
+  "n_updates": 1,
+  "asof": "2008-08-01 00:00:00",
+  "P": {
+    "measure": "P",
+    "lambda": 0.11282133586131878,
+    "omega": 4.945398674340513e-05,
+    "alpha": 0.09911823081502034,
+    "beta": 0.8268941457256853,
+    "sigma0": 0.026077931750939407,
+    "mean_equation": "r_f + \u03bb \u03c3 \u2212 \u00bd \u03c3\u00b2",
+    "variance_shock": "\u03b5_t",
+    "persist": 0.9260123765407057,
+    "uncond_var": 0.0006684089099119822,
+    "mu_p": 0.6669822118454061,
+    "rf_mean": 0.0340383597883598
+  },
+  "premium": {},
+  "Q": {
+    "measure": "Q (LRNVR)",
+    "lambda": 0.11282133586131878,
+    "omega": 4.945398674340513e-05,
+    "alpha": 0.09911823081502034,
+    "beta": 0.8268941457256853,
+    "sigma0": 0.026077931750939407,
+    "mean_equation": "r_f \u2212 \u00bd \u03c3\u00b2",
+    "variance_shock": "\u03be_t \u2212 \u03bb",
+    "persist": 0.9272740181885493,
+    "uncond_var": 0.0006800043878626411,
+    "q_stationary": true
+  }
+}

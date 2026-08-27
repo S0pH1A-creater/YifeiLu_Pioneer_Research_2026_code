@@ -1,0 +1,33 @@
+{
+  "ticker": "SPY",
+  "regime": "2013-2014",
+  "model": "Heston",
+  "n_updates": 1,
+  "asof": "2014-01-02 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.19452939687884388,
+    "kappa": 20.0,
+    "theta": 0.013262035672089204,
+    "xi": 3.0,
+    "rho": 0.01648569682881886,
+    "v0": 0.009373042790721951,
+    "variance_drift": "\u03ba(\u03b8 \u2212 v)"
+  },
+  "premium": {
+    "eta_v": -39.999999999892715,
+    "source": "listed calls (Pan 2002 \u03b7_v); not from returns",
+    "q_explosive": false,
+    "n_quotes": 22
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "kappa_q": 59.999999999892715,
+    "theta_q": 0.004420678557370972,
+    "xi": 3.0,
+    "rho": 0.01648569682881886,
+    "v0_q": 0.03364830462839088,
+    "mean_equation": "r_f \u2212 \u00bd v",
+    "variance_drift": "\u03ba(\u03b8 \u2212 v) + \u03b7_v v"
+  }
+}

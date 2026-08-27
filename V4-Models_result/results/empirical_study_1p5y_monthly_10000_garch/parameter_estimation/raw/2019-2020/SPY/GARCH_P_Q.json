@@ -1,0 +1,33 @@
+{
+  "ticker": "SPY",
+  "regime": "2019-2020",
+  "n_updates": 13,
+  "asof": "2020-08-31 00:00:00",
+  "P": {
+    "measure": "P",
+    "lambda": 0.19288917398930272,
+    "omega": 4.532889350432796e-06,
+    "alpha": 0.3085303248907169,
+    "beta": 0.6914686751092782,
+    "sigma0": 0.0066560613034608905,
+    "mean_equation": "r_f + \u03bb \u03c3 \u2212 \u00bd \u03c3\u00b2",
+    "variance_shock": "\u03b5_t",
+    "persist": 0.9999989999999952,
+    "uncond_var": 4.5328893286626215,
+    "mu_p": 0.6027212075912066,
+    "rf_mean": 0.013548421052631581
+  },
+  "Q": {
+    "measure": "Q (LRNVR)",
+    "lambda": 0.19288917398930272,
+    "omega": 4.532889350432796e-06,
+    "alpha": 0.3085303248907169,
+    "beta": 0.6914686751092782,
+    "sigma0": 0.0066560613034608905,
+    "mean_equation": "r_f \u2212 \u00bd \u03c3\u00b2",
+    "variance_shock": "\u03be_t \u2212 \u03bb",
+    "persist": 1.0114782512919003,
+    "uncond_var": null,
+    "q_stationary": false
+  }
+}

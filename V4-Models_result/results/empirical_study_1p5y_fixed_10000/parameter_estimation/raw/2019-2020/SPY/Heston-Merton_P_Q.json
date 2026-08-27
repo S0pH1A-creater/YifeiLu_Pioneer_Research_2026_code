@@ -1,0 +1,43 @@
+{
+  "ticker": "SPY",
+  "regime": "2019-2020",
+  "model": "Heston\u2013Merton",
+  "n_updates": 1,
+  "asof": "2019-09-03 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.05136115058329398,
+    "kappa": 20.0,
+    "theta": 0.02379748724023757,
+    "xi": 3.0,
+    "rho": -0.15612871211658472,
+    "v0": 0.051028292539455726,
+    "variance_drift": "\u03ba(\u03b8 \u2212 v)",
+    "lam": 4.666666666666667,
+    "mu_j": -0.010689159356941655,
+    "sigma_j": 0.03562572359425228,
+    "kappa_j": -0.010004185129660725
+  },
+  "premium": {
+    "eta_v": -39.999999999990024,
+    "source": "listed calls (Pan 2002 \u03b7_v); not from returns",
+    "q_explosive": false,
+    "n_quotes": 24,
+    "mu_j_minus_mu_j_q": 0.03869461136026088,
+    "jump_premium_identified": true
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "kappa_q": 59.999999999990024,
+    "theta_q": 0.007932495746747176,
+    "xi": 3.0,
+    "rho": -0.15612871211658472,
+    "v0_q": 0.014248177321793485,
+    "mean_equation": "r_f \u2212 \u03bb \u03ba^Q \u2212 \u00bd v",
+    "variance_drift": "\u03ba(\u03b8 \u2212 v) + \u03b7_v v",
+    "lam": 4.666666666666667,
+    "mu_j_q": -0.049383770717202534,
+    "sigma_j": 0.03562572359425228,
+    "kappa_j_q": -0.04758000915893401
+  }
+}

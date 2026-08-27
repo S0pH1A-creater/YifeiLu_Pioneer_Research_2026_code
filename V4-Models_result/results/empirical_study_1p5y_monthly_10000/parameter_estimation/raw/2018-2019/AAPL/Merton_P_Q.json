@@ -1,0 +1,31 @@
+{
+  "ticker": "AAPL",
+  "regime": "2018-2019",
+  "model": "Merton",
+  "n_updates": 13,
+  "asof": "2019-09-30 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.2395673717264695,
+    "sigma": 0.24277131923514486,
+    "lam": 4.0,
+    "mu_j": -0.00700668683419677,
+    "sigma_j": 0.07910400918152581,
+    "kappa": -0.0038704551052450853
+  },
+  "premium": {
+    "mu_j_minus_mu_j_q": 0.03833058729364823,
+    "source": "listed calls (Pan 2002 \u03bc*); \u03bb* = \u03bb (timing not separately identified)",
+    "jump_premium_identified": true,
+    "n_quotes": 24
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "sigma": 0.24277131923514486,
+    "lam": 4.0,
+    "mu_j_q": -0.045337274127845,
+    "sigma_j": 0.07910400918152581,
+    "kappa_q": -0.04133017278074835,
+    "mean_equation": "r_f \u2212 \u03bb \u03ba^Q \u2212 \u00bd \u03c3\u00b2"
+  }
+}

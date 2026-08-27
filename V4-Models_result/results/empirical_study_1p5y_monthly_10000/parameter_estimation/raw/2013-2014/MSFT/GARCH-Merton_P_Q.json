@@ -1,0 +1,42 @@
+{
+  "ticker": "MSFT",
+  "regime": "2013-2014",
+  "model": "GARCH\u2013Merton",
+  "n_updates": 13,
+  "asof": "2014-12-31 00:00:00",
+  "P": {
+    "measure": "P",
+    "lambda": 0.16426264652377826,
+    "omega": 7.696409234182134e-05,
+    "alpha": 0.6083009563294867,
+    "beta": 0.2562771660531664,
+    "sigma0": 0.014234220836800123,
+    "lam": 3.968503937007874,
+    "mu_j": 0.006160568536065503,
+    "sigma_j": 0.07457074876369083,
+    "kappa": 0.008981056657060948,
+    "sigma": 0.37844252450265603,
+    "mean_equation": "r_f + \u03bb \u03c3 \u2212 \u00bd \u03c3\u00b2 + J",
+    "variance_shock": "\u03b5_t"
+  },
+  "premium": {
+    "mu_j_q": -0.014811876613655432,
+    "n_quotes": 20,
+    "jump_premium_identified": true
+  },
+  "Q": {
+    "measure": "Q (Duan LRNVR + Pan \u03bc_J*)",
+    "lambda": 0.16426264652377826,
+    "omega": 7.696409234182134e-05,
+    "alpha": 0.6083009563294867,
+    "beta": 0.2562771660531664,
+    "sigma0": 0.014234220836800123,
+    "lam": 3.968503937007874,
+    "mu_j_q": -0.014811876613655432,
+    "sigma_j": 0.07457074876369083,
+    "kappa_q": -0.011959389494072714,
+    "mean_equation": "r_f \u2212 \u03bb \u03ba* \u2212 \u00bd \u03c3\u00b2 + J*",
+    "variance_shock": "\u03be_t \u2212 \u03bb",
+    "q_stationary": true
+  }
+}

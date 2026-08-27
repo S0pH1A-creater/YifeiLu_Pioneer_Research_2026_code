@@ -1,0 +1,31 @@
+{
+  "ticker": "SPY",
+  "regime": "2013-2014",
+  "model": "Merton",
+  "n_updates": 13,
+  "asof": "2014-12-31 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.19361373405522037,
+    "sigma": 0.09760437798658717,
+    "lam": 3.968503937007874,
+    "mu_j": -0.00674801932963461,
+    "sigma_j": 0.022870617273797116,
+    "kappa": -0.0064654949194268285
+  },
+  "premium": {
+    "mu_j_minus_mu_j_q": 0.005816221325517105,
+    "source": "listed calls (Pan 2002 \u03bc*); \u03bb* = \u03bb (timing not separately identified)",
+    "jump_premium_identified": true,
+    "n_quotes": 21
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "sigma": 0.09760437798658717,
+    "lam": 3.968503937007874,
+    "mu_j_q": -0.012564240655151715,
+    "sigma_j": 0.022870617273797116,
+    "kappa_q": -0.012227339171969054,
+    "mean_equation": "r_f \u2212 \u03bb \u03ba^Q \u2212 \u00bd \u03c3\u00b2"
+  }
+}

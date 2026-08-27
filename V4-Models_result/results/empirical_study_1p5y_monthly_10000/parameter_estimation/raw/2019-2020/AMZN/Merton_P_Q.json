@@ -1,0 +1,31 @@
+{
+  "ticker": "AMZN",
+  "regime": "2019-2020",
+  "model": "Merton",
+  "n_updates": 13,
+  "asof": "2020-08-31 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.3835060585252196,
+    "sigma": 0.2544124906098706,
+    "lam": 4.6421052631578945,
+    "mu_j": 0.025201435095650458,
+    "sigma_j": 0.0726013117932214,
+    "kappa": 0.02822797738741256
+  },
+  "premium": {
+    "mu_j_minus_mu_j_q": -0.10213727601982464,
+    "source": "listed calls (Pan 2002 \u03bc*); \u03bb* = \u03bb (timing not separately identified)",
+    "jump_premium_identified": true,
+    "n_quotes": 24
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "sigma": 0.2544124906098706,
+    "lam": 4.6421052631578945,
+    "mu_j_q": 0.1273387111154751,
+    "sigma_j": 0.0726013117932214,
+    "kappa_q": 0.13879898638962107,
+    "mean_equation": "r_f \u2212 \u03bb \u03ba^Q \u2212 \u00bd \u03c3\u00b2"
+  }
+}

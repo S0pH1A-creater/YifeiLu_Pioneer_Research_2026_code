@@ -1,0 +1,33 @@
+{
+  "ticker": "AMZN",
+  "regime": "2018-2019",
+  "model": "Heston",
+  "n_updates": 1,
+  "asof": "2018-10-01 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.5438359073244179,
+    "kappa": 20.0,
+    "theta": 0.05922112404171132,
+    "xi": 3.0,
+    "rho": 0.21049842906630784,
+    "v0": 0.05281274368640807,
+    "variance_drift": "\u03ba(\u03b8 \u2212 v)"
+  },
+  "premium": {
+    "eta_v": 19.368510221706458,
+    "source": "listed calls (Pan 2002 \u03b7_v); not from returns",
+    "q_explosive": false,
+    "n_quotes": 24
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "kappa_q": 0.6314897782935418,
+    "theta_q": 1.8756004001123505,
+    "xi": 3.0,
+    "rho": 0.21049842906630784,
+    "v0_q": 0.03558226397254949,
+    "mean_equation": "r_f \u2212 \u00bd v",
+    "variance_drift": "\u03ba(\u03b8 \u2212 v) + \u03b7_v v"
+  }
+}

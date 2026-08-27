@@ -1,0 +1,33 @@
+{
+  "ticker": "MSFT",
+  "regime": "2018-2019",
+  "model": "Heston",
+  "n_updates": 13,
+  "asof": "2019-09-30 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.2964166891122583,
+    "kappa": 20.0,
+    "theta": 0.05955032368884038,
+    "xi": 3.0,
+    "rho": -0.08479446934742328,
+    "v0": 0.027511512362099547,
+    "variance_drift": "\u03ba(\u03b8 \u2212 v)"
+  },
+  "premium": {
+    "eta_v": 11.793069930069759,
+    "source": "listed calls (Pan 2002 \u03b7_v); not from returns",
+    "q_explosive": false,
+    "n_quotes": 23
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "kappa_q": 8.206930069930241,
+    "theta_q": 0.14512204486067115,
+    "xi": 3.0,
+    "rho": -0.08479446934742328,
+    "v0_q": 0.013059612313818249,
+    "mean_equation": "r_f \u2212 \u00bd v",
+    "variance_drift": "\u03ba(\u03b8 \u2212 v) + \u03b7_v v"
+  }
+}

@@ -1,0 +1,2400 @@
+{
+  "meta": {
+    "window_label": "1.5 years",
+    "rolling": "none",
+    "n_paths": 10000,
+    "seed": 42,
+    "models": [
+      "Heston",
+      "Heston\u2013Merton"
+    ],
+    "tickers": [
+      "SPY",
+      "AAPL",
+      "MSFT",
+      "AMZN"
+    ],
+    "regimes": [
+      "2008-2009",
+      "2013-2014",
+      "2018-2019",
+      "2019-2020"
+    ],
+    "regime_meta": {
+      "2008-2009": {
+        "title": "Crisis",
+        "window": "2008-08-01 \u2192 2009-07-31",
+        "note": "Global financial crisis / high realized volatility"
+      },
+      "2013-2014": {
+        "title": "Normal",
+        "window": "2014-01-01 \u2192 2014-12-31",
+        "note": "Low-volatility expansion year"
+      },
+      "2018-2019": {
+        "title": "Late-cycle",
+        "window": "2018-10-01 \u2192 2019-09-30",
+        "note": "Vol spike (Q4 2018) then recovery"
+      },
+      "2019-2020": {
+        "title": "COVID",
+        "window": "2019-09-01 \u2192 2020-08-31",
+        "note": "COVID crash and rebound (shares Sep 2019 with late-cycle file)"
+      }
+    },
+    "primary_metric": "percentage RMSE",
+    "bias_definition": "model \u2212 market (dollars)",
+    "bias_pct_definition": "100 \u00d7 mean((model \u2212 market) / market)",
+    "elapsed_sec": 143.3974118232727,
+    "failures": [],
+    "generated_at": "2026-08-23T04:17:50.228206+00:00",
+    "parent_models": [
+      "GBM",
+      "Modified GBM",
+      "GARCH",
+      "Heston",
+      "Merton",
+      "GARCH\u2013Merton",
+      "Heston\u2013Merton"
+    ],
+    "grouped_report": "option_implied",
+    "banner_extra": "option-implied Heston family",
+    "notebook_title_suffix": " \u2014 option-implied Heston family",
+    "group_intro": [
+      "Companion to the seven-model 10,000-path V4 fixed-calibration study. This report keeps only Heston and Heston\u2013Merton. In V4 their P dynamics still come from returns (Method A), and listed calls identify the Pan (2002) volatility / jump-size premia used for LSM. Rankings are within this pair; they are not compared here with return-based models.",
+      "Companies are SPY, AAPL, MSFT, and AMZN. No new calibration or LSM.",
+      "Return-based companion: V4_1p5y_fixed_empirical_study_return_based.pdf."
+    ],
+    "pdf_name": "V4_1p5y_fixed_empirical_study_option_implied.pdf",
+    "nb_name": "V4_1p5y_fixed_empirical_study_option_implied.ipynb"
+  },
+  "shared_contracts": {
+    "2008-2009": {
+      "period_start": "2008-08-01",
+      "period_end": "2009-07-31",
+      "n": {
+        "SPY": 50,
+        "AAPL": 50,
+        "MSFT": 50,
+        "AMZN": 50
+      }
+    },
+    "2013-2014": {
+      "period_start": "2014-01-01",
+      "period_end": "2014-12-31",
+      "n": {
+        "SPY": 50,
+        "AAPL": 50,
+        "MSFT": 50,
+        "AMZN": 50
+      }
+    },
+    "2018-2019": {
+      "period_start": "2018-10-01",
+      "period_end": "2019-09-30",
+      "n": {
+        "SPY": 50,
+        "AAPL": 51,
+        "MSFT": 50,
+        "AMZN": 51
+      }
+    },
+    "2019-2020": {
+      "period_start": "2019-09-01",
+      "period_end": "2020-08-31",
+      "n": {
+        "SPY": 50,
+        "AAPL": 50,
+        "MSFT": 50,
+        "AMZN": 50
+      }
+    }
+  },
+  "filter_funnel": {
+    "tickers": {
+      "SPY": {
+        "2008-2009": {
+          "lookback_start": "2008-01-31",
+          "period_end": "2009-07-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 3359
+            },
+            {
+              "step": "calls only",
+              "n": 3359
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 3359
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 3311
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 3311
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 3203
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 3203
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 1357,
+            "ITM": 1139,
+            "ATM": 747,
+            "deep ITM": 116,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 1357,
+            "ITM": 1099,
+            "ATM": 747,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2013-2014": {
+          "lookback_start": "2013-06-30",
+          "period_end": "2014-12-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 12815
+            },
+            {
+              "step": "calls only",
+              "n": 12815
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 12815
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 12548
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 12548
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 12405
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 12405
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "ATM": 5451,
+            "ITM": 4195,
+            "OTM": 2999,
+            "deep ITM": 170,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "ATM": 5448,
+            "ITM": 3958,
+            "OTM": 2999,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2018-2019": {
+          "lookback_start": "2018-03-30",
+          "period_end": "2019-09-30",
+          "steps": [
+            {
+              "step": "input",
+              "n": 35222
+            },
+            {
+              "step": "calls only",
+              "n": 35222
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 35222
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 35104
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 35104
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 34809
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 34809
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "ATM": 14873,
+            "OTM": 11106,
+            "ITM": 8932,
+            "deep ITM": 311,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "ATM": 14872,
+            "OTM": 11106,
+            "ITM": 8831,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2019-2020": {
+          "lookback_start": "2019-02-28",
+          "period_end": "2020-08-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 42100
+            },
+            {
+              "step": "calls only",
+              "n": 42100
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 42100
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 41961
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 41961
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 41379
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 41379
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 14711,
+            "ATM": 14694,
+            "ITM": 12082,
+            "deep ITM": 613,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 14711,
+            "ATM": 14693,
+            "ITM": 11975,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        }
+      },
+      "AAPL": {
+        "2008-2009": {
+          "lookback_start": "2008-01-31",
+          "period_end": "2009-07-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 685
+            },
+            {
+              "step": "calls only",
+              "n": 685
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 685
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 685
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 685
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 652
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 652
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 271,
+            "ITM": 248,
+            "ATM": 133,
+            "deep ITM": 33,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 271,
+            "ITM": 248,
+            "ATM": 133,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2013-2014": {
+          "lookback_start": "2013-06-30",
+          "period_end": "2014-12-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 8925
+            },
+            {
+              "step": "calls only",
+              "n": 8925
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 8925
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 8875
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 8875
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 8633
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 8633
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 3672,
+            "ITM": 2888,
+            "ATM": 2113,
+            "deep ITM": 252,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 3672,
+            "ITM": 2848,
+            "ATM": 2113,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2018-2019": {
+          "lookback_start": "2018-03-30",
+          "period_end": "2019-09-30",
+          "steps": [
+            {
+              "step": "input",
+              "n": 6309
+            },
+            {
+              "step": "calls only",
+              "n": 6309
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 6309
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 6297
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 6297
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 6084
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 6084
+            }
+          ],
+          "n_eval_contracts": 51,
+          "moneyness_before": {
+            "OTM": 2552,
+            "ITM": 2185,
+            "ATM": 1354,
+            "deep ITM": 218,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 2552,
+            "ITM": 2178,
+            "ATM": 1354,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2019-2020": {
+          "lookback_start": "2019-02-28",
+          "period_end": "2020-08-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 8010
+            },
+            {
+              "step": "calls only",
+              "n": 8010
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 8010
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 7992
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 7992
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 7713
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 7713
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 3176,
+            "ITM": 2805,
+            "ATM": 1744,
+            "deep ITM": 285,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 3176,
+            "ITM": 2793,
+            "ATM": 1744,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        }
+      },
+      "MSFT": {
+        "2008-2009": {
+          "lookback_start": "2008-01-31",
+          "period_end": "2009-07-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 566
+            },
+            {
+              "step": "calls only",
+              "n": 566
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 566
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 566
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 566
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 538
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 538
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 234,
+            "ITM": 188,
+            "ATM": 116,
+            "deep ITM": 28,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 234,
+            "ITM": 188,
+            "ATM": 116,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2013-2014": {
+          "lookback_start": "2013-06-30",
+          "period_end": "2014-12-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 3299
+            },
+            {
+              "step": "calls only",
+              "n": 3299
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 3299
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 3237
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 3237
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 3175
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 3175
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 1153,
+            "ITM": 1094,
+            "ATM": 975,
+            "deep ITM": 77,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 1153,
+            "ITM": 1047,
+            "ATM": 975,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2018-2019": {
+          "lookback_start": "2018-03-30",
+          "period_end": "2019-09-30",
+          "steps": [
+            {
+              "step": "input",
+              "n": 7814
+            },
+            {
+              "step": "calls only",
+              "n": 7814
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 7814
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 7752
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 7752
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 7583
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 7583
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 2986,
+            "ITM": 2614,
+            "ATM": 2032,
+            "deep ITM": 182,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 2986,
+            "ITM": 2565,
+            "ATM": 2032,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2019-2020": {
+          "lookback_start": "2019-02-28",
+          "period_end": "2020-08-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 6892
+            },
+            {
+              "step": "calls only",
+              "n": 6892
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 6892
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 6852
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 6852
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 6655
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 6655
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 2621,
+            "ITM": 2386,
+            "ATM": 1677,
+            "deep ITM": 208,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 2621,
+            "ITM": 2357,
+            "ATM": 1677,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        }
+      },
+      "AMZN": {
+        "2008-2009": {
+          "lookback_start": "2008-01-31",
+          "period_end": "2009-07-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 465
+            },
+            {
+              "step": "calls only",
+              "n": 465
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 465
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 465
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 465
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 442
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 442
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "ITM": 185,
+            "OTM": 173,
+            "ATM": 84,
+            "deep ITM": 23,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "ITM": 185,
+            "OTM": 173,
+            "ATM": 84,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2013-2014": {
+          "lookback_start": "2013-06-30",
+          "period_end": "2014-12-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 5715
+            },
+            {
+              "step": "calls only",
+              "n": 5715
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 5715
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 5692
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 5692
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 5598
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 5598
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 2583,
+            "ATM": 1522,
+            "ITM": 1509,
+            "deep ITM": 101,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 2583,
+            "ATM": 1522,
+            "ITM": 1493,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2018-2019": {
+          "lookback_start": "2018-03-30",
+          "period_end": "2019-09-30",
+          "steps": [
+            {
+              "step": "input",
+              "n": 28809
+            },
+            {
+              "step": "calls only",
+              "n": 28809
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 28809
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 28808
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 28808
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 28346
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 28346
+            }
+          ],
+          "n_eval_contracts": 51,
+          "moneyness_before": {
+            "OTM": 12200,
+            "ATM": 8464,
+            "ITM": 7683,
+            "deep ITM": 462,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 12200,
+            "ATM": 8464,
+            "ITM": 7682,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        },
+        "2019-2020": {
+          "lookback_start": "2019-02-28",
+          "period_end": "2020-08-31",
+          "steps": [
+            {
+              "step": "input",
+              "n": 26766
+            },
+            {
+              "step": "calls only",
+              "n": 26766
+            },
+            {
+              "step": "finite S, K, C",
+              "n": 26766
+            },
+            {
+              "step": "1. no-arbitrage C \u2265 max(0, S\u2212K)",
+              "n": 26760
+            },
+            {
+              "step": "2. maturity 7\u201360 DTE",
+              "n": 26760
+            },
+            {
+              "step": "3a. |S/K \u2212 1| \u2264 10%",
+              "n": 26323
+            },
+            {
+              "step": "3b. liquidity / wide bid\u2013ask",
+              "n": 26323
+            }
+          ],
+          "n_eval_contracts": 50,
+          "moneyness_before": {
+            "OTM": 11003,
+            "ATM": 8140,
+            "ITM": 7185,
+            "deep ITM": 438,
+            "deep OTM": 0
+          },
+          "moneyness_after": {
+            "OTM": 11003,
+            "ATM": 8140,
+            "ITM": 7180,
+            "deep OTM": 0,
+            "deep ITM": 0
+          }
+        }
+      }
+    },
+    "note": "Same filters for every model. No model-specific data selection."
+  },
+  "cells": {
+    "SPY|2008-2009|Heston": {
+      "ticker": "SPY",
+      "regime": "2008-2009",
+      "model": "Heston",
+      "rmse_pct": 39.12505467005572,
+      "mae": 1.4774236913122925,
+      "bias": -1.2427577059987343,
+      "bias_pct": -26.21800843966841,
+      "early": 0.181062,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.26543688774108887,
+      "t_lsm": 1.328578233718872,
+      "elapsed": 1.596719741821289,
+      "contracts_csv": "contracts/2008-2009/SPY/2008-2009_heston.csv"
+    },
+    "AAPL|2008-2009|Heston": {
+      "ticker": "AAPL",
+      "regime": "2008-2009",
+      "model": "Heston",
+      "rmse_pct": 33.293791932674544,
+      "mae": 1.7314300231003055,
+      "bias": -0.4464960313838209,
+      "bias_pct": -1.8682624182633365,
+      "early": 0.189438,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.07278609275817871,
+      "t_lsm": 1.146744966506958,
+      "elapsed": 1.2217817306518555,
+      "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_heston.csv"
+    },
+    "MSFT|2008-2009|Heston": {
+      "ticker": "MSFT",
+      "regime": "2008-2009",
+      "model": "Heston",
+      "rmse_pct": 26.563981877030727,
+      "mae": 0.29687535972844886,
+      "bias": -0.20982466773225283,
+      "bias_pct": -13.713963493145052,
+      "early": 0.20773200000000003,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.07045578956604004,
+      "t_lsm": 1.2607011795043945,
+      "elapsed": 1.3336448669433594,
+      "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_heston.csv"
+    },
+    "AMZN|2008-2009|Heston": {
+      "ticker": "AMZN",
+      "regime": "2008-2009",
+      "model": "Heston",
+      "rmse_pct": 29.75807117197392,
+      "mae": 1.2208642871514734,
+      "bias": -0.613563134563249,
+      "bias_pct": -9.764826483333147,
+      "early": 0.17799199999999998,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.1379389762878418,
+      "t_lsm": 1.1206440925598145,
+      "elapsed": 1.2606682777404785,
+      "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_heston.csv"
+    },
+    "SPY|2013-2014|Heston": {
+      "ticker": "SPY",
+      "regime": "2013-2014",
+      "model": "Heston",
+      "rmse_pct": 45.984781777305514,
+      "mae": 0.8231240293555026,
+      "bias": 0.698507012812938,
+      "bias_pct": 34.22044676820527,
+      "early": 0.19164799999999996,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.11528587341308594,
+      "t_lsm": 1.233152151107788,
+      "elapsed": 1.3509681224822998,
+      "contracts_csv": "contracts/2013-2014/SPY/2013-2014_heston.csv"
+    },
+    "AAPL|2013-2014|Heston": {
+      "ticker": "AAPL",
+      "regime": "2013-2014",
+      "model": "Heston",
+      "rmse_pct": 70.88357893339325,
+      "mae": 4.876856020461014,
+      "bias": 4.876856020461014,
+      "bias_pct": 64.15487950872718,
+      "early": 0.19194399999999998,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.10376811027526855,
+      "t_lsm": 1.3439369201660156,
+      "elapsed": 1.4518511295318604,
+      "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_heston.csv"
+    },
+    "MSFT|2013-2014|Heston": {
+      "ticker": "MSFT",
+      "regime": "2013-2014",
+      "model": "Heston",
+      "rmse_pct": 76.14977547892636,
+      "mae": 0.5487309438992591,
+      "bias": 0.5487309438992591,
+      "bias_pct": 66.83204407351563,
+      "early": 0.18703,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.085723876953125,
+      "t_lsm": 1.1210498809814453,
+      "elapsed": 1.2091140747070312,
+      "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_heston.csv"
+    },
+    "AMZN|2013-2014|Heston": {
+      "ticker": "AMZN",
+      "regime": "2013-2014",
+      "model": "Heston",
+      "rmse_pct": 41.34785393748197,
+      "mae": 3.4101026574594204,
+      "bias": 2.9635668521429492,
+      "bias_pct": 30.498105463245036,
+      "early": 0.160354,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.2371830940246582,
+      "t_lsm": 1.1241610050201416,
+      "elapsed": 1.3636276721954346,
+      "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_heston.csv"
+    },
+    "SPY|2018-2019|Heston": {
+      "ticker": "SPY",
+      "regime": "2018-2019",
+      "model": "Heston",
+      "rmse_pct": 27.908347546355138,
+      "mae": 0.9467605983257679,
+      "bias": 0.2281011737995599,
+      "bias_pct": 10.439717638363273,
+      "early": 0.1623,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.19390487670898438,
+      "t_lsm": 1.1763272285461426,
+      "elapsed": 1.372438907623291,
+      "contracts_csv": "contracts/2018-2019/SPY/2018-2019_heston.csv"
+    },
+    "AAPL|2018-2019|Heston": {
+      "ticker": "AAPL",
+      "regime": "2018-2019",
+      "model": "Heston",
+      "rmse_pct": 19.54550239204698,
+      "mae": 0.95586874047446,
+      "bias": 0.361205141967234,
+      "bias_pct": 7.539445652342866,
+      "early": 0.1458450980392157,
+      "n": 51,
+      "n_updates": 1,
+      "t_cal": 0.11605596542358398,
+      "t_lsm": 1.2585320472717285,
+      "elapsed": 1.3770029544830322,
+      "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_heston.csv"
+    },
+    "MSFT|2018-2019|Heston": {
+      "ticker": "MSFT",
+      "regime": "2018-2019",
+      "model": "Heston",
+      "rmse_pct": 23.911088819314188,
+      "mae": 0.5954077108708895,
+      "bias": 0.11286984470738304,
+      "bias_pct": 6.1306929531825665,
+      "early": 0.147214,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.08951377868652344,
+      "t_lsm": 1.1443569660186768,
+      "elapsed": 1.237818956375122,
+      "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_heston.csv"
+    },
+    "AMZN|2018-2019|Heston": {
+      "ticker": "AMZN",
+      "regime": "2018-2019",
+      "model": "Heston",
+      "rmse_pct": 32.203688806994236,
+      "mae": 15.31541470031858,
+      "bias": 6.37868916371814,
+      "bias_pct": 13.428090649903366,
+      "early": 0.14014901960784312,
+      "n": 51,
+      "n_updates": 1,
+      "t_cal": 0.25064802169799805,
+      "t_lsm": 1.2061247825622559,
+      "elapsed": 1.46048903465271,
+      "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_heston.csv"
+    },
+    "SPY|2019-2020|Heston": {
+      "ticker": "SPY",
+      "regime": "2019-2020",
+      "model": "Heston",
+      "rmse_pct": 53.988815839804346,
+      "mae": 2.9170512954601606,
+      "bias": -0.9629282138205975,
+      "bias_pct": 11.311865711717331,
+      "early": 0.195036,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.17628216743469238,
+      "t_lsm": 1.0741569995880127,
+      "elapsed": 1.2523150444030762,
+      "contracts_csv": "contracts/2019-2020/SPY/2019-2020_heston.csv"
+    },
+    "AAPL|2019-2020|Heston": {
+      "ticker": "AAPL",
+      "regime": "2019-2020",
+      "model": "Heston",
+      "rmse_pct": 44.310984202810644,
+      "mae": 3.287568623344195,
+      "bias": 1.065836954713764,
+      "bias_pct": 22.80050829847956,
+      "early": 0.19458800000000004,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.08164811134338379,
+      "t_lsm": 1.1313879489898682,
+      "elapsed": 1.215043067932129,
+      "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_heston.csv"
+    },
+    "MSFT|2019-2020|Heston": {
+      "ticker": "MSFT",
+      "regime": "2019-2020",
+      "model": "Heston",
+      "rmse_pct": 42.52836252075008,
+      "mae": 1.7171827281196832,
+      "bias": -0.22358108991039669,
+      "bias_pct": 12.090470210858099,
+      "early": 0.17964,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.10664510726928711,
+      "t_lsm": 1.1151511669158936,
+      "elapsed": 1.2242040634155273,
+      "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_heston.csv"
+    },
+    "AMZN|2019-2020|Heston": {
+      "ticker": "AMZN",
+      "regime": "2019-2020",
+      "model": "Heston",
+      "rmse_pct": 37.32978854082189,
+      "mae": 22.830740759247732,
+      "bias": -4.322091559313867,
+      "bias_pct": 9.365353782601558,
+      "early": 0.16495599999999996,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.15106987953186035,
+      "t_lsm": 1.1050660610198975,
+      "elapsed": 1.258617639541626,
+      "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_heston.csv"
+    },
+    "SPY|2008-2009|Heston\u2013Merton": {
+      "ticker": "SPY",
+      "regime": "2008-2009",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 35.788063999288624,
+      "mae": 1.3325913604482822,
+      "bias": -0.8124429301268122,
+      "bias_pct": -13.60245406181924,
+      "early": 0.07913600000000001,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.2600679397583008,
+      "t_lsm": 1.3597679138183594,
+      "elapsed": 1.622175931930542,
+      "contracts_csv": "contracts/2008-2009/SPY/2008-2009_heston_merton.csv"
+    },
+    "AAPL|2008-2009|Heston\u2013Merton": {
+      "ticker": "AAPL",
+      "regime": "2008-2009",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 34.748256203825434,
+      "mae": 1.7486320600997092,
+      "bias": -0.1334983721353644,
+      "bias_pct": 3.2896773788495155,
+      "early": 0.11969200000000002,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.09651494026184082,
+      "t_lsm": 1.189063310623169,
+      "elapsed": 1.287837028503418,
+      "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_heston_merton.csv"
+    },
+    "MSFT|2008-2009|Heston\u2013Merton": {
+      "ticker": "MSFT",
+      "regime": "2008-2009",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 25.657611864244423,
+      "mae": 0.29224492963517656,
+      "bias": -0.1696639196968452,
+      "bias_pct": -10.057532363673971,
+      "early": 0.149154,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.061798095703125,
+      "t_lsm": 1.330221176147461,
+      "elapsed": 1.394016981124878,
+      "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_heston_merton.csv"
+    },
+    "AMZN|2008-2009|Heston\u2013Merton": {
+      "ticker": "AMZN",
+      "regime": "2008-2009",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 29.491616077196586,
+      "mae": 1.2180244102550117,
+      "bias": -0.3013727936041615,
+      "bias_pct": -3.1178882857562256,
+      "early": 0.09244000000000002,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.08347582817077637,
+      "t_lsm": 1.2352440357208252,
+      "elapsed": 1.321537971496582,
+      "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_heston_merton.csv"
+    },
+    "SPY|2013-2014|Heston\u2013Merton": {
+      "ticker": "SPY",
+      "regime": "2013-2014",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 77.91803114704466,
+      "mae": 1.5211565483760847,
+      "bias": 1.492546914698189,
+      "bias_pct": 67.2264233328363,
+      "early": 0.133582,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.29889416694641113,
+      "t_lsm": 1.2743589878082275,
+      "elapsed": 1.5753979682922363,
+      "contracts_csv": "contracts/2013-2014/SPY/2013-2014_heston_merton.csv"
+    },
+    "AAPL|2013-2014|Heston\u2013Merton": {
+      "ticker": "AAPL",
+      "regime": "2013-2014",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 73.89070710264052,
+      "mae": 5.08439338009757,
+      "bias": 5.08439338009757,
+      "bias_pct": 67.1184424163228,
+      "early": 0.168546,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.15027689933776855,
+      "t_lsm": 1.3019580841064453,
+      "elapsed": 1.454385757446289,
+      "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_heston_merton.csv"
+    },
+    "MSFT|2013-2014|Heston\u2013Merton": {
+      "ticker": "MSFT",
+      "regime": "2013-2014",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 80.6410029508125,
+      "mae": 0.5846191218082218,
+      "bias": 0.5846191218082218,
+      "bias_pct": 71.11659011776403,
+      "early": 0.16525599999999996,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.11804580688476562,
+      "t_lsm": 1.2300491333007812,
+      "elapsed": 1.3501029014587402,
+      "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_heston_merton.csv"
+    },
+    "AMZN|2013-2014|Heston\u2013Merton": {
+      "ticker": "AMZN",
+      "regime": "2013-2014",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 51.1056032015064,
+      "mae": 4.3555347849480865,
+      "bias": 4.143455005642215,
+      "bias_pct": 41.095827740379974,
+      "early": 0.136214,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.14623117446899414,
+      "t_lsm": 1.2302188873291016,
+      "elapsed": 1.3785619735717773,
+      "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_heston_merton.csv"
+    },
+    "SPY|2018-2019|Heston\u2013Merton": {
+      "ticker": "SPY",
+      "regime": "2018-2019",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 38.790467540593895,
+      "mae": 1.2359894813928693,
+      "bias": 0.8906818788968915,
+      "bias_pct": 25.17788947073446,
+      "early": 0.141518,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.17447900772094727,
+      "t_lsm": 1.276336908340454,
+      "elapsed": 1.4528639316558838,
+      "contracts_csv": "contracts/2018-2019/SPY/2018-2019_heston_merton.csv"
+    },
+    "AAPL|2018-2019|Heston\u2013Merton": {
+      "ticker": "AAPL",
+      "regime": "2018-2019",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 29.954747876093872,
+      "mae": 1.498518437621619,
+      "bias": 1.278428195567045,
+      "bias_pct": 22.289221597656294,
+      "early": 0.1402,
+      "n": 51,
+      "n_updates": 1,
+      "t_cal": 0.21079087257385254,
+      "t_lsm": 1.4262769222259521,
+      "elapsed": 1.639350175857544,
+      "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_heston_merton.csv"
+    },
+    "MSFT|2018-2019|Heston\u2013Merton": {
+      "ticker": "MSFT",
+      "regime": "2018-2019",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 42.61391327444464,
+      "mae": 1.0877245156193844,
+      "bias": 0.9716127044608863,
+      "bias_pct": 32.04472251455884,
+      "early": 0.100862,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.18252325057983398,
+      "t_lsm": 1.2625999450683594,
+      "elapsed": 1.4470179080963135,
+      "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_heston_merton.csv"
+    },
+    "AMZN|2018-2019|Heston\u2013Merton": {
+      "ticker": "AMZN",
+      "regime": "2018-2019",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 57.83225391693663,
+      "mae": 26.7875838463462,
+      "bias": 24.508729483407986,
+      "bias_pct": 43.446702847147606,
+      "early": 0.09288823529411765,
+      "n": 51,
+      "n_updates": 1,
+      "t_cal": 0.184600830078125,
+      "t_lsm": 1.1825459003448486,
+      "elapsed": 1.3692958354949951,
+      "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_heston_merton.csv"
+    },
+    "SPY|2019-2020|Heston\u2013Merton": {
+      "ticker": "SPY",
+      "regime": "2019-2020",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 69.93299407164068,
+      "mae": 3.210432269772328,
+      "bias": 0.35298963597984345,
+      "bias_pct": 34.09251813251564,
+      "early": 0.114128,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.5575191974639893,
+      "t_lsm": 1.1646618843078613,
+      "elapsed": 1.7242112159729004,
+      "contracts_csv": "contracts/2019-2020/SPY/2019-2020_heston_merton.csv"
+    },
+    "AAPL|2019-2020|Heston\u2013Merton": {
+      "ticker": "AAPL",
+      "regime": "2019-2020",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 51.80988281410714,
+      "mae": 3.742422335923489,
+      "bias": 1.995003730831023,
+      "bias_pct": 31.82093520524273,
+      "early": 0.09996000000000001,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.24147510528564453,
+      "t_lsm": 1.2752130031585693,
+      "elapsed": 1.5187599658966064,
+      "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_heston_merton.csv"
+    },
+    "MSFT|2019-2020|Heston\u2013Merton": {
+      "ticker": "MSFT",
+      "regime": "2019-2020",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 55.185532166376696,
+      "mae": 1.9180975997909586,
+      "bias": 0.6023801914931749,
+      "bias_pct": 28.243531923814512,
+      "early": 0.074076,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.277587890625,
+      "t_lsm": 1.2739341259002686,
+      "elapsed": 1.5537092685699463,
+      "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_heston_merton.csv"
+    },
+    "AMZN|2019-2020|Heston\u2013Merton": {
+      "ticker": "AMZN",
+      "regime": "2019-2020",
+      "model": "Heston\u2013Merton",
+      "rmse_pct": 46.05714241205076,
+      "mae": 23.826098114293348,
+      "bias": 4.702876752467748,
+      "bias_pct": 22.38406761859981,
+      "early": 0.08787800000000001,
+      "n": 50,
+      "n_updates": 1,
+      "t_cal": 0.37499189376831055,
+      "t_lsm": 1.3093540668487549,
+      "elapsed": 1.6868410110473633,
+      "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_heston_merton.csv"
+    }
+  },
+  "tables": {
+    "SPY|2008-2009": {
+      "ticker": "SPY",
+      "regime": "2008-2009",
+      "best_model": "Heston\u2013Merton",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "SPY",
+          "regime": "2008-2009",
+          "model": "Heston",
+          "rmse_pct": 39.12505467005572,
+          "mae": 1.4774236913122925,
+          "bias": -1.2427577059987343,
+          "bias_pct": -26.21800843966841,
+          "early": 0.181062,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.26543688774108887,
+          "t_lsm": 1.328578233718872,
+          "elapsed": 1.596719741821289,
+          "contracts_csv": "contracts/2008-2009/SPY/2008-2009_heston.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2008-2009",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 35.788063999288624,
+          "mae": 1.3325913604482822,
+          "bias": -0.8124429301268122,
+          "bias_pct": -13.60245406181924,
+          "early": 0.07913600000000001,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.2600679397583008,
+          "t_lsm": 1.3597679138183594,
+          "elapsed": 1.622175931930542,
+          "contracts_csv": "contracts/2008-2009/SPY/2008-2009_heston_merton.csv"
+        }
+      ]
+    },
+    "SPY|2013-2014": {
+      "ticker": "SPY",
+      "regime": "2013-2014",
+      "best_model": "Heston",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "SPY",
+          "regime": "2013-2014",
+          "model": "Heston",
+          "rmse_pct": 45.984781777305514,
+          "mae": 0.8231240293555026,
+          "bias": 0.698507012812938,
+          "bias_pct": 34.22044676820527,
+          "early": 0.19164799999999996,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.11528587341308594,
+          "t_lsm": 1.233152151107788,
+          "elapsed": 1.3509681224822998,
+          "contracts_csv": "contracts/2013-2014/SPY/2013-2014_heston.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2013-2014",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 77.91803114704466,
+          "mae": 1.5211565483760847,
+          "bias": 1.492546914698189,
+          "bias_pct": 67.2264233328363,
+          "early": 0.133582,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.29889416694641113,
+          "t_lsm": 1.2743589878082275,
+          "elapsed": 1.5753979682922363,
+          "contracts_csv": "contracts/2013-2014/SPY/2013-2014_heston_merton.csv"
+        }
+      ]
+    },
+    "SPY|2018-2019": {
+      "ticker": "SPY",
+      "regime": "2018-2019",
+      "best_model": "Heston",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "SPY",
+          "regime": "2018-2019",
+          "model": "Heston",
+          "rmse_pct": 27.908347546355138,
+          "mae": 0.9467605983257679,
+          "bias": 0.2281011737995599,
+          "bias_pct": 10.439717638363273,
+          "early": 0.1623,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.19390487670898438,
+          "t_lsm": 1.1763272285461426,
+          "elapsed": 1.372438907623291,
+          "contracts_csv": "contracts/2018-2019/SPY/2018-2019_heston.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2018-2019",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 38.790467540593895,
+          "mae": 1.2359894813928693,
+          "bias": 0.8906818788968915,
+          "bias_pct": 25.17788947073446,
+          "early": 0.141518,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.17447900772094727,
+          "t_lsm": 1.276336908340454,
+          "elapsed": 1.4528639316558838,
+          "contracts_csv": "contracts/2018-2019/SPY/2018-2019_heston_merton.csv"
+        }
+      ]
+    },
+    "SPY|2019-2020": {
+      "ticker": "SPY",
+      "regime": "2019-2020",
+      "best_model": "Heston",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "SPY",
+          "regime": "2019-2020",
+          "model": "Heston",
+          "rmse_pct": 53.988815839804346,
+          "mae": 2.9170512954601606,
+          "bias": -0.9629282138205975,
+          "bias_pct": 11.311865711717331,
+          "early": 0.195036,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.17628216743469238,
+          "t_lsm": 1.0741569995880127,
+          "elapsed": 1.2523150444030762,
+          "contracts_csv": "contracts/2019-2020/SPY/2019-2020_heston.csv"
+        },
+        {
+          "ticker": "SPY",
+          "regime": "2019-2020",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 69.93299407164068,
+          "mae": 3.210432269772328,
+          "bias": 0.35298963597984345,
+          "bias_pct": 34.09251813251564,
+          "early": 0.114128,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.5575191974639893,
+          "t_lsm": 1.1646618843078613,
+          "elapsed": 1.7242112159729004,
+          "contracts_csv": "contracts/2019-2020/SPY/2019-2020_heston_merton.csv"
+        }
+      ]
+    },
+    "AAPL|2008-2009": {
+      "ticker": "AAPL",
+      "regime": "2008-2009",
+      "best_model": "Heston",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AAPL",
+          "regime": "2008-2009",
+          "model": "Heston",
+          "rmse_pct": 33.293791932674544,
+          "mae": 1.7314300231003055,
+          "bias": -0.4464960313838209,
+          "bias_pct": -1.8682624182633365,
+          "early": 0.189438,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.07278609275817871,
+          "t_lsm": 1.146744966506958,
+          "elapsed": 1.2217817306518555,
+          "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_heston.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2008-2009",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 34.748256203825434,
+          "mae": 1.7486320600997092,
+          "bias": -0.1334983721353644,
+          "bias_pct": 3.2896773788495155,
+          "early": 0.11969200000000002,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.09651494026184082,
+          "t_lsm": 1.189063310623169,
+          "elapsed": 1.287837028503418,
+          "contracts_csv": "contracts/2008-2009/AAPL/2008-2009_heston_merton.csv"
+        }
+      ]
+    },
+    "AAPL|2013-2014": {
+      "ticker": "AAPL",
+      "regime": "2013-2014",
+      "best_model": "Heston",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AAPL",
+          "regime": "2013-2014",
+          "model": "Heston",
+          "rmse_pct": 70.88357893339325,
+          "mae": 4.876856020461014,
+          "bias": 4.876856020461014,
+          "bias_pct": 64.15487950872718,
+          "early": 0.19194399999999998,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.10376811027526855,
+          "t_lsm": 1.3439369201660156,
+          "elapsed": 1.4518511295318604,
+          "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_heston.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2013-2014",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 73.89070710264052,
+          "mae": 5.08439338009757,
+          "bias": 5.08439338009757,
+          "bias_pct": 67.1184424163228,
+          "early": 0.168546,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.15027689933776855,
+          "t_lsm": 1.3019580841064453,
+          "elapsed": 1.454385757446289,
+          "contracts_csv": "contracts/2013-2014/AAPL/2013-2014_heston_merton.csv"
+        }
+      ]
+    },
+    "AAPL|2018-2019": {
+      "ticker": "AAPL",
+      "regime": "2018-2019",
+      "best_model": "Heston",
+      "n_contracts": 51,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AAPL",
+          "regime": "2018-2019",
+          "model": "Heston",
+          "rmse_pct": 19.54550239204698,
+          "mae": 0.95586874047446,
+          "bias": 0.361205141967234,
+          "bias_pct": 7.539445652342866,
+          "early": 0.1458450980392157,
+          "n": 51,
+          "n_updates": 1,
+          "t_cal": 0.11605596542358398,
+          "t_lsm": 1.2585320472717285,
+          "elapsed": 1.3770029544830322,
+          "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_heston.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2018-2019",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 29.954747876093872,
+          "mae": 1.498518437621619,
+          "bias": 1.278428195567045,
+          "bias_pct": 22.289221597656294,
+          "early": 0.1402,
+          "n": 51,
+          "n_updates": 1,
+          "t_cal": 0.21079087257385254,
+          "t_lsm": 1.4262769222259521,
+          "elapsed": 1.639350175857544,
+          "contracts_csv": "contracts/2018-2019/AAPL/2018-2019_heston_merton.csv"
+        }
+      ]
+    },
+    "AAPL|2019-2020": {
+      "ticker": "AAPL",
+      "regime": "2019-2020",
+      "best_model": "Heston",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AAPL",
+          "regime": "2019-2020",
+          "model": "Heston",
+          "rmse_pct": 44.310984202810644,
+          "mae": 3.287568623344195,
+          "bias": 1.065836954713764,
+          "bias_pct": 22.80050829847956,
+          "early": 0.19458800000000004,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.08164811134338379,
+          "t_lsm": 1.1313879489898682,
+          "elapsed": 1.215043067932129,
+          "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_heston.csv"
+        },
+        {
+          "ticker": "AAPL",
+          "regime": "2019-2020",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 51.80988281410714,
+          "mae": 3.742422335923489,
+          "bias": 1.995003730831023,
+          "bias_pct": 31.82093520524273,
+          "early": 0.09996000000000001,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.24147510528564453,
+          "t_lsm": 1.2752130031585693,
+          "elapsed": 1.5187599658966064,
+          "contracts_csv": "contracts/2019-2020/AAPL/2019-2020_heston_merton.csv"
+        }
+      ]
+    },
+    "MSFT|2008-2009": {
+      "ticker": "MSFT",
+      "regime": "2008-2009",
+      "best_model": "Heston\u2013Merton",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "MSFT",
+          "regime": "2008-2009",
+          "model": "Heston",
+          "rmse_pct": 26.563981877030727,
+          "mae": 0.29687535972844886,
+          "bias": -0.20982466773225283,
+          "bias_pct": -13.713963493145052,
+          "early": 0.20773200000000003,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.07045578956604004,
+          "t_lsm": 1.2607011795043945,
+          "elapsed": 1.3336448669433594,
+          "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_heston.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2008-2009",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 25.657611864244423,
+          "mae": 0.29224492963517656,
+          "bias": -0.1696639196968452,
+          "bias_pct": -10.057532363673971,
+          "early": 0.149154,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.061798095703125,
+          "t_lsm": 1.330221176147461,
+          "elapsed": 1.394016981124878,
+          "contracts_csv": "contracts/2008-2009/MSFT/2008-2009_heston_merton.csv"
+        }
+      ]
+    },
+    "MSFT|2013-2014": {
+      "ticker": "MSFT",
+      "regime": "2013-2014",
+      "best_model": "Heston",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "MSFT",
+          "regime": "2013-2014",
+          "model": "Heston",
+          "rmse_pct": 76.14977547892636,
+          "mae": 0.5487309438992591,
+          "bias": 0.5487309438992591,
+          "bias_pct": 66.83204407351563,
+          "early": 0.18703,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.085723876953125,
+          "t_lsm": 1.1210498809814453,
+          "elapsed": 1.2091140747070312,
+          "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_heston.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2013-2014",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 80.6410029508125,
+          "mae": 0.5846191218082218,
+          "bias": 0.5846191218082218,
+          "bias_pct": 71.11659011776403,
+          "early": 0.16525599999999996,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.11804580688476562,
+          "t_lsm": 1.2300491333007812,
+          "elapsed": 1.3501029014587402,
+          "contracts_csv": "contracts/2013-2014/MSFT/2013-2014_heston_merton.csv"
+        }
+      ]
+    },
+    "MSFT|2018-2019": {
+      "ticker": "MSFT",
+      "regime": "2018-2019",
+      "best_model": "Heston",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "MSFT",
+          "regime": "2018-2019",
+          "model": "Heston",
+          "rmse_pct": 23.911088819314188,
+          "mae": 0.5954077108708895,
+          "bias": 0.11286984470738304,
+          "bias_pct": 6.1306929531825665,
+          "early": 0.147214,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.08951377868652344,
+          "t_lsm": 1.1443569660186768,
+          "elapsed": 1.237818956375122,
+          "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_heston.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2018-2019",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 42.61391327444464,
+          "mae": 1.0877245156193844,
+          "bias": 0.9716127044608863,
+          "bias_pct": 32.04472251455884,
+          "early": 0.100862,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.18252325057983398,
+          "t_lsm": 1.2625999450683594,
+          "elapsed": 1.4470179080963135,
+          "contracts_csv": "contracts/2018-2019/MSFT/2018-2019_heston_merton.csv"
+        }
+      ]
+    },
+    "MSFT|2019-2020": {
+      "ticker": "MSFT",
+      "regime": "2019-2020",
+      "best_model": "Heston",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "MSFT",
+          "regime": "2019-2020",
+          "model": "Heston",
+          "rmse_pct": 42.52836252075008,
+          "mae": 1.7171827281196832,
+          "bias": -0.22358108991039669,
+          "bias_pct": 12.090470210858099,
+          "early": 0.17964,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.10664510726928711,
+          "t_lsm": 1.1151511669158936,
+          "elapsed": 1.2242040634155273,
+          "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_heston.csv"
+        },
+        {
+          "ticker": "MSFT",
+          "regime": "2019-2020",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 55.185532166376696,
+          "mae": 1.9180975997909586,
+          "bias": 0.6023801914931749,
+          "bias_pct": 28.243531923814512,
+          "early": 0.074076,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.277587890625,
+          "t_lsm": 1.2739341259002686,
+          "elapsed": 1.5537092685699463,
+          "contracts_csv": "contracts/2019-2020/MSFT/2019-2020_heston_merton.csv"
+        }
+      ]
+    },
+    "AMZN|2008-2009": {
+      "ticker": "AMZN",
+      "regime": "2008-2009",
+      "best_model": "Heston\u2013Merton",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AMZN",
+          "regime": "2008-2009",
+          "model": "Heston",
+          "rmse_pct": 29.75807117197392,
+          "mae": 1.2208642871514734,
+          "bias": -0.613563134563249,
+          "bias_pct": -9.764826483333147,
+          "early": 0.17799199999999998,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.1379389762878418,
+          "t_lsm": 1.1206440925598145,
+          "elapsed": 1.2606682777404785,
+          "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_heston.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2008-2009",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 29.491616077196586,
+          "mae": 1.2180244102550117,
+          "bias": -0.3013727936041615,
+          "bias_pct": -3.1178882857562256,
+          "early": 0.09244000000000002,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.08347582817077637,
+          "t_lsm": 1.2352440357208252,
+          "elapsed": 1.321537971496582,
+          "contracts_csv": "contracts/2008-2009/AMZN/2008-2009_heston_merton.csv"
+        }
+      ]
+    },
+    "AMZN|2013-2014": {
+      "ticker": "AMZN",
+      "regime": "2013-2014",
+      "best_model": "Heston",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AMZN",
+          "regime": "2013-2014",
+          "model": "Heston",
+          "rmse_pct": 41.34785393748197,
+          "mae": 3.4101026574594204,
+          "bias": 2.9635668521429492,
+          "bias_pct": 30.498105463245036,
+          "early": 0.160354,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.2371830940246582,
+          "t_lsm": 1.1241610050201416,
+          "elapsed": 1.3636276721954346,
+          "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_heston.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2013-2014",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 51.1056032015064,
+          "mae": 4.3555347849480865,
+          "bias": 4.143455005642215,
+          "bias_pct": 41.095827740379974,
+          "early": 0.136214,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.14623117446899414,
+          "t_lsm": 1.2302188873291016,
+          "elapsed": 1.3785619735717773,
+          "contracts_csv": "contracts/2013-2014/AMZN/2013-2014_heston_merton.csv"
+        }
+      ]
+    },
+    "AMZN|2018-2019": {
+      "ticker": "AMZN",
+      "regime": "2018-2019",
+      "best_model": "Heston",
+      "n_contracts": 51,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AMZN",
+          "regime": "2018-2019",
+          "model": "Heston",
+          "rmse_pct": 32.203688806994236,
+          "mae": 15.31541470031858,
+          "bias": 6.37868916371814,
+          "bias_pct": 13.428090649903366,
+          "early": 0.14014901960784312,
+          "n": 51,
+          "n_updates": 1,
+          "t_cal": 0.25064802169799805,
+          "t_lsm": 1.2061247825622559,
+          "elapsed": 1.46048903465271,
+          "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_heston.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2018-2019",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 57.83225391693663,
+          "mae": 26.7875838463462,
+          "bias": 24.508729483407986,
+          "bias_pct": 43.446702847147606,
+          "early": 0.09288823529411765,
+          "n": 51,
+          "n_updates": 1,
+          "t_cal": 0.184600830078125,
+          "t_lsm": 1.1825459003448486,
+          "elapsed": 1.3692958354949951,
+          "contracts_csv": "contracts/2018-2019/AMZN/2018-2019_heston_merton.csv"
+        }
+      ]
+    },
+    "AMZN|2019-2020": {
+      "ticker": "AMZN",
+      "regime": "2019-2020",
+      "best_model": "Heston",
+      "n_contracts": 50,
+      "n_contracts_identical": true,
+      "rows": [
+        {
+          "ticker": "AMZN",
+          "regime": "2019-2020",
+          "model": "Heston",
+          "rmse_pct": 37.32978854082189,
+          "mae": 22.830740759247732,
+          "bias": -4.322091559313867,
+          "bias_pct": 9.365353782601558,
+          "early": 0.16495599999999996,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.15106987953186035,
+          "t_lsm": 1.1050660610198975,
+          "elapsed": 1.258617639541626,
+          "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_heston.csv"
+        },
+        {
+          "ticker": "AMZN",
+          "regime": "2019-2020",
+          "model": "Heston\u2013Merton",
+          "rmse_pct": 46.05714241205076,
+          "mae": 23.826098114293348,
+          "bias": 4.702876752467748,
+          "bias_pct": 22.38406761859981,
+          "early": 0.08787800000000001,
+          "n": 50,
+          "n_updates": 1,
+          "t_cal": 0.37499189376831055,
+          "t_lsm": 1.3093540668487549,
+          "elapsed": 1.6868410110473633,
+          "contracts_csv": "contracts/2019-2020/AMZN/2019-2020_heston_merton.csv"
+        }
+      ]
+    }
+  },
+  "summary_by_regime": [
+    {
+      "regime": "2008-2009",
+      "model": "Heston",
+      "mean_rmse_pct": 32.18522491293373,
+      "median_rmse_pct": 31.52593155232423,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2008-2009",
+      "model": "Heston\u2013Merton",
+      "mean_rmse_pct": 31.421387036138764,
+      "median_rmse_pct": 32.11993614051101,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2013-2014",
+      "model": "Heston",
+      "mean_rmse_pct": 58.591497531776774,
+      "median_rmse_pct": 58.43418035534938,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2013-2014",
+      "model": "Heston\u2013Merton",
+      "mean_rmse_pct": 70.88883610050101,
+      "median_rmse_pct": 75.90436912484259,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2018-2019",
+      "model": "Heston",
+      "mean_rmse_pct": 25.892156891177635,
+      "median_rmse_pct": 25.909718182834663,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2018-2019",
+      "model": "Heston\u2013Merton",
+      "mean_rmse_pct": 42.29784565201726,
+      "median_rmse_pct": 40.70219040751927,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2019-2020",
+      "model": "Heston",
+      "mean_rmse_pct": 44.53948777604674,
+      "median_rmse_pct": 43.41967336178036,
+      "n_tickers": 4
+    },
+    {
+      "regime": "2019-2020",
+      "model": "Heston\u2013Merton",
+      "mean_rmse_pct": 55.74638786604382,
+      "median_rmse_pct": 53.49770749024192,
+      "n_tickers": 4
+    }
+  ],
+  "summary_by_ticker": [
+    {
+      "ticker": "SPY",
+      "model": "Heston",
+      "mean_rmse_pct": 41.75174995838018,
+      "median_rmse_pct": 42.554918223680616,
+      "n_regimes": 4,
+      "n_best": 3
+    },
+    {
+      "ticker": "SPY",
+      "model": "Heston\u2013Merton",
+      "mean_rmse_pct": 55.607389189641964,
+      "median_rmse_pct": 54.361730806117286,
+      "n_regimes": 4,
+      "n_best": 1
+    },
+    {
+      "ticker": "AAPL",
+      "model": "Heston",
+      "mean_rmse_pct": 42.00846436523136,
+      "median_rmse_pct": 38.8023880677426,
+      "n_regimes": 4,
+      "n_best": 4
+    },
+    {
+      "ticker": "AAPL",
+      "model": "Heston\u2013Merton",
+      "mean_rmse_pct": 47.60089849916674,
+      "median_rmse_pct": 43.27906950896629,
+      "n_regimes": 4,
+      "n_best": 0
+    },
+    {
+      "ticker": "MSFT",
+      "model": "Heston",
+      "mean_rmse_pct": 42.28830217400534,
+      "median_rmse_pct": 34.5461721988904,
+      "n_regimes": 4,
+      "n_best": 3
+    },
+    {
+      "ticker": "MSFT",
+      "model": "Heston\u2013Merton",
+      "mean_rmse_pct": 51.02451506396957,
+      "median_rmse_pct": 48.899722720410665,
+      "n_regimes": 4,
+      "n_best": 1
+    },
+    {
+      "ticker": "AMZN",
+      "model": "Heston",
+      "mean_rmse_pct": 35.159850614318,
+      "median_rmse_pct": 34.766738673908065,
+      "n_regimes": 4,
+      "n_best": 3
+    },
+    {
+      "ticker": "AMZN",
+      "model": "Heston\u2013Merton",
+      "mean_rmse_pct": 46.12165390192259,
+      "median_rmse_pct": 48.581372806778575,
+      "n_regimes": 4,
+      "n_best": 1
+    }
+  ],
+  "summary_overall": [
+    {
+      "model": "Heston",
+      "mean_rmse_pct": 40.30209177798372,
+      "median_rmse_pct": 38.227421605438806,
+      "n_cells": 16,
+      "n_best": 13
+    },
+    {
+      "model": "Heston\u2013Merton",
+      "mean_rmse_pct": 50.08861416367522,
+      "median_rmse_pct": 48.581372806778575,
+      "n_cells": 16,
+      "n_best": 3
+    }
+  ],
+  "ranking_grid": [
+    {
+      "ticker": "SPY",
+      "regime": "2008-2009",
+      "rank1": "Heston\u2013Merton",
+      "rank2": "Heston",
+      "best_rmse_pct": 35.788063999288624,
+      "ranks": {
+        "Heston\u2013Merton": 1,
+        "Heston": 2
+      }
+    },
+    {
+      "ticker": "SPY",
+      "regime": "2013-2014",
+      "rank1": "Heston",
+      "rank2": "Heston\u2013Merton",
+      "best_rmse_pct": 45.984781777305514,
+      "ranks": {
+        "Heston": 1,
+        "Heston\u2013Merton": 2
+      }
+    },
+    {
+      "ticker": "SPY",
+      "regime": "2018-2019",
+      "rank1": "Heston",
+      "rank2": "Heston\u2013Merton",
+      "best_rmse_pct": 27.908347546355138,
+      "ranks": {
+        "Heston": 1,
+        "Heston\u2013Merton": 2
+      }
+    },
+    {
+      "ticker": "SPY",
+      "regime": "2019-2020",
+      "rank1": "Heston",
+      "rank2": "Heston\u2013Merton",
+      "best_rmse_pct": 53.988815839804346,
+      "ranks": {
+        "Heston": 1,
+        "Heston\u2013Merton": 2
+      }
+    },
+    {
+      "ticker": "AAPL",
+      "regime": "2008-2009",
+      "rank1": "Heston",
+      "rank2": "Heston\u2013Merton",
+      "best_rmse_pct": 33.293791932674544,
+      "ranks": {
+        "Heston": 1,
+        "Heston\u2013Merton": 2
+      }
+    },
+    {
+      "ticker": "AAPL",
+      "regime": "2013-2014",
+      "rank1": "Heston",
+      "rank2": "Heston\u2013Merton",
+      "best_rmse_pct": 70.88357893339325,
+      "ranks": {
+        "Heston": 1,
+        "Heston\u2013Merton": 2
+      }
+    },
+    {
+      "ticker": "AAPL",
+      "regime": "2018-2019",
+      "rank1": "Heston",
+      "rank2": "Heston\u2013Merton",
+      "best_rmse_pct": 19.54550239204698,
+      "ranks": {
+        "Heston": 1,
+        "Heston\u2013Merton": 2
+      }
+    },
+    {
+      "ticker": "AAPL",
+      "regime": "2019-2020",
+      "rank1": "Heston",
+      "rank2": "Heston\u2013Merton",
+      "best_rmse_pct": 44.310984202810644,
+      "ranks": {
+        "Heston": 1,
+        "Heston\u2013Merton": 2
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "regime": "2008-2009",
+      "rank1": "Heston\u2013Merton",
+      "rank2": "Heston",
+      "best_rmse_pct": 25.657611864244423,
+      "ranks": {
+        "Heston\u2013Merton": 1,
+        "Heston": 2
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "regime": "2013-2014",
+      "rank1": "Heston",
+      "rank2": "Heston\u2013Merton",
+      "best_rmse_pct": 76.14977547892636,
+      "ranks": {
+        "Heston": 1,
+        "Heston\u2013Merton": 2
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "regime": "2018-2019",
+      "rank1": "Heston",
+      "rank2": "Heston\u2013Merton",
+      "best_rmse_pct": 23.911088819314188,
+      "ranks": {
+        "Heston": 1,
+        "Heston\u2013Merton": 2
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "regime": "2019-2020",
+      "rank1": "Heston",
+      "rank2": "Heston\u2013Merton",
+      "best_rmse_pct": 42.52836252075008,
+      "ranks": {
+        "Heston": 1,
+        "Heston\u2013Merton": 2
+      }
+    },
+    {
+      "ticker": "AMZN",
+      "regime": "2008-2009",
+      "rank1": "Heston\u2013Merton",
+      "rank2": "Heston",
+      "best_rmse_pct": 29.491616077196586,
+      "ranks": {
+        "Heston\u2013Merton": 1,
+        "Heston": 2
+      }
+    },
+    {
+      "ticker": "AMZN",
+      "regime": "2013-2014",
+      "rank1": "Heston",
+      "rank2": "Heston\u2013Merton",
+      "best_rmse_pct": 41.34785393748197,
+      "ranks": {
+        "Heston": 1,
+        "Heston\u2013Merton": 2
+      }
+    },
+    {
+      "ticker": "AMZN",
+      "regime": "2018-2019",
+      "rank1": "Heston",
+      "rank2": "Heston\u2013Merton",
+      "best_rmse_pct": 32.203688806994236,
+      "ranks": {
+        "Heston": 1,
+        "Heston\u2013Merton": 2
+      }
+    },
+    {
+      "ticker": "AMZN",
+      "regime": "2019-2020",
+      "rank1": "Heston",
+      "rank2": "Heston\u2013Merton",
+      "best_rmse_pct": 37.32978854082189,
+      "ranks": {
+        "Heston": 1,
+        "Heston\u2013Merton": 2
+      }
+    }
+  ]
+}

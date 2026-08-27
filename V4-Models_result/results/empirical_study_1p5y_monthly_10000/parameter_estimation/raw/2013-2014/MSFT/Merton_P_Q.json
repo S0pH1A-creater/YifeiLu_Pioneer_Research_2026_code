@@ -1,0 +1,31 @@
+{
+  "ticker": "MSFT",
+  "regime": "2013-2014",
+  "model": "Merton",
+  "n_updates": 13,
+  "asof": "2014-12-31 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.25215411765019025,
+    "sigma": 0.17328711436998065,
+    "lam": 2.645669291338583,
+    "mu_j": -0.009845115996580445,
+    "sigma_j": 0.09079154505269556,
+    "kappa": -0.005707215284722511
+  },
+  "premium": {
+    "mu_j_minus_mu_j_q": 0.032139349805075504,
+    "source": "listed calls (Pan 2002 \u03bc*); \u03bb* = \u03bb (timing not separately identified)",
+    "jump_premium_identified": true,
+    "n_quotes": 20
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "sigma": 0.17328711436998065,
+    "lam": 2.645669291338583,
+    "mu_j_q": -0.04198446580165595,
+    "sigma_j": 0.09079154505269556,
+    "kappa_q": -0.03715507509087601,
+    "mean_equation": "r_f \u2212 \u03bb \u03ba^Q \u2212 \u00bd \u03c3\u00b2"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "ticker": "AMZN",
+  "regime": "2013-2014",
+  "model": "GARCH",
+  "n_updates": 1,
+  "asof": "2014-01-02 00:00:00",
+  "P": {
+    "measure": "P",
+    "lambda": 0.11216696345141924,
+    "omega": 4.2402889262743464e-05,
+    "alpha": 0.12128150034808961,
+    "beta": 0.7371846541937151,
+    "sigma0": 0.015391617238663448,
+    "mean_equation": "r_f + \u03bb \u03c3 \u2212 \u00bd \u03c3\u00b2",
+    "variance_shock": "\u03b5_t",
+    "persist": 0.8584661545418047,
+    "uncond_var": 0.0002995954015484443,
+    "mu_p": 0.43857725647805706,
+    "rf_mean": 0.0007015831134564644
+  },
+  "premium": {},
+  "Q": {
+    "measure": "Q (LRNVR)",
+    "lambda": 0.11216696345141924,
+    "omega": 4.2402889262743464e-05,
+    "alpha": 0.12128150034808961,
+    "beta": 0.7371846541937151,
+    "sigma0": 0.015391617238663448,
+    "mean_equation": "r_f \u2212 \u00bd \u03c3\u00b2",
+    "variance_shock": "\u03be_t \u2212 \u03bb",
+    "persist": 0.8599920489685583,
+    "uncond_var": 0.0003028605800624924,
+    "q_stationary": true
+  }
+}

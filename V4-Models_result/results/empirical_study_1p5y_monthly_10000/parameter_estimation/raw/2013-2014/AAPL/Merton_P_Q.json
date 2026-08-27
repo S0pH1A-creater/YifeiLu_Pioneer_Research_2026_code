@@ -1,0 +1,31 @@
+{
+  "ticker": "AAPL",
+  "regime": "2013-2014",
+  "model": "Merton",
+  "n_updates": 13,
+  "asof": "2014-12-31 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.44397295084464244,
+    "sigma": 0.17642954200234312,
+    "lam": 4.6299212598425195,
+    "mu_j": 0.00591485290569725,
+    "sigma_j": 0.06443798276377137,
+    "kappa": 0.008022992810628127
+  },
+  "premium": {
+    "mu_j_minus_mu_j_q": 0.003844455091999853,
+    "source": "listed calls (Pan 2002 \u03bc*); \u03bb* = \u03bb (timing not separately identified)",
+    "jump_premium_identified": true,
+    "n_quotes": 22
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "sigma": 0.17642954200234312,
+    "lam": 4.6299212598425195,
+    "mu_j_q": 0.0020703978136973967,
+    "sigma_j": 0.06443798276377137,
+    "kappa_q": 0.004155133352917062,
+    "mean_equation": "r_f \u2212 \u03bb \u03ba^Q \u2212 \u00bd \u03c3\u00b2"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "ticker": "MSFT",
+  "regime": "2019-2020",
+  "model": "GARCH",
+  "n_updates": 1,
+  "asof": "2019-09-03 00:00:00",
+  "P": {
+    "measure": "P",
+    "lambda": 0.1191184044482883,
+    "omega": 2.0288865069505734e-05,
+    "alpha": 0.1841959328771299,
+    "beta": 0.7450200892056962,
+    "sigma0": 0.014280348067776111,
+    "mean_equation": "r_f + \u03bb \u03c3 \u2212 \u00bd \u03c3\u00b2",
+    "variance_shock": "\u03b5_t",
+    "persist": 0.929216022082826,
+    "uncond_var": 0.00028663075552558275,
+    "mu_p": 0.45461969105962335,
+    "rf_mean": 0.0217478835978836
+  },
+  "premium": {},
+  "Q": {
+    "measure": "Q (LRNVR)",
+    "lambda": 0.1191184044482883,
+    "omega": 2.0288865069505734e-05,
+    "alpha": 0.1841959328771299,
+    "beta": 0.7450200892056962,
+    "sigma0": 0.014280348067776111,
+    "mean_equation": "r_f \u2212 \u00bd \u03c3\u00b2",
+    "variance_shock": "\u03be_t \u2212 \u03bb",
+    "persist": 0.9318296139596934,
+    "uncond_var": 0.0002976199233712671,
+    "q_stationary": true
+  }
+}

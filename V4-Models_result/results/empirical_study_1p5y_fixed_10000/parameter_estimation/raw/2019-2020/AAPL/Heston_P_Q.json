@@ -1,0 +1,33 @@
+{
+  "ticker": "AAPL",
+  "regime": "2019-2020",
+  "model": "Heston",
+  "n_updates": 1,
+  "asof": "2019-09-03 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.11832700889140894,
+    "kappa": 20.0,
+    "theta": 0.08533922808427637,
+    "xi": 3.0,
+    "rho": -0.1851681826975882,
+    "v0": 0.12991164777323186,
+    "variance_drift": "\u03ba(\u03b8 \u2212 v)"
+  },
+  "premium": {
+    "eta_v": 7.908231264319545,
+    "source": "listed calls (Pan 2002 \u03b7_v); not from returns",
+    "q_explosive": false,
+    "n_quotes": 24
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "kappa_q": 12.091768735680455,
+    "theta_q": 0.14115259719193424,
+    "xi": 3.0,
+    "rho": -0.1851681826975882,
+    "v0_q": 0.06383354949288482,
+    "mean_equation": "r_f \u2212 \u00bd v",
+    "variance_drift": "\u03ba(\u03b8 \u2212 v) + \u03b7_v v"
+  }
+}

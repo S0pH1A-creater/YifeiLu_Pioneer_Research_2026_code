@@ -1,0 +1,43 @@
+{
+  "ticker": "AAPL",
+  "regime": "2008-2009",
+  "model": "Heston\u2013Merton",
+  "n_updates": 1,
+  "asof": "2008-08-01 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.40966002063602613,
+    "kappa": 20.0,
+    "theta": 0.1637596822265028,
+    "xi": 3.0,
+    "rho": -0.07620236736166615,
+    "v0": 0.15352280316658887,
+    "variance_drift": "\u03ba(\u03b8 \u2212 v)",
+    "lam": 2.0,
+    "mu_j": -0.03060109782853922,
+    "sigma_j": 0.11445910655796028,
+    "kappa_j": -0.023763742050551873
+  },
+  "premium": {
+    "eta_v": -15.965946180698984,
+    "source": "listed calls (Pan 2002 \u03b7_v); not from returns",
+    "q_explosive": false,
+    "n_quotes": 12,
+    "mu_j_minus_mu_j_q": 0.15071458208812258,
+    "jump_premium_identified": true
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "kappa_q": 35.965946180698985,
+    "theta_q": 0.09106374202071399,
+    "xi": 3.0,
+    "rho": -0.07620236736166615,
+    "v0_q": 0.15330355823868405,
+    "mean_equation": "r_f \u2212 \u03bb \u03ba^Q \u2212 \u00bd v",
+    "variance_drift": "\u03ba(\u03b8 \u2212 v) + \u03b7_v v",
+    "lam": 2.0,
+    "mu_j_q": -0.1813156799166618,
+    "sigma_j": 0.11445910655796028,
+    "kappa_j_q": -0.16034588212674938
+  }
+}

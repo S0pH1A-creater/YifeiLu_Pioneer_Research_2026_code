@@ -1,0 +1,42 @@
+{
+  "ticker": "AMZN",
+  "regime": "2019-2020",
+  "model": "GARCH\u2013Merton",
+  "n_updates": 13,
+  "asof": "2020-08-31 00:00:00",
+  "P": {
+    "measure": "P",
+    "lambda": 0.13085127071641572,
+    "omega": 1.7002642596654698e-05,
+    "alpha": 0.1350777330905744,
+    "beta": 0.8189150450327167,
+    "sigma0": 0.01652498510287737,
+    "lam": 3.3157894736842106,
+    "mu_j": 0.01289481859492252,
+    "sigma_j": 0.0715101745291724,
+    "kappa": 0.015571665436720838,
+    "sigma": 0.30517255841650204,
+    "mean_equation": "r_f + \u03bb \u03c3 \u2212 \u00bd \u03c3\u00b2 + J",
+    "variance_shock": "\u03b5_t"
+  },
+  "premium": {
+    "mu_j_q": 0.13902263324915562,
+    "n_quotes": 24,
+    "jump_premium_identified": true
+  },
+  "Q": {
+    "measure": "Q (Duan LRNVR + Pan \u03bc_J*)",
+    "lambda": 0.13085127071641572,
+    "omega": 1.7002642596654698e-05,
+    "alpha": 0.1350777330905744,
+    "beta": 0.8189150450327167,
+    "sigma0": 0.01652498510287737,
+    "lam": 3.3157894736842106,
+    "mu_j_q": 0.13902263324915562,
+    "sigma_j": 0.0715101745291724,
+    "kappa_q": 0.15209207555842408,
+    "mean_equation": "r_f \u2212 \u03bb \u03ba* \u2212 \u00bd \u03c3\u00b2 + J*",
+    "variance_shock": "\u03be_t \u2212 \u03bb",
+    "q_stationary": true
+  }
+}

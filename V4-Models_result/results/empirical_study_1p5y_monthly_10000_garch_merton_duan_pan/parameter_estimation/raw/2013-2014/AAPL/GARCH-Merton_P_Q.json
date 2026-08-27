@@ -1,0 +1,42 @@
+{
+  "ticker": "AAPL",
+  "regime": "2013-2014",
+  "model": "GARCH\u2013Merton",
+  "n_updates": 13,
+  "asof": "2014-12-31 00:00:00",
+  "P": {
+    "measure": "P",
+    "lambda": 0.14150243370917454,
+    "omega": 6.378391466182433e-19,
+    "alpha": 1.1411157726014771e-43,
+    "beta": 0.9995430300969543,
+    "sigma0": 0.01296339815963892,
+    "lam": 5.291338582677166,
+    "mu_j": 0.0003156539809825998,
+    "sigma_j": 0.06172424776779615,
+    "kappa": 0.0022230627101031963,
+    "sigma": 5.930783308989044e-07,
+    "mean_equation": "r_f + \u03bb \u03c3 \u2212 \u00bd \u03c3\u00b2 + J",
+    "variance_shock": "\u03b5_t"
+  },
+  "premium": {
+    "mu_j_q": 0.03649570263984215,
+    "n_quotes": 22,
+    "jump_premium_identified": true
+  },
+  "Q": {
+    "measure": "Q (Duan LRNVR + Pan \u03bc_J*)",
+    "lambda": 0.14150243370917454,
+    "omega": 6.378391466182433e-19,
+    "alpha": 1.1411157726014771e-43,
+    "beta": 0.9995430300969543,
+    "sigma0": 0.01296339815963892,
+    "lam": 5.291338582677166,
+    "mu_j_q": 0.03649570263984215,
+    "sigma_j": 0.06172424776779615,
+    "kappa_q": 0.03914747771390692,
+    "mean_equation": "r_f \u2212 \u03bb \u03ba* \u2212 \u00bd \u03c3\u00b2 + J*",
+    "variance_shock": "\u03be_t \u2212 \u03bb",
+    "q_stationary": true
+  }
+}

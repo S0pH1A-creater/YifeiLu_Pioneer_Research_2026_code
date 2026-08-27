@@ -1,0 +1,31 @@
+{
+  "ticker": "AMZN",
+  "regime": "2013-2014",
+  "model": "Merton",
+  "n_updates": 1,
+  "asof": "2014-01-02 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.2676977919169034,
+    "sigma": 0.21762627036309584,
+    "lam": 3.9894459102902373,
+    "mu_j": 0.025837165628138942,
+    "sigma_j": 0.07279439743516591,
+    "kappa": 0.0288963035573353
+  },
+  "premium": {
+    "mu_j_minus_mu_j_q": -0.004116447304479239,
+    "source": "listed calls (Pan 2002 \u03bc*); \u03bb* = \u03bb (timing not separately identified)",
+    "jump_premium_identified": true,
+    "n_quotes": 24
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "sigma": 0.21762627036309584,
+    "lam": 3.9894459102902373,
+    "mu_j_q": 0.02995361293261818,
+    "sigma_j": 0.07279439743516591,
+    "kappa_q": 0.03314043034172531,
+    "mean_equation": "r_f \u2212 \u03bb \u03ba^Q \u2212 \u00bd \u03c3\u00b2"
+  }
+}

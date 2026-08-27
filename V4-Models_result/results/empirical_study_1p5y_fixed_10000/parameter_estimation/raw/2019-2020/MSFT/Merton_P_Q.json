@@ -1,0 +1,31 @@
+{
+  "ticker": "MSFT",
+  "regime": "2019-2020",
+  "model": "Merton",
+  "n_updates": 1,
+  "asof": "2019-09-03 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.21520425917001584,
+    "sigma": 0.2235709987837819,
+    "lam": 3.3333333333333335,
+    "mu_j": 0.017006641335002293,
+    "sigma_j": 0.06635719917775044,
+    "kappa": 0.01939394616077128
+  },
+  "premium": {
+    "mu_j_minus_mu_j_q": 0.05426707204570196,
+    "source": "listed calls (Pan 2002 \u03bc*); \u03bb* = \u03bb (timing not separately identified)",
+    "jump_premium_identified": true,
+    "n_quotes": 23
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "sigma": 0.2235709987837819,
+    "lam": 3.3333333333333335,
+    "mu_j_q": -0.03726043071069967,
+    "sigma_j": 0.06635719917775044,
+    "kappa_q": -0.034451351724579915,
+    "mean_equation": "r_f \u2212 \u03bb \u03ba^Q \u2212 \u00bd \u03c3\u00b2"
+  }
+}

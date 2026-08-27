@@ -1,0 +1,31 @@
+{
+  "ticker": "SPY",
+  "regime": "2018-2019",
+  "model": "Merton",
+  "n_updates": 13,
+  "asof": "2019-09-30 00:00:00",
+  "P": {
+    "measure": "P",
+    "mu": 0.13192379835579596,
+    "sigma": 0.1255451012687032,
+    "lam": 4.666666666666667,
+    "mu_j": -0.010689159356941655,
+    "sigma_j": 0.03562572359425228,
+    "kappa": -0.010004185129660725
+  },
+  "premium": {
+    "mu_j_minus_mu_j_q": 0.0035701697036752654,
+    "source": "listed calls (Pan 2002 \u03bc*); \u03bb* = \u03bb (timing not separately identified)",
+    "jump_premium_identified": true,
+    "n_quotes": 24
+  },
+  "Q": {
+    "measure": "Q (Pan)",
+    "sigma": 0.1255451012687032,
+    "lam": 4.666666666666667,
+    "mu_j_q": -0.01425932906061692,
+    "sigma_j": 0.03562572359425228,
+    "kappa_q": -0.013532336397775624,
+    "mean_equation": "r_f \u2212 \u03bb \u03ba^Q \u2212 \u00bd \u03c3\u00b2"
+  }
+}

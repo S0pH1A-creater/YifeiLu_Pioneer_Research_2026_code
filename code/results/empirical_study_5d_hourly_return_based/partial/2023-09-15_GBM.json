@@ -1,0 +1,46 @@
+{
+  "model": "GBM",
+  "regime": "2023-09-15",
+  "stem": "7d_1min_gbm",
+  "tickers": {
+    "SPY": {
+      "rmse_pct": 100.0,
+      "mae": 100.0,
+      "bias": -6.1782352941176475,
+      "bias_pct": -100.0,
+      "early": 0.0,
+      "n": 34,
+      "n_updates": 35,
+      "t_cal": 0.02599501609802246,
+      "t_lsm": 1.5858619213104248,
+      "elapsed": 1.6132140159606934,
+      "contracts_csv": "contracts/2023-09-15/SPY/2023-09-15_gbm.csv"
+    },
+    "AAPL": {
+      "rmse_pct": 100.0,
+      "mae": 100.0,
+      "bias": -4.030882352941175,
+      "bias_pct": -100.0,
+      "early": 0.0,
+      "n": 34,
+      "n_updates": 35,
+      "t_cal": 0.025589942932128906,
+      "t_lsm": 1.5958161354064941,
+      "elapsed": 1.6219887733459473,
+      "contracts_csv": "contracts/2023-09-15/AAPL/2023-09-15_gbm.csv"
+    },
+    "MSFT": {
+      "rmse_pct": 100.0,
+      "mae": 100.0,
+      "bias": -7.268382352941177,
+      "bias_pct": -100.0,
+      "early": 0.0,
+      "n": 34,
+      "n_updates": 35,
+      "t_cal": 0.024402856826782227,
+      "t_lsm": 1.5773770809173584,
+      "elapsed": 1.6024067401885986,
+      "contracts_csv": "contracts/2023-09-15/MSFT/2023-09-15_gbm.csv"
+    }
+  }
+}

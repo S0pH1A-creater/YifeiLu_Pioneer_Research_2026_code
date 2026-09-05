@@ -1,0 +1,14 @@
+---
+description: V4 Merton P from returns, Pan Q jump-size premium
+globs: V4-Models_result/merton notebook/**
+alwaysApply: false
+---
+
+# V4 Merton — Pan (2002) jump-size premium
+
+- Estimate **P** from lookback returns (3σ jumps + residual diffusion σ).
+- If \(\lambda>0\), identify \(\mu_J^*\) from listed calls. Do **not** set \(P=Q\) for jumps.
+- Pan identification: \(\lambda^*=\lambda\), \(\sigma^Q=\sigma^P\), \(\sigma_J^Q=\sigma_J^P\).
+- §5 uses P. §6 LSM uses `simulate_merton_q` with compensator \(\lambda\kappa^Q\).
+- Do not change V3, GBM, or GARCH.
+- See `V4-Models_result/P_TO_Q_RISK_PRICING.md` and `scripts/pq_risk_premium.py`.

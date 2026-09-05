@@ -1,12 +1,12 @@
 ---
-description: True rolling-window GARCH(1,1) calibration (no jumps) for garch notebook period files
-globs: "**/garch notebook/**"
+description: True rolling-window GARCH(1,1) calibration (no jumps) for V1–V3 garch notebook period files
+globs: "{V1-Models_result,V2-Models_result,V3-Models_result}/garch notebook/**"
 alwaysApply: false
 ---
 
-# GARCH period notebooks — rolling calibration
+# GARCH period notebooks — rolling calibration (V1–V3)
 
-When editing files under `garch notebook/`:
+When editing files under V1/V2/V3 `garch notebook/`:
 
 - This model is **GARCH–Merton without jumps**: estimate only \((\mu,\omega,\alpha,\beta,\sigma_0)\). Do **not** add \(\lambda,\mu_J,\sigma_J,\kappa\) or a jump term in simulation.
 - Use **true rolling-window calibration**: at each update point, re-estimate from only the current lookback window, then use those params for the **next** Monte Carlo segment.
@@ -16,4 +16,4 @@ When editing files under `garch notebook/`:
 - Lookback options: 3m / 6m / 1y / 2y / 5y (2-year files) or 1 hour / 1 day (1-minute files); keep a **Reestimate** control.
 - §4 shows rolling graphs for \(\mu,\omega,\alpha,\beta,\sigma_0\); §5 uses the GARCH update (not Merton jumps).
 - Keep the same §4 / §5 / §6 workflow as the other model notebooks.
-- See `V2-Models_result/garch notebook/ROLLING_CALIBRATION.md`.
+- V4 GARCH uses Duan LRNVR instead; see `.cursor/rules/v4-garch-duan-lrnvr.mdc`.

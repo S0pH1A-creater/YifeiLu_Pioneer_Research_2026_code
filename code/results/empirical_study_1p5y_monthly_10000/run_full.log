@@ -1,0 +1,527 @@
+===== V4 10k LSM =====
+Sampling shared contracts …
+Filter funnel …
+  resume GBM 2008-2009
+  resume GBM 2013-2014
+  resume GBM 2018-2019
+  resume GBM 2019-2020
+
+=== Modified GBM | 2008-2009 ===
+    Modified GBM     2008-2009 SPY: RMSE%=47.67 MAE=1.2488 n=50 updates=13 cal=0.0s lsm=1.3s
+    Modified GBM     2008-2009 AAPL: RMSE%=51.94 MAE=2.1591 n=50 updates=13 cal=0.0s lsm=1.4s
+    Modified GBM     2008-2009 MSFT: RMSE%=41.99 MAE=0.3590 n=50 updates=13 cal=0.0s lsm=2.3s
+    Modified GBM     2008-2009 AMZN: RMSE%=40.25 MAE=1.3199 n=50 updates=13 cal=0.0s lsm=2.2s
+
+=== Modified GBM | 2013-2014 ===
+    Modified GBM     2013-2014 SPY: RMSE%=37.08 MAE=0.6750 n=50 updates=13 cal=0.0s lsm=2.5s
+    Modified GBM     2013-2014 AAPL: RMSE%=45.44 MAE=3.1559 n=50 updates=13 cal=0.0s lsm=2.3s
+    Modified GBM     2013-2014 MSFT: RMSE%=59.39 MAE=0.4056 n=50 updates=13 cal=0.0s lsm=2.2s
+    Modified GBM     2013-2014 AMZN: RMSE%=29.48 MAE=2.6249 n=50 updates=13 cal=0.0s lsm=2.3s
+
+=== Modified GBM | 2018-2019 ===
+    Modified GBM     2018-2019 SPY: RMSE%=51.83 MAE=1.7487 n=50 updates=13 cal=0.0s lsm=2.0s
+    Modified GBM     2018-2019 AAPL: RMSE%=34.33 MAE=1.7907 n=51 updates=13 cal=0.0s lsm=2.5s
+    Modified GBM     2018-2019 MSFT: RMSE%=33.44 MAE=0.8877 n=50 updates=13 cal=0.0s lsm=2.2s
+    Modified GBM     2018-2019 AMZN: RMSE%=47.59 MAE=22.5407 n=51 updates=13 cal=0.0s lsm=2.3s
+
+=== Modified GBM | 2019-2020 ===
+    Modified GBM     2019-2020 SPY: RMSE%=64.56 MAE=3.4810 n=50 updates=13 cal=0.0s lsm=2.5s
+    Modified GBM     2019-2020 AAPL: RMSE%=45.88 MAE=3.7712 n=50 updates=13 cal=0.0s lsm=2.4s
+    Modified GBM     2019-2020 MSFT: RMSE%=40.97 MAE=1.7579 n=50 updates=13 cal=0.0s lsm=2.4s
+    Modified GBM     2019-2020 AMZN: RMSE%=54.35 MAE=26.3138 n=50 updates=13 cal=0.0s lsm=2.2s
+  resume GARCH 2008-2009
+  resume GARCH 2013-2014
+  resume GARCH 2018-2019
+  resume GARCH 2019-2020
+  resume Heston 2008-2009
+  resume Heston 2013-2014
+  resume Heston 2018-2019
+  resume Heston 2019-2020
+  resume Merton 2008-2009
+  resume Merton 2013-2014
+  resume Merton 2018-2019
+  resume Merton 2019-2020
+
+=== GARCH–Merton | 2008-2009 ===
+    GARCH–Merton     2008-2009 SPY: RMSE%=60.33 MAE=1.9863 n=50 updates=13 cal=1.1s lsm=2.1s
+    GARCH–Merton     2008-2009 AAPL: RMSE%=60.45 MAE=3.3579 n=50 updates=13 cal=1.1s lsm=2.1s
+    GARCH–Merton     2008-2009 MSFT: RMSE%=77.43 MAE=0.6755 n=50 updates=13 cal=1.5s lsm=2.2s
+    GARCH–Merton     2008-2009 AMZN: RMSE%=48.95 MAE=1.7358 n=50 updates=13 cal=1.4s lsm=1.8s
+
+=== GARCH–Merton | 2013-2014 ===
+    GARCH–Merton     2013-2014 SPY: RMSE%=42.87 MAE=0.7768 n=50 updates=13 cal=0.9s lsm=1.9s
+    GARCH–Merton     2013-2014 AAPL: RMSE%=75.10 MAE=5.5189 n=50 updates=13 cal=1.6s lsm=2.0s
+    GARCH–Merton     2013-2014 MSFT: RMSE%=93.30 MAE=0.7006 n=50 updates=13 cal=0.9s lsm=1.4s
+    GARCH–Merton     2013-2014 AMZN: RMSE%=59.06 MAE=4.8914 n=50 updates=13 cal=2.3s lsm=1.9s
+
+=== GARCH–Merton | 2018-2019 ===
+    GARCH–Merton     2018-2019 SPY: RMSE%=75.23 MAE=2.3003 n=50 updates=13 cal=1.0s lsm=2.0s
+    GARCH–Merton     2018-2019 AAPL: RMSE%=59.55 MAE=2.6651 n=51 updates=13 cal=0.9s lsm=2.0s
+    GARCH–Merton     2018-2019 MSFT: RMSE%=52.78 MAE=1.3643 n=50 updates=13 cal=1.0s lsm=1.8s
+    GARCH–Merton     2018-2019 AMZN: RMSE%=44.82 MAE=22.5080 n=51 updates=13 cal=0.7s lsm=1.6s
+
+=== GARCH–Merton | 2019-2020 ===
+    GARCH–Merton     2019-2020 SPY: RMSE%=66.91 MAE=3.4516 n=50 updates=13 cal=2.1s lsm=1.7s
+    GARCH–Merton     2019-2020 AAPL: RMSE%=70.13 MAE=5.5322 n=50 updates=13 cal=0.8s lsm=1.7s
+    GARCH–Merton     2019-2020 MSFT: RMSE%=260.38 MAE=5.4433 n=50 updates=13 cal=1.0s lsm=1.8s
+    GARCH–Merton     2019-2020 AMZN: RMSE%=42.07 MAE=24.4939 n=50 updates=13 cal=1.1s lsm=1.6s
+  resume Heston–Merton 2008-2009
+  resume Heston–Merton 2013-2014
+  resume Heston–Merton 2018-2019
+  resume Heston–Merton 2019-2020
+
+Wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/V4-Models_result/results/empirical_study_1p5y_monthly_10000/payload.json in 1.4 min
+wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/Results_In_Short/V4/V4 1.5-year monthly empirical study 10000 paths/V4_1p5y_monthly_empirical_study.pdf (126 KB)
+wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/Results_In_Short/V4/V4 1.5-year monthly empirical study 10000 paths/V4_1p5y_monthly_empirical_study.ipynb
+
+=== P / premium / Q (last monthly update) ===
+ticker    regime         model  n_updates                asof
+  AAPL 2008-2009         GARCH         13 2009-07-31 00:00:00
+  AAPL 2008-2009 Heston–Merton         13 2009-07-31 00:00:00
+  AAPL 2008-2009        Heston         13 2009-07-31 00:00:00
+  AAPL 2008-2009        Merton         13 2009-07-31 00:00:00
+  AMZN 2008-2009         GARCH         13 2009-07-31 00:00:00
+  AMZN 2008-2009 Heston–Merton         13 2009-07-31 00:00:00
+  AMZN 2008-2009        Heston         13 2009-07-31 00:00:00
+  AMZN 2008-2009        Merton         13 2009-07-31 00:00:00
+  MSFT 2008-2009         GARCH         13 2009-07-31 00:00:00
+  MSFT 2008-2009 Heston–Merton         13 2009-07-31 00:00:00
+  MSFT 2008-2009        Heston         13 2009-07-31 00:00:00
+  MSFT 2008-2009        Merton         13 2009-07-31 00:00:00
+   SPY 2008-2009         GARCH         13 2009-07-31 00:00:00
+   SPY 2008-2009 Heston–Merton         13 2009-07-31 00:00:00
+   SPY 2008-2009        Heston         13 2009-07-31 00:00:00
+   SPY 2008-2009        Merton         13 2009-07-31 00:00:00
+  AAPL 2013-2014         GARCH         13 2014-12-31 00:00:00
+  AAPL 2013-2014 Heston–Merton         13 2014-12-31 00:00:00
+  AAPL 2013-2014        Heston         13 2014-12-31 00:00:00
+  AAPL 2013-2014        Merton         13 2014-12-31 00:00:00
+  AMZN 2013-2014         GARCH         13 2014-12-31 00:00:00
+  AMZN 2013-2014 Heston–Merton         13 2014-12-31 00:00:00
+  AMZN 2013-2014        Heston         13 2014-12-31 00:00:00
+  AMZN 2013-2014        Merton         13 2014-12-31 00:00:00
+  MSFT 2013-2014         GARCH         13 2014-12-31 00:00:00
+  MSFT 2013-2014 Heston–Merton         13 2014-12-31 00:00:00
+  MSFT 2013-2014        Heston         13 2014-12-31 00:00:00
+  MSFT 2013-2014        Merton         13 2014-12-31 00:00:00
+   SPY 2013-2014         GARCH         13 2014-12-31 00:00:00
+   SPY 2013-2014 Heston–Merton         13 2014-12-31 00:00:00
+   SPY 2013-2014        Heston         13 2014-12-31 00:00:00
+   SPY 2013-2014        Merton         13 2014-12-31 00:00:00
+  AAPL 2018-2019         GARCH         13 2019-09-30 00:00:00
+  AAPL 2018-2019 Heston–Merton         13 2019-09-30 00:00:00
+  AAPL 2018-2019        Heston         13 2019-09-30 00:00:00
+  AAPL 2018-2019        Merton         13 2019-09-30 00:00:00
+  AMZN 2018-2019         GARCH         13 2019-09-30 00:00:00
+  AMZN 2018-2019 Heston–Merton         13 2019-09-30 00:00:00
+  AMZN 2018-2019        Heston         13 2019-09-30 00:00:00
+  AMZN 2018-2019        Merton         13 2019-09-30 00:00:00
+  MSFT 2018-2019         GARCH         13 2019-09-30 00:00:00
+  MSFT 2018-2019 Heston–Merton         13 2019-09-30 00:00:00
+  MSFT 2018-2019        Heston         13 2019-09-30 00:00:00
+  MSFT 2018-2019        Merton         13 2019-09-30 00:00:00
+   SPY 2018-2019         GARCH         13 2019-09-30 00:00:00
+   SPY 2018-2019 Heston–Merton         13 2019-09-30 00:00:00
+   SPY 2018-2019        Heston         13 2019-09-30 00:00:00
+   SPY 2018-2019        Merton         13 2019-09-30 00:00:00
+  AAPL 2019-2020         GARCH         13 2020-08-31 00:00:00
+  AAPL 2019-2020 Heston–Merton         13 2020-08-31 00:00:00
+  AAPL 2019-2020        Heston         13 2020-08-31 00:00:00
+  AAPL 2019-2020        Merton         13 2020-08-31 00:00:00
+  AMZN 2019-2020         GARCH         13 2020-08-31 00:00:00
+  AMZN 2019-2020 Heston–Merton         13 2020-08-31 00:00:00
+  AMZN 2019-2020        Heston         13 2020-08-31 00:00:00
+  AMZN 2019-2020        Merton         13 2020-08-31 00:00:00
+  MSFT 2019-2020         GARCH         13 2020-08-31 00:00:00
+  MSFT 2019-2020 Heston–Merton         13 2020-08-31 00:00:00
+  MSFT 2019-2020        Heston         13 2020-08-31 00:00:00
+  MSFT 2019-2020        Merton         13 2020-08-31 00:00:00
+   SPY 2019-2020         GARCH         13 2020-08-31 00:00:00
+   SPY 2019-2020 Heston–Merton         13 2020-08-31 00:00:00
+   SPY 2019-2020        Heston         13 2020-08-31 00:00:00
+   SPY 2019-2020        Merton         13 2020-08-31 00:00:00
+===== grouped reports =====
+wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/Results_In_Short/V4/V4 1.5-year monthly empirical study 10000 paths/V4_1p5y_monthly_empirical_study_option_implied.pdf (105 KB)
+wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/Results_In_Short/V4/V4 1.5-year monthly empirical study 10000 paths/V4_1p5y_monthly_empirical_study_option_implied.ipynb
+option_implied: V4_1p5y_monthly_empirical_study_option_implied.pdf  V4_1p5y_monthly_empirical_study_option_implied.ipynb
+wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/Results_In_Short/V4/V4 1.5-year monthly empirical study 10000 paths/V4_1p5y_monthly_empirical_study_return_based.pdf (124 KB)
+wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/Results_In_Short/V4/V4 1.5-year monthly empirical study 10000 paths/V4_1p5y_monthly_empirical_study_return_based.ipynb
+return_based: V4_1p5y_monthly_empirical_study_return_based.pdf  V4_1p5y_monthly_empirical_study_return_based.ipynb
+original files unchanged: V4_1p5y_monthly_empirical_study.pdf, V4_1p5y_monthly_empirical_study.ipynb
+===== stock paths =====
+
+=== stock GBM | 2008-2009 ===
+    GBM              2008-2009 SPY: RMSE%=25.80 MAE=17.4631 ICP=39.3% n=252
+    GBM              2008-2009 AAPL: RMSE%=51.72 MAE=1.2223 ICP=38.1% n=252
+    GBM              2008-2009 MSFT: RMSE%=18.26 MAE=2.3103 ICP=52.0% n=252
+    GBM              2008-2009 AMZN: RMSE%=38.14 MAE=0.7962 ICP=63.1% n=252
+
+=== stock GBM | 2013-2014 ===
+    GBM              2013-2014 SPY: RMSE%=4.49 MAE=7.2337 ICP=85.0% n=253
+    GBM              2013-2014 AAPL: RMSE%=18.03 MAE=3.3957 ICP=26.9% n=253
+    GBM              2013-2014 MSFT: RMSE%=4.49 MAE=1.4435 ICP=95.7% n=253
+    GBM              2013-2014 AMZN: RMSE%=35.30 MAE=5.1873 ICP=6.7% n=253
+
+=== stock GBM | 2018-2019 ===
+    GBM              2018-2019 SPY: RMSE%=8.90 MAE=21.0394 ICP=47.8% n=251
+    GBM              2018-2019 AAPL: RMSE%=30.71 MAE=11.8415 ICP=13.5% n=251
+    GBM              2018-2019 MSFT: RMSE%=12.44 MAE=11.7781 ICP=54.2% n=251
+    GBM              2018-2019 AMZN: RMSE%=36.37 MAE=30.5655 ICP=0.4% n=251
+
+=== stock GBM | 2019-2020 ===
+    GBM              2019-2020 SPY: RMSE%=8.57 MAE=20.0495 ICP=55.6% n=252
+    GBM              2019-2020 AAPL: RMSE%=26.10 MAE=19.2567 ICP=8.7% n=252
+    GBM              2019-2020 MSFT: RMSE%=10.72 MAE=15.8101 ICP=79.0% n=252
+    GBM              2019-2020 AMZN: RMSE%=20.44 MAE=19.8517 ICP=57.1% n=252
+
+=== stock Modified GBM | 2008-2009 ===
+    Modified GBM     2008-2009 SPY: RMSE%=28.81 MAE=20.4361 ICP=34.9% n=252
+    Modified GBM     2008-2009 AAPL: RMSE%=48.93 MAE=1.1596 ICP=38.1% n=252
+    Modified GBM     2008-2009 MSFT: RMSE%=20.88 MAE=2.5199 ICP=47.2% n=252
+    Modified GBM     2008-2009 AMZN: RMSE%=60.91 MAE=1.2595 ICP=46.4% n=252
+
+=== stock Modified GBM | 2013-2014 ===
+    Modified GBM     2013-2014 SPY: RMSE%=3.93 MAE=6.2957 ICP=87.4% n=253
+    Modified GBM     2013-2014 AAPL: RMSE%=23.70 MAE=4.4831 ICP=26.9% n=253
+    Modified GBM     2013-2014 MSFT: RMSE%=8.46 MAE=2.8349 ICP=83.8% n=253
+    Modified GBM     2013-2014 AMZN: RMSE%=26.98 MAE=4.0209 ICP=8.3% n=253
+
+=== stock Modified GBM | 2018-2019 ===
+    Modified GBM     2018-2019 SPY: RMSE%=6.73 MAE=13.2464 ICP=63.7% n=251
+    Modified GBM     2018-2019 AAPL: RMSE%=30.74 MAE=11.6527 ICP=16.7% n=251
+    Modified GBM     2018-2019 MSFT: RMSE%=15.52 MAE=16.3571 ICP=36.7% n=251
+    Modified GBM     2018-2019 AMZN: RMSE%=45.06 MAE=37.8664 ICP=0.4% n=251
+
+=== stock Modified GBM | 2019-2020 ===
+    Modified GBM     2019-2020 SPY: RMSE%=8.90 MAE=22.2581 ICP=54.0% n=252
+    Modified GBM     2019-2020 AAPL: RMSE%=29.10 MAE=21.5615 ICP=5.2% n=252
+    Modified GBM     2019-2020 MSFT: RMSE%=8.56 MAE=12.4401 ICP=90.1% n=252
+    Modified GBM     2019-2020 AMZN: RMSE%=18.37 MAE=17.9199 ICP=60.3% n=252
+
+=== stock GARCH | 2008-2009 ===
+warning: Q-GARCH not stationary at 2008-09-30 (α(1+λ²)+β=1.0000)
+    GARCH            2008-2009 SPY: RMSE%=33.58 MAE=24.8846 ICP=24.6% n=252
+    GARCH            2008-2009 AAPL: RMSE%=88.07 MAE=2.5246 ICP=5.2% n=252
+warning: Q-GARCH not stationary at 2008-10-31 (α(1+λ²)+β=1.0000)
+warning: Q-GARCH not stationary at 2008-11-30 (α(1+λ²)+β=1.0001)
+warning: Q-GARCH not stationary at 2009-01-31 (α(1+λ²)+β=1.0001)
+    GARCH            2008-2009 MSFT: RMSE%=18.01 MAE=2.2364 ICP=56.3% n=252
+    GARCH            2008-2009 AMZN: RMSE%=48.79 MAE=1.0904 ICP=50.8% n=252
+
+=== stock GARCH | 2013-2014 ===
+    GARCH            2013-2014 SPY: RMSE%=8.02 MAE=13.5304 ICP=32.4% n=253
+    GARCH            2013-2014 AAPL: RMSE%=13.30 MAE=2.5755 ICP=42.7% n=253
+    GARCH            2013-2014 MSFT: RMSE%=3.23 MAE=0.9802 ICP=95.3% n=253
+    GARCH            2013-2014 AMZN: RMSE%=37.43 MAE=5.5465 ICP=5.9% n=253
+
+=== stock GARCH | 2018-2019 ===
+warning: Q-GARCH not stationary at 2018-12-31 (α(1+λ²)+β=1.0048)
+warning: Q-GARCH not stationary at 2019-01-31 (α(1+λ²)+β=1.0050)
+warning: Q-GARCH not stationary at 2019-02-28 (α(1+λ²)+β=1.0080)
+warning: Q-GARCH not stationary at 2019-03-31 (α(1+λ²)+β=1.0060)
+    GARCH            2018-2019 SPY: RMSE%=24.77 MAE=65.0894 ICP=1.2% n=251
+    GARCH            2018-2019 AAPL: RMSE%=46.80 MAE=19.8628 ICP=1.6% n=251
+    GARCH            2018-2019 MSFT: RMSE%=25.64 MAE=28.4270 ICP=1.2% n=251
+    GARCH            2018-2019 AMZN: RMSE%=78.80 MAE=63.5569 ICP=0.4% n=251
+
+=== stock GARCH | 2019-2020 ===
+warning: Q-GARCH not stationary at 2020-03-31 (α(1+λ²)+β=1.0051)
+warning: Q-GARCH not stationary at 2020-04-30 (α(1+λ²)+β=1.0086)
+warning: Q-GARCH not stationary at 2020-05-31 (α(1+λ²)+β=1.0102)
+warning: Q-GARCH not stationary at 2020-06-30 (α(1+λ²)+β=1.0103)
+warning: Q-GARCH not stationary at 2020-07-31 (α(1+λ²)+β=1.0096)
+warning: Q-GARCH not stationary at 2020-08-31 (α(1+λ²)+β=1.0120)
+    GARCH            2019-2020 SPY: RMSE%=20.26 MAE=43.2075 ICP=42.1% n=252
+    GARCH            2019-2020 AAPL: RMSE%=10.87 MAE=6.6467 ICP=56.7% n=252
+    GARCH            2019-2020 MSFT: RMSE%=6.27 MAE=6.5020 ICP=89.3% n=252
+    GARCH            2019-2020 AMZN: RMSE%=12.30 MAE=12.5260 ICP=56.0% n=252
+
+=== stock Heston | 2008-2009 ===
+    Heston           2008-2009 SPY: RMSE%=26.46 MAE=18.0183 ICP=39.3% n=252
+    Heston           2008-2009 AAPL: RMSE%=53.57 MAE=1.2624 ICP=37.3% n=252
+    Heston           2008-2009 MSFT: RMSE%=17.91 MAE=2.2788 ICP=50.8% n=252
+    Heston           2008-2009 AMZN: RMSE%=37.25 MAE=0.7861 ICP=63.1% n=252
+
+=== stock Heston | 2013-2014 ===
+    Heston           2013-2014 SPY: RMSE%=4.48 MAE=7.2207 ICP=91.3% n=253
+    Heston           2013-2014 AAPL: RMSE%=17.48 MAE=3.3093 ICP=25.7% n=253
+    Heston           2013-2014 MSFT: RMSE%=4.06 MAE=1.2801 ICP=92.9% n=253
+    Heston           2013-2014 AMZN: RMSE%=35.55 MAE=5.2144 ICP=5.9% n=253
+
+=== stock Heston | 2018-2019 ===
+    Heston           2018-2019 SPY: RMSE%=9.68 MAE=23.2907 ICP=54.2% n=251
+    Heston           2018-2019 AAPL: RMSE%=30.62 MAE=11.8345 ICP=14.3% n=251
+    Heston           2018-2019 MSFT: RMSE%=12.11 MAE=11.2370 ICP=55.0% n=251
+    Heston           2018-2019 AMZN: RMSE%=35.57 MAE=29.8356 ICP=0.4% n=251
+
+=== stock Heston | 2019-2020 ===
+    Heston           2019-2020 SPY: RMSE%=8.41 MAE=19.1421 ICP=65.9% n=252
+    Heston           2019-2020 AAPL: RMSE%=25.43 MAE=18.7225 ICP=9.1% n=252
+    Heston           2019-2020 MSFT: RMSE%=10.50 MAE=15.4683 ICP=81.3% n=252
+    Heston           2019-2020 AMZN: RMSE%=20.48 MAE=19.9176 ICP=54.8% n=252
+
+=== stock Merton | 2008-2009 ===
+<unknown>:302: SyntaxWarning: invalid escape sequence '\('
+    Merton           2008-2009 SPY: RMSE%=27.61 MAE=19.2509 ICP=36.5% n=252
+    Merton           2008-2009 AAPL: RMSE%=56.69 MAE=1.3367 ICP=36.5% n=252
+    Merton           2008-2009 MSFT: RMSE%=18.66 MAE=2.4237 ICP=40.5% n=252
+    Merton           2008-2009 AMZN: RMSE%=31.83 MAE=0.8062 ICP=49.2% n=252
+
+=== stock Merton | 2013-2014 ===
+<unknown>:302: SyntaxWarning: invalid escape sequence '\('
+    Merton           2013-2014 SPY: RMSE%=7.02 MAE=11.6343 ICP=47.4% n=253
+    Merton           2013-2014 AAPL: RMSE%=11.21 MAE=2.1896 ICP=74.7% n=253
+    Merton           2013-2014 MSFT: RMSE%=2.73 MAE=0.7663 ICP=94.1% n=253
+    Merton           2013-2014 AMZN: RMSE%=42.68 MAE=6.0807 ICP=7.1% n=253
+
+=== stock Merton | 2018-2019 ===
+<unknown>:302: SyntaxWarning: invalid escape sequence '\('
+    Merton           2018-2019 SPY: RMSE%=13.33 MAE=35.1454 ICP=1.2% n=251
+    Merton           2018-2019 AAPL: RMSE%=29.96 MAE=11.4880 ICP=12.7% n=251
+    Merton           2018-2019 MSFT: RMSE%=12.29 MAE=10.8532 ICP=55.0% n=251
+    Merton           2018-2019 AMZN: RMSE%=33.94 MAE=28.3045 ICP=0.4% n=251
+
+=== stock Merton | 2019-2020 ===
+<unknown>:302: SyntaxWarning: invalid escape sequence '\('
+    Merton           2019-2020 SPY: RMSE%=9.02 MAE=18.3611 ICP=60.3% n=252
+    Merton           2019-2020 AAPL: RMSE%=24.55 MAE=18.0488 ICP=11.5% n=252
+    Merton           2019-2020 MSFT: RMSE%=10.88 MAE=16.2008 ICP=77.8% n=252
+    Merton           2019-2020 AMZN: RMSE%=20.65 MAE=19.8184 ICP=58.3% n=252
+
+=== stock GARCH–Merton | 2008-2009 ===
+    GARCH–Merton     2008-2009 SPY: RMSE%=33.42 MAE=24.7375 ICP=25.0% n=252
+    GARCH–Merton     2008-2009 AAPL: RMSE%=99.38 MAE=2.8832 ICP=5.6% n=252
+    GARCH–Merton     2008-2009 MSFT: RMSE%=20.00 MAE=2.3864 ICP=54.0% n=252
+    GARCH–Merton     2008-2009 AMZN: RMSE%=49.75 MAE=1.1834 ICP=52.0% n=252
+
+=== stock GARCH–Merton | 2013-2014 ===
+    GARCH–Merton     2013-2014 SPY: RMSE%=5.37 MAE=8.8786 ICP=79.1% n=253
+    GARCH–Merton     2013-2014 AAPL: RMSE%=14.97 MAE=2.8661 ICP=43.5% n=253
+    GARCH–Merton     2013-2014 MSFT: RMSE%=8.09 MAE=2.6111 ICP=96.4% n=253
+    GARCH–Merton     2013-2014 AMZN: RMSE%=39.54 MAE=5.8139 ICP=6.7% n=253
+
+=== stock GARCH–Merton | 2018-2019 ===
+    GARCH–Merton     2018-2019 SPY: RMSE%=12.22 MAE=32.1692 ICP=12.0% n=251
+    GARCH–Merton     2018-2019 AAPL: RMSE%=40.39 MAE=16.9252 ICP=1.6% n=251
+    GARCH–Merton     2018-2019 MSFT: RMSE%=17.28 MAE=18.6306 ICP=30.3% n=251
+    GARCH–Merton     2018-2019 AMZN: RMSE%=64.50 MAE=52.0538 ICP=0.4% n=251
+
+=== stock GARCH–Merton | 2019-2020 ===
+    GARCH–Merton     2019-2020 SPY: RMSE%=12.93 MAE=30.6239 ICP=33.3% n=252
+    GARCH–Merton     2019-2020 AAPL: RMSE%=11.40 MAE=7.3392 ICP=61.5% n=252
+    GARCH–Merton     2019-2020 MSFT: RMSE%=8.38 MAE=12.3239 ICP=90.1% n=252
+    GARCH–Merton     2019-2020 AMZN: RMSE%=13.83 MAE=13.7861 ICP=44.8% n=252
+
+=== stock Heston–Merton | 2008-2009 ===
+    Heston–Merton    2008-2009 SPY: RMSE%=25.88 MAE=17.4139 ICP=42.1% n=252
+    Heston–Merton    2008-2009 AAPL: RMSE%=51.96 MAE=1.2305 ICP=38.9% n=252
+    Heston–Merton    2008-2009 MSFT: RMSE%=17.83 MAE=2.2857 ICP=57.9% n=252
+    Heston–Merton    2008-2009 AMZN: RMSE%=35.47 MAE=0.7936 ICP=65.1% n=252
+
+=== stock Heston–Merton | 2013-2014 ===
+    Heston–Merton    2013-2014 SPY: RMSE%=4.25 MAE=6.8366 ICP=92.5% n=253
+    Heston–Merton    2013-2014 AAPL: RMSE%=18.37 MAE=3.4763 ICP=31.2% n=253
+    Heston–Merton    2013-2014 MSFT: RMSE%=4.53 MAE=1.4430 ICP=94.5% n=253
+    Heston–Merton    2013-2014 AMZN: RMSE%=34.22 MAE=5.0217 ICP=5.9% n=253
+
+=== stock Heston–Merton | 2018-2019 ===
+    Heston–Merton    2018-2019 SPY: RMSE%=9.58 MAE=22.6918 ICP=61.0% n=251
+    Heston–Merton    2018-2019 AAPL: RMSE%=29.66 MAE=11.2388 ICP=27.1% n=251
+    Heston–Merton    2018-2019 MSFT: RMSE%=11.85 MAE=10.6106 ICP=56.2% n=251
+    Heston–Merton    2018-2019 AMZN: RMSE%=34.27 MAE=28.7374 ICP=0.4% n=251
+
+=== stock Heston–Merton | 2019-2020 ===
+    Heston–Merton    2019-2020 SPY: RMSE%=8.61 MAE=20.0620 ICP=70.2% n=252
+    Heston–Merton    2019-2020 AAPL: RMSE%=26.13 MAE=19.2264 ICP=11.9% n=252
+    Heston–Merton    2019-2020 MSFT: RMSE%=11.33 MAE=16.6961 ICP=88.1% n=252
+    Heston–Merton    2019-2020 AMZN: RMSE%=21.14 MAE=20.6121 ICP=56.7% n=252
+
+Wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/V4-Models_result/results/empirical_study_1p5y_monthly_10000/stock/payload.json in 5.7 min
+wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/Results_In_Short/V4/V4 1.5-year monthly empirical study 10000 paths/V4_1p5y_monthly_stock_price.pdf (116 KB)
+wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/Results_In_Short/V4/V4 1.5-year monthly empirical study 10000 paths/V4_1p5y_monthly_stock_price.ipynb
+===== parameter estimation =====
+
+=== calibrate GBM | 2008-2009 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate GBM | 2013-2014 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate GBM | 2018-2019 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate GBM | 2019-2020 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Modified GBM | 2008-2009 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Modified GBM | 2013-2014 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Modified GBM | 2018-2019 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Modified GBM | 2019-2020 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate GARCH | 2008-2009 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate GARCH | 2013-2014 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate GARCH | 2018-2019 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate GARCH | 2019-2020 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Heston | 2008-2009 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Heston | 2013-2014 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Heston | 2018-2019 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Heston | 2019-2020 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Merton | 2008-2009 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Merton | 2013-2014 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Merton | 2018-2019 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Merton | 2019-2020 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate GARCH–Merton | 2008-2009 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate GARCH–Merton | 2013-2014 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate GARCH–Merton | 2018-2019 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate GARCH–Merton | 2019-2020 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Heston–Merton | 2008-2009 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Heston–Merton | 2013-2014 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Heston–Merton | 2018-2019 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+
+=== calibrate Heston–Merton | 2019-2020 ===
+  resume SPY n=13
+  resume AAPL n=13
+  resume MSFT n=13
+  resume AMZN n=13
+wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/Results_In_Short/V4/V4 1.5-year monthly empirical study 10000 paths/V4_1p5y_monthly_parameter_estimation.pdf (166 KB)
+wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/Results_In_Short/V4/V4 1.5-year monthly empirical study 10000 paths/V4_1p5y_monthly_parameter_estimation.ipynb
+===== moneyness =====
+wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/Results_In_Short/V4/V4 1.5-year monthly empirical study 10000 paths/V4_1p5y_monthly_moneyness_performance.pdf (86 KB)
+wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/Results_In_Short/V4/V4 1.5-year monthly empirical study 10000 paths/V4_1p5y_monthly_moneyness_performance.ipynb
+===== Modified GBM spec =====
+copied V4_modified_gbm_model.pdf from V3 1.5-year monthly empirical study
+copied V4_modified_gbm_model.ipynb from V3 1.5-year monthly empirical study
+moved V4_1p5y_monthly_stock_price.ipynb → Notebooks/
+moved V4_1p5y_monthly_moneyness_performance.ipynb → Notebooks/
+moved V4_1p5y_monthly_parameter_estimation.ipynb → Notebooks/
+moved V4_modified_gbm_model.ipynb → Notebooks/
+moved V4_1p5y_monthly_empirical_study.ipynb → Notebooks/
+moved V4_1p5y_monthly_empirical_study_return_based.ipynb → Notebooks/
+moved V4_1p5y_monthly_empirical_study_option_implied.ipynb → Notebooks/
+outputs in /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/Results_In_Short/V4/V4 1.5-year monthly empirical study 10000 paths
+cache in /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/V4-Models_result/results/empirical_study_1p5y_monthly_10000

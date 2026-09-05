@@ -1,83 +1,46 @@
-### **1. Stock market data**
+# Data
 
-For:
+Tickers in this study: **SPY, AAPL, MSFT, AMZN**.
 
-- **SPY** (primary)
-- **AAPL**, **MSFT** (secondary)
-- **JPM**, **XOM** (auxiliary — retained)
+```
+data/
+  equity/
+    prices_clean.csv           # adj close, 2003-12-01 → 2020-12-31
+    log_returns_all.csv
+    log_returns_by_regime.csv
+    summary_stats.csv
+  rates/
+    risk_free_dgs3mo.csv       # FRED DGS3MO
+  options/processed/
+    {SPY,AAPL,MSFT,AMZN}_calls_panel.csv
+    {SPY,AAPL,MSFT,AMZN}_options_panel.csv
+    calls_panel_{all,crisis,normal,late,covid}.csv
+    options_panel_{all,crisis,normal,late,covid}.csv
+    options_summary.csv
+```
 
-Download:
+## Equity
 
-- Date
-- Adjusted closing price
+- SPY: State Street NAV
+- AAPL / MSFT / AMZN: Yahoo adj-close mirror
+- Log return \(R_t=\ln(S_t/S_{t-1})\)
+- Common sample on disk starts 2003-12-01 (SPY NAV)
 
-(Used to calculate log returns and estimate GBM/GARCH/Heston/Merton parameters.)
+## Listed American calls
 
-**Status:** ✓ SPY, AAPL, MSFT, JPM, XOM in `research/data/equity/` (prices + log returns + regime stats).
+- Dates: 2008-01-01 → 2020-12-31
+- Near ATM: \|K/S − 1\| ≤ 10%
+- DTE 7–60
+- Used for LSM comparison and for Merton / GARCH–Merton Q jump-size premia
 
----
+## Risk-free
 
-### **2. American call option data**
+FRED `DGS3MO`, joined as decimal `r`.
 
-Focus set (complete):
+## Rebuild
 
-- **SPY** (primary)
-- **AAPL**, **MSFT** (secondary)
-
-Auxiliary (equity kept; options not required):
-
-- **JPM**, **XOM**
-
-Download:
-
-- Trading date
-- Underlying stock price S_t
-- Strike price K
-- Expiration date
-- Option price (premium)
-- Option type (call)
-
-(Used for American option pricing and optimal stopping.)
-
-**Status:** ✓ SPY + AAPL + MSFT American option panels (all three regimes). JPM / XOM left equity-only (no free Cobweb dumps; CDN offline).
-
----
-
-### **3. Risk-free interest rate data**
-
-Download:
-
-- U.S. Treasury risk-free rate
-
-(Used to discount future option payoffs.)
-
-**Status:** ✓ FRED DGS3MO in `research/data/rates/risk_free_dgs3mo.csv`.
-
-### **Stock price data**
-
-Download:
-
-- **Post-2000 period (2000–present)**
-
-Purpose:
-
-- Enough data to estimate model parameters (GARCH/Heston/Merton).
-- Then select specific regimes for comparison.
-
-### **Main evaluation periods:**
-
-1. **Crisis period**
-  - 2008–2009 (Global Financial Crisis)
-2. **Normal volatility period**
-  - 2013–2014
-3. **Late period**
-  - 2018–2019
-
-### **Option data**
-
-Use:
-
-- The same three periods:
-  - 2008–2009
-  - 2013–2014
-  - 2018–2019
+```bash
+/opt/anaconda3/bin/python code/scripts/data_fetch.py
+/opt/anaconda3/bin/python code/scripts/data_prepare.py
+/opt/anaconda3/bin/python code/scripts/options_fetch.py
+```

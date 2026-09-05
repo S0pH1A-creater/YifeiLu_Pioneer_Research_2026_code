@@ -1,0 +1,46 @@
+{
+  "model": "MD-GBM",
+  "regime": "2022-11-18",
+  "stem": "7d_1min_modified_gbm_meanfix",
+  "tickers": {
+    "SPY": {
+      "rmse_pct": 99.86824245511337,
+      "mae": 99.86766950672528,
+      "bias": -10.563976089523305,
+      "bias_pct": -99.86766950672528,
+      "early": 0.005820588235294118,
+      "n": 34,
+      "n_updates": 35,
+      "t_cal": 0.020292043685913086,
+      "t_lsm": 3.6104650497436523,
+      "elapsed": 3.6322689056396484,
+      "contracts_csv": "contracts/2022-11-18/SPY/2022-11-18_modified_gbm_meanfix.csv"
+    },
+    "AAPL": {
+      "rmse_pct": 96.79917255352429,
+      "mae": 96.45940217127418,
+      "bias": -5.713380420549679,
+      "bias_pct": -96.45940217127418,
+      "early": 0.10619117647058823,
+      "n": 34,
+      "n_updates": 35,
+      "t_cal": 0.024699926376342773,
+      "t_lsm": 3.9370839595794678,
+      "elapsed": 3.962419033050537,
+      "contracts_csv": "contracts/2022-11-18/AAPL/2022-11-18_modified_gbm_meanfix.csv"
+    },
+    "MSFT": {
+      "rmse_pct": 62.78816445704777,
+      "mae": 50.508095261454145,
+      "bias": -1.280648006148421,
+      "bias_pct": -15.37702552908257,
+      "early": 0.6860323529411765,
+      "n": 34,
+      "n_updates": 35,
+      "t_cal": 0.015860795974731445,
+      "t_lsm": 6.419291973114014,
+      "elapsed": 6.436293125152588,
+      "contracts_csv": "contracts/2022-11-18/MSFT/2022-11-18_modified_gbm_meanfix.csv"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+---
+description: Duan (1995) GARCH-in-mean + LRNVR for V4 GARCH notebooks
+globs: V4-Models_result/garch notebook/**
+alwaysApply: false
+---
+
+# V4 GARCH — Duan LRNVR
+
+When editing files under `V4-Models_result/garch notebook/`:
+
+- Estimate Duan GARCH-in-mean \((\lambda,\omega,\alpha,\beta,\sigma_0)\) from lookback returns and observed DGS3MO \(r_{f,t}\). \(\lambda\) is the **unit risk premium**, not a jump intensity.
+- Do **not** add Merton jump parameters \(\lambda_J,\mu_J,\sigma_J,\kappa\).
+- Do **not** risk-neutralize by replacing \(\mu\to r\) only. §6 LSM must use Duan LRNVR \(Q\)-paths: mean \(r_f-\tfrac12\sigma_t^2\), variance shock \((\xi_t-\lambda)\).
+- \(\omega,\alpha,\beta,\lambda,\sigma_0\) are the same numbers under \(Q\); only the mean and the GARCH innovation change.
+- Shared implementation: `V4-Models_result/scripts/garch_duan_lrnvr.py`.
+- True rolling-window calibration (daily / monthly / none) still applies.
+- §4 graphs: \(\lambda,\omega,\alpha,\beta,\sigma_0\), plus separate P vs Q tables after Reestimate.
+- See `V4-Models_result/garch notebook/ROLLING_CALIBRATION.md` and `V4_CHANGES.md`.

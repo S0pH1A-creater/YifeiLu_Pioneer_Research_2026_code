@@ -1,0 +1,179 @@
+copied shared contracts from /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/V4-Models_result/results/empirical_study_1p5y_monthly_10000_garch/shared_contracts.json
+merged 52 GARCH artifacts from empirical_study_1p5y_monthly_10000_garch
+Sampling shared contracts …
+Filter funnel …
+
+=== GBM | 2008-2009 ===
+    GBM              2008-2009 SPY: RMSE%=55.01 MAE=1.4054 n=50 updates=13 cal=0.0s lsm=1.0s
+    GBM              2008-2009 AAPL: RMSE%=57.67 MAE=2.4326 n=50 updates=13 cal=0.0s lsm=1.1s
+    GBM              2008-2009 MSFT: RMSE%=44.02 MAE=0.3723 n=50 updates=13 cal=0.0s lsm=1.5s
+    GBM              2008-2009 AMZN: RMSE%=46.92 MAE=1.5126 n=50 updates=13 cal=0.0s lsm=1.6s
+
+=== GBM | 2013-2014 ===
+    GBM              2013-2014 SPY: RMSE%=38.08 MAE=0.6850 n=50 updates=13 cal=0.0s lsm=1.4s
+    GBM              2013-2014 AAPL: RMSE%=50.20 MAE=3.5766 n=50 updates=13 cal=0.0s lsm=1.3s
+    GBM              2013-2014 MSFT: RMSE%=62.49 MAE=0.4283 n=50 updates=13 cal=0.0s lsm=1.0s
+    GBM              2013-2014 AMZN: RMSE%=31.09 MAE=2.7024 n=50 updates=13 cal=0.0s lsm=0.9s
+
+=== GBM | 2018-2019 ===
+    GBM              2018-2019 SPY: RMSE%=49.51 MAE=1.6628 n=50 updates=13 cal=0.0s lsm=1.3s
+    GBM              2018-2019 AAPL: RMSE%=32.53 MAE=1.7033 n=51 updates=13 cal=0.0s lsm=2.1s
+    GBM              2018-2019 MSFT: RMSE%=41.73 MAE=1.0839 n=50 updates=13 cal=0.0s lsm=1.3s
+    GBM              2018-2019 AMZN: RMSE%=43.66 MAE=21.3373 n=51 updates=13 cal=0.0s lsm=1.3s
+
+=== GBM | 2019-2020 ===
+    GBM              2019-2020 SPY: RMSE%=64.88 MAE=3.6003 n=50 updates=13 cal=0.0s lsm=1.4s
+    GBM              2019-2020 AAPL: RMSE%=46.19 MAE=3.9995 n=50 updates=13 cal=0.0s lsm=1.6s
+    GBM              2019-2020 MSFT: RMSE%=45.93 MAE=2.0118 n=50 updates=13 cal=0.0s lsm=1.2s
+    GBM              2019-2020 AMZN: RMSE%=52.42 MAE=25.8364 n=50 updates=13 cal=0.0s lsm=1.3s
+  resume GARCH 2008-2009
+  resume GARCH 2013-2014
+  resume GARCH 2018-2019
+  resume GARCH 2019-2020
+
+=== Heston | 2008-2009 ===
+    Heston           2008-2009 SPY: RMSE%=25.90 MAE=0.8505 n=50 updates=13 cal=2.1s lsm=1.7s
+    Heston           2008-2009 AAPL: RMSE%=31.07 MAE=1.5486 n=50 updates=13 cal=0.5s lsm=1.9s
+    Heston           2008-2009 MSFT: RMSE%=25.98 MAE=0.2559 n=50 updates=13 cal=0.8s lsm=1.6s
+    Heston           2008-2009 AMZN: RMSE%=26.60 MAE=0.9658 n=50 updates=13 cal=0.6s lsm=1.9s
+
+=== Heston | 2013-2014 ===
+    Heston           2013-2014 SPY: RMSE%=59.26 MAE=1.0496 n=50 updates=13 cal=2.0s lsm=1.9s
+    Heston           2013-2014 AAPL: RMSE%=34.83 MAE=2.3767 n=50 updates=13 cal=1.9s lsm=1.6s
+    Heston           2013-2014 MSFT: RMSE%=40.25 MAE=0.2644 n=50 updates=13 cal=1.3s lsm=1.7s
+    Heston           2013-2014 AMZN: RMSE%=32.30 MAE=2.5634 n=50 updates=13 cal=1.7s lsm=1.7s
+
+=== Heston | 2018-2019 ===
+    Heston           2018-2019 SPY: RMSE%=49.97 MAE=1.6780 n=50 updates=13 cal=2.3s lsm=1.4s
+    Heston           2018-2019 AAPL: RMSE%=34.04 MAE=1.6829 n=51 updates=13 cal=2.1s lsm=2.0s
+    Heston           2018-2019 MSFT: RMSE%=27.61 MAE=0.6677 n=50 updates=13 cal=1.4s lsm=1.7s
+    Heston           2018-2019 AMZN: RMSE%=29.98 MAE=14.2678 n=51 updates=13 cal=1.9s lsm=1.5s
+
+=== Heston | 2019-2020 ===
+    Heston           2019-2020 SPY: RMSE%=47.54 MAE=2.9139 n=50 updates=13 cal=3.7s lsm=2.4s
+    Heston           2019-2020 AAPL: RMSE%=34.22 MAE=2.9397 n=50 updates=13 cal=1.8s lsm=1.5s
+    Heston           2019-2020 MSFT: RMSE%=33.07 MAE=1.7078 n=50 updates=13 cal=1.6s lsm=2.3s
+    Heston           2019-2020 AMZN: RMSE%=36.37 MAE=25.1284 n=50 updates=13 cal=2.2s lsm=1.7s
+
+=== Merton | 2008-2009 ===
+<unknown>:302: SyntaxWarning: invalid escape sequence '\('
+    Merton           2008-2009 SPY: RMSE%=51.73 MAE=1.2281 n=50 updates=13 cal=0.5s lsm=1.8s
+    Merton           2008-2009 AAPL: RMSE%=55.37 MAE=2.2738 n=50 updates=13 cal=0.3s lsm=2.3s
+    Merton           2008-2009 MSFT: RMSE%=41.80 MAE=0.3513 n=50 updates=13 cal=0.3s lsm=2.2s
+    Merton           2008-2009 AMZN: RMSE%=46.51 MAE=1.4638 n=50 updates=13 cal=0.3s lsm=2.4s
+
+=== Merton | 2013-2014 ===
+<unknown>:302: SyntaxWarning: invalid escape sequence '\('
+    Merton           2013-2014 SPY: RMSE%=37.32 MAE=0.6747 n=50 updates=13 cal=0.7s lsm=3.6s
+    Merton           2013-2014 AAPL: RMSE%=48.87 MAE=3.5222 n=50 updates=13 cal=0.9s lsm=3.8s
+    Merton           2013-2014 MSFT: RMSE%=56.13 MAE=0.3788 n=50 updates=13 cal=0.6s lsm=2.4s
+    Merton           2013-2014 AMZN: RMSE%=35.62 MAE=2.8594 n=50 updates=13 cal=0.7s lsm=2.4s
+
+=== Merton | 2018-2019 ===
+<unknown>:302: SyntaxWarning: invalid escape sequence '\('
+    Merton           2018-2019 SPY: RMSE%=60.60 MAE=2.1433 n=50 updates=13 cal=1.2s lsm=2.1s
+    Merton           2018-2019 AAPL: RMSE%=36.65 MAE=1.8944 n=51 updates=13 cal=0.6s lsm=2.4s
+    Merton           2018-2019 MSFT: RMSE%=43.31 MAE=1.1095 n=50 updates=13 cal=0.7s lsm=2.1s
+    Merton           2018-2019 AMZN: RMSE%=49.34 MAE=25.3991 n=51 updates=13 cal=0.9s lsm=2.0s
+
+=== Merton | 2019-2020 ===
+<unknown>:302: SyntaxWarning: invalid escape sequence '\('
+    Merton           2019-2020 SPY: RMSE%=70.92 MAE=4.3291 n=50 updates=13 cal=1.2s lsm=2.4s
+    Merton           2019-2020 AAPL: RMSE%=47.03 MAE=3.9576 n=50 updates=13 cal=0.8s lsm=2.4s
+    Merton           2019-2020 MSFT: RMSE%=50.06 MAE=2.2979 n=50 updates=13 cal=0.8s lsm=2.4s
+    Merton           2019-2020 AMZN: RMSE%=59.46 MAE=35.9859 n=50 updates=13 cal=1.1s lsm=2.5s
+
+=== Heston–Merton | 2008-2009 ===
+    Heston–Merton    2008-2009 SPY: RMSE%=38.05 MAE=1.1843 n=50 updates=13 cal=6.0s lsm=3.6s
+    Heston–Merton    2008-2009 AAPL: RMSE%=33.89 MAE=1.6930 n=50 updates=13 cal=1.3s lsm=2.0s
+    Heston–Merton    2008-2009 MSFT: RMSE%=29.00 MAE=0.2777 n=50 updates=13 cal=1.6s lsm=2.6s
+    Heston–Merton    2008-2009 AMZN: RMSE%=30.92 MAE=1.1478 n=50 updates=13 cal=2.1s lsm=3.8s
+
+=== Heston–Merton | 2013-2014 ===
+    Heston–Merton    2013-2014 SPY: RMSE%=74.75 MAE=1.5047 n=50 updates=13 cal=6.8s lsm=3.6s
+    Heston–Merton    2013-2014 AAPL: RMSE%=40.21 MAE=2.7363 n=50 updates=13 cal=3.8s lsm=2.6s
+    Heston–Merton    2013-2014 MSFT: RMSE%=50.19 MAE=0.3425 n=50 updates=13 cal=3.2s lsm=2.3s
+    Heston–Merton    2013-2014 AMZN: RMSE%=36.36 MAE=3.0478 n=50 updates=13 cal=3.3s lsm=3.3s
+
+=== Heston–Merton | 2018-2019 ===
+    Heston–Merton    2018-2019 SPY: RMSE%=70.07 MAE=2.4072 n=50 updates=13 cal=5.1s lsm=2.6s
+    Heston–Merton    2018-2019 AAPL: RMSE%=42.20 MAE=2.1348 n=51 updates=13 cal=4.3s lsm=2.9s
+    Heston–Merton    2018-2019 MSFT: RMSE%=40.75 MAE=1.0965 n=50 updates=13 cal=3.4s lsm=2.5s
+    Heston–Merton    2018-2019 AMZN: RMSE%=36.66 MAE=18.2024 n=51 updates=13 cal=5.7s lsm=4.1s
+
+=== Heston–Merton | 2019-2020 ===
+    Heston–Merton    2019-2020 SPY: RMSE%=72.56 MAE=4.3592 n=50 updates=13 cal=5.8s lsm=3.5s
+    Heston–Merton    2019-2020 AAPL: RMSE%=41.76 MAE=3.6242 n=50 updates=13 cal=4.8s lsm=3.1s
+    Heston–Merton    2019-2020 MSFT: RMSE%=43.27 MAE=2.1971 n=50 updates=13 cal=4.7s lsm=2.8s
+    Heston–Merton    2019-2020 AMZN: RMSE%=45.25 MAE=28.8566 n=50 updates=13 cal=5.0s lsm=2.8s
+
+Wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/V4-Models_result/results/empirical_study_1p5y_monthly_10000/payload.json in 4.1 min
+wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/Results_In_Short/V4/V4 1.5-year monthly empirical study 10000 paths/V4_1p5y_monthly_empirical_study.pdf (116 KB)
+wrote /Users/sophia/Desktop/Study📄/202606 - Pioneer/Research/Coding tests/Results_In_Short/V4/V4 1.5-year monthly empirical study 10000 paths/V4_1p5y_monthly_empirical_study.ipynb
+
+=== P / premium / Q (last monthly update) ===
+ticker    regime         model  n_updates                asof
+  AAPL 2008-2009         GARCH         13 2009-07-31 00:00:00
+  AAPL 2008-2009 Heston–Merton         13 2009-07-31 00:00:00
+  AAPL 2008-2009        Heston         13 2009-07-31 00:00:00
+  AAPL 2008-2009        Merton         13 2009-07-31 00:00:00
+  AMZN 2008-2009         GARCH         13 2009-07-31 00:00:00
+  AMZN 2008-2009 Heston–Merton         13 2009-07-31 00:00:00
+  AMZN 2008-2009        Heston         13 2009-07-31 00:00:00
+  AMZN 2008-2009        Merton         13 2009-07-31 00:00:00
+  MSFT 2008-2009         GARCH         13 2009-07-31 00:00:00
+  MSFT 2008-2009 Heston–Merton         13 2009-07-31 00:00:00
+  MSFT 2008-2009        Heston         13 2009-07-31 00:00:00
+  MSFT 2008-2009        Merton         13 2009-07-31 00:00:00
+   SPY 2008-2009         GARCH         13 2009-07-31 00:00:00
+   SPY 2008-2009 Heston–Merton         13 2009-07-31 00:00:00
+   SPY 2008-2009        Heston         13 2009-07-31 00:00:00
+   SPY 2008-2009        Merton         13 2009-07-31 00:00:00
+  AAPL 2013-2014         GARCH         13 2014-12-31 00:00:00
+  AAPL 2013-2014 Heston–Merton         13 2014-12-31 00:00:00
+  AAPL 2013-2014        Heston         13 2014-12-31 00:00:00
+  AAPL 2013-2014        Merton         13 2014-12-31 00:00:00
+  AMZN 2013-2014         GARCH         13 2014-12-31 00:00:00
+  AMZN 2013-2014 Heston–Merton         13 2014-12-31 00:00:00
+  AMZN 2013-2014        Heston         13 2014-12-31 00:00:00
+  AMZN 2013-2014        Merton         13 2014-12-31 00:00:00
+  MSFT 2013-2014         GARCH         13 2014-12-31 00:00:00
+  MSFT 2013-2014 Heston–Merton         13 2014-12-31 00:00:00
+  MSFT 2013-2014        Heston         13 2014-12-31 00:00:00
+  MSFT 2013-2014        Merton         13 2014-12-31 00:00:00
+   SPY 2013-2014         GARCH         13 2014-12-31 00:00:00
+   SPY 2013-2014 Heston–Merton         13 2014-12-31 00:00:00
+   SPY 2013-2014        Heston         13 2014-12-31 00:00:00
+   SPY 2013-2014        Merton         13 2014-12-31 00:00:00
+  AAPL 2018-2019         GARCH         13 2019-09-30 00:00:00
+  AAPL 2018-2019 Heston–Merton         13 2019-09-30 00:00:00
+  AAPL 2018-2019        Heston         13 2019-09-30 00:00:00
+  AAPL 2018-2019        Merton         13 2019-09-30 00:00:00
+  AMZN 2018-2019         GARCH         13 2019-09-30 00:00:00
+  AMZN 2018-2019 Heston–Merton         13 2019-09-30 00:00:00
+  AMZN 2018-2019        Heston         13 2019-09-30 00:00:00
+  AMZN 2018-2019        Merton         13 2019-09-30 00:00:00
+  MSFT 2018-2019         GARCH         13 2019-09-30 00:00:00
+  MSFT 2018-2019 Heston–Merton         13 2019-09-30 00:00:00
+  MSFT 2018-2019        Heston         13 2019-09-30 00:00:00
+  MSFT 2018-2019        Merton         13 2019-09-30 00:00:00
+   SPY 2018-2019         GARCH         13 2019-09-30 00:00:00
+   SPY 2018-2019 Heston–Merton         13 2019-09-30 00:00:00
+   SPY 2018-2019        Heston         13 2019-09-30 00:00:00
+   SPY 2018-2019        Merton         13 2019-09-30 00:00:00
+  AAPL 2019-2020         GARCH         13 2020-08-31 00:00:00
+  AAPL 2019-2020 Heston–Merton         13 2020-08-31 00:00:00
+  AAPL 2019-2020        Heston         13 2020-08-31 00:00:00
+  AAPL 2019-2020        Merton         13 2020-08-31 00:00:00
+  AMZN 2019-2020         GARCH         13 2020-08-31 00:00:00
+  AMZN 2019-2020 Heston–Merton         13 2020-08-31 00:00:00
+  AMZN 2019-2020        Heston         13 2020-08-31 00:00:00
+  AMZN 2019-2020        Merton         13 2020-08-31 00:00:00
+  MSFT 2019-2020         GARCH         13 2020-08-31 00:00:00
+  MSFT 2019-2020 Heston–Merton         13 2020-08-31 00:00:00
+  MSFT 2019-2020        Heston         13 2020-08-31 00:00:00
+  MSFT 2019-2020        Merton         13 2020-08-31 00:00:00
+   SPY 2019-2020         GARCH         13 2020-08-31 00:00:00
+   SPY 2019-2020 Heston–Merton         13 2020-08-31 00:00:00
+   SPY 2019-2020        Heston         13 2020-08-31 00:00:00
+   SPY 2019-2020        Merton         13 2020-08-31 00:00:00
